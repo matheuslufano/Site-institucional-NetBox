@@ -1,0 +1,143 @@
+Unable to fetch the `Request.cf` object! Falling back to a default placeholder...
+AggregateError [EACCES]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m15:47:04[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <DevRecoveryBoundary resetKey={0} onCatch={function handleDevRecoveryBoundaryCatch}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary>
+          <NavigationCommitSignal renderId={0}>
+            <Slot id="route:/">
+              <meta>
+              <title>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <link>
+              <link>
+              <link>
+              <meta>
+              <meta>
+              <LayoutSegmentProvider segmentMap={{children:[...]}}>
+                <Slot id="layout:/">
+                  <default>
+                    <link>
+                    <RemoveDuplicateServerCss>
+                    <default>
+                      <RootLayout>
+                        <html
+                          lang="pt-BR"
+-                         className="simulator-touch"
+                        >
+
+[2m15:47:28[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <DevRecoveryBoundary resetKey={0} onCatch={function handleDevRecoveryBoundaryCatch}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary>
+          <NavigationCommitSignal renderId={0}>
+            <Slot id="route:/">
+              <meta>
+              <title>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <link>
+              <link>
+              <link>
+              <meta>
+              <meta>
+              <LayoutSegmentProvider segmentMap={{children:[...]}}>
+                <Slot id="layout:/">
+                  <default>
+                    <link>
+                    <RemoveDuplicateServerCss>
+                    <default>
+                      <RootLayout>
+                        <html
+                          lang="pt-BR"
+-                         className="simulator-touch"
+                        >
+
+[2m15:47:31[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <DevRecoveryBoundary resetKey={0} onCatch={function handleDevRecoveryBoundaryCatch}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary>
+          <NavigationCommitSignal renderId={0}>
+            <Slot id="route:/">
+              <meta>
+              <title>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <meta>
+              <link>
+              <link>
+              <link>
+              <meta>
+              <meta>
+              <LayoutSegmentProvider segmentMap={{children:[...]}}>
+                <Slot id="layout:/">
+                  <default>
+                    <link>
+                    <RemoveDuplicateServerCss>
+                    <default>
+                      <RootLayout>
+                        <html
+                          lang="pt-BR"
+-                         className="simulator-touch"
+                        >
+
+[2m16:09:16[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mAn empty string ("") was passed to the src attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to src instead of an empty string.
