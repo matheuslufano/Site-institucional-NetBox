@@ -60,15 +60,6 @@ const gallery = [
   ["08", "Instalação agendada", "Consulta técnica e próximos passos pelo WhatsApp."],
 ];
 
-const reviewSlots = [
-  "Paraíso do Tocantins",
-  "Guaraí",
-  "Colinas do Tocantins",
-  "Miranorte",
-  "Miracema",
-  "Pedro Afonso",
-];
-
 const heroSlides = [
   {
     kicker: "Internet regional que conecta de verdade",
@@ -228,7 +219,7 @@ export default function Home() {
           <div className="hero-network" aria-hidden="true">
             <i /><i /><i /><i /><i /><i />
           </div>
-          <div className="model-shell hero-inner">
+          <div className="model-shell hero-inner carousel-only">
             <div className="model-hero-copy" key={activeSlide} aria-live="polite" aria-atomic="true">
               <span>{heroSlides[activeSlide].kicker}</span>
               <h1>{heroSlides[activeSlide].title}</h1>
@@ -243,34 +234,6 @@ export default function Home() {
               </a>
             </div>
 
-            <form className="hero-form" id="consulta" onSubmit={consultCoverage}>
-              <small>Consulte seu endereço</small>
-              <h2>A Netbox chega até você?</h2>
-              <label>
-                Cidade
-                <select
-                  value={city}
-                  onChange={(event) => {
-                    setCity(event.target.value);
-                    track("selecionou_cidade", { city: event.target.value });
-                  }}
-                >
-                  {cities.map((item) => <option key={item}>{item}</option>)}
-                </select>
-              </label>
-              <label>
-                CEP, bairro ou endereço
-                <input
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
-                  placeholder="Ex.: Centro ou 77600-000"
-                />
-              </label>
-              <button className="model-button orange" type="submit">
-                Consultar pelo WhatsApp <b>»</b>
-              </button>
-              <em>Consulta sujeita à viabilidade técnica do endereço.</em>
-            </form>
           </div>
           <button className="hero-arrow left" type="button" onClick={() => moveSlide(-1)} aria-label="Mostrar destaque anterior">‹</button>
           <button className="hero-arrow right" type="button" onClick={() => moveSlide(1)} aria-label="Mostrar próximo destaque">›</button>
@@ -365,29 +328,49 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="reviews-section" id="depoimentos">
-          <div className="model-shell">
-            <div className="model-heading">
-              <h2>Depoimentos de Clientes</h2>
+        <section className="coverage-conversion-section" id="consulta">
+          <div className="model-shell coverage-conversion-layout">
+            <div className="coverage-conversion-copy">
+              <small>Consulta de cobertura</small>
+              <h2>A Netbox chega até você?</h2>
               <p>
-                Este espaço receberá avaliações reais, com autorização e origem
-                identificada. Nenhum depoimento fictício é exibido.
+                Informe sua cidade e a região do endereço. A equipe confirma a
+                disponibilidade e apresenta as opções vigentes pelo WhatsApp.
               </p>
+              <div className="coverage-highlights">
+                <span><i>01</i> Selecione sua cidade</span>
+                <span><i>02</i> Informe o endereço</span>
+                <span><i>03</i> Converse com o consultor</span>
+              </div>
             </div>
-            <div className="reviews-grid">
-              {reviewSlots.map((reviewCity, index) => (
-                <article key={reviewCity}>
-                  <span className="review-avatar" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                  <p>Depoimento real pendente de validação e autorização para publicação.</p>
-                  <strong>Cliente Netbox</strong>
-                  <small>{reviewCity}</small>
-                  <div aria-label="Avaliação ainda não informada">☆ ☆ ☆ ☆ ☆</div>
-                </article>
-              ))}
-            </div>
-            <a className="outline-button" href="https://netbox.net.br/avalie.html" target="_blank" rel="noreferrer">
-              Avaliar atendimento <b>→</b>
-            </a>
+
+            <form className="coverage-form" onSubmit={consultCoverage}>
+              <span>Consulte seu endereço</span>
+              <label>
+                Cidade
+                <select
+                  value={city}
+                  onChange={(event) => {
+                    setCity(event.target.value);
+                    track("selecionou_cidade", { city: event.target.value });
+                  }}
+                >
+                  {cities.map((item) => <option key={item}>{item}</option>)}
+                </select>
+              </label>
+              <label>
+                CEP, bairro ou endereço
+                <input
+                  value={address}
+                  onChange={(event) => setAddress(event.target.value)}
+                  placeholder="Ex.: Centro ou 77600-000"
+                />
+              </label>
+              <button className="model-button orange" type="submit">
+                Consultar pelo WhatsApp <b>»</b>
+              </button>
+              <em>Consulta sujeita à viabilidade técnica do endereço.</em>
+            </form>
           </div>
         </section>
 
