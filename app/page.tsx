@@ -144,15 +144,16 @@ export default function Home() {
       <a className="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
       <header className="model-header">
-        <a className="model-brand" href="#inicio" aria-label="Netbox Internet — início">
+        <a className="model-brand" href="/" aria-label="Netbox Internet — início">
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
         </a>
         <nav className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
-          <a href="#inicio" onClick={() => setMenuOpen(false)}>Início</a>
-          <a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços <span>＋</span></a>
-          <a href="#solucoes" onClick={() => setMenuOpen(false)}>Nossas soluções</a>
-          <a href="#depoimentos" onClick={() => setMenuOpen(false)}>Depoimentos</a>
-          <a href="#contato" onClick={() => setMenuOpen(false)}>Contatos</a>
+          <a href="/" onClick={() => setMenuOpen(false)}>Início</a>
+          <a href="/sobre" onClick={() => setMenuOpen(false)}>Sobre nós</a>
+          <a href="/nossos-servicos" onClick={() => setMenuOpen(false)}>Serviços <span>＋</span></a>
+          <a href="/nossa-estrutura" onClick={() => setMenuOpen(false)}>Nossa estrutura</a>
+          <a href="/depoimentos" onClick={() => setMenuOpen(false)}>Depoimentos</a>
+          <a href="/contatos" onClick={() => setMenuOpen(false)}>Contatos</a>
           <a className="nav-icon" href="mailto:atendimento@netbox.net.br" aria-label="Enviar e-mail">✉</a>
           <a className="nav-icon" href={`https://wa.me/${WHATSAPP}`} aria-label="Abrir WhatsApp">◔</a>
         </nav>
@@ -342,7 +343,7 @@ export default function Home() {
                 <div><strong>{service.title} →</strong><small>{service.text}</small></div>
               </button>
             ))}
-            <a className="footer-pill" href="#servicos">Todos os serviços →</a>
+            <a className="footer-pill" href="/nossos-servicos">Todos os serviços →</a>
           </div>
 
           <div className="footer-about">
@@ -351,7 +352,7 @@ export default function Home() {
               Fibra óptica, presença regional e atendimento humanizado para conectar
               casas e empresas no Tocantins.
             </p>
-            <a className="model-button yellow" href="#inicio">Mais sobre a Netbox →</a>
+            <a className="model-button yellow" href="/sobre">Mais sobre a Netbox →</a>
           </div>
 
           <div className="footer-contact">
