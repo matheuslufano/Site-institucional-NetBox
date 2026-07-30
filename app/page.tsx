@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import logoNetbox from "../public/LOGO-NETBOX.png";
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
 const PLAY_STORE =
@@ -171,19 +170,13 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Netbox Internet — início">
           <Image
-            src={logoNetbox}
-            alt="Logo Netbox"
-            width={180}
-            height={60}
+            className="brand-logo"
+            src="/LOGO-NETBOX.png"
+            alt="Netbox Internet"
+            width={176}
+            height={58}
             priority
           />
-          <span className="brand-mark" aria-hidden="true">
-            N
-          </span>
-          <span>
-            <strong>NETBOX</strong>
-            <small>INTERNET</small>
-          </span>
         </a>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="Navegação principal">
           <a href="#planos" onClick={() => setMenuOpen(false)}>Planos</a>
@@ -483,7 +476,15 @@ export default function Home() {
       <footer>
         <div className="shell footer-grid">
           <div>
-            <a className="brand footer-brand" href="#inicio"><span className="brand-mark">N</span><span><strong>NETBOX</strong><small>INTERNET</small></span></a>
+            <a className="brand footer-brand" href="#inicio" aria-label="Netbox Internet — início">
+              <Image
+                className="footer-logo"
+                src="/LOGO-NETBOX.png"
+                alt="Netbox Internet"
+                width={176}
+                height={58}
+              />
+            </a>
             <p>Internet de verdade. Amizade que conecta.</p>
             <a className="phone-link" href="tel:08006022732">0800 602 2732</a>
           </div>
