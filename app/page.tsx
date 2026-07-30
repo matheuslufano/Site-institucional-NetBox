@@ -62,18 +62,22 @@ const gallery = [
 
 const heroSlides = [
   {
-    kicker: "Internet regional que conecta de verdade",
-    title: "Fibra óptica para acompanhar toda a sua rotina.",
-    text: "Estude, trabalhe, assista e conecte seus dispositivos com estabilidade e atendimento humanizado.",
+    kicker: "Conexão que acompanha o Tocantins",
+    title: "Internet para aproximar pessoas, cidades e oportunidades.",
+    text: "Uma rede regional preparada para conectar sua casa ou empresa com estabilidade e atendimento próximo.",
     action: "Consultar cobertura",
     href: "#consulta",
+    image: "/carousel/slide-01.jpg",
+    side: "left",
   },
   {
-    kicker: "Soluções empresariais Netbox",
-    title: "Sua empresa conectada para continuar crescendo.",
-    text: "Internet empresarial, link dedicado e atendimento personalizado para as necessidades do seu negócio.",
-    action: "Conhecer soluções empresariais",
-    href: "/nossos-servicos#empresas",
+    kicker: "Presença regional",
+    title: "Mais cidades conectadas por uma rede que está perto de você.",
+    text: "Conheça a estrutura da Netbox e nossa atuação em diferentes municípios do Tocantins.",
+    action: "Conhecer nossa estrutura",
+    href: "/nossa-estrutura",
+    image: "/carousel/slide-02.jpg",
+    side: "right",
   },
   {
     kicker: "Tudo mais simples para o cliente",
@@ -81,6 +85,71 @@ const heroSlides = [
     text: "Consulte faturas, emita segunda via, solicite suporte e acesse serviços pelos canais digitais da Netbox.",
     action: "Acessar Central do Assinante",
     href: SECOND_COPY,
+    image: "/carousel/slide-03.jpg",
+    side: "left",
+  },
+  {
+    kicker: "Compartilhe uma boa conexão",
+    title: "Indique a Netbox para quem também quer internet de verdade.",
+    text: "Fale com nossa equipe para conhecer as condições vigentes do programa de indicação.",
+    action: "Quero indicar alguém",
+    href: `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Quero conhecer o programa de indicação da Netbox.")}`,
+    image: "/carousel/slide-04.jpg",
+    side: "left",
+  },
+  {
+    kicker: "Conexão para todos",
+    title: "Uma internet que acompanha toda a família.",
+    text: "Trabalho, estudo, entretenimento e vários dispositivos conectados em uma única experiência.",
+    action: "Encontrar a melhor opção",
+    href: "#consulta",
+    image: "/carousel/slide-05.jpg",
+    side: "left",
+  },
+  {
+    kicker: "Rede construída por quem entende",
+    title: "Infraestrutura preparada para levar fibra até você.",
+    text: "Equipe técnica regional e expansão contínua para oferecer uma conexão cada vez mais presente.",
+    action: "Ver nossa estrutura",
+    href: "/nossa-estrutura",
+    image: "/carousel/slide-06.jpg",
+    side: "left",
+  },
+  {
+    kicker: "Instalação e suporte",
+    title: "Atendimento técnico cuidadoso, do início ao pós-venda.",
+    text: "Conte com profissionais preparados para instalar, orientar e ajudar quando você precisar.",
+    action: "Falar com a Netbox",
+    href: "/contatos",
+    image: "/carousel/slide-07.jpg",
+    side: "right",
+  },
+  {
+    kicker: "Tecnologia que faz diferença",
+    title: "Fibra óptica para uma experiência mais estável.",
+    text: "Conheça as soluções Netbox para residências e empresas que precisam estar sempre conectadas.",
+    action: "Conhecer os serviços",
+    href: "/nossos-servicos",
+    image: "/carousel/slide-08.jpg",
+    side: "left",
+  },
+  {
+    kicker: "Netbox Empresas",
+    title: "Soluções para negócios que não podem parar.",
+    text: "Internet empresarial, link dedicado e atendimento personalizado para as necessidades da sua operação.",
+    action: "Ver soluções empresariais",
+    href: "/nossos-servicos#empresas",
+    image: "/carousel/slide-09.jpg",
+    side: "right",
+  },
+  {
+    kicker: "Atendimento humanizado",
+    title: "Canais digitais e pessoas prontas para atender você.",
+    text: "Encontre suporte, informações e soluções com uma equipe que conhece a realidade da região.",
+    action: "Conhecer os canais",
+    href: "/contatos",
+    image: "/carousel/slide-10.jpg",
+    side: "left",
   },
 ];
 
@@ -199,7 +268,7 @@ export default function Home() {
 
       <main id="conteudo">
         <section
-          className={`model-hero slide-theme-${activeSlide + 1}`}
+          className={`model-hero copy-${heroSlides[activeSlide].side}`}
           id="inicio"
           role="region"
           aria-roledescription="carrossel"
@@ -216,6 +285,12 @@ export default function Home() {
             if (event.key === "ArrowRight") moveSlide(1);
           }}
         >
+          <div
+            className="hero-slide-background"
+            key={heroSlides[activeSlide].image}
+            style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }}
+            aria-hidden="true"
+          />
           <div className="hero-network" aria-hidden="true">
             <i /><i /><i /><i /><i /><i />
           </div>

@@ -78,40 +78,44 @@ button { cursor: pointer; }
   min-height: 650px;
   overflow: hidden;
   color: #fff;
-  background:
-    radial-gradient(circle at 75% 45%, rgba(255,201,62,.36), transparent 25%),
-    linear-gradient(112deg, rgba(100,17,0,.62), rgba(30,17,11,.5)),
-    linear-gradient(135deg, #e13a0d 0%, #f47721 48%, #ffb31a 100%);
-  transition: background-color .6s ease;
+  background: #17120f;
 }
-.model-hero.slide-theme-1 {
-  background:
-    radial-gradient(circle at 75% 45%, rgba(255,201,62,.38), transparent 25%),
-    linear-gradient(112deg, rgba(100,17,0,.62), rgba(30,17,11,.5)),
-    linear-gradient(135deg, #e13a0d 0%, #f47721 48%, #ffb31a 100%);
+.hero-slide-background {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  animation: carouselImageReveal .7s ease both;
+  transform: scale(1.015);
 }
-.model-hero.slide-theme-2 {
-  background:
-    radial-gradient(circle at 78% 42%, rgba(255,176,39,.28), transparent 24%),
-    linear-gradient(112deg, rgba(24,20,18,.8), rgba(77,35,20,.52)),
-    linear-gradient(135deg, #1d1b19 0%, #583021 50%, #e4631a 100%);
+@keyframes carouselImageReveal {
+  from { opacity: .35; transform: scale(1.045); }
+  to { opacity: 1; transform: scale(1.015); }
 }
-.model-hero.slide-theme-3 {
-  background:
-    radial-gradient(circle at 76% 45%, rgba(255,221,139,.32), transparent 25%),
-    linear-gradient(112deg, rgba(117,29,4,.72), rgba(57,25,15,.5)),
-    linear-gradient(135deg, #b52c09 0%, #f06a1a 50%, #ffb900 100%);
+.model-hero::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(12,10,9,.9) 0%, rgba(12,10,9,.72) 32%, rgba(12,10,9,.18) 66%, rgba(12,10,9,.04) 100%);
+  pointer-events: none;
+}
+.model-hero.copy-right::after {
+  background: linear-gradient(270deg, rgba(12,10,9,.9) 0%, rgba(12,10,9,.72) 32%, rgba(12,10,9,.18) 66%, rgba(12,10,9,.04) 100%);
 }
 .model-hero::before {
   content: "";
   position: absolute;
+  z-index: 1;
   inset: 0;
   opacity: .25;
   background-image:
     linear-gradient(118deg, transparent 0 53%, rgba(255,255,255,.13) 53.2% 53.4%, transparent 53.6%),
     linear-gradient(25deg, transparent 0 60%, rgba(255,255,255,.12) 60.2% 60.4%, transparent 60.6%);
+  pointer-events: none;
 }
-.hero-network { position: absolute; inset: 0; }
+.hero-network { position: absolute; z-index: 1; inset: 0; opacity: .22; }
 .hero-network::before {
   content: "";
   position: absolute;
@@ -152,6 +156,10 @@ button { cursor: pointer; }
   grid-template-columns: minmax(0, 790px);
   justify-content: start;
 }
+.model-hero.copy-right .hero-inner.carousel-only { justify-content: end; }
+.model-hero.copy-right .model-hero-copy { text-align: right; }
+.model-hero.copy-right .model-hero-copy > p,
+.model-hero.copy-right .model-hero h1 { margin-left: auto; }
 .hero-inner.carousel-only .model-hero-copy { max-width: 790px; }
 .model-hero-copy > span {
   display: block;
@@ -250,7 +258,7 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   gap: 7px;
 }
 .carousel-controls button {
-  width: 42px;
+  width: 28px;
   height: 34px;
   display: grid;
   place-items: center;
@@ -263,7 +271,7 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   transition: width .25s, background .25s, color .25s;
 }
 .carousel-controls button.active {
-  width: 66px;
+  width: 48px;
   border-color: var(--yellow);
   background: var(--yellow);
   color: #3b2d00;
@@ -764,6 +772,14 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   .model-nav { top: 72px; }
   .model-hero, .hero-inner { min-height: auto; }
   .hero-inner { padding-block: 65px; }
+  .model-hero::after,
+  .model-hero.copy-right::after {
+    background: linear-gradient(90deg, rgba(12,10,9,.9), rgba(12,10,9,.68));
+  }
+  .model-hero.copy-right .hero-inner.carousel-only { justify-content: start; }
+  .model-hero.copy-right .model-hero-copy { text-align: left; }
+  .model-hero.copy-right .model-hero-copy > p,
+  .model-hero.copy-right .model-hero h1 { margin-left: 0; }
   .model-hero h1 { font-size: 41px; }
   .model-hero-copy > p { font-size: 14px; }
   .hero-form { padding: 20px; }
@@ -772,10 +788,14 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   .hero-arrow { display: none; }
   .carousel-controls {
     right: 14px;
+    left: 14px;
     bottom: 13px;
+    justify-content: center;
+    gap: 3px;
   }
-  .carousel-controls button { width: 34px; height: 30px; }
-  .carousel-controls button.active { width: 48px; }
+  .carousel-controls button { width: 18px; height: 28px; font-size: 7px; }
+  .carousel-controls button.active { width: 30px; }
+  .carousel-controls .carousel-pause { width: 28px; }
   .services-section, .gallery-section, .reviews-section { padding-block: 70px; }
   .service-feature { min-height: 390px; }
   .services-copy > h2, .model-heading h2 { font-size: 33px; }
