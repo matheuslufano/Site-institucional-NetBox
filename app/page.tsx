@@ -69,6 +69,30 @@ const reviewSlots = [
   "Pedro Afonso",
 ];
 
+const heroSlides = [
+  {
+    kicker: "Internet regional que conecta de verdade",
+    title: "Fibra óptica para acompanhar toda a sua rotina.",
+    text: "Estude, trabalhe, assista e conecte seus dispositivos com estabilidade e atendimento humanizado.",
+    action: "Consultar cobertura",
+    href: "#consulta",
+  },
+  {
+    kicker: "Soluções empresariais Netbox",
+    title: "Sua empresa conectada para continuar crescendo.",
+    text: "Internet empresarial, link dedicado e atendimento personalizado para as necessidades do seu negócio.",
+    action: "Conhecer soluções empresariais",
+    href: "/nossos-servicos#empresas",
+  },
+  {
+    kicker: "Tudo mais simples para o cliente",
+    title: "Sua assinatura Netbox na palma da mão.",
+    text: "Consulte faturas, emita segunda via, solicite suporte e acesse serviços pelos canais digitais da Netbox.",
+    action: "Acessar Central do Assinante",
+    href: SECOND_COPY,
+  },
+];
+
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
@@ -105,10 +129,25 @@ export default function Home() {
   const [address, setAddress] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [carouselPaused, setCarouselPaused] = useState(false);
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
   }, []);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (carouselPaused || reduceMotion) return;
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 6000);
+    return () => window.clearInterval(timer);
+  }, [carouselPaused]);
+
+  function moveSlide(direction: number) {
+    setActiveSlide((current) => (current + direction + heroSlides.length) % heroSlides.length);
+  }
 
   function consultCoverage(event?: FormEvent) {
     event?.preventDefault();
@@ -168,20 +207,39 @@ export default function Home() {
       </header>
 
       <main id="conteudo">
-        <section className="model-hero" id="inicio">
+        <section
+          className={`model-hero slide-theme-${activeSlide + 1}`}
+          id="inicio"
+          role="region"
+          aria-roledescription="carrossel"
+          aria-label="Destaques Netbox"
+          tabIndex={0}
+          onMouseEnter={() => setCarouselPaused(true)}
+          onMouseLeave={() => setCarouselPaused(false)}
+          onFocusCapture={() => setCarouselPaused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node)) setCarouselPaused(false);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") moveSlide(-1);
+            if (event.key === "ArrowRight") moveSlide(1);
+          }}
+        >
           <div className="hero-network" aria-hidden="true">
             <i /><i /><i /><i /><i /><i />
           </div>
           <div className="model-shell hero-inner">
-            <div className="model-hero-copy">
-              <span>Internet regional que conecta de verdade</span>
-              <h1>Fibra óptica para sua casa e sua empresa</h1>
-              <p>
-                Conecte sua rotina com estabilidade, velocidade e atendimento humanizado
-                em cidades do Tocantins.
-              </p>
-              <a className="model-button yellow" href="#consulta">
-                Consultar cobertura <b>»</b>
+            <div className="model-hero-copy" key={activeSlide} aria-live="polite" aria-atomic="true">
+              <span>{heroSlides[activeSlide].kicker}</span>
+              <h1>{heroSlides[activeSlide].title}</h1>
+              <p>{heroSlides[activeSlide].text}</p>
+              <a
+                className="model-button yellow"
+                href={heroSlides[activeSlide].href}
+                target={heroSlides[activeSlide].href.startsWith("http") ? "_blank" : undefined}
+                rel={heroSlides[activeSlide].href.startsWith("http") ? "noreferrer" : undefined}
+              >
+                {heroSlides[activeSlide].action} <b>»</b>
               </a>
             </div>
 
@@ -214,8 +272,30 @@ export default function Home() {
               <em>Consulta sujeita à viabilidade técnica do endereço.</em>
             </form>
           </div>
-          <a className="hero-arrow left" href="#contato" aria-label="Ir para atendimento">‹</a>
-          <a className="hero-arrow right" href="#servicos" aria-label="Ir para serviços">›</a>
+          <button className="hero-arrow left" type="button" onClick={() => moveSlide(-1)} aria-label="Mostrar destaque anterior">‹</button>
+          <button className="hero-arrow right" type="button" onClick={() => moveSlide(1)} aria-label="Mostrar próximo destaque">›</button>
+          <div className="carousel-controls" aria-label="Escolher destaque">
+            {heroSlides.map((slide, index) => (
+              <button
+                key={slide.title}
+                type="button"
+                className={index === activeSlide ? "active" : ""}
+                onClick={() => setActiveSlide(index)}
+                aria-label={`Mostrar destaque ${index + 1}: ${slide.kicker}`}
+                aria-current={index === activeSlide ? "true" : undefined}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+              </button>
+            ))}
+            <button
+              className="carousel-pause"
+              type="button"
+              onClick={() => setCarouselPaused(!carouselPaused)}
+              aria-label={carouselPaused ? "Retomar rotação automática" : "Pausar rotação automática"}
+            >
+              {carouselPaused ? "▶" : "Ⅱ"}
+            </button>
+          </div>
         </section>
 
         <section className="services-section" id="servicos">
