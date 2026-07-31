@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -191,10 +191,27 @@ export default function Home() {
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
+  const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
+  const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
+  const featureVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -207,6 +224,20 @@ export default function Home() {
 
   function moveSlide(direction: number) {
     setActiveSlide((current) => (current + direction + heroSlides.length) % heroSlides.length);
+  }
+
+  function toggleFeatureVideo() {
+    const video = featureVideoRef.current;
+    if (!video) return;
+    if (video.paused) void video.play();
+    else video.pause();
+  }
+
+  function toggleFeatureVideoSound() {
+    const video = featureVideoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setFeatureVideoMuted(video.muted);
   }
 
   function consultCoverage(event?: FormEvent) {
@@ -246,10 +277,14 @@ export default function Home() {
         <a className="model-brand" href="/" aria-label="Netbox Internet — início">
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
         </a>
-        <nav className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
+        <nav id="menu-principal" className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
+          <div className="mobile-nav-heading" aria-hidden="true">
+            <span>Menu</span>
+            <small>Netbox Internet</small>
+          </div>
           <a href="/" onClick={() => setMenuOpen(false)}>Início</a>
           <a href="/sobre" onClick={() => setMenuOpen(false)}>Sobre nós</a>
-          <a href="/nossos-servicos" onClick={() => setMenuOpen(false)}>Serviços <span>＋</span></a>
+          <a href="/nossos-servicos" onClick={() => setMenuOpen(false)}>Serviços</a>
           <a href="/nossa-estrutura" onClick={() => setMenuOpen(false)}>Nossa estrutura</a>
           <a href="/depoimentos" onClick={() => setMenuOpen(false)}>Depoimentos</a>
           <a href="/contatos" onClick={() => setMenuOpen(false)}>Contatos</a>
@@ -257,7 +292,8 @@ export default function Home() {
           <a className="nav-icon" href={`https://wa.me/${WHATSAPP}`} aria-label="Abrir WhatsApp">◔</a>
         </nav>
         <button
-          className="model-menu"
+          className={menuOpen ? "model-menu open" : "model-menu"}
+          aria-controls="menu-principal"
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -265,6 +301,15 @@ export default function Home() {
           <span /><span /><span />
         </button>
       </header>
+      {menuOpen && (
+        <button
+          type="button"
+          className="menu-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Fechar menu"
+          tabIndex={-1}
+        />
+      )}
 
       <main id="conteudo">
         <section
@@ -339,17 +384,49 @@ export default function Home() {
         <section className="services-section" id="servicos">
           <div className="model-shell services-layout">
             <div className="service-feature">
-              <div className="fiber-pole" aria-hidden="true">
-                <span className="pole" />
-                <span className="cable one" />
-                <span className="cable two" />
-                <span className="pulse p1" />
-                <span className="pulse p2" />
-                <span className="pulse p3" />
+              <div className="fiber-pole">
+                <video
+                  ref={featureVideoRef}
+                  className="feature-video"
+                  src="/videos/Video-netbox.mp4"
+                  autoPlay
+                  muted={featureVideoMuted}
+                  loop
+                  playsInline
+                  preload="metadata"
+                  onPlay={() => setFeatureVideoPaused(false)}
+                  onPause={() => setFeatureVideoPaused(true)}
+                  aria-label="Vídeo sobre a conexão de fibra óptica da Netbox"
+                />
               </div>
               <div className="feature-caption">
-                <span>100% fibra óptica</span>
-                <strong>Conexão feita para acompanhar seu ritmo.</strong>
+                <div className="feature-caption-copy">
+                  <span>100% fibra óptica</span>
+                  <strong>Conexão no seu ritmo.</strong>
+                </div>
+                <div className="feature-video-controls">
+                  <button
+                    type="button"
+                    onClick={toggleFeatureVideo}
+                    aria-label={featureVideoPaused ? "Reproduzir vídeo" : "Pausar vídeo"}
+                  >
+                    {featureVideoPaused ? (
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z" /></svg>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={toggleFeatureVideoSound}
+                    aria-label={featureVideoMuted ? "Ativar som" : "Desativar som"}
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 9v6h4l5 4V5L8 9H4z" />
+                      {featureVideoMuted ? <path d="m17 9 4 4m0-4-4 4" className="sound-stroke" /> : <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" className="sound-stroke" />}
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -523,10 +600,30 @@ export default function Home() {
       </a>
 
       <div className="client-shortcuts">
-        <a href={SECOND_COPY} target="_blank" rel="noreferrer">▤<span>2ª via</span></a>
-        <a href="#servicos">⌁<span>Serviços</span></a>
-        <a href="#consulta">⌖<span>Cobertura</span></a>
-        <a href={`https://wa.me/${WHATSAPP}`}>◔<span>WhatsApp</span></a>
+        <a href={SECOND_COPY} target="_blank" rel="noreferrer">
+          <span className="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 3.5h8l3 3V20.5H7z" /><path d="M15 3.5v4h3M10 11h5M10 14.5h5" /></svg>
+          </span>
+          <span className="shortcut-label">2ª via</span>
+        </a>
+        <a href="#servicos">
+          <span className="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 16.5a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0M11 9.5a2 2 0 0 1 2 0" /><circle cx="12" cy="18.5" r="1" /></svg>
+          </span>
+          <span className="shortcut-label">Serviços</span>
+        </a>
+        <a href="#consulta">
+          <span className="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11z" /><circle cx="12" cy="10" r="2.2" /></svg>
+          </span>
+          <span className="shortcut-label">Cobertura</span>
+        </a>
+        <a href={`https://wa.me/${WHATSAPP}`}>
+          <span className="shortcut-icon whatsapp-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4A8 8 0 1 1 20 11.5z" /><path d="M9 8.3c.4 2.7 2 4.3 4.7 5.3l1.2-1.2 2 .9c-.4 1.6-1.5 2.4-3 2.2-3.9-.6-6.8-3.5-7.4-7.4-.2-1.4.6-2.6 2.2-3l.9 2z" /></svg>
+          </span>
+          <span className="shortcut-label">WhatsApp</span>
+        </a>
       </div>
 
       {cookieOpen && (
