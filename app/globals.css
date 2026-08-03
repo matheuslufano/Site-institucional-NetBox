@@ -850,10 +850,10 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     opacity: 0;
     border: 1px solid rgba(255,255,255,.52);
     border-radius: 30px;
-    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.31));
+    background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(255,247,241,.78));
     box-shadow: inset 0 1px 0 rgba(255,255,255,.92), inset 0 -1px 0 rgba(255,255,255,.25), -16px 24px 65px rgba(43,25,11,.22);
-    backdrop-filter: blur(34px) saturate(190%);
-    -webkit-backdrop-filter: blur(34px) saturate(190%);
+    backdrop-filter: blur(44px) saturate(165%);
+    -webkit-backdrop-filter: blur(44px) saturate(165%);
     transform: translateX(calc(100% + 28px)) scale(.97);
     transform-origin: top right;
     transition: transform .38s cubic-bezier(.22,1,.36,1), opacity .24s ease, visibility .38s;
