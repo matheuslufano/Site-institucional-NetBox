@@ -28,7 +28,7 @@ export default function ServicesPage() {
           ))}
         </div></div>
       </section>
-      <section className="support-strip"><div className="model-shell"><div><small>Já sou cliente</small><h2>Resolva tudo com mais praticidade.</h2></div><div><a href="https://netboxfibra.sgp.net.br/accounts/central/login">2ª via</a><a href="/contatos">Suporte</a><a href="https://play.google.com/store/apps/details?id=br.com.appdoprovedor.netbox">Aplicativo</a></div></div></section>
+      <section className="support-strip"><div className="model-shell"><div><small>Já sou cliente</small><h2>Resolva tudo com mais praticidade.</h2></div><div><a href="https://netboxfibra.sgp.net.br/accounts/central/login">2ª !</a><a href="/contatos">Suporte</a><a href="https://play.google.com/store/apps/details?id=br.com.appdoprovedor.netbox">Aplicativo</a></div></div></section>
     </NetboxFrame>
   );
 }
