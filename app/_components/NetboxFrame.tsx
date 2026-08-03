@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { MenuContactLinks } from "./MenuContactLinks";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -17,6 +18,20 @@ const navItems = [
 export function NetboxFrame({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
+
   return (
     <>
       <a className="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -24,15 +39,19 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
         <a className="model-brand" href="/" aria-label="Netbox Internet — início">
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
         </a>
-        <nav className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
+        <nav id="menu-principal" className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
+          <div className="mobile-nav-heading" aria-hidden="true">
+            <span>Menu</span>
+            <small>Netbox Internet</small>
+          </div>
           {navItems.map(([href, label]) => (
             <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>
           ))}
-          <a className="nav-icon" href={SECOND_COPY} target="_blank" rel="noreferrer" aria-label="Central do Assinante">▤</a>
-          <a className="nav-icon" href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" aria-label="Abrir WhatsApp">◔</a>
+          <MenuContactLinks />
         </nav>
         <button
-          className="model-menu"
+          className={menuOpen ? "model-menu open" : "model-menu"}
+          aria-controls="menu-principal"
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -40,6 +59,15 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
           <span /><span /><span />
         </button>
       </header>
+      {menuOpen && (
+        <button
+          type="button"
+          className="menu-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Fechar menu"
+          tabIndex={-1}
+        />
+      )}
 
       <main id="conteudo">{children}</main>
 

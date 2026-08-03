@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { MenuContactLinks } from "./_components/MenuContactLinks";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -50,14 +51,14 @@ const services = [
 ];
 
 const gallery = [
-  ["01", "Fibra residencial", "Conexão para a rotina da sua casa."],
-  ["02", "Casa conectada", "Mais dispositivos com estabilidade."],
-  ["03", "Netbox Empresas", "Soluções para negócios que não podem parar."],
-  ["04", "Link dedicado", "Desempenho personalizado para sua operação."],
-  ["05", "Aplicativo Netbox", "Serviços e faturas na palma da mão."],
-  ["06", "Suporte regional", "Atendimento feito por quem está perto."],
-  ["07", "Lojas Netbox", "Presença em cidades do Tocantins."],
-  ["08", "Instalação agendada", "Consulta técnica e próximos passos pelo WhatsApp."],
+  ["01", "Fibra residencial", "Conexão para a rotina da sua casa.", "/solutions/fibra-residencial.png", "Casal usando a internet Netbox em casa"],
+  ["02", "Casa conectada", "Mais dispositivos com estabilidade.", "/solutions/casa-conectada.png", "Dispositivos conectados à rede de uma residência"],
+  ["03", "Netbox Empresas", "Soluções para negócios que não podem parar.", "/solutions/netbox-empresas.png", "Equipe trabalhando conectada em uma empresa"],
+  ["04", "Link dedicado", "Desempenho personalizado para sua operação.", "/solutions/link-dedicado.png", "Equipamentos de rede conectados por fibra óptica"],
+  ["05", "Aplicativo Netbox", "Serviços e faturas na palma da mão.", "/solutions/aplicativo-netbox.png", "Aplicativo Netbox sendo usado em um celular"],
+  ["06", "Suporte regional", "Atendimento feito por quem está perto.", "/solutions/suporte-regional.png", "Atendente Netbox auxiliando um cliente"],
+  ["07", "Lojas Netbox", "Presença em cidades do Tocantins.", "/solutions/lojas-netbox.png", "Cliente chegando a uma loja Netbox"],
+  ["08", "Instalação agendada", "Consulta técnica e próximos passos pelo WhatsApp.", "/solutions/instalacao-agendada.png", "Técnico instalando fibra óptica em uma residência"],
 ];
 
 const heroSlides = [
@@ -288,8 +289,7 @@ export default function Home() {
           <a href="/nossa-estrutura" onClick={() => setMenuOpen(false)}>Nossa estrutura</a>
           <a href="/depoimentos" onClick={() => setMenuOpen(false)}>Depoimentos</a>
           <a href="/contatos" onClick={() => setMenuOpen(false)}>Contatos</a>
-          <a className="nav-icon" href="mailto:atendimento@netbox.net.br" aria-label="Enviar e-mail">✉</a>
-          <a className="nav-icon" href={`https://wa.me/${WHATSAPP}`} aria-label="Abrir WhatsApp">◔</a>
+          <MenuContactLinks />
         </nav>
         <button
           className={menuOpen ? "model-menu open" : "model-menu"}
@@ -464,11 +464,11 @@ export default function Home() {
               </p>
             </div>
             <div className="solution-gallery">
-              {gallery.map(([number, title, text], index) => (
+              {gallery.map(([number, title, text, image, alt], index) => (
                 <article className={`solution-card card-${index + 1}`} key={title}>
-                  <div className="solution-art" aria-hidden="true">
+                  <div className="solution-art">
+                    <img src={image} alt={alt} loading="lazy" decoding="async" />
                     <span>{number}</span>
-                    <i /><i /><i />
                   </div>
                   <div className="solution-overlay">
                     <h3>{title}</h3>
