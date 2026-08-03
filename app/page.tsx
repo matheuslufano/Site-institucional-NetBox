@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
+import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -195,6 +196,7 @@ export default function Home() {
   const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
   const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
   const featureVideoRef = useRef<HTMLVideoElement>(null);
+  const navigationVisible = useScrollDirectionVisibility();
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
@@ -276,7 +278,7 @@ export default function Home() {
     <>
       <a className="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
-      <header className="model-header">
+      <header className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}>
         <a className="model-brand" href="/" aria-label="Netbox Internet — início">
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
         </a>
@@ -601,7 +603,10 @@ export default function Home() {
         <strong>◔ Fale Conosco</strong>
       </a>
 
-      <div className="client-shortcuts">
+      <div
+        className={`client-shortcuts${navigationVisible ? "" : " is-hidden"}`}
+        aria-hidden={!navigationVisible}
+      >
         <a href={SECOND_COPY} target="_blank" rel="noreferrer">
           <span className="shortcut-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M7 3.5h8l3 3V20.5H7z" /><path d="M15 3.5v4h3M10 11h5M10 14.5h5" /></svg>

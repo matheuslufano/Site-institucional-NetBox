@@ -828,6 +828,12 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     border-bottom-color: rgba(255,255,255,.58);
     background: rgba(255,255,255,.78);
     box-shadow: 0 7px 24px rgba(36,24,14,.08);
+    transition: top .32s cubic-bezier(.22,1,.36,1), opacity .22s ease;
+  }
+  .model-header.is-hidden {
+    top: -90px;
+    opacity: 0;
+    pointer-events: none;
   }
   .model-menu {
     position: relative;
@@ -1037,6 +1043,13 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(255,255,255,.22), 0 16px 45px rgba(39,24,14,.22);
     backdrop-filter: blur(28px) saturate(190%);
     -webkit-backdrop-filter: blur(28px) saturate(190%);
+    transition: transform .32s cubic-bezier(.22,1,.36,1), opacity .22s ease, filter .25s ease;
+    will-change: transform, opacity;
+  }
+  .client-shortcuts.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(100% + 24px + env(safe-area-inset-bottom)));
   }
   .client-shortcuts::before {
     content: "";

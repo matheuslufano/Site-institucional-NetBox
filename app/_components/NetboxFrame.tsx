@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { MenuContactLinks } from "./MenuContactLinks";
+import { useScrollDirectionVisibility } from "./useScrollDirectionVisibility";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -17,6 +18,7 @@ const navItems = [
 
 export function NetboxFrame({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigationVisible = useScrollDirectionVisibility();
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -39,7 +41,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
       <a className="skip-link" href="#conteudo">
         Ir para o conteúdo
       </a>
-      <header className="model-header">
+      <header className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}>
         <a
           className="model-brand"
           href="/"
@@ -164,7 +166,10 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
         <strong>◔ Fale Conosco</strong>
       </a>
 
-      <div className="client-shortcuts">
+      <div
+        className={`client-shortcuts${navigationVisible ? "" : " is-hidden"}`}
+        aria-hidden={!navigationVisible}
+      >
         <a href={SECOND_COPY} target="_blank" rel="noreferrer">
           ▤<span>2ª via</span>
         </a>
