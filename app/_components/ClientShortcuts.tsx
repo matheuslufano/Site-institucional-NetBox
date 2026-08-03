@@ -1,0 +1,35 @@
+"use client";
+
+import { useScrollDirectionVisibility } from "./useScrollDirectionVisibility";
+
+const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
+const WHATSAPP = "5508006022732";
+
+export function ClientShortcuts({ home = false }: { home?: boolean }) {
+  const visible = useScrollDirectionVisibility();
+
+  return (
+    <div className={`client-shortcuts${visible ? "" : " is-hidden"}`} aria-hidden={!visible}>
+      <a href={SECOND_COPY} target="_blank" rel="noreferrer">
+        <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5h8l3 3V20.5H7z" /><path d="M15 3.5v4h3M10 11h5M10 14.5h5" /></svg></span>
+        <span className="shortcut-label">2ª via</span>
+      </a>
+      <a href={home ? "#servicos" : "/nossos-servicos"}>
+        <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 16.5a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0M11 9.5a2 2 0 0 1 2 0" /><circle cx="12" cy="18.5" r="1" /></svg></span>
+        <span className="shortcut-label">Serviços</span>
+      </a>
+      <a href={home ? "#consulta" : "/nossa-estrutura"}>
+        <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11z" /><circle cx="12" cy="10" r="2.2" /></svg></span>
+        <span className="shortcut-label">{home ? "Cobertura" : "Estrutura"}</span>
+      </a>
+      <a href="/central-do-cliente">
+        <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3" /><path d="M6.5 19a5.5 5.5 0 0 1 11 0M4 3.5h16v17H4z" /></svg></span>
+        <span className="shortcut-label">Central</span>
+      </a>
+      <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer">
+        <span className="shortcut-icon whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4A8 8 0 1 1 20 11.5z" /><path d="M9 8.3c.4 2.7 2 4.3 4.7 5.3l1.2-1.2 2 .9c-.4 1.6-1.5 2.4-3 2.2-3.9-.6-6.8-3.5-7.4-7.4-.2-1.4.6-2.6 2.2-3l.9 2z" /></svg></span>
+        <span className="shortcut-label">WhatsApp</span>
+      </a>
+    </div>
+  );
+}

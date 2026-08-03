@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContactLinks } from "./MenuContactLinks";
 import { useScrollDirectionVisibility } from "./useScrollDirectionVisibility";
 
@@ -41,7 +42,9 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
       <a className="skip-link" href="#conteudo">
         Ir para o conteúdo
       </a>
-      <header className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}>
+      <header
+        className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}
+      >
         <a
           className="model-brand"
           href="/"
@@ -166,23 +169,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
         <strong>◔ Fale Conosco</strong>
       </a>
 
-      <div
-        className={`client-shortcuts${navigationVisible ? "" : " is-hidden"}`}
-        aria-hidden={!navigationVisible}
-      >
-        <a href={SECOND_COPY} target="_blank" rel="noreferrer">
-          ▤<span>2ª via</span>
-        </a>
-        <a href="/nossos-servicos">
-          ⌁<span>Serviços</span>
-        </a>
-        <a href="/nossa-estrutura">
-          ⌖<span>Estrutura</span>
-        </a>
-        <a href={`https://wa.me/${WHATSAPP}`}>
-          ◔<span>WhatsApp</span>
-        </a>
-      </div>
+      <ClientShortcuts />
     </>
   );
 }
