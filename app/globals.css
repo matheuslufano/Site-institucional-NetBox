@@ -810,6 +810,18 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
 .cookie-banner .model-button { min-height: 40px; padding: 0 13px; font-size: 10px; }
 
 @media (max-width: 980px) {
+  body > main,
+  body > footer,
+  .client-shortcuts,
+  .model-whatsapp {
+    transition: filter .25s ease;
+  }
+  html.mobile-menu-open body > main,
+  html.mobile-menu-open body > footer,
+  html.mobile-menu-open .client-shortcuts,
+  html.mobile-menu-open .model-whatsapp {
+    filter: blur(12px);
+  }
   .model-header {
     min-height: 78px;
     padding: 10px 20px;
@@ -850,8 +862,8 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     opacity: 0;
     border: 1px solid rgba(255,255,255,.52);
     border-radius: 30px;
-    background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(255,247,241,.92));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.92), inset 0 -1px 0 rgba(255,255,255,.50), -16px 24px 65px rgba(43,25,11,.22);
+    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,247,241,.68));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.92), inset 0 -1px 0 rgba(255,255,255,.25), -16px 24px 65px rgba(43,25,11,.22);
     backdrop-filter: blur(44px) saturate(165%);
     -webkit-backdrop-filter: blur(44px) saturate(165%);
     transform: translateX(calc(100% + 28px)) scale(.97);
@@ -937,9 +949,9 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     inset: 0;
     display: block;
     border: 0;
-    background: rgba(24,17,13,.3);
-    backdrop-filter: blur(12px) saturate(115%);
-    -webkit-backdrop-filter: blur(12px) saturate(115%);
+    background: rgba(24,17,13,.24);
+    backdrop-filter: blur(20px) saturate(115%);
+    -webkit-backdrop-filter: blur(20px) saturate(115%);
     animation: menu-backdrop-in .25s ease both;
   }
   .hero-inner { grid-template-columns: 1fr; gap: 35px; }

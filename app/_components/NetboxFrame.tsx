@@ -22,12 +22,14 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
     if (!menuOpen) return;
     const previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
+    document.documentElement.classList.add("mobile-menu-open");
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.documentElement.style.overflow = previousOverflow;
+      document.documentElement.classList.remove("mobile-menu-open");
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [menuOpen]);
