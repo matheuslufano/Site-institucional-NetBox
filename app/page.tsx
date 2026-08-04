@@ -11,25 +11,30 @@ const PLAY_STORE =
   "https://play.google.com/store/apps/details?id=br.com.appdoprovedor.netbox";
 const APP_STORE = "https://apps.apple.com/br/app/netbox/id1574550280";
 
-const cities = [
-  "Paraíso do Tocantins",
-  "Barrolândia",
-  "Brasilândia do Tocantins",
-  "Colinas do Tocantins",
-  "Colméia",
-  "Goianorte",
-  "Guaraí",
-  "Itacajá",
-  "Lajeado",
-  "Miracema",
-  "Miranorte",
-  "Pedro Afonso",
-  "Presidente Kennedy",
-  "Rio dos Bois",
-  "Santa Maria do Tocantins",
-  "Tabocão",
-  "Tocantínia",
-];
+const storeAddresses: Record<string, string> = {
+  "Paraíso do Tocantins - TO": "Rua Bernardino Maciel, 891, Centro - Paraíso do Tocantins/TO",
+  "Barrolândia - TO": "Netbox Internet - Barrolândia - Av. Bernardo Sayão, S/N - Centro, Barrolândia - TO, 77665-000",
+  "Bom Jesus do Tocantins - TO": "Netbox internet - Pedro Afonso - Av. Pedro Mariano dos Santos, 1050 - St. maria Galvão, Pedro Afonso - TO, 77710-000",
+  "Brasilândia do Tocantins - TO": "Netbox Internet - Colinas - Av. Pedro Ludovico Teixeira, 1152 - Centro, Colinas do Tocantins - TO, 77760-000",
+  "Colinas do Tocantins - TO": "Netbox Internet - Colinas - Av. Pedro Ludovico Teixeira, 1152 - Centro, Colinas do Tocantins - TO, 77760-000",
+  "Colméia - TO": "Netbox Internet - Colméia - Av. Longuinho Viêira Júnior, 470 - Centro, Colméia - TO, 77725-000",
+  "Goianorte - TO": "Netbox Internet - Goianorte, esquina com a - Avenida Tiradentes, R. Piauí - Centro, Goianorte - TO, 77695-000",
+  "Guaraí - TO": "Netbox Internet - Guaraí - Rua Dr Valdir, 1375 - St. Planalto, Guaraí - TO, 77700-000",
+  "Gurupi - TO": "Netbox Internet - Gurupi, Esquina com a - Avenida Pará, R. D, Q.11 - LT.01, Gurupi - TO, 77403-010",
+  "Itacajá - TO": "NETBOX INTERNET - ITACAJÁ - Av. Pres. Dutra, 435 - Cartucho - Centro, Itacajá - TO, 77720-000",
+  "Lajeado - TO": "Netbox Internet - Miracema - TO-342, 1664 - Vila Maria, Miracema do Tocantins - TO, 77650-000",
+  "Miracema - TO": "Netbox Internet - Miracema - TO-342, 1664 - Vila Maria, Miracema do Tocantins - TO, 77650-000",
+  "Miranorte - TO": "Netbox Internet - Miranorte - Av. Tocantins, 812 - Centro, Miranorte - TO, 77660-000",
+  "Pedro Afonso - TO": "Netbox internet - Pedro Afonso - Av. Pedro Mariano dos Santos, 1050 - St. maria Galvão, Pedro Afonso - TO, 77710-000",
+  "Presidente Kennedy - TO": "Netbox Internet - Presidente Kennedy - Av. Tocantins, 681 - Centro, Pres. Kennedy - TO, 77745-000",
+  "Rio dos Bois - TO": "Netbox Internet - Miranorte - Av. Tocantins, 812 - Centro, Miranorte - TO, 77660-000",
+  "Santa Maria do Tocantins - TO": "Netbox internet - Pedro Afonso - Av. Pedro Mariano dos Santos, 1050 - St. maria Galvão, Pedro Afonso - TO, 77710-000",
+  "Tabocão - TO": "Netbox Internet - Fortaleza do Tabocão - R. Amazonas, 112 - CENTRO, Tabocão - TO, 77708-000",
+  "Tocantínia - TO": "Netbox Internet - Miracema - TO-342, 1664 - Vila Maria, Miracema do Tocantins - TO, 77650-000",
+  "Tupirama - TO": "Netbox internet - Pedro Afonso - Av. Pedro Mariano dos Santos, 1050 - St. maria Galvão, Pedro Afonso - TO, 77710-000",
+};
+
+const cities = Object.keys(storeAddresses);
 
 const services = [
   {
@@ -189,7 +194,6 @@ function openWhatsApp(message: string, context: Record<string, unknown>) {
 
 export default function Home() {
   const [city, setCity] = useState("Paraíso do Tocantins");
-  const [address, setAddress] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -198,6 +202,10 @@ export default function Home() {
   const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
   const featureVideoRef = useRef<HTMLVideoElement>(null);
   const navigationVisible = useScrollDirectionVisibility();
+  const selectedStoreAddress = storeAddresses[city];
+  const selectedMapLocation = selectedStoreAddress;
+  const googleMapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(selectedMapLocation)}&output=embed`;
+  const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedMapLocation)}`;
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
@@ -248,10 +256,10 @@ export default function Home() {
 
   function consultCoverage(event?: FormEvent) {
     event?.preventDefault();
-    track("consultou_cobertura", { city, address });
+    track("consultou_cobertura", { city });
     openWhatsApp(
-      `Olá! Quero consultar a cobertura da Netbox em ${city}${address ? `, na região de ${address}` : ""}.`,
-      { city, address, type: "residencial", origin: "consulta_cobertura" },
+      `Olá! Quero consultar a cobertura da Netbox em ${city}.`,
+      { city, type: "residencial", origin: "consulta_cobertura" },
     );
   }
 
@@ -489,22 +497,15 @@ export default function Home() {
           <div className="model-shell coverage-conversion-layout">
             <div className="coverage-conversion-copy">
               <small>Consulta de cobertura</small>
-              <h2>A Netbox chega até você?</h2>
+              <h2>Encontre a Netbox na sua cidade.</h2>
               <p>
-                Informe sua cidade e a região do endereço. A equipe confirma a
-                disponibilidade e apresenta as opções vigentes pelo WhatsApp.
+                Escolha a cidade, veja o mapa e consulte a disponibilidade pelo WhatsApp.
               </p>
-              <div className="coverage-highlights">
-                <span><i>01</i> Selecione sua cidade</span>
-                <span><i>02</i> Informe o endereço</span>
-                <span><i>03</i> Converse com o consultor</span>
-              </div>
             </div>
 
             <form className="coverage-form" onSubmit={consultCoverage}>
-              <span>Consulte seu endereço</span>
               <label>
-                Cidade
+                Selecione a cidade
                 <select
                   value={city}
                   onChange={(event) => {
@@ -515,18 +516,30 @@ export default function Home() {
                   {cities.map((item) => <option key={item}>{item}</option>)}
                 </select>
               </label>
-              <label>
-                CEP, bairro ou endereço
-                <input
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
-                  placeholder="Ex.: Centro ou 77600-000"
+              <div className="coverage-map" aria-live="polite">
+                <iframe
+                  key={city}
+                  src={googleMapsEmbedUrl}
+                  title={`Mapa da Netbox em ${city}`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
                 />
-              </label>
+              </div>
+              <div className="coverage-location">
+                <div>
+                  <small>Endereço da loja</small>
+                  <strong>{city}</strong>
+                  <p>{selectedStoreAddress}</p>
+                </div>
+                <a href={googleMapsLink} target="_blank" rel="noreferrer" aria-label={`Abrir ${city} no Google Maps`}>
+                  Abrir mapa ↗
+                </a>
+              </div>
               <button className="model-button orange" type="submit">
                 Consultar pelo WhatsApp <b>»</b>
               </button>
-              <em>Consulta sujeita à viabilidade técnica do endereço.</em>
+              <em>Cobertura sujeita à viabilidade técnica.</em>
             </form>
           </div>
         </section>

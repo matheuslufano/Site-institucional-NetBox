@@ -9,6 +9,10 @@
   --soft: #f2f2f2;
   --paper: #fff;
   --charcoal: #242424;
+  --type-caption: clamp(12px, 11.5px + .12vw, 13px);
+  --type-small: clamp(14px, 13.5px + .14vw, 15px);
+  --type-body: clamp(16px, 15.5px + .16vw, 17px);
+  --type-lead: clamp(18px, 17px + .2vw, 20px);
 }
 
 * { box-sizing: border-box; }
@@ -580,7 +584,8 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
 
 .coverage-conversion-section {
   position: relative;
-  padding: 100px 0;
+  scroll-margin-top: 96px;
+  padding: 82px 0;
   overflow: hidden;
   background:
     radial-gradient(circle at 12% 72%, rgba(255,185,0,.15), transparent 25%),
@@ -601,9 +606,9 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr .82fr;
+  grid-template-columns: .58fr 1.42fr;
   align-items: center;
-  gap: 85px;
+  gap: 46px;
 }
 .coverage-conversion-copy > small {
   color: var(--orange-dark);
@@ -612,7 +617,7 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   letter-spacing: .12em;
 }
 .coverage-conversion-copy h2 {
-  margin: 10px 0 16px;
+  margin: 10px 0 14px;
   font-family: var(--font-display);
   font-size: clamp(38px, 4.5vw, 58px);
   line-height: 1.06;
@@ -623,36 +628,15 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   color: #666;
   line-height: 1.65;
 }
-.coverage-highlights {
-  margin-top: 30px;
-  display: grid;
-  gap: 11px;
-}
-.coverage-highlights span {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  font-weight: 800;
-}
-.coverage-highlights i {
-  width: 31px;
-  height: 31px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--yellow);
-  color: #392d00;
-  font-size: 9px;
-  font-style: normal;
-}
 .coverage-form {
-  padding: 31px;
+  padding: 24px;
   display: grid;
-  gap: 15px;
-  border-top: 5px solid var(--yellow);
+  gap: 14px;
+  border: 1px solid rgba(255,255,255,.8);
+  border: 4px solid #;
+  border-radius: 22px;
   background: #fff;
-  box-shadow: 0 24px 70px rgba(56,38,27,.13);
+  box-shadow: 0 22px 60px rgba(4, 2, 0, 0.23);
 }
 .coverage-form > span {
   margin-bottom: 3px;
@@ -660,6 +644,46 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   font-size: 22px;
   font-weight: 800;
 }
+.coverage-map {
+  min-height: 230px;
+  overflow: hidden;
+  border: 1px solid #e4ded9;
+  border-radius: 16px;
+  background: #eee9e5;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+}
+.coverage-map iframe {
+  width: 100%;
+  height: 400px;
+  display: block;
+  border: 0;
+}
+.coverage-location {
+  padding: 13px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid #eee4dd;
+  border-radius: 12px;
+  background: #fff8f3;
+}
+.coverage-location > div { min-width: 0; display: grid; gap: 3px; }
+.coverage-location small { color: var(--orange-dark); font-size: 8px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+.coverage-location strong { font-size: 13px; }
+.coverage-location p { margin: 0; color: #6d6864; font-size: 9px; line-height: 1.4; }
+.coverage-location > a {
+  padding: 8px 10px;
+  flex: 0 0 auto;
+  border: 1px solid #efcdb8;
+  border-radius: 999px;
+  color: var(--orange-dark);
+  background: #fff;
+  font-size: 9px;
+  font-weight: 900;
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.coverage-location > a:hover { border-color: var(--orange); color: #fff; background: var(--orange); }
 .coverage-form .model-button { width: 100%; }
 .coverage-form em {
   color: #888;
@@ -938,7 +962,7 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     min-height: 46px;
     justify-content: center;
     font-size: 20px;
-    background: rgba(255,136,47,.15);
+    background: rgba(181, 94, 27, 0.15);
   }
   .model-nav .menu-contact-links {
     position: relative;
@@ -1010,8 +1034,15 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   .model-hero h1 { font-size: 41px; }
   .model-hero-copy > p { font-size: 14px; }
   .hero-form { padding: 20px; }
-  .coverage-conversion-section { padding: 72px 0; }
-  .coverage-form { padding: 22px; }
+  .coverage-conversion-section { padding: 52px 0; }
+  .coverage-conversion-layout { gap: 25px; }
+  .coverage-conversion-copy > p { margin-bottom: 0; }
+  .coverage-form { padding: 14px; gap: 12px; border-radius: 18px; }
+  .coverage-map,
+  .coverage-map iframe { min-height: 200px; height: 350px; }
+  .coverage-map { min-height: 185px; border-radius: 13px; }
+  .coverage-location { padding: 12px; align-items: flex-start; flex-direction: column; gap: 10px; }
+  .coverage-location > a { width: 100%; text-align: center; }
   .hero-arrow { display: none; }
   .carousel-controls {
     right: 14px;
@@ -1066,12 +1097,12 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.58);
-    border-radius: 24px;
-    background: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.32));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(255,255,255,.22), 0 16px 45px rgba(39,24,14,.22);
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 25px;
+    background: linear-gradient(145deg, rgba(255,255,255,.56), rgba(244,239,236,.3));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.18), 0 14px 38px rgba(46,31,20,.18);
+    backdrop-filter: blur(32px) saturate(175%);
+    -webkit-backdrop-filter: blur(32px) saturate(175%);
     transition: transform .32s cubic-bezier(.22,1,.36,1), opacity .22s ease, filter .25s ease;
     will-change: transform, opacity;
   }
@@ -1095,56 +1126,61 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     place-items: center;
     align-content: center;
     gap: 2px;
+    overflow: hidden;
     border: 1px solid transparent;
-    border-radius: 17px;
-    color: #d7480c;
-    background-color: transparent;
-    transition: color .2s ease, background-color .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    border-radius: 18px;
+    color: rgba(70,55,47,.72);
+    background: transparent;
+    box-shadow: none;
+    transition: color .2s ease, background-color .24s ease, transform .2s ease, border-color .24s ease, box-shadow .24s ease;
   }
   .client-shortcuts a:hover,
   .client-shortcuts a:focus-visible {
-    border-color: #f3d1ba;
-    color: #d7480c;
-    background-color: #fff7f0;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 6px 16px rgba(50,30,15,.1);
-    transform: translateY(-2px);
+    color: #b94616;
+  }
+  .client-shortcuts a.is-selected,
+  .client-shortcuts a:active {
+    border-color: rgba(255,255,255,.78);
+    color: #a83e12;
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.27));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.22), 0 7px 18px rgba(55,36,23,.13);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
   }
   .client-shortcuts a:active { transform: scale(.96); }
-  .client-shortcuts a:last-child { background-color: #fff0e6; }
+  .client-shortcuts a.is-selected::after {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 18px;
+    top: -11px;
+    left: 8%;
+    border-radius: 50%;
+    background: rgba(255,255,255,.72);
+    filter: blur(7px);
+    transform: rotate(-8deg);
+  }
   .client-shortcuts .shortcut-icon {
     position: relative;
-    width: 40px;
-    height: 40px;
+    z-index: 1;
+    width: 34px;
+    height: 34px;
     display: grid;
     flex: 0 0 auto;
     place-items: center;
-    overflow: hidden;
-    border: 1px solid #f3d1ba;
-    border-radius: 13px;
-    background-color: #fff7f0;
-    color: #7c3518;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(255,255,255,.2), 0 6px 15px rgba(55,31,15,.13);
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
     transition: color .2s ease, background-color .2s ease, border-color .2s ease;
   }
-  .client-shortcuts .shortcut-icon::before {
-    content: "";
-    position: absolute;
-    width: 29px;
-    height: 16px;
-    top: -7px;
-    left: -2px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.72);
-    filter: blur(4px);
-    transform: rotate(-18deg);
-  }
+  .client-shortcuts .shortcut-icon::before { content: none; }
   .client-shortcuts .shortcut-icon svg {
     position: relative;
     z-index: 1;
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     overflow: visible;
     fill: none;
     stroke: currentColor;
@@ -1154,16 +1190,18 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
   }
   .client-shortcuts .whatsapp-icon {
-    border-color: #25d366;
-    background-color: #25d366;
-    color: #ffffff;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.76), inset 0 -1px 0 rgba(7,104,50,.14), 0 6px 16px rgba(7,132,61,.2);
+    color: #e2eee7;
+    background: linear-gradient(145deg, rgba(4, 254, 42, 0.68), rgb(18, 134, 3));
+    border-radius: 20%;
+    filter: drop-shadow(0 0px 0 rgba(255, 255, 255, 0));
+
   }
   .client-shortcuts a:hover .shortcut-icon,
-  .client-shortcuts a:focus-visible .shortcut-icon { border-color: #f3f0ee; color: #ff3c00; background-color: #fdfdfd04; }
+  .client-shortcuts a:focus-visible .shortcut-icon { color: #d7480c; }
   .client-shortcuts a:last-child:hover .whatsapp-icon,
-  .client-shortcuts a:last-child:focus-visible .whatsapp-icon { border-color: #128c7e; background-color: #128c7e; }
-  .client-shortcuts .shortcut-label { overflow: hidden; max-width: 100%; color: #4f382a; font-size: 8px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; transition: color .2s ease; }
+  .client-shortcuts a:last-child:focus-visible .whatsapp-icon,
+  .client-shortcuts a:last-child.is-selected .whatsapp-icon { color: #ffffff; }
+  .client-shortcuts .shortcut-label { position: relative; z-index: 1; overflow: hidden; max-width: 100%; color: inherit; font-size: 9.5px; font-weight: 750; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; transition: color .2s ease; }
   .client-shortcuts a:hover .shortcut-label,
   .client-shortcuts a:focus-visible .shortcut-label { color: #d7480c; }
   .cookie-banner { right: 14px; bottom: 96px; width: calc(100% - 28px); align-items: stretch; flex-direction: column; }
@@ -1376,4 +1414,85 @@ textarea:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(255,185
   .inner-form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 21px; }
   .inner-cta h2 { font-size: 31px; }
+}
+
+/* Sistema tipográfico */
+body { font-size: var(--type-body); line-height: 1.55; }
+p { font-size: var(--type-body); }
+small,
+.model-hero-copy > span,
+.hero-form > small,
+.feature-caption span,
+.coverage-conversion-copy > small,
+.inner-copy > small,
+.coverage-inner small,
+.customer-center-heading small,
+.customer-service-grid small,
+.speed-test-links small,
+.inner-page-hero span { font-size: var(--type-caption); }
+
+label,
+button,
+input,
+select,
+textarea,
+.model-nav,
+.model-button,
+.support-strip a { font-size: var(--type-small); }
+
+.services-list h3,
+.solution-overlay h3,
+.structure-gallery h3,
+.contact-cards strong,
+.speed-test-links strong { font-size: var(--type-body); }
+
+.services-list p,
+.solution-overlay p,
+.value-grid p,
+.detail-service-grid ul,
+.review-policy p,
+.contact-cards em,
+.form-status,
+.contact-hours,
+.customer-service-grid p,
+.customer-service-grid strong,
+.speed-tip p,
+.footer-services strong,
+.footer-services small,
+.footer-about p,
+.footer-contact,
+.footer-bottom,
+.inner-footer .inner-footer-link strong,
+.inner-footer .inner-footer-link small,
+.cookie-banner p { font-size: var(--type-small); }
+
+.coverage-conversion-copy > p {
+  font-size: var(--type-lead);
+  line-height: 1.65;
+}
+.coverage-form { gap: 14px; }
+.coverage-form > span { font-size: clamp(24px, 22px + .4vw, 28px); }
+.coverage-form label { gap: 8px; font-size: var(--type-small); }
+.coverage-form select { min-height: 50px; font-size: var(--type-body); }
+.coverage-location small { font-size: var(--type-caption); }
+.coverage-location strong { font-size: var(--type-body); }
+.coverage-location p { font-size: var(--type-small); }
+.coverage-location > a { font-size: var(--type-caption); }
+.coverage-form em { font-size: var(--type-caption); line-height: 1.45; }
+.client-shortcuts .shortcut-label { font-size: 11px; }
+
+@media (max-width: 640px) {
+  :root {
+    --type-caption: 12px;
+    --type-small: 14px;
+    --type-body: 16px;
+    --type-lead: 18px;
+  }
+  .coverage-conversion-copy h2 { font-size: 38px; }
+  .coverage-conversion-copy > p { font-size: 16px; line-height: 1.55; }
+  .coverage-form label { font-size: 13px; }
+  .coverage-form select { min-height: 48px; font-size: 16px; }
+  .coverage-location p { line-height: 1.5; }
+  .coverage-form em { font-size: 11px; }
+  .client-shortcuts .shortcut-label { font-size: 10px; }
 }
