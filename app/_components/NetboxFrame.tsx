@@ -21,6 +21,15 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigationVisible = useScrollDirectionVisibility();
 
+  function goToPreviousPage() {
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+
+    window.location.assign("/");
+  }
+
   useEffect(() => {
     if (!menuOpen) return;
     const previousOverflow = document.documentElement.style.overflow;
@@ -90,7 +99,17 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
         />
       )}
 
-      <main id="conteudo">{children}</main>
+      <main id="conteudo">
+        <div className="back-navigation">
+          <div className="model-shell">
+            <button type="button" className="back-button" onClick={goToPreviousPage}>
+              <span aria-hidden="true">←</span>
+              Voltar
+            </button>
+          </div>
+        </div>
+        {children}
+      </main>
 
       <footer className="model-footer inner-footer">
         <div className="model-shell footer-main">
