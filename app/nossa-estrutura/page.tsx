@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ const coverageCities = ["Barrolândia", "Brasilândia do Tocantins", "Colinas do
 export default function StructurePage() {
   return (
     <NetboxFrame>
-      <section className="inner-page-hero structure-hero"><div className="model-shell"><span>Início / Nossa estrutura</span><h1>Presença regional e canais para estar sempre perto.</h1><p>Conheça a estrutura que conecta clientes em cidades do Tocantins.</p></div></section>
+      <section className="inner-page-hero structure-hero"><div className="model-shell"><div className="inner-hero-nav"><BackButton /><span>Início / Nossa estrutura</span></div><h1>Presença regional e canais para estar sempre perto.</h1><p>Conheça a estrutura que conecta clientes em cidades do Tocantins.</p></div></section>
       <section className="inner-section soft-section"><div className="model-shell"><div className="model-heading"><h2>Nossa estrutura</h2><p>Imagens oficiais serão incluídas conforme o acervo da Netbox for validado.</p></div><div className="structure-gallery">
         {structureItems.map((item, index) => <article key={item}><div className={`structure-art s-${index + 1}`}><span>{String(index + 1).padStart(2, "0")}</span><i>Foto oficial pendente</i></div><h3>{item}</h3></article>)}
       </div></div></section>

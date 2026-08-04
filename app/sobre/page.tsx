@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export default function AboutPage() {
   return (
     <NetboxFrame>
       <section className="inner-page-hero about-hero">
-        <div className="model-shell"><span>Início / Sobre nós</span><h1>Conexão regional feita para estar perto.</h1><p>Conheça os princípios que orientam a Netbox no Tocantins.</p></div>
+        <div className="model-shell"><div className="inner-hero-nav"><BackButton /><span>Início / Sobre nós</span></div><h1>Conexão regional feita para estar perto.</h1><p>Conheça os princípios que orientam a Netbox no Tocantins.</p></div>
       </section>
       <section className="inner-section">
         <div className="model-shell story-layout">
