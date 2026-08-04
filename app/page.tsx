@@ -1,6 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { ClientShortcuts } from "./_components/ClientShortcuts";
+import { MenuContactLinks } from "./_components/MenuContactLinks";
+import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -50,14 +53,14 @@ const services = [
 ];
 
 const gallery = [
-  ["01", "Fibra residencial", "Conexão para a rotina da sua casa."],
-  ["02", "Casa conectada", "Mais dispositivos com estabilidade."],
-  ["03", "Netbox Empresas", "Soluções para negócios que não podem parar."],
-  ["04", "Link dedicado", "Desempenho personalizado para sua operação."],
-  ["05", "Aplicativo Netbox", "Serviços e faturas na palma da mão."],
-  ["06", "Suporte regional", "Atendimento feito por quem está perto."],
-  ["07", "Lojas Netbox", "Presença em cidades do Tocantins."],
-  ["08", "Instalação agendada", "Consulta técnica e próximos passos pelo WhatsApp."],
+  ["01", "Fibra residencial", "Conexão para a rotina da sua casa.", "/solutions/fibra-residencial.png", "Casal usando a internet Netbox em casa"],
+  ["02", "Casa conectada", "Mais dispositivos com estabilidade.", "/solutions/casa-conectada.png", "Dispositivos conectados à rede de uma residência"],
+  ["03", "Netbox Empresas", "Soluções para negócios que não podem parar.", "/solutions/netbox-empresas.png", "Equipe trabalhando conectada em uma empresa"],
+  ["04", "Link dedicado", "Desempenho personalizado para sua operação.", "/solutions/link-dedicado.png", "Equipamentos de rede conectados por fibra óptica"],
+  ["05", "Aplicativo Netbox", "Serviços e faturas na palma da mão.", "/solutions/aplicativo-netbox.png", "Aplicativo Netbox sendo usado em um celular"],
+  ["06", "Suporte regional", "Atendimento feito por quem está perto.", "/solutions/suporte-regional.png", "Atendente Netbox auxiliando um cliente"],
+  ["07", "Lojas Netbox", "Presença em cidades do Tocantins.", "/solutions/lojas-netbox.png", "Cliente chegando a uma loja Netbox"],
+  ["08", "Instalação agendada", "Consulta técnica e próximos passos pelo WhatsApp.", "/solutions/instalacao-agendada.png", "Técnico instalando fibra óptica em uma residência"],
 ];
 
 const heroSlides = [
@@ -191,10 +194,30 @@ export default function Home() {
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
+  const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
+  const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
+  const featureVideoRef = useRef<HTMLVideoElement>(null);
+  const navigationVisible = useScrollDirectionVisibility();
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.classList.add("mobile-menu-open");
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      document.documentElement.classList.remove("mobile-menu-open");
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -207,6 +230,20 @@ export default function Home() {
 
   function moveSlide(direction: number) {
     setActiveSlide((current) => (current + direction + heroSlides.length) % heroSlides.length);
+  }
+
+  function toggleFeatureVideo() {
+    const video = featureVideoRef.current;
+    if (!video) return;
+    if (video.paused) void video.play();
+    else video.pause();
+  }
+
+  function toggleFeatureVideoSound() {
+    const video = featureVideoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setFeatureVideoMuted(video.muted);
   }
 
   function consultCoverage(event?: FormEvent) {
@@ -242,22 +279,26 @@ export default function Home() {
     <>
       <a className="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
-      <header className="model-header">
+      <header className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}>
         <a className="model-brand" href="/" aria-label="Netbox Internet — início">
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
         </a>
-        <nav className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
+        <nav id="menu-principal" className={menuOpen ? "model-nav open" : "model-nav"} aria-label="Navegação principal">
+          <div className="mobile-nav-heading" aria-hidden="true">
+            <span>Menu</span>
+            <small>Netbox Internet</small>
+          </div>
           <a href="/" onClick={() => setMenuOpen(false)}>Início</a>
           <a href="/sobre" onClick={() => setMenuOpen(false)}>Sobre nós</a>
-          <a href="/nossos-servicos" onClick={() => setMenuOpen(false)}>Serviços <span>＋</span></a>
+          <a href="/nossos-servicos" onClick={() => setMenuOpen(false)}>Serviços</a>
           <a href="/nossa-estrutura" onClick={() => setMenuOpen(false)}>Nossa estrutura</a>
           <a href="/depoimentos" onClick={() => setMenuOpen(false)}>Depoimentos</a>
           <a href="/contatos" onClick={() => setMenuOpen(false)}>Contatos</a>
-          <a className="nav-icon" href="mailto:atendimento@netbox.net.br" aria-label="Enviar e-mail">✉</a>
-          <a className="nav-icon" href={`https://wa.me/${WHATSAPP}`} aria-label="Abrir WhatsApp">◔</a>
+          <MenuContactLinks />
         </nav>
         <button
-          className="model-menu"
+          className={menuOpen ? "model-menu open" : "model-menu"}
+          aria-controls="menu-principal"
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -265,6 +306,15 @@ export default function Home() {
           <span /><span /><span />
         </button>
       </header>
+      {menuOpen && (
+        <button
+          type="button"
+          className="menu-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Fechar menu"
+          tabIndex={-1}
+        />
+      )}
 
       <main id="conteudo">
         <section
@@ -339,17 +389,49 @@ export default function Home() {
         <section className="services-section" id="servicos">
           <div className="model-shell services-layout">
             <div className="service-feature">
-              <div className="fiber-pole" aria-hidden="true">
-                <span className="pole" />
-                <span className="cable one" />
-                <span className="cable two" />
-                <span className="pulse p1" />
-                <span className="pulse p2" />
-                <span className="pulse p3" />
+              <div className="fiber-pole">
+                <video
+                  ref={featureVideoRef}
+                  className="feature-video"
+                  src="/videos/Video-netbox.mp4"
+                  autoPlay
+                  muted={featureVideoMuted}
+                  loop
+                  playsInline
+                  preload="metadata"
+                  onPlay={() => setFeatureVideoPaused(false)}
+                  onPause={() => setFeatureVideoPaused(true)}
+                  aria-label="Vídeo sobre a conexão de fibra óptica da Netbox"
+                />
               </div>
               <div className="feature-caption">
-                <span>100% fibra óptica</span>
-                <strong>Conexão feita para acompanhar seu ritmo.</strong>
+                <div className="feature-caption-copy">
+                  <span>100% fibra óptica</span>
+                  <strong>Conexão no seu ritmo.</strong>
+                </div>
+                <div className="feature-video-controls">
+                  <button
+                    type="button"
+                    onClick={toggleFeatureVideo}
+                    aria-label={featureVideoPaused ? "Reproduzir vídeo" : "Pausar vídeo"}
+                  >
+                    {featureVideoPaused ? (
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z" /></svg>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={toggleFeatureVideoSound}
+                    aria-label={featureVideoMuted ? "Ativar som" : "Desativar som"}
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 9v6h4l5 4V5L8 9H4z" />
+                      {featureVideoMuted ? <path d="m17 9 4 4m0-4-4 4" className="sound-stroke" /> : <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" className="sound-stroke" />}
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -387,11 +469,11 @@ export default function Home() {
               </p>
             </div>
             <div className="solution-gallery">
-              {gallery.map(([number, title, text], index) => (
+              {gallery.map(([number, title, text, image, alt], index) => (
                 <article className={`solution-card card-${index + 1}`} key={title}>
-                  <div className="solution-art" aria-hidden="true">
+                  <div className="solution-art">
+                    <img src={image} alt={alt} loading="lazy" decoding="async" />
                     <span>{number}</span>
-                    <i /><i /><i />
                   </div>
                   <div className="solution-overlay">
                     <h3>{title}</h3>
@@ -522,12 +604,7 @@ export default function Home() {
         <strong>◔ Fale Conosco</strong>
       </a>
 
-      <div className="client-shortcuts">
-        <a href={SECOND_COPY} target="_blank" rel="noreferrer">▤<span>2ª via</span></a>
-        <a href="#servicos">⌁<span>Serviços</span></a>
-        <a href="#consulta">⌖<span>Cobertura</span></a>
-        <a href={`https://wa.me/${WHATSAPP}`}>◔<span>WhatsApp</span></a>
-      </div>
+      <ClientShortcuts home />
 
       {cookieOpen && (
         <aside className="cookie-banner" aria-label="Preferências de cookies">

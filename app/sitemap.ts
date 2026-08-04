@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/sobre", "/nossos-servicos", "/nossa-estrutura", "/depoimentos", "/contatos"];
+  const routes = ["", "/sobre", "/nossos-servicos", "/nossa-estrutura", "/depoimentos", "/contatos", "/central-do-cliente"];
   return routes.map((route, index) => ({
     url: `https://netbox.net.br${route}`,
     lastModified: new Date(),
