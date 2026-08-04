@@ -35,6 +35,7 @@ const storeAddresses: Record<string, string> = {
 };
 
 const cities = Object.keys(storeAddresses);
+const DEFAULT_CITY = "Paraíso do Tocantins - TO";
 
 const services = [
   {
@@ -193,19 +194,21 @@ function openWhatsApp(message: string, context: Record<string, unknown>) {
 }
 
 export default function Home() {
-  const [city, setCity] = useState("Paraíso do Tocantins");
+  const [city, setCity] = useState(DEFAULT_CITY);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [activeSolution, setActiveSolution] = useState<number | null>(null);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
   const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
   const featureVideoRef = useRef<HTMLVideoElement>(null);
   const navigationVisible = useScrollDirectionVisibility();
-  const selectedStoreAddress = storeAddresses[city];
+  const selectedStoreAddress = storeAddresses[city] ?? storeAddresses[DEFAULT_CITY];
   const selectedMapLocation = selectedStoreAddress;
-  const googleMapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(selectedMapLocation)}&output=embed`;
+  const googleMapsEmbedUrl = `https://maps.google.com/maps?hl=pt-BR&q=${encodeURIComponent(selectedMapLocation)}&z=16&output=embed`;
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedMapLocation)}`;
+  const activeSolutionData = activeSolution === null ? null : gallery[activeSolution];
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
@@ -226,6 +229,26 @@ export default function Home() {
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    if (activeSolution === null) return;
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveSolution(null);
+      if (event.key === "ArrowLeft") {
+        setActiveSolution((current) => current === null ? null : (current - 1 + gallery.length) % gallery.length);
+      }
+      if (event.key === "ArrowRight") {
+        setActiveSolution((current) => current === null ? null : (current + 1) % gallery.length);
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeSolution]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -358,7 +381,7 @@ export default function Home() {
               <h1>{heroSlides[activeSlide].title}</h1>
               <p>{heroSlides[activeSlide].text}</p>
               <a
-                className="model-button yellow"
+                className="model-button hero-primary"
                 href={heroSlides[activeSlide].href}
                 target={heroSlides[activeSlide].href.startsWith("http") ? "_blank" : undefined}
                 rel={heroSlides[activeSlide].href.startsWith("http") ? "noreferrer" : undefined}
@@ -370,19 +393,24 @@ export default function Home() {
           </div>
           <button className="hero-arrow left" type="button" onClick={() => moveSlide(-1)} aria-label="Mostrar destaque anterior">‹</button>
           <button className="hero-arrow right" type="button" onClick={() => moveSlide(1)} aria-label="Mostrar próximo destaque">›</button>
-          <div className="carousel-controls" aria-label="Escolher destaque">
-            {heroSlides.map((slide, index) => (
-              <button
-                key={slide.title}
-                type="button"
-                className={index === activeSlide ? "active" : ""}
-                onClick={() => setActiveSlide(index)}
-                aria-label={`Mostrar destaque ${index + 1}: ${slide.kicker}`}
-                aria-current={index === activeSlide ? "true" : undefined}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-              </button>
-            ))}
+          <div className="carousel-controls">
+            <span className="carousel-count" aria-live="polite" aria-atomic="true">
+              <strong>{String(activeSlide + 1).padStart(2, "0")}</strong>
+              <i>/</i>
+              {String(heroSlides.length).padStart(2, "0")}
+            </span>
+            <div className="carousel-dots" aria-label="Escolher destaque">
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide.title}
+                  type="button"
+                  className={index === activeSlide ? "active" : ""}
+                  onClick={() => setActiveSlide(index)}
+                  aria-label={`Mostrar destaque ${index + 1}: ${slide.kicker}`}
+                  aria-current={index === activeSlide ? "true" : undefined}
+                />
+              ))}
+            </div>
             <button
               className="carousel-pause"
               type="button"
@@ -478,7 +506,13 @@ export default function Home() {
             </div>
             <div className="solution-gallery">
               {gallery.map(([number, title, text, image, alt], index) => (
-                <article className={`solution-card card-${index + 1}`} key={title}>
+                <button
+                  className={`solution-card card-${index + 1}`}
+                  key={title}
+                  type="button"
+                  onClick={() => setActiveSolution(index)}
+                  aria-label={`Abrir detalhes de ${title}`}
+                >
                   <div className="solution-art">
                     <img src={image} alt={alt} loading="lazy" decoding="async" />
                     <span>{number}</span>
@@ -487,11 +521,62 @@ export default function Home() {
                     <h3>{title}</h3>
                     <p>{text}</p>
                   </div>
-                </article>
+                </button>
               ))}
             </div>
           </div>
         </section>
+
+        {activeSolutionData && activeSolution !== null && (
+          <div
+            className="solution-modal-backdrop"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setActiveSolution(null);
+            }}
+          >
+            <section
+              className="solution-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="solution-modal-title"
+            >
+              <button
+                className="solution-modal-close"
+                type="button"
+                onClick={() => setActiveSolution(null)}
+                aria-label="Fechar detalhes do serviço"
+                autoFocus
+              >
+                ×
+              </button>
+              <div className="solution-modal-image">
+                <img src={activeSolutionData[3]} alt={activeSolutionData[4]} />
+                <button
+                  className="solution-modal-arrow previous"
+                  type="button"
+                  onClick={() => setActiveSolution((activeSolution - 1 + gallery.length) % gallery.length)}
+                  aria-label="Mostrar solução anterior"
+                >
+                  ‹
+                </button>
+                <button
+                  className="solution-modal-arrow next"
+                  type="button"
+                  onClick={() => setActiveSolution((activeSolution + 1) % gallery.length)}
+                  aria-label="Mostrar próxima solução"
+                >
+                  ›
+                </button>
+              </div>
+              <div className="solution-modal-copy">
+                <span>{activeSolutionData[0]} / {String(gallery.length).padStart(2, "0")}</span>
+                <h3 id="solution-modal-title">{activeSolutionData[1]}</h3>
+                <p>{activeSolutionData[2]}</p>
+              </div>
+            </section>
+          </div>
+        )}
 
         <section className="coverage-conversion-section" id="consulta">
           <div className="model-shell coverage-conversion-layout">
@@ -521,7 +606,7 @@ export default function Home() {
                   key={city}
                   src={googleMapsEmbedUrl}
                   title={`Mapa da Netbox em ${city}`}
-                  loading="lazy"
+                  loading="eager"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
                 />
