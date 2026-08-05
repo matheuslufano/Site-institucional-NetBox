@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
 const CENTRAL_URL = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -40,7 +41,10 @@ export default function CustomerCenterPage() {
     <NetboxFrame>
       <section className="inner-page-hero customer-center-hero">
         <div className="model-shell">
-          <span>Início / Central do Cliente</span>
+          <div className="inner-hero-nav">
+            <BackButton />
+            <span>Início / Central do Cliente</span>
+          </div>
           <h1>Resolva tudo de forma simples.</h1>
           <p>Acesse os serviços da sua assinatura e confira a qualidade da sua conexão em poucos cliques.</p>
         </div>

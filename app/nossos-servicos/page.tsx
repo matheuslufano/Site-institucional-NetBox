@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ const serviceDetails = [
 export default function ServicesPage() {
   return (
     <NetboxFrame>
-      <section className="inner-page-hero services-hero"><div className="model-shell"><span>Início / Serviços</span><h1>Soluções para conectar cada momento.</h1><p>Casa, empresa e atendimento reunidos em uma página completa.</p></div></section>
+      <section className="inner-page-hero services-hero"><div className="model-shell"><div className="inner-hero-nav"><BackButton /><span>Início / Serviços</span></div><h1>Soluções para conectar cada momento.</h1><p>Casa, empresa e atendimento reunidos em uma página completa.</p></div></section>
       <section className="inner-section">
         <div className="model-shell"><div className="model-heading"><h2>Nossos serviços</h2><p>Escolha uma jornada e fale com o canal adequado.</p></div><div className="detail-service-grid">
           {serviceDetails.map(([icon, title, text, items]) => (
