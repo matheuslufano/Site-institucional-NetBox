@@ -46,7 +46,9 @@ export function ClientShortcuts({ home = false }: { home?: boolean }) {
         <span className="shortcut-label">Central</span>
       </a>
       <a className={itemClass("whatsapp")} href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" onClick={() => setSelected("whatsapp")}>
-        <span className="shortcut-icon whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4A8 8 0 1 1 20 11.5z" /><path d="M9 8.3c.4 2.7 2 4.3 4.7 5.3l1.2-1.2 2 .9c-.4 1.6-1.5 2.4-3 2.2-3.9-.6-6.8-3.5-7.4-7.4-.2-1.4.6-2.6 2.2-3l.9 2z" /></svg></span>
+        <span className="shortcut-icon whatsapp-icon" aria-hidden="true">
+          <img src="/whatsapp-shortcut.png" alt="" width={36} height={36} />
+        </span>
         <span className="shortcut-label">WhatsApp</span>
       </a>
     </div>

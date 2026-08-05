@@ -1253,7 +1253,7 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   box-shadow: 0 10px 28px rgba(4,112,54,.3);
   font-size: 14px;
 }
-.model-whatsapp img { width: 24px; height: 24px; display: block; object-fit: contain; }
+.model-whatsapp img { width: 34px; height: 34px; display: block; object-fit: contain; }
 .client-shortcuts { display: none; }
 .cookie-banner {
   position: fixed;
@@ -1526,14 +1526,14 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   .footer-contact { grid-column: auto; }
   .footer-bottom { align-items: flex-start; flex-direction: column; }
   .model-whatsapp {
-    right: 14px;
-    bottom: 96px;
+    right: 10px;
+    bottom: 50px;
     transition: opacity .22s ease, visibility .22s ease, transform .28s cubic-bezier(.22,1,.36,1), filter .25s ease;
   }
   .model-whatsapp small { display: none; }
   .model-whatsapp strong {
-    width: 60px;
-    height: 60px;
+    width: 68px;
+    height: 68px;
     padding: 0;
     display: grid;
     place-items: center;
@@ -1543,8 +1543,8 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   }
   .model-whatsapp strong span { display: none; }
   .model-whatsapp img {
-    width: 60px;
-    height: 60px;
+    width: 68px;
+    height: 68px;
     filter: drop-shadow(0 10px 15px rgba(4,112,54,.28));
   }
   .model-whatsapp.shortcuts-visible {
@@ -1665,17 +1665,18 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
   }
   .client-shortcuts .whatsapp-icon {
-    color: #e2eee7;
-    background: linear-gradient(145deg, rgba(4, 254, 42, 0.68), rgb(18, 134, 3));
-    border-radius: 20%;
-    filter: drop-shadow(0 0px 0 rgba(255, 255, 255, 0));
-
+    width: 38px;
+    height: 38px;
+  }
+  .client-shortcuts .whatsapp-icon img {
+    width: 36px;
+    height: 36px;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
   }
   .client-shortcuts a:hover .shortcut-icon,
   .client-shortcuts a:focus-visible .shortcut-icon { color: #d7480c; }
-  .client-shortcuts a:last-child:hover .whatsapp-icon,
-  .client-shortcuts a:last-child:focus-visible .whatsapp-icon,
-  .client-shortcuts a:last-child.is-selected .whatsapp-icon { color: #ffffff; }
   .client-shortcuts .shortcut-label { position: relative; z-index: 1; overflow: hidden; max-width: 100%; color: inherit; font-size: 9.5px; font-weight: 750; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; transition: color .2s ease; }
   .client-shortcuts a:hover .shortcut-label,
   .client-shortcuts a:focus-visible .shortcut-label { color: #d7480c; }
