@@ -40,13 +40,13 @@ const DEFAULT_CITY = "Paraíso do Tocantins - TO";
 const services = [
   {
     icon: "⌁",
-    title: "Internet residencial",
-    text: "Fibra óptica para conectar sua casa, sua rotina e tudo o que importa.",
+    title: "Internet Fibra Residencial",
+    text: "Internet rápida e estável para estudar, trabalhar, jogar e assistir aos seus conteúdos favoritos.",
     action: "Consultar opções residenciais",
   },
   {
     icon: "▦",
-    title: "Soluções empresariais",
+    title: "Conteúdo e entretenimento",
     text: "Internet empresarial, link dedicado e atendimento personalizado.",
     action: "Solicitar proposta empresarial",
   },
@@ -55,6 +55,73 @@ const services = [
     title: "Atendimento ao cliente",
     text: "Segunda via, aplicativo, suporte técnico e Central do Assinante.",
     action: "Acessar atendimento",
+  },
+];
+
+const residentialPlans = [
+  {
+    name: "Básico",
+    features: [
+      "Entrega da velocidade contratada",
+      "Desconto para pagamento com pontualidade",
+      "Roteador em comodato",
+      "Suporte premium 7 dias por semana",
+    ],
+    platforms: [
+      { name: "Ubook Go", tone: "ubook" },
+      { name: "App Netbox", tone: "netbox" },
+    ],
+    bonus: "Indique, fechou, ganhou!",
+  },
+  {
+    name: "Essencial",
+    features: [
+      "Entrega da velocidade contratada",
+      "Desconto para pagamento com pontualidade",
+      "Roteador em comodato",
+      "Suporte premium 7 dias por semana",
+    ],
+    platforms: [
+      { name: "Ubook Go", tone: "ubook" },
+      { name: "App Netbox", tone: "netbox" },
+      { name: "Deezer Premium", tone: "deezer" },
+      { name: "Prime Video", tone: "prime" },
+    ],
+    choiceNote: "Você pode optar por Deezer Premium ou Prime Video.",
+  },
+  {
+    name: "Família",
+    features: [
+      "Entrega da velocidade contratada",
+      "Desconto para pagamento com pontualidade",
+      "Roteadores em comodato",
+      "Suporte premium 7 dias por semana",
+      "Instalação prioritária",
+    ],
+    platforms: [
+      { name: "Ubook Go", tone: "ubook" },
+      { name: "App Netbox", tone: "netbox" },
+      { name: "Deezer Premium", tone: "deezer" },
+      { name: "Prime Video", tone: "prime" },
+    ],
+    allIncluded: true,
+  },
+  {
+    name: "Top Família",
+    features: [
+      "Entrega da velocidade contratada",
+      "Desconto para pagamento com pontualidade",
+      "Roteador em comodato",
+      "Suporte premium 7 dias por semana",
+      "Instalação prioritária",
+    ],
+    platforms: [
+      { name: "Ubook Go", tone: "ubook" },
+      { name: "App Netbox", tone: "netbox" },
+      { name: "HBO Max", tone: "hbo" },
+      { name: "Disney+", tone: "disney" },
+    ],
+    choiceNote: "Você pode optar por HBO Max ou Disney+.",
   },
 ];
 
@@ -199,10 +266,13 @@ export default function Home() {
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeSolution, setActiveSolution] = useState<number | null>(null);
+  const [plansOpen, setPlansOpen] = useState(false);
+  const [activePlan, setActivePlan] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
   const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
   const featureVideoRef = useRef<HTMLVideoElement>(null);
+  const planTouchStart = useRef<number | null>(null);
   const navigationVisible = useScrollDirectionVisibility();
   const selectedStoreAddress = storeAddresses[city] ?? storeAddresses[DEFAULT_CITY];
   const selectedMapLocation = selectedStoreAddress;
@@ -251,6 +321,26 @@ export default function Home() {
   }, [activeSolution]);
 
   useEffect(() => {
+    if (!plansOpen) return;
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const handlePlansKeyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPlansOpen(false);
+      if (event.key === "ArrowLeft") {
+        setActivePlan((current) => (current - 1 + residentialPlans.length) % residentialPlans.length);
+      }
+      if (event.key === "ArrowRight") {
+        setActivePlan((current) => (current + 1) % residentialPlans.length);
+      }
+    };
+    window.addEventListener("keydown", handlePlansKeyboard);
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handlePlansKeyboard);
+    };
+  }, [plansOpen]);
+
+  useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (carouselPaused || reduceMotion) return;
     const timer = window.setInterval(() => {
@@ -261,6 +351,24 @@ export default function Home() {
 
   function moveSlide(direction: number) {
     setActiveSlide((current) => (current + direction + heroSlides.length) % heroSlides.length);
+  }
+
+  function movePlan(direction: number) {
+    setActivePlan((current) => (current + direction + residentialPlans.length) % residentialPlans.length);
+  }
+
+  function openResidentialPlans() {
+    setActivePlan(0);
+    setPlansOpen(true);
+    track("abriu_planos_residenciais", { city, origin: "servicos" });
+  }
+
+  function contactPlan(planName: string) {
+    openWhatsApp(
+      `Olá! Tenho interesse no plano residencial ${planName} da Netbox e gostaria de consultar disponibilidade e condições em ${city}.`,
+      { city, type: "residencial", plan: planName, origin: "modal_planos" },
+    );
+    setPlansOpen(false);
   }
 
   function toggleFeatureVideo() {
@@ -287,6 +395,10 @@ export default function Home() {
   }
 
   function handleService(title: string) {
+    if (title.toLocaleLowerCase("pt-BR").includes("residencial")) {
+      openResidentialPlans();
+      return;
+    }
     if (title === "Atendimento ao cliente") {
       document.querySelector("#contato")?.scrollIntoView({ behavior: "smooth" });
       track("acessou_atendimento", { origin: "servicos" });
@@ -495,6 +607,144 @@ export default function Home() {
           </div>
         </section>
 
+        {plansOpen && (
+          <div className="plans-modal-backdrop" onMouseDown={() => setPlansOpen(false)}>
+            <section
+              className="plans-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Planos residenciais Netbox"
+              onMouseDown={(event) => event.stopPropagation()}
+            >
+              <div className="plans-modal-toolbar">
+                <button
+                  type="button"
+                  className="plans-modal-close"
+                  onClick={() => setPlansOpen(false)}
+                  aria-label="Fechar planos residenciais"
+                  autoFocus
+                >
+                  ×
+                </button>
+              </div>
+
+              <div
+                className="plans-carousel"
+                onTouchStart={(event) => {
+                  planTouchStart.current = event.touches[0]?.clientX ?? null;
+                }}
+                onTouchEnd={(event) => {
+                  if (planTouchStart.current === null) return;
+                  const distance = (event.changedTouches[0]?.clientX ?? planTouchStart.current) - planTouchStart.current;
+                  if (Math.abs(distance) > 45) movePlan(distance > 0 ? -1 : 1);
+                  planTouchStart.current = null;
+                }}
+              >
+                <button
+                  type="button"
+                  className="plans-carousel-arrow previous"
+                  onClick={() => movePlan(-1)}
+                  aria-label="Plano anterior"
+                >
+                  ‹
+                </button>
+
+                <div className="plans-carousel-viewport">
+                  <div className="plans-carousel-track">
+                    {residentialPlans.map((plan, index) => {
+                      const position = index === activePlan
+                        ? "is-active"
+                        : index === (activePlan - 1 + residentialPlans.length) % residentialPlans.length
+                          ? "is-previous"
+                          : index === (activePlan + 1) % residentialPlans.length
+                            ? "is-next"
+                            : "is-far";
+
+                      return (
+                        <article
+                          className={`residential-plan-slide ${position}`}
+                          key={plan.name}
+                          aria-hidden={index !== activePlan}
+                          onClick={() => {
+                            if (index !== activePlan) setActivePlan(index);
+                          }}
+                        >
+                        <div className="residential-plan-card">
+                          <div className="residential-plan-kicker">Plano Netbox</div>
+                          <h3>{plan.name}</h3>
+
+                          <ul className="residential-plan-features">
+                            {plan.features.map((feature) => (
+                              <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>
+                            ))}
+                          </ul>
+
+                          <div className="residential-plan-subscriptions">
+                            <strong>
+                              {plan.allIncluded
+                                ? "Assinatura inclui todas as plataformas"
+                                : "Assinatura inclusa"}
+                            </strong>
+                            <div className="plan-platforms">
+                              {plan.platforms.map((platform) => (
+                                <span className={`plan-platform brand-${platform.tone}`} key={platform.name}>
+                                  {platform.name}
+                                </span>
+                              ))}
+                            </div>
+                            {plan.choiceNote && <small>{plan.choiceNote}</small>}
+                            {plan.bonus && <b className="residential-plan-bonus">{plan.bonus}</b>}
+                          </div>
+
+                          <div className="residential-plan-notes">
+                            <small>Consulte a disponibilidade na sua região.</small>
+                            <small>* Taxa de ativação. Consulte condições.</small>
+                          </div>
+
+                          <button
+                            type="button"
+                            className="residential-plan-cta"
+                            onClick={() => contactPlan(plan.name)}
+                            tabIndex={index === activePlan ? 0 : -1}
+                          >
+                            Assine já pelo WhatsApp
+                          </button>
+                        </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="plans-carousel-arrow next"
+                  onClick={() => movePlan(1)}
+                  aria-label="Próximo plano"
+                >
+                  ›
+                </button>
+              </div>
+
+              <footer className="plans-carousel-footer">
+                <span>{String(activePlan + 1).padStart(2, "0")} / {String(residentialPlans.length).padStart(2, "0")}</span>
+                <div className="plans-carousel-dots" aria-label="Selecionar plano">
+                  {residentialPlans.map((plan, index) => (
+                    <button
+                      type="button"
+                      className={index === activePlan ? "active" : ""}
+                      onClick={() => setActivePlan(index)}
+                      aria-label={`Ver plano ${plan.name}`}
+                      aria-current={index === activePlan ? "true" : undefined}
+                      key={plan.name}
+                    />
+                  ))}
+                </div>
+              </footer>
+            </section>
+          </div>
+        )}
+
         <section className="gallery-section" id="solucoes">
           <div className="model-shell">
             <div className="model-heading">
@@ -701,10 +951,7 @@ export default function Home() {
       >
         <small>Atendimento agora!</small>
         <strong>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8Z" />
-            <path d="M9.1 8.7c.2 2.3 2 4.1 4.3 4.4m-.1 0 1.5-.8 1.4 1.1-.4 1.5c-.2.5-.7.7-1.2.6-3.3-.7-5.9-3.3-6.6-6.6-.1-.5.1-1 .6-1.2l1.5-.4 1.1 1.4-.8 1.5" />
-          </svg>
+          <img src="/whatsapp-floating.png" alt="" aria-hidden="true" />
           <span>Fale Conosco</span>
         </strong>
       </a>
