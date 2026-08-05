@@ -725,8 +725,8 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   padding: 82px 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 12% 72%, rgba(255,185,0,.15), transparent 25%),
-    #f4f4f4;
+    radial-gradient(circle at 12% 72%, rgba(217, 161, 8, 0.15), transparent 25%),
+    rgb(233, 233, 233);
 }
 .coverage-conversion-section::after {
   content: "";
