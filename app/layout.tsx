@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     type: "website",
   },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
 };
 
 export const viewport: Viewport = {
