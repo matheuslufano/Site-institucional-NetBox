@@ -777,12 +777,12 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255,255,255,.92);
+  background: rgba(245, 229, 222, 0.46);
   color: #1d1d1d;
   border: 1px solid rgba(255,255,255,.8);
   font-size: 22px;
@@ -793,15 +793,15 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
 
 .app-carousel-arrow:hover {
   transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 18px 34px rgba(0,0,0,.16);
+  box-shadow: 0 15px 30px rgba(0,0,0,.16);
 }
 
 .app-carousel-arrow.previous {
-  left: 12px;
+  left: 1px;
 }
 
 .app-carousel-arrow.next {
-  right: 12px;
+  right: 1px;
 }
 
 
