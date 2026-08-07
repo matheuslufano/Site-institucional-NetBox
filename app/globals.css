@@ -728,13 +728,7 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
 }
 
 .netbox-app-visual::after {
-  content: "";
-  position: absolute;
-  inset: auto -20% -35% auto;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.16);
+
 }
 .netbox-app-visual img {
   z-index: 1;
@@ -1846,136 +1840,26 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
     pointer-events: none;
     transform: translateY(12px) scale(.84);
   }
-  .client-shortcuts {
-    position: fixed;
-    z-index: 85;
-    right: 12px;
-    bottom: max(10px, env(safe-area-inset-bottom));
-    left: 12px;
-    height: 70px;
-    padding: 7px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 25px;
-    background-color: rgba(244,240,237,.9);
-    background-image: linear-gradient(145deg, rgba(255,255,255,.72), rgba(226,219,214,.36));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(255,255,255,.28), 0 14px 38px rgba(46,31,20,.22);
-    backdrop-filter: blur(24px) saturate(120%);
-    -webkit-backdrop-filter: blur(24px) saturate(120%);
-    transition: transform .32s cubic-bezier(.22,1,.36,1), opacity .22s ease, filter .25s ease;
-    will-change: transform, opacity;
-  }
-  .client-shortcuts.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(calc(100% + 24px + env(safe-area-inset-bottom)));
-  }
-  .client-shortcuts::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.86), transparent 38%), radial-gradient(circle at 92% 120%, rgba(255,132,47,.2), transparent 42%);
-  }
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .client-shortcuts {
-      background-color: rgba(244,240,237,.97);
-      background-image: linear-gradient(145deg, rgba(255,255,255,.84), rgba(226,219,214,.5));
-    }
-  }
-  .client-shortcuts a {
-    position: relative;
-    z-index: 1;
-    min-width: 0;
-    display: grid;
-    place-items: center;
-    align-content: center;
-    gap: 2px;
-    overflow: hidden;
-    border: 1px solid transparent;
-    border-radius: 18px;
-    color: rgba(70,55,47,.72);
-    background: transparent;
-    box-shadow: none;
-    transition: color .2s ease, background-color .24s ease, transform .2s ease, border-color .24s ease, box-shadow .24s ease;
-  }
-  .client-shortcuts a:hover,
-  .client-shortcuts a:focus-visible {
-    color: #b94616;
-  }
-  .client-shortcuts a.is-selected,
-  .client-shortcuts a:active {
-    border-color: rgba(255,255,255,.78);
-    color: #a83e12;
-    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.27));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.22), 0 7px 18px rgba(55,36,23,.13);
-    backdrop-filter: blur(22px) saturate(170%);
-    -webkit-backdrop-filter: blur(22px) saturate(170%);
-  }
-  .client-shortcuts a:active { transform: scale(.96); }
-  .client-shortcuts a.is-selected::after {
-    content: "";
-    position: absolute;
-    width: 70%;
-    height: 18px;
-    top: -11px;
-    left: 8%;
-    border-radius: 50%;
-    background: rgba(255,255,255,.72);
-    filter: blur(7px);
-    transform: rotate(-8deg);
-  }
-  .client-shortcuts .shortcut-icon {
-    position: relative;
-    z-index: 1;
-    width: 34px;
-    height: 34px;
-    display: grid;
-    flex: 0 0 auto;
-    place-items: center;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    color: inherit;
-    box-shadow: none;
-    transition: color .2s ease, background-color .2s ease, border-color .2s ease;
-  }
-  .client-shortcuts .shortcut-icon::before { content: none; }
-  .client-shortcuts .shortcut-icon svg {
-    position: relative;
-    z-index: 1;
-    width: 26px;
-    height: 26px;
-    overflow: visible;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
-  }
-  .client-shortcuts .whatsapp-icon {
-    width: 38px;
-    height: 38px;
-  }
-  .client-shortcuts .whatsapp-icon img {
-    width: 36px;
-    height: 36px;
-    display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
-  }
-  .client-shortcuts a:hover .shortcut-icon,
-  .client-shortcuts a:focus-visible .shortcut-icon { color: #d7480c; }
-  .client-shortcuts .shortcut-label { position: relative; z-index: 1; overflow: hidden; max-width: 100%; color: inherit; font-size: 9.5px; font-weight: 750; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; transition: color .2s ease; }
-  .client-shortcuts a:hover .shortcut-label,
-  .client-shortcuts a:focus-visible .shortcut-label { color: #d7480c; }
   .cookie-banner { right: 14px; bottom: 96px; width: calc(100% - 28px); align-items: stretch; flex-direction: column; }
   .cookie-banner > div:last-child { display: grid; grid-template-columns: 1fr 1fr; }
   .model-footer { padding-bottom: 105px; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .client-shortcuts {
+    display: none !important;
+  }
+  .model-footer { padding-bottom: 98px; }
+}
+
+@media (max-width: 640px) {
+  .client-shortcuts {
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: calc(100vw - 24px);
+    min-width: 0;
+  }
 }
 
 @media (max-width: 360px) {
@@ -2263,6 +2147,136 @@ textarea,
   .coverage-form select { min-height: 48px; font-size: 15px; font-weight: 400; }
   .coverage-location p { line-height: 1.5; }
   .coverage-form em { font-size: 11px; }
+  .client-shortcuts {
+    position: fixed;
+    z-index: 85;
+    right: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: 12px;
+    box-sizing: border-box;
+    width: auto;
+    max-width: calc(100vw - 24px);
+    height: 70px;
+    padding: 7px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 25px;
+    background-color: rgba(244,240,237,.9);
+    background-image: linear-gradient(145deg, rgba(255,255,255,.72), rgba(226,219,214,.36));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(255,255,255,.28), 0 14px 38px rgba(46,31,20,.22);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    transition: transform .32s cubic-bezier(.22,1,.36,1), opacity .22s ease, filter .25s ease;
+    will-change: transform, opacity;
+  }
+  .client-shortcuts.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(100% + 24px + env(safe-area-inset-bottom)));
+  }
+  .client-shortcuts::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.86), transparent 38%), radial-gradient(circle at 92% 120%, rgba(255,132,47,.2), transparent 42%);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .client-shortcuts {
+      background-color: rgba(244,240,237,.97);
+      background-image: linear-gradient(145deg, rgba(255,255,255,.84), rgba(226,219,214,.5));
+    }
+  }
+  .client-shortcuts a {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 2px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    color: rgba(70,55,47,.72);
+    background: transparent;
+    box-shadow: none;
+    transition: color .2s ease, background-color .24s ease, transform .2s ease, border-color .24s ease, box-shadow .24s ease;
+  }
+  .client-shortcuts a:hover,
+  .client-shortcuts a:focus-visible {
+    color: #b94616;
+  }
+  .client-shortcuts a.is-selected,
+  .client-shortcuts a:active {
+    border-color: rgba(255,255,255,.78);
+    color: #a83e12;
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.27));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.22), 0 7px 18px rgba(55,36,23,.13);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+  }
+  .client-shortcuts a:active { transform: scale(.96); }
+  .client-shortcuts a.is-selected::after {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 18px;
+    top: -11px;
+    left: 8%;
+    border-radius: 50%;
+    background: rgba(255,255,255,.72);
+    filter: blur(7px);
+    transform: rotate(-8deg);
+  }
+  .client-shortcuts .shortcut-icon {
+    position: relative;
+    z-index: 1;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+  }
+  .client-shortcuts .shortcut-icon::before { content: none; }
+  .client-shortcuts .shortcut-icon svg {
+    position: relative;
+    z-index: 1;
+    width: 26px;
+    height: 26px;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
+  }
+  .client-shortcuts .whatsapp-icon {
+    width: 38px;
+    height: 38px;
+  }
+  .client-shortcuts .whatsapp-icon img {
+    width: 36px;
+    height: 36px;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
+  }
+  .client-shortcuts a:hover .shortcut-icon,
+  .client-shortcuts a:focus-visible .shortcut-icon { color: #d7480c; }
+  .client-shortcuts .shortcut-label { position: relative; z-index: 1; overflow: hidden; max-width: 100%; color: inherit; font-size: 9.5px; font-weight: 750; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; transition: color .2s ease; }
+  .client-shortcuts a:hover .shortcut-label,
+  .client-shortcuts a:focus-visible .shortcut-label { color: #d7480c; }
   .client-shortcuts .shortcut-label { font-size: 10px; }
   .plans-modal-backdrop { padding: 8px; }
   .plans-modal { max-height: calc(100svh - 16px); border-radius: 27px; }
