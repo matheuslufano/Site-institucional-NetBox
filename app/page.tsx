@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
+import { ThemeToggle } from "./_components/ThemeToggle";
 import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 import { FaApple } from "react-icons/fa";
 import { SiGoogleplay } from "react-icons/si";
@@ -299,9 +300,9 @@ const heroSlides = [
 ];
 
 const appScreens = [
-  "/carocel_app/celular-1.png",
-  "/carocel_app/celular-2.png",
-  "/carocel_app/celular-3.png",
+  "/carocel_app/celular-laranja-1.png",
+  "/carocel_app/celular-laranja-2.png",
+  "/carocel_app/celular-laranja-3.png",
 ];
 
 declare global {
@@ -594,6 +595,7 @@ export default function Home() {
           </a>
           <MenuContactLinks />
         </nav>
+        <ThemeToggle />
         <button
           className={menuOpen ? "model-menu open" : "model-menu"}
           aria-controls="menu-principal"
@@ -832,11 +834,13 @@ export default function Home() {
           <div className="model-shell netbox-app-layout">
             <div className="netbox-app-copy">
               <div className="netbox-app-copy-row">
-                <img
-                  src="/netbox-app-icon.png"
-                  alt="Netbox App"
-                  className="netbox-app-icon"
-                />
+                <span className="netbox-app-icon-glow">
+                  <img
+                    src="/netbox-app-icon.png"
+                    alt="Netbox App"
+                    className="netbox-app-icon"
+                  />
+                </span>
                 <div className="netbox-app-copy-text">
                   <small>Controle na palma da mão</small>
                   <h2>Aplicativo Netbox</h2>
@@ -1207,17 +1211,19 @@ export default function Home() {
       </footer>
 
       <a
-        className={`model-whatsapp${navigationVisible ? " shortcuts-visible" : ""}`}
+        className={`model-whatsapp${navigationVisible ? " shortcuts-visible" : " is-collapsed"}`}
         href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo site da Netbox e gostaria de atendimento em ${city}.`)}`}
         target="_blank"
         rel="noreferrer"
         aria-label="Falar com a Netbox pelo WhatsApp"
         onClick={() => track("clicou_whatsapp", { origin: "flutuante", city })}
       >
-        <small>Atendimento agora!</small>
+        <small>WHATSAPP &middot; agora</small>
         <strong>
-          <img src="/whatsapp-floating.png" alt="" aria-hidden="true" />
-          <span>Fale Conosco</span>
+          <span className="model-whatsapp-icon" aria-hidden="true">
+            <img src="/whatsapp-shortcut.png" alt="" />
+          </span>
+          <span className="model-whatsapp-copy">Fale Conosco</span>
         </strong>
       </a>
 

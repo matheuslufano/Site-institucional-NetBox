@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContactLinks } from "./MenuContactLinks";
+import { ThemeToggle } from "./ThemeToggle";
 import { useScrollDirectionVisibility } from "./useScrollDirectionVisibility";
 
 const WHATSAPP = "5508006022732";
@@ -68,6 +69,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
           ))}
           <MenuContactLinks />
         </nav>
+        <ThemeToggle />
         <button
           className={menuOpen ? "model-menu open" : "model-menu"}
           aria-controls="menu-principal"
@@ -160,16 +162,18 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
       </footer>
 
       <a
-        className={`model-whatsapp${navigationVisible ? " shortcuts-visible" : ""}`}
+        className={`model-whatsapp${navigationVisible ? " shortcuts-visible" : " is-collapsed"}`}
         href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo site da Netbox e gostaria de atendimento.")}`}
         target="_blank"
         rel="noreferrer"
         aria-label="Falar com a Netbox pelo WhatsApp"
       >
-        <small>Atendimento agora!</small>
+        <small>WHATSAPP &middot; agora</small>
         <strong>
-          <img src="/whatsapp-floating.png" alt="" aria-hidden="true" />
-          <span>Fale Conosco</span>
+          <span className="model-whatsapp-icon" aria-hidden="true">
+            <img src="/whatsapp-shortcut.png" alt="" />
+          </span>
+          <span className="model-whatsapp-copy">Fale Conosco</span>
         </strong>
       </a>
 

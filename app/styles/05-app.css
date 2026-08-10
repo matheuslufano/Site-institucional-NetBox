@@ -24,13 +24,59 @@
   letter-spacing: .12em;
 }
 
-.netbox-app-icon {
-  display: block;
+.netbox-app-icon-glow {
+  position: relative;
+  isolation: isolate;
   width: 150px;
   height: 150px;
-  object-fit: contain;
+  display: grid;
+  flex: 0 0 150px;
   margin-bottom: 12px;
+  place-items: center;
+}
+
+.netbox-app-icon-glow::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 8%;
+  border-radius: 28%;
+  background: url("/netbox-app-icon.png") center / cover no-repeat;
+  filter: blur(25px) saturate(1.45);
+  opacity: .5;
+  transform: translateY(13px) scale(.94);
+  transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.netbox-app-icon-glow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 4%;
+  bottom: -8%;
+  left: 4%;
+  height: 48%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 139, 18, .34), rgba(255, 185, 49, .1) 52%, transparent 74%);
+  filter: blur(18px);
+  opacity: .82;
+  transform: scaleX(1.16);
+}
+
+.netbox-app-icon {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
   border-radius: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(137, 67, 5, .16));
+}
+
+.netbox-app-icon-glow:hover::before {
+  opacity: .62;
+  transform: translateY(14px) scale(1.01);
 }
 
 .netbox-app-copy-row {
