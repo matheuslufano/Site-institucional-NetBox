@@ -116,7 +116,6 @@
   width: 150px;
   height: 110px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .58);
   filter: blur(12px);
   pointer-events: none;
 }
@@ -218,17 +217,15 @@
   box-shadow: 0 2px 6px rgba(157, 18, 12, .32);
 }
 
+.model-whatsapp-icon picture { display: contents; }
+
 .model-whatsapp-icon img {
   width: 46px;
   height: 46px;
   display: block;
   border-radius: 14px;
   object-fit: contain;
-  box-shadow: 0 5px 13px rgba(6, 102, 49, .2);
-}
-
-.model-whatsapp:hover {
-  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 5px 13px rgba(6, 102, 49, .2)px) scale(1.01);
   box-shadow: 0 24px 58px rgba(16, 35, 27, .23), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(255, 255, 255, .4);
 }
 
@@ -280,8 +277,7 @@
     box-shadow: none;
   }
 }
-
-.client-shortcuts { display: none; }
+client-shortcuts { display: none; }
 
 .cookie-banner {
   position: fixed;
