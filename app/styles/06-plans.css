@@ -1,0 +1,348 @@
+/* =====================================================
+   PLANS
+   ===================================================== */
+
+.plans-modal-backdrop {
+  position: fixed;
+  z-index: 220;
+  inset: 0;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,130,46,.22), transparent 32%),
+    radial-gradient(circle at 84% 78%, rgba(255,185,0,.14), transparent 30%),
+    rgba(21, 12, 8, .78);
+  backdrop-filter: blur(22px) saturate(125%);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  animation: menu-backdrop-in .22s ease both;
+}
+
+.plans-modal {
+  position: relative;
+  width: min(1120px, 100%);
+  max-height: calc(100svh - 48px);
+  overflow: hidden auto;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 50% -18%, rgba(255,179,87,.23), transparent 43%),
+    linear-gradient(155deg, rgba(57,35,25,.96), rgba(24,17,14,.98));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 35px 100px rgba(7,3,1,.48);
+}
+
+.plans-modal-toolbar {
+  position: absolute;
+  z-index: 10;
+  top: 17px;
+  right: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.plans-modal-close {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 8px 22px rgba(0,0,0,.2);
+  backdrop-filter: blur(14px);
+  font-size: 28px;
+  line-height: 1;
+  transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.plans-modal-close:hover { color: #2b180e; background: #fff; transform: rotate(5deg); }
+
+.plans-carousel {
+  position: relative;
+  padding: 50px 64px 10px;
+  display: grid;
+  align-items: center;
+}
+
+.plans-carousel-viewport {
+  min-height: 590px;
+  overflow: hidden;
+  perspective: 1500px;
+  perspective-origin: 50% 45%;
+}
+
+.plans-carousel-track {
+  position: relative;
+  height: 590px;
+  transform-style: preserve-3d;
+}
+
+.residential-plan-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(400px, calc(100% - 180px));
+  opacity: 0;
+  transform-origin: 50% 88%;
+  transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .35s ease, filter .35s ease;
+  will-change: transform, opacity;
+}
+
+.residential-plan-slide.is-active {
+  z-index: 4;
+  opacity: 1;
+  filter: none;
+  transform: translateX(-50%) translateY(0) translateZ(70px) rotateY(0) scale(1);
+}
+
+.residential-plan-slide.is-previous {
+  z-index: 2;
+  opacity: .7;
+  filter: brightness(.72) saturate(.8);
+  cursor: pointer;
+  transform: translateX(-140%) translateY(45px) translateZ(-90px) rotateY(19deg) rotateZ(-2.5deg) scale(.82);
+}
+
+.residential-plan-slide.is-next {
+  z-index: 2;
+  opacity: .7;
+  filter: brightness(.72) saturate(.8);
+  cursor: pointer;
+  transform: translateX(40%) translateY(45px) translateZ(-90px) rotateY(-19deg) rotateZ(2.5deg) scale(.82);
+}
+
+.residential-plan-slide.is-far {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(95px) translateZ(-260px) scale(.62);
+}
+
+.residential-plan-card {
+  position: relative;
+  width: 100%;
+  min-height: 550px;
+  padding: 25px;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 30px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 78% 14%, rgba(255,225,174,.35), transparent 30%),
+    linear-gradient(155deg, #ff7b20 0%, #e84312 49%, #5e1d14 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.34), inset 0 -1px 0 rgba(255,255,255,.1), 0 24px 58px rgba(0,0,0,.34);
+}
+
+.residential-plan-slide:nth-child(2) .residential-plan-card {
+  background: radial-gradient(circle at 23% 12%, rgba(255,222,120,.36), transparent 30%), linear-gradient(155deg, #ffb017 0%, #f06515 48%, #7f2415 100%);
+}
+
+.residential-plan-slide:nth-child(3) .residential-plan-card {
+  background: radial-gradient(circle at 80% 16%, rgba(255,202,128,.33), transparent 29%), linear-gradient(155deg, #f77421 0%, #d72f22 48%, #4f183c 100%);
+}
+
+.residential-plan-slide:nth-child(4) .residential-plan-card {
+  background: radial-gradient(circle at 25% 14%, rgba(255,183,79,.28), transparent 30%), linear-gradient(155deg, #e95518 0%, #912220 46%, #251429 100%);
+}
+
+.residential-plan-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 300px;
+  height: 300px;
+  right: -155px;
+  bottom: -95px;
+  border: 42px solid rgba(255,255,255,.075);
+  border-radius: 50%;
+  box-shadow: 0 0 0 28px rgba(255,255,255,.035);
+}
+
+.residential-plan-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(118deg, rgba(255,255,255,.16), transparent 22%, transparent 72%, rgba(255,255,255,.06));
+  pointer-events: none;
+}
+
+.residential-plan-kicker {
+  width: max-content;
+  padding: 7px 11px;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 999px;
+  color: rgba(255,255,255,.82);
+  background: rgba(35,12,5,.16);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+.residential-plan-card h3 {
+  margin: 12px 0 18px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 38px;
+  line-height: .95;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  text-shadow: 0 3px 18px rgba(38,8,2,.22);
+}
+
+.residential-plan-features {
+  margin: 0;
+  padding: 15px;
+  display: grid;
+  gap: 7px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 18px;
+  background: rgba(36,12,7,.18);
+  backdrop-filter: blur(12px);
+  list-style: none;
+}
+
+.residential-plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: rgba(255,255,255,.9);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.residential-plan-features li span { color: #ffe16d; font-size: 14px; font-weight: 900; }
+
+.residential-plan-subscriptions {
+  margin-top: 13px;
+  padding: 14px;
+  display: grid;
+  gap: 9px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 18px;
+  background: rgba(255,255,255,.11);
+  backdrop-filter: blur(14px);
+}
+
+.residential-plan-subscriptions > strong {
+  color: #fff3c4;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.residential-plan-subscriptions > small { color: rgba(255,255,255,.72); font-size: 8px; line-height: 1.4; }
+
+.plan-platforms { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.plan-platform {
+  width: 72px;
+  min-height: 48px;
+  padding: 7px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 7px 16px rgba(36,22,15,.12);
+}
+
+.brand-ubook { background: linear-gradient(145deg, #ff613b, #ff3218); }
+
+.brand-netbox { background: linear-gradient(145deg, #ffb11f, #ff7109); }
+
+.brand-deezer { background: linear-gradient(145deg, #211044, #050505); }
+
+.brand-prime { background: linear-gradient(145deg, #177aaf, #082d66); }
+
+.brand-hbo { background: linear-gradient(145deg, #33394d, #080a10); }
+
+.brand-disney { background: linear-gradient(145deg, #17647b, #082635); }
+
+.residential-plan-bonus {
+  color: #fff19b;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.residential-plan-notes { margin-top: auto; padding: 12px 3px 9px; display: grid; gap: 2px; color: rgba(255,255,255,.62); }
+
+.residential-plan-notes small { font-size: 8px; }
+
+.residential-plan-cta {
+  min-height: 46px;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  color: #3b1b09;
+  background: linear-gradient(100deg, #ffe470, #ffb719);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 11px 25px rgba(53,13,3,.25);
+  font-size: 13px;
+  font-weight: 900;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.residential-plan-cta:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 15px 30px rgba(53,13,3,.34); }
+
+.plans-carousel-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 48%;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255,255,255,.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 9px 24px rgba(0,0,0,.2);
+  backdrop-filter: blur(12px);
+  font-size: 32px;
+  transform: translateY(-50%);
+  transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.plans-carousel-arrow:hover { color: #2d170b; background: #fff; transform: translateY(-50%) scale(1.05); }
+
+.plans-carousel-arrow.previous { left: 20px; }
+
+.plans-carousel-arrow.next { right: 20px; }
+
+.plans-carousel-footer {
+  padding: 0 30px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.plans-carousel-footer > span { color: rgba(255,255,255,.58); font-size: 10px; font-weight: 900; }
+
+.plans-carousel-dots { display: flex; gap: 7px; }
+
+.plans-carousel-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(255,255,255,.24);
+  transition: width .25s ease, background-color .25s ease;
+}
+
+.plans-carousel-dots button.active { width: 27px; background: #ffbd2c; }

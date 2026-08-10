@@ -1,0 +1,185 @@
+/* =====================================================
+   GALLERY
+   ===================================================== */
+
+.gallery-section { padding: 95px 0; background: #ececec; }
+
+.model-heading { max-width: 830px; margin: 0 auto 38px; text-align: center; }
+
+.model-heading h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  letter-spacing: -.035em;
+}
+
+.model-heading p { margin: 0; color: var(--muted); line-height: 1.55; }
+
+.solution-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.solution-card {
+  position: relative;
+  aspect-ratio: 1.35 / 1;
+  overflow: hidden;
+  background: #db5b19;
+}
+
+.solution-art {
+  position: absolute;
+  inset: 0;
+}
+
+.solution-art img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), filter .35s ease;
+}
+
+.solution-card:hover .solution-art img { transform: scale(1.045); filter: saturate(1.08); }
+
+.solution-art > span {
+  position: absolute;
+  top: 15px;
+  left: 17px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 7px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 15px;
+  background: rgba(20,14,10,.25);
+  color: rgba(255,255,255,.92);
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 900;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 8px 20px rgba(0,0,0,.18);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+}
+
+.solution-overlay {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 45px 16px 15px;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(22,17,14,.94));
+  transform: translateY(42px);
+  transition: transform .25s;
+}
+
+.solution-card:hover .solution-overlay { transform: translateY(0); }
+
+.solution-overlay h3 { margin: 0; font-size: 14px; }
+
+.solution-overlay p { margin: 5px 0 0; font-size: 10px; line-height: 1.4; opacity: .83; }
+
+.solution-card {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.solution-card:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+.solution-modal-backdrop {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: rgba(18, 10, 6, .82);
+  backdrop-filter: blur(12px);
+  animation: solutionModalFade .22s ease both;
+}
+
+.solution-modal {
+  position: relative;
+  width: min(920px, 100%);
+  max-height: calc(100svh - 48px);
+  overflow: auto;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 30px 90px rgba(0,0,0,.42);
+  animation: solutionModalReveal .28s cubic-bezier(.22,1,.36,1) both;
+}
+
+.solution-modal-image {
+  min-height: 360px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #17110e;
+}
+
+.solution-modal-image img {
+  width: 100%;
+  max-height: 65svh;
+  display: block;
+  object-fit: contain;
+}
+
+.solution-modal-copy { padding: 24px 28px 28px; }
+
+.solution-modal-copy > span {
+  color: var(--orange-dark);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.solution-modal-copy h3 {
+  margin: 7px 0 8px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: -.025em;
+}
+
+.solution-modal-copy p { margin: 0; color: #686868; line-height: 1.55; }
+
+.solution-modal-close,
+
+.solution-modal-arrow {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(35,17,9,.48);
+  backdrop-filter: blur(10px);
+}
+
+.solution-modal-close {
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+}
+
+.solution-modal-arrow {
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  transform: translateY(-50%);
+  font-size: 29px;
+}
+
+.solution-modal-arrow.previous { left: 14px; }
+
+.solution-modal-arrow.next { right: 14px; }
+
+.solution-modal-close:hover,
+
+.solution-modal-arrow:hover { background: rgba(232,79,18,.88); }

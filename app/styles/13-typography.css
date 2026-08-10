@@ -1,0 +1,120 @@
+/* =====================================================
+   TYPOGRAPHY
+   ===================================================== */
+
+/* Sistema tipográfico */
+
+body { font-size: var(--type-body); line-height: 1.55; }
+
+p { font-size: var(--type-body); }
+
+small,
+
+.model-hero-copy > span,
+
+.hero-form > small,
+
+.feature-caption span,
+
+.coverage-conversion-copy > small,
+
+.inner-copy > small,
+
+.coverage-inner small,
+
+.customer-center-heading small,
+
+.customer-service-grid small,
+
+.speed-test-links small,
+
+.inner-page-hero span { font-size: var(--type-caption); }
+
+label,
+
+button,
+
+input,
+
+select,
+
+textarea,
+
+.model-nav,
+
+.model-button,
+
+.support-strip a { font-size: var(--type-small); }
+
+.services-list h3,
+
+.solution-overlay h3,
+
+.structure-gallery h3,
+
+.contact-cards strong,
+
+.speed-test-links strong { font-size: var(--type-body); }
+
+.services-list p,
+
+.solution-overlay p,
+
+.value-grid p,
+
+.detail-service-grid ul,
+
+.review-policy p,
+
+.contact-cards em,
+
+.form-status,
+
+.contact-hours,
+
+.customer-service-grid p,
+
+.customer-service-grid strong,
+
+.speed-tip p,
+
+.footer-services strong,
+
+.footer-services small,
+
+.footer-about p,
+
+.footer-contact,
+
+.footer-bottom,
+
+.inner-footer .inner-footer-link strong,
+
+.inner-footer .inner-footer-link small,
+
+.cookie-banner p { font-size: var(--type-small); }
+
+.coverage-conversion-copy > p {
+  font-size: var(--type-lead);
+  line-height: 1.65;
+}
+
+.coverage-form { gap: 14px; }
+
+.coverage-form > span { font-size: clamp(24px, 22px + .4vw, 28px); }
+
+.coverage-form label { gap: 8px; font-size: var(--type-small); }
+
+.coverage-form select { min-height: 50px; font-size: var(--type-body); font-weight: 700; }
+
+.coverage-location small { font-size: var(--type-caption); }
+
+.coverage-location strong { font-size: var(--type-body); }
+
+.coverage-location p { font-size: var(--type-small); }
+
+.coverage-location > a { font-size: var(--type-caption); }
+
+.coverage-form em { font-size: var(--type-caption); line-height: 1.45; }
+
+.client-shortcuts .shortcut-label { font-size: 11px; }
