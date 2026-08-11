@@ -682,7 +682,7 @@ export default function Home() {
                 <video
                   ref={featureVideoRef}
                   className="feature-video"
-                  src="/videos/Video-netbox.mp4"
+                  src="/videos/Video-netbox-web.mp4"
                   autoPlay
                   muted={featureVideoMuted}
                   loop
