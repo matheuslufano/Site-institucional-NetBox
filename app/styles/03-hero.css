@@ -81,8 +81,9 @@
 .model-hero h1 {
   max-width: 9ch;
   margin: 0 0 18px;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: clamp(44px, 4.6vw, 68px);
+  font-weight: 800;
   line-height: .98;
   letter-spacing: -.055em;
   text-shadow: 0 3px 28px rgba(67,19,2,.3);
@@ -92,7 +93,9 @@
   max-width: 520px;
   margin: 0;
   color: rgba(255,255,255,.94);
+  font-family: var(--font-body);
   font-size: clamp(16px, 1.2vw, 20px);
+  font-weight: 500;
   line-height: 1.38;
 }
 
