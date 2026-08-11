@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@import "./01-base.css";
+@import "./02-header.css";
+@import "./03-hero.css";
+@import "./04-services.css";
+@import "./05-app.css";
+@import "./06-plans.css";
+@import "./07-gallery.css";
+@import "./08-reviews.css";
+@import "./09-coverage.css";
+@import "./10-cta.css";
+@import "./11-footer.css";
+@import "./12-inner-pages.css";
+@import "./13-typography.css";
+@import "./14-animations.css";
+@import "./15-responsive.css";

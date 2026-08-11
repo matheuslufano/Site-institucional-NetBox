@@ -1,0 +1,269 @@
+/* =====================================================
+   APP
+   ===================================================== */
+
+.netbox-app-section {
+  scroll-margin-top: 96px;
+  padding: 88px 0 92px;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 189, 44, .18), transparent 28%),
+    linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+}
+
+.netbox-app-layout {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.netbox-app-copy > small {
+  color: var(--orange-dark);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.netbox-app-icon-glow {
+  position: relative;
+  isolation: isolate;
+  width: 150px;
+  height: 150px;
+  display: grid;
+  flex: 0 0 150px;
+  margin-bottom: 12px;
+  place-items: center;
+}
+
+.netbox-app-icon-glow::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 8%;
+  border-radius: 28%;
+  background: url("/netbox-app-icon.png") center / cover no-repeat;
+  filter: blur(25px) saturate(1.45);
+  opacity: .5;
+  transform: translateY(13px) scale(.94);
+  transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.netbox-app-icon-glow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 4%;
+  bottom: -8%;
+  left: 4%;
+  height: 48%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 139, 18, .34), rgba(255, 185, 49, .1) 52%, transparent 74%);
+  filter: blur(18px);
+  opacity: .82;
+  transform: scaleX(1.16);
+}
+
+.netbox-app-icon {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(137, 67, 5, .16));
+}
+
+.netbox-app-icon-glow:hover::before {
+  opacity: .62;
+  transform: translateY(14px) scale(1.01);
+}
+
+.netbox-app-copy-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.netbox-app-copy-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.netbox-app-copy h2 {
+  margin: 10px 0 14px;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+
+.netbox-app-copy > p {
+  max-width: 560px;
+  margin: 0 0 28px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.netbox-app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+.netbox-app-badges span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  color: #1f120b;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 14px 35px rgba(0,0,0,.06);
+}
+
+.netbox-app-stores {
+  display: flex;
+  gap: 18px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.store-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+
+  min-width: 150px;
+  height: 72px;
+
+  padding: 8px 18px;
+
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+
+  border: 2px solid #8a8a8a;
+  border-radius: 16px;
+
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+.store-download:hover {
+  transform: translateY(-2px);
+  border-color: #bcbcbc;
+}
+
+.store-icon {
+  flex-shrink: 0;
+}
+
+.store-icon.apple {
+  font-size: 52px;
+}
+
+.store-icon.play {
+  font-size: 42px;
+}
+
+.store-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.store-text span {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.store-text strong {
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.8px;
+}
+
+.netbox-app-visual::after {
+
+}
+
+.netbox-app-visual img {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  display: block;
+  object-fit: cover;
+}
+
+.netbox-app-carousel {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  border-radius: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.netbox-app-carousel-track {
+  display: flex;
+  width: 300%;
+  transition: transform .44s ease;
+}
+
+.netbox-app-carousel-item {
+  flex: 0 0 100%;
+  width: 100%;
+  min-height: 600px;
+  max-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.netbox-app-carousel-item img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 32px;
+}
+
+.app-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(245, 229, 222, 0.46);
+  color: #1d1d1d;
+  border: 1px solid rgba(255,255,255,.8);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.app-carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,.16);
+}
+
+.app-carousel-arrow.previous {
+  left: 1px;
+}
+
+.app-carousel-arrow.next {
+  right: 1px;
+}

@@ -17,8 +17,15 @@ export const metadata: Metadata = {
     description: "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
     locale: "pt_BR",
     type: "website",
+    images: [{ url: "/og.jpg", width: 1731, height: 909, alt: "Netbox Internet — Internet de verdade" }],
   },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Netbox Internet — Internet de verdade",
+    description: "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
+    images: ["/og.jpg"],
+  },
+  icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
 };
 
 export const viewport: Viewport = {
@@ -28,6 +35,17 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const themeScript = `
+    (function () {
+      try {
+        var saved = localStorage.getItem("netbox_theme");
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("theme-dark", dark);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta && dark) meta.setAttribute("content", "#11110f");
+      } catch (_) {}
+    })();
+  `;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -40,7 +58,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${manrope.variable} ${sora.variable}`}>
         {children}
         <script
