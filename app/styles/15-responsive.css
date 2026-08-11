@@ -737,8 +737,8 @@
   .hero-inner,
   .hero-inner.carousel-only {
     min-height: clamp(590px, calc(100svh - 72px), 720px);
-    padding: 72px 0 82px;
-    align-items: center;
+    padding: clamp(28px, 7vw, 44px) 0 82px;
+    align-items: start;
   }
 
   .model-hero.copy-right .hero-inner.carousel-only { justify-content: start; }
@@ -817,7 +817,7 @@
 
 @media (max-width: 300px) {
   .hero-inner,
-  .hero-inner.carousel-only { padding: 72px 0; }
+  .hero-inner.carousel-only { padding: 28px 0 72px; }
   .model-hero h1,
   .model-hero.copy-right .model-hero h1 { font-size: 31px; }
   .model-hero-copy > p,
