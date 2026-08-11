@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { type CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
 import { ThemeToggle } from "./_components/ThemeToggle";
@@ -208,23 +208,26 @@ const gallery = [
 
 const heroSlides = [
   {
-    title: "Tudo na palma da sua mão",
+    title: "Aplicativo Netbox",
     text: "Acesse faturas, segunda via, suporte e outros serviços Netbox de onde estiver.",
     image: "/carousel/netbox-app.jpg",
+    mobileImage: "/carousel/netbox-app-mobile.jpg",
     position: "68% center",
     side: "left",
   },
   {
-    title: "Conexão para todos os momentos",
-    text: "Velocidade para trabalhar, estudar, jogar e curtir em família, tudo ao mesmo tempo.",
+    title: "Casa conectada",
+    text: "Mais dispositivos conectados com estabilidade, velocidade e segurança.",
     image: "/carousel/netbox-conexao.jpg",
+    mobileImage: "/carousel/netbox-conexao-mobile.jpg",
     position: "68% center",
     side: "left",
   },
   {
-    title: "Conexão que move negócios",
+    title: "Conexão Empresarial",
     text: "Soluções empresariais para sua equipe produzir, atender e crescer sem interrupções.",
     image: "/carousel/netbox-empresas.jpg",
+    mobileImage: "/carousel/netbox-empresas-mobile.jpg",
     position: "69% center",
     side: "left",
   },
@@ -232,6 +235,7 @@ const heroSlides = [
     title: "Suporte regional",
     text: "Atendimento feito por quem está perto e entende o que você precisa.",
     image: "/carousel/netbox-regional.jpg",
+    mobileImage: "/carousel/netbox-regional-mobile.jpg",
     position: "68% center",
     side: "left",
   },
@@ -239,13 +243,15 @@ const heroSlides = [
     title: "Internet para toda a família",
     text: "Uma conexão estável para cada tela, cada tarefa e cada momento da sua casa.",
     image: "/carousel/netbox-familia.jpg",
+    mobileImage: "/carousel/netbox-familia-mobile.jpg",
     position: "68% center",
     side: "left",
   },
   {
-    title: "Instalação sem complicação",
+    title: "Instalação A",
     text: "Agendamento prático e uma equipe preparada para deixar tudo funcionando para você.",
     image: "/carousel/netbox-instalacao.jpg",
+    mobileImage: "/carousel/netbox-instalacao-mobile.jpg",
     position: "70% center",
     side: "left",
   },
@@ -253,6 +259,7 @@ const heroSlides = [
     title: "Tecnologia que não para",
     text: "Uma infraestrutura monitorada para entregar estabilidade, segurança e alto desempenho.",
     image: "/carousel/netbox-infraestrutura.jpg",
+    mobileImage: "/carousel/netbox-infraestrutura-mobile.jpg",
     position: "70% center",
     side: "left",
   },
@@ -603,7 +610,8 @@ export default function Home() {
             style={{
               backgroundImage: `url(${heroSlides[activeSlide].image})`,
               backgroundPosition: heroSlides[activeSlide].position,
-            }}
+              "--hero-mobile-image": `url(${heroSlides[activeSlide].mobileImage})`,
+            } as CSSProperties}
             aria-hidden="true"
           />
           <div className="model-shell hero-inner carousel-only">
