@@ -248,7 +248,7 @@ const heroSlides = [
     side: "left",
   },
   {
-    title: "Instalação A",
+    title: "Instalação Agendada",
     text: "Agendamento prático e uma equipe preparada para deixar tudo funcionando para você.",
     image: "/carousel/netbox-instalacao.jpg",
     mobileImage: "/carousel/netbox-instalacao-mobile.jpg",
