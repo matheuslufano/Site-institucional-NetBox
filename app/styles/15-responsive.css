@@ -737,8 +737,8 @@
   .hero-inner,
   .hero-inner.carousel-only {
     min-height: clamp(590px, calc(100svh - 72px), 720px);
-    padding: 52px 0 82px;
-    align-items: end;
+    padding: 72px 0 82px;
+    align-items: center;
   }
 
   .model-hero.copy-right .hero-inner.carousel-only { justify-content: start; }
@@ -749,18 +749,17 @@
     width: 100%;
     max-width: 520px;
     margin-inline: auto;
-    text-align: left;
+    text-align: center;
   }
 
   .hero-logo {
-    width: clamp(180px, 54vw, 230px);
-    margin: 0 0 16px;
+    display: none;
   }
 
   .model-hero h1,
   .model-hero.copy-right .model-hero h1 {
     max-width: 10ch;
-    margin: 0 0 13px;
+    margin: 0 auto 13px;
     font-size: clamp(30px, 8.5vw, 38px);
     line-height: .96;
     letter-spacing: -.05em;
@@ -770,7 +769,7 @@
   .model-hero-copy > p,
   .model-hero.copy-right .model-hero-copy > p {
     max-width: 28ch;
-    margin: 0;
+    margin: 0 auto;
     color: rgba(255, 255, 255, .9);
     font-size: clamp(14px, 3.9vw, 16px);
     line-height: 1.35;
