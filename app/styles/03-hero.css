@@ -90,6 +90,7 @@
 }
 
 .model-hero-copy > p {
+  white-space: pre-line;
   max-width: 520px;
   margin: 0;
   color: rgba(255,255,255,.94);
@@ -220,13 +221,13 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   left: 50%;
   display: flex;
   align-items: center;
-  padding: 7px 9px;
-  gap: 10px;
-  border: 1px solid rgba(255,255,255,.2);
+  padding: 5px 7px;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: 999px;
-  background: rgba(67,20,4,.28);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
-  backdrop-filter: blur(14px);
+  background: rgba(40,12,3,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter: blur(10px);
   transform: translateX(-50%);
 }
 
@@ -234,48 +235,61 @@ input:focus, select:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px r
   display: flex;
   align-items: center;
   gap: 4px;
-  color: rgba(255,255,255,.58);
-  font-size: 9px;
+  color: rgba(255,255,255,.46);
+  font-size: 8px;
   font-weight: 800;
   letter-spacing: .05em;
 }
 
-.carousel-count strong { color: #fff; font-size: 11px; }
+.carousel-count strong { color: rgba(255,255,255,.82); font-size: 10px; }
 
 .carousel-count i { color: rgba(255,255,255,.3); font-style: normal; }
 
-.carousel-dots { display: flex; align-items: center; gap: 5px; }
+.carousel-dots { display: flex; align-items: center; gap: 4px; }
 
 .carousel-dots button {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   padding: 0;
   display: grid;
   place-items: center;
   border: 0;
   border-radius: 999px;
-  background: rgba(255,255,255,.32);
+  background: rgba(255,255,255,.24);
   transition: width .25s, background .25s, transform .2s;
 }
 
 .carousel-dots button:hover { background: rgba(255,255,255,.7); transform: scale(1.2); }
 
 .carousel-dots button.active {
-  width: 18px;
-  background: #ff9b4d;
+  width: 14px;
+  background: rgba(255,174,104,.82);
 }
 
 .carousel-controls .carousel-pause {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.14);
   border-radius: 50%;
-  background: rgba(255,255,255,.09);
-  color: rgba(255,255,255,.74);
-  font-size: 10px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.7);
+  font-size: 12px;
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
 }
 
-.carousel-controls .carousel-pause:hover { color: #fff; background: rgba(244,119,33,.55); }
+.carousel-controls .carousel-pause svg { display: block; }
+
+.carousel-controls .carousel-pause:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,.25);
+  background: rgba(244,119,33,.35);
+  transform: scale(1.06);
+}
+
+.carousel-controls .carousel-pause:focus-visible {
+  outline: 2px solid rgba(255,255,255,.9);
+  outline-offset: 2px;
+}
