@@ -781,22 +781,26 @@
     margin-top: 18px;
   }
 
-  .hero-whatsapp-button {
+  .hero-whatsapp-desktop { display: none; }
+
+  .hero-whatsapp-mobile {
     position: absolute;
+    z-index: 6;
     right: auto;
-    bottom: 70px;
+    bottom: 64px;
     left: 50%;
     width: max-content;
     max-width: calc(100% - 40px);
     margin-top: 0;
+    display: inline-flex;
     transform: translateX(-50%);
   }
 
-  .hero-whatsapp-button:hover {
+  .hero-whatsapp-mobile:hover {
     transform: translateX(-50%) translateY(-2px);
   }
 
-  .hero-whatsapp-button:active {
+  .hero-whatsapp-mobile:active {
     transform: translateX(-50%) scale(.98);
   }
 

@@ -658,7 +658,7 @@ export default function Home() {
                 </div>
               ) : (
                 <a
-                  className="model-button hero-primary hero-whatsapp-button"
+                  className="model-button hero-primary hero-whatsapp-button hero-whatsapp-desktop"
                   href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
                   target="_blank"
                   rel="noreferrer"
@@ -669,6 +669,17 @@ export default function Home() {
               )}
             </div>
           </div>
+          {activeSlide !== 0 && (
+            <a
+              className="model-button hero-primary hero-whatsapp-button hero-whatsapp-mobile"
+              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => track("clicou_whatsapp", { origin: "carrossel_mobile", slide: heroSlides[activeSlide].title })}
+            >
+              Falar pelo WhatsApp <b aria-hidden="true">›</b>
+            </a>
+          )}
           <button
             className="hero-arrow left"
             type="button"
