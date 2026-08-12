@@ -625,6 +625,13 @@ export default function Home() {
                 src="/logo-branca-1024x371.png"
                 alt="Netbox — Internet de verdade"
               />
+              {activeSlide === 0 && (
+                <img
+                  className="hero-app-icon"
+                  src="/netbox-app-icon.png"
+                  alt="Ícone do Aplicativo Netbox"
+                />
+              )}
               <h1>{heroSlides[activeSlide].title}</h1>
               <p>{heroSlides[activeSlide].text}</p>
               {activeSlide === 0 ? (

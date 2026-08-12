@@ -76,6 +76,17 @@
   filter: drop-shadow(0 5px 18px rgba(70, 15, 0, .22));
 }
 
+.hero-app-icon {
+  width: clamp(64px, 6vw, 88px);
+  height: auto;
+  margin: 0 0 18px;
+  display: block;
+  border-radius: 22%;
+  filter: drop-shadow(0 10px 24px rgba(64, 16, 0, .3));
+}
+
+.model-hero.copy-right .hero-app-icon { margin-left: auto; }
+
 .model-hero-copy { animation: carouselReveal .48s ease both; }
 
 .model-hero h1 {
