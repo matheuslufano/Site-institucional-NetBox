@@ -807,7 +807,7 @@
 
   .hero-app-stores,
   .model-hero.copy-right .hero-app-stores {
-    width: min(100%, 306px);
+    width: min(100%, 290px);
     margin-inline: auto;
     justify-content: center;
     flex-wrap: nowrap;
@@ -820,7 +820,7 @@
     min-width: 0;
     height: 48px;
     margin-top: 0;
-    padding: 5px 7px;
+    padding: 5px 5px;
     flex: 1 1 0;
     gap: 7px;
     justify-content: center;
@@ -921,14 +921,14 @@
 
   .hero-app-stores,
   .model-hero.copy-right .hero-app-stores {
-    width: min(100%, 284px);
+    width: min(100%, 274px);
     gap: 6px;
     margin-top: 14px;
   }
 
   .hero-app-stores .store-download {
     height: 44px;
-    padding-inline: 6px;
+    padding-inline: 4px;
     gap: 5px;
     border-radius: 11px;
   }
@@ -964,9 +964,9 @@
 
 @media (max-width: 320px) {
   .hero-app-stores,
-  .model-hero.copy-right .hero-app-stores { width: min(100%, 268px); }
+  .model-hero.copy-right .hero-app-stores { width: min(100%, 258px); }
 
-  .hero-app-stores .store-download { padding-inline: 4px; }
+  .hero-app-stores .store-download { padding-inline: 3px; }
   .hero-app-stores .store-icon.apple { font-size: 25px; }
   .hero-app-stores .store-icon.play { font-size: 20px; }
   .hero-app-stores .store-text strong { font-size: 11px; }
