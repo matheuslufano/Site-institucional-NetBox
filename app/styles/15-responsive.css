@@ -4,6 +4,9 @@
    ===================================================== */
 
 @media (min-width: 981px) {
+   .hero-app-icon{
+    width: 150px;
+   }
   .netbox-app-carousel {
     min-height: 520px;
     height: 600px;
@@ -118,24 +121,25 @@
     width: auto;
   }
   .netbox-app-stores {
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
     margin-top: 8px;
     justify-content: center;
   }
   .store-download {
-    margin-top: 10px;
-    height: 48px;
-    padding: 5px 10px;
-    min-width: 100px;
+    margin-top: 8px;
+    height: 46px;
+    padding: 5px 8px;
+    min-width: 0;
+    flex: 1 1 0;
     font-size: 12px;
     border-radius: 12px;
   }
   .store-download .store-icon.apple {
-    font-size: 40px;
+    font-size: 30px;
   }
   .store-download .store-icon.play {
-    font-size: 30px;
+    font-size: 23px;
   }
   .store-download .store-text span {
     font-size: 7px;
@@ -166,6 +170,7 @@
     box-shadow: 0 7px 24px rgba(36,24,14,.08);
     transition: top .32s cubic-bezier(.22,1,.36,1), opacity .22s ease;
   }
+  .header-actions { gap: 8px; margin-left: auto; }
   .model-header.is-hidden {
     top: -82px;
     opacity: 0;
@@ -756,6 +761,16 @@
     display: none;
   }
 
+  .hero-app-icon,
+  .model-hero.copy-right .hero-app-icon {
+    width: clamp(54px, 15vw, 68px);
+    margin: 30px auto 12px;
+    border-radius: 22%;
+  }
+
+  .hero-app-icon + h1,
+  .model-hero.copy-right .hero-app-icon + h1 { margin-top: 0; }
+
   .model-hero h1,
   .model-hero.copy-right .model-hero h1 {
     max-width: 10ch;
@@ -806,7 +821,7 @@
 
   .hero-app-stores,
   .model-hero.copy-right .hero-app-stores {
-    width: min(100%, 306px);
+    width: min(100%, 290px);
     margin-inline: auto;
     justify-content: center;
     flex-wrap: nowrap;
@@ -819,7 +834,7 @@
     min-width: 0;
     height: 48px;
     margin-top: 0;
-    padding: 5px 7px;
+    padding: 5px 5px;
     flex: 1 1 0;
     gap: 7px;
     justify-content: center;
@@ -910,6 +925,13 @@
     line-height: 1.04;
   }
 
+  .hero-app-icon,
+  .model-hero.copy-right .hero-app-icon {
+    width: 150px;
+    margin-top: 24px;
+    margin-bottom: 9px;
+  }
+
   .model-hero-copy > p,
   .model-hero.copy-right .model-hero-copy > p {
     max-width: 30ch;
@@ -920,14 +942,14 @@
 
   .hero-app-stores,
   .model-hero.copy-right .hero-app-stores {
-    width: min(100%, 284px);
+    width: min(100%, 274px);
     gap: 6px;
     margin-top: 14px;
   }
 
   .hero-app-stores .store-download {
     height: 44px;
-    padding-inline: 6px;
+    padding-inline: 4px;
     gap: 5px;
     border-radius: 11px;
   }
@@ -963,9 +985,9 @@
 
 @media (max-width: 320px) {
   .hero-app-stores,
-  .model-hero.copy-right .hero-app-stores { width: min(100%, 268px); }
+  .model-hero.copy-right .hero-app-stores { width: min(100%, 258px); }
 
-  .hero-app-stores .store-download { padding-inline: 4px; }
+  .hero-app-stores .store-download { padding-inline: 3px; }
   .hero-app-stores .store-icon.apple { font-size: 25px; }
   .hero-app-stores .store-icon.play { font-size: 20px; }
   .hero-app-stores .store-text strong { font-size: 11px; }
@@ -1039,15 +1061,17 @@ iframe {
     border-radius: 0;
   }
 
-  .store-download {
-    min-width: 0;
-    flex: 1 1 145px;
-    
+  .netbox-app-stores:not(.hero-app-stores) {
+    width: min(100%, 300px);
+    margin-inline: auto;
   }
 
-  .netbox-app-stores {
-    width: 100%;
+  .netbox-app-stores:not(.hero-app-stores) .store-download {
+    min-width: 0;
+    flex: 1 1 0;
   }
+
+
 
   .inner-section,
   .services-section,
@@ -1070,8 +1094,9 @@ iframe {
   }
 
   .netbox-app-stores:not(.hero-app-stores) {
-    flex-direction: column;
-    align-items: stretch;
+    width: min(100%, 270px);
+    flex-direction: row;
+    align-items: center;
   }
 
   .netbox-app-stores:not(.hero-app-stores) .store-download {

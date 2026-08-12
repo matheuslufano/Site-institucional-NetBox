@@ -123,6 +123,14 @@
 
 .theme-toggle-label { display: none; }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
 @media (min-width: 981px) {
   .model-header {
     min-height: 76px;

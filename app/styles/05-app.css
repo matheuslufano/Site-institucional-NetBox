@@ -127,7 +127,7 @@
 
 .netbox-app-stores {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   flex-wrap: nowrap;
   align-items: center;
 }
@@ -135,20 +135,20 @@
 .store-download {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex: 0 0 auto;
 
-  min-width: 150px;
-  height: 72px;
+  min-width: 136px;
+  height: 58px;
 
-  padding: 8px 18px;
+  padding: 7px 12px;
 
   background: #000;
   color: #fff;
   text-decoration: none;
 
   border: 2px solid #8a8a8a;
-  border-radius: 16px;
+  border-radius: 13px;
 
   transition: transform .18s ease, border-color .18s ease;
 }
@@ -163,11 +163,11 @@
 }
 
 .store-icon.apple {
-  font-size: 52px;
+  font-size: 38px;
 }
 
 .store-icon.play {
-  font-size: 42px;
+  font-size: 31px;
 }
 
 .store-text {
@@ -185,7 +185,7 @@
 
 .store-text strong {
   margin-top: 4px;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: -.8px;
 }

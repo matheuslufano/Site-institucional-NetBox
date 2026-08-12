@@ -563,18 +563,20 @@ export default function Home() {
           </a>
           <MenuContactLinks />
         </nav>
-        <ThemeToggle />
-        <button
-          className={menuOpen ? "model-menu open" : "model-menu"}
-          aria-controls="menu-principal"
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className="header-actions">
+          <ThemeToggle />
+          <button
+            className={menuOpen ? "model-menu open" : "model-menu"}
+            aria-controls="menu-principal"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
       {menuOpen && (
         <button
@@ -613,7 +615,7 @@ export default function Home() {
           />
           <div className="model-shell hero-inner carousel-only">
             <div
-              className="model-hero-copy"
+              className={`model-hero-copy${activeSlide === 0 ? " is-app-slide" : ""}`}
               key={activeSlide}
               aria-live="polite"
               aria-atomic="true"
@@ -623,6 +625,13 @@ export default function Home() {
                 src="/logo-branca-1024x371.png"
                 alt="Netbox — Internet de verdade"
               />
+              {activeSlide === 0 && (
+                <img
+                  className="hero-app-icon"
+                  src="/netbox-app-icon.png"
+                  alt="Ícone do Aplicativo Netbox"
+                />
+              )}
               <h1>{heroSlides[activeSlide].title}</h1>
               <p>{heroSlides[activeSlide].text}</p>
               {activeSlide === 0 ? (
