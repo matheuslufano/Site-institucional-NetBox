@@ -6,6 +6,7 @@ import { MenuContactLinks } from "./_components/MenuContactLinks";
 import { ThemeToggle } from "./_components/ThemeToggle";
 import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 import { FaApple } from "react-icons/fa";
+import { IoPause, IoPlay } from "react-icons/io5";
 import { SiGoogleplay } from "react-icons/si";
 
 const WHATSAPP = "5508006022732";
@@ -209,23 +210,23 @@ const gallery = [
 const heroSlides = [
   {
     title: "Aplicativo Netbox",
-    text: "Acesse faturas, segunda via, suporte e outros serviços Netbox de onde estiver.",
+    text: "Acesse faturas, segunda via, suporte e \n outros serviços Netbox de onde estiver.",
     image: "/carousel/netbox-app.jpg",
     mobileImage: "/carousel/mobile-v2-app.jpg",
     position: "68% center",
     side: "left",
   },
-  {
-    title: "Casa conectada",
-    text: "Mais dispositivos conectados com estabilidade, velocidade e segurança.",
-    image: "/carousel/netbox-conexao.jpg",
+    {
+    title: "Internet Residencial",
+    text: "Conexão rápida e estável para estudar, trabalhar,  jogar \ne assistir aos seus conteúdos favoritos.",
+    image: "/carousel/netbox-familia.jpg",
     mobileImage: "/carousel/mobile-v2-casa.jpg",
     position: "68% center",
     side: "left",
   },
   {
     title: "Conexão Empresarial",
-    text: "Soluções empresariais para sua equipe produzir, atender e crescer sem interrupções.",
+    text: "Soluções empresariais para sua equipe produzir, \n atender e crescer sem interrupções.",
     image: "/carousel/netbox-empresas.jpg",
     mobileImage: "/carousel/mobile-v2-empresas.jpg",
     position: "69% center",
@@ -233,34 +234,34 @@ const heroSlides = [
   },
   {
     title: "Suporte regional",
-    text: "Atendimento feito por quem está perto e entende o que você precisa.",
+    text: "Atendimento para todo o Tocantins feito \npor uma equipe que conhece a região.",
     image: "/carousel/netbox-regional.jpg",
     mobileImage: "/carousel/mobile-v2-regional.jpg",
     position: "68% center",
     side: "left",
   },
   {
-    title: "Internet para toda a família",
-    text: "Uma conexão estável para cada tela, cada tarefa e cada momento da sua casa.",
-    image: "/carousel/netbox-familia.jpg",
-    mobileImage: "/carousel/mobile-v2-casa.jpg",
-    position: "68% center",
-    side: "left",
-  },
-  {
     title: "Instalação Agendada",
-    text: "Agendamento prático e uma equipe preparada para deixar tudo funcionando para você.",
+    text: "Agendamento prático e uma equipe preparada  \n para deixar tudo funcionando para você.",
     image: "/carousel/netbox-instalacao.jpg",
     mobileImage: "/carousel/mobile-v2-instalacao.jpg",
     position: "70% center",
     side: "left",
   },
   {
-    title: "Tecnologia que não para",
-    text: "Uma infraestrutura monitorada para entregar estabilidade, segurança e alto desempenho.",
+    title: "Conexão de fibra óptica",
+    text: "Uma infraestrutura monitorada para entregar \n estabilidade, segurança e alto desempenho.",
     image: "/carousel/netbox-infraestrutura.jpg",
     mobileImage: "/carousel/mobile-v2-infraestrutura.jpg",
     position: "70% center",
+    side: "left",
+  },
+  {
+    title: "Toda casa conectada",
+    text: "Mais dispositivos conectados com estabilidade, \n velocidade e segurança.",
+    image: "/carousel/netbox-conexao.jpg",
+    mobileImage: "/carousel/mobile-v2-casa.jpg",
+    position: "68% center",
     side: "left",
   },
 ];
@@ -316,6 +317,7 @@ export default function Home() {
   const [plansOpen, setPlansOpen] = useState(false);
   const [activePlan, setActivePlan] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
+  const [carouselInteractionPaused, setCarouselInteractionPaused] = useState(false);
   const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
   const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
   const featureVideoRef = useRef<HTMLVideoElement>(null);
@@ -402,12 +404,12 @@ export default function Home() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (carouselPaused || reduceMotion) return;
+    if (carouselPaused || carouselInteractionPaused || reduceMotion) return;
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length);
     }, 6000);
     return () => window.clearInterval(timer);
-  }, [carouselPaused]);
+  }, [carouselPaused, carouselInteractionPaused]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia(
@@ -592,13 +594,8 @@ export default function Home() {
           aria-roledescription="carrossel"
           aria-label="Destaques Netbox"
           tabIndex={0}
-          onMouseEnter={() => setCarouselPaused(true)}
-          onMouseLeave={() => setCarouselPaused(false)}
-          onFocusCapture={() => setCarouselPaused(true)}
-          onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node))
-              setCarouselPaused(false);
-          }}
+          onMouseEnter={() => setCarouselInteractionPaused(true)}
+          onMouseLeave={() => setCarouselInteractionPaused(false)}
           onKeyDown={(event) => {
             if (event.key === "ArrowLeft") moveSlide(-1);
             if (event.key === "ArrowRight") moveSlide(1);
@@ -661,7 +658,7 @@ export default function Home() {
                 </div>
               ) : (
                 <a
-                  className="model-button hero-primary hero-whatsapp-button"
+                  className="model-button hero-primary hero-whatsapp-button hero-whatsapp-desktop"
                   href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
                   target="_blank"
                   rel="noreferrer"
@@ -672,6 +669,17 @@ export default function Home() {
               )}
             </div>
           </div>
+          {activeSlide !== 0 && (
+            <a
+              className="model-button hero-primary hero-whatsapp-button hero-whatsapp-mobile"
+              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => track("clicou_whatsapp", { origin: "carrossel_mobile", slide: heroSlides[activeSlide].title })}
+            >
+              Falar pelo WhatsApp <b aria-hidden="true">›</b>
+            </a>
+          )}
           <button
             className="hero-arrow left"
             type="button"
@@ -713,14 +721,18 @@ export default function Home() {
             <button
               className="carousel-pause"
               type="button"
-              onClick={() => setCarouselPaused(!carouselPaused)}
+              onClick={() => setCarouselPaused((paused) => !paused)}
               aria-label={
                 carouselPaused
                   ? "Retomar rotação automática"
                   : "Pausar rotação automática"
               }
             >
-              {carouselPaused ? "▶" : "Ⅱ"}
+              {carouselPaused ? (
+                <IoPlay aria-hidden="true" />
+              ) : (
+                <IoPause aria-hidden="true" />
+              )}
             </button>
           </div>
         </section>

@@ -330,7 +330,7 @@
   .model-hero.copy-right .model-hero-copy > p,
   .model-hero.copy-right .model-hero h1 { margin-left: 0; }
   .model-hero h1 { font-size: 41px; }
-  .model-hero-copy > p { font-size: 14px; }
+  .model-hero-copy > p { font-size: 14px; white-space: pre-line;}
   .hero-form { padding: 20px; }
   .coverage-conversion-section { padding: 52px 0; }
   .coverage-conversion-layout { gap: 25px; }
@@ -759,9 +759,9 @@
   .model-hero h1,
   .model-hero.copy-right .model-hero h1 {
     max-width: 10ch;
-    margin: 0 auto 13px;
-    font-size: clamp(30px, 8.5vw, 38px);
-    line-height: .96;
+    margin: 60px auto 13px auto;
+    font-size: clamp(45px, 8.5vw, 38px);
+    line-height: 1.06;
     letter-spacing: -.05em;
     text-wrap: balance;
   }
@@ -771,8 +771,9 @@
     max-width: 28ch;
     margin: 0 auto;
     color: rgba(255, 255, 255, .9);
-    font-size: clamp(14px, 3.9vw, 16px);
+    font-size: clamp(17px, 3.9vw, 16px);
     line-height: 1.35;
+    white-space: normal;
   }
 
   .hero-whatsapp-button,
@@ -780,9 +781,32 @@
     margin-top: 18px;
   }
 
+  .hero-whatsapp-desktop { display: none; }
+
+  .hero-whatsapp-mobile {
+    position: absolute;
+    z-index: 6;
+    right: auto;
+    bottom: 64px;
+    left: 50%;
+    width: max-content;
+    max-width: calc(100% - 40px);
+    margin-top: 0;
+    display: inline-flex;
+    transform: translateX(-50%);
+  }
+
+  .hero-whatsapp-mobile:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  .hero-whatsapp-mobile:active {
+    transform: translateX(-50%) scale(.98);
+  }
+
   .hero-app-stores,
   .model-hero.copy-right .hero-app-stores {
-    width: min(100%, 330px);
+    width: min(100%, 306px);
     margin-inline: auto;
     justify-content: center;
     flex-wrap: nowrap;
@@ -790,20 +814,42 @@
   }
 
   .hero-app-stores .store-download {
+    text-align: center;
+    align-items: center;
     min-width: 0;
     height: 48px;
     margin-top: 0;
-    padding: 5px 9px;
+    padding: 5px 7px;
     flex: 1 1 0;
     gap: 7px;
-    border-width: 1px;
-    border-radius: 11px;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 13px;
+    background: linear-gradient(145deg, rgba(8, 8, 8, .96), rgba(29, 29, 29, .96));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .13), 0 9px 22px rgba(34, 8, 0, .28);
+    backdrop-filter: blur(10px);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+
+  .hero-app-stores .store-download:hover {
+    border-color: rgba(255, 255, 255, .5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 12px 26px rgba(34, 8, 0, .34);
+    transform: translateY(-2px);
+  }
+
+  .hero-app-stores .store-download:active { transform: scale(.98); }
+  .hero-app-stores .store-download:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
   }
 
   .hero-app-stores .store-icon.apple { font-size: 32px; }
   .hero-app-stores .store-icon.play { font-size: 25px; }
-  .hero-app-stores .store-text span { font-size: 7px; }
-  .hero-app-stores .store-text strong { font-size: 14px; letter-spacing: -.4px; }
+  .hero-app-stores .store-text span { color: rgba(255,255,255,.72); font-size: 7px; }
+  .hero-app-stores .store-text strong { margin-top: 3px; font-size: 14px; letter-spacing: -.4px; }
+  .hero-app-stores .store-text { align-items: center; text-align: center; }
 
   .model-button.hero-primary {
     min-height: 45px;
@@ -815,7 +861,6 @@
   }
 
   .hero-arrow {
-    top: 43%;
     width: 38px;
     height: 38px;
     display: grid;
