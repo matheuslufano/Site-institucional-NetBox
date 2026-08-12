@@ -563,18 +563,20 @@ export default function Home() {
           </a>
           <MenuContactLinks />
         </nav>
-        <ThemeToggle />
-        <button
-          className={menuOpen ? "model-menu open" : "model-menu"}
-          aria-controls="menu-principal"
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className="header-actions">
+          <ThemeToggle />
+          <button
+            className={menuOpen ? "model-menu open" : "model-menu"}
+            aria-controls="menu-principal"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
       {menuOpen && (
         <button
