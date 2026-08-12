@@ -806,7 +806,7 @@
 
   .hero-app-stores,
   .model-hero.copy-right .hero-app-stores {
-    width: min(100%, 330px);
+    width: min(100%, 306px);
     margin-inline: auto;
     justify-content: center;
     flex-wrap: nowrap;
@@ -819,7 +819,7 @@
     min-width: 0;
     height: 48px;
     margin-top: 0;
-    padding: 5px 9px;
+    padding: 5px 7px;
     flex: 1 1 0;
     gap: 7px;
     justify-content: center;
@@ -861,7 +861,6 @@
   }
 
   .hero-arrow {
-    top: 43%;
     width: 38px;
     height: 38px;
     display: grid;
