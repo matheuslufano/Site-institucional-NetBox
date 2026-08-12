@@ -923,7 +923,7 @@
 
   .hero-app-icon,
   .model-hero.copy-right .hero-app-icon {
-    width: 52px;
+    width: 150px;
     margin-top: 24px;
     margin-bottom: 9px;
   }
@@ -1063,9 +1063,7 @@ iframe {
     
   }
 
-  .netbox-app-stores {
-    width: 100%;
-  }
+
 
   .inner-section,
   .services-section,
