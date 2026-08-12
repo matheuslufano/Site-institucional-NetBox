@@ -854,6 +854,7 @@
   .model-button.hero-primary {
     min-height: 45px;
     padding: 12px 18px;
+    margin-bottom: 40px;
     border-color: rgba(255, 255, 255, .26);
     border-radius: 999px;
     font-size: 13px;
@@ -890,18 +891,84 @@
   .carousel-dots button.active { width: 15px; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 380px) {
+  .model-hero,
   .hero-inner,
-  .hero-inner.carousel-only { padding: 28px 0 72px; }
+  .hero-inner.carousel-only {
+    min-height: clamp(560px, calc(100svh - 64px), 680px);
+  }
+
+  .hero-inner,
+  .hero-inner.carousel-only { padding: 22px 0 70px; }
+
   .model-hero h1,
-  .model-hero.copy-right .model-hero h1 { font-size: 31px; }
+  .model-hero.copy-right .model-hero h1 {
+    max-width: 11ch;
+    margin-top: 42px;
+    margin-bottom: 9px;
+    font-size: clamp(29px, 9.6vw, 34px);
+    line-height: 1.04;
+  }
+
   .model-hero-copy > p,
-  .model-hero.copy-right .model-hero-copy > p { font-size: 14px; }
-  .hero-arrow { width: 34px; height: 34px; font-size: 22px; }
-  .hero-arrow.left { left: 7px; }
-  .hero-arrow.right { right: 7px; }
+  .model-hero.copy-right .model-hero-copy > p {
+    max-width: 30ch;
+    padding-inline: 8px;
+    font-size: 13px;
+    line-height: 1.32;
+  }
+
+  .hero-app-stores,
+  .model-hero.copy-right .hero-app-stores {
+    width: min(100%, 284px);
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .hero-app-stores .store-download {
+    height: 44px;
+    padding-inline: 6px;
+    gap: 5px;
+    border-radius: 11px;
+  }
+
+  .hero-app-stores .store-icon.apple { font-size: 28px; }
+  .hero-app-stores .store-icon.play { font-size: 22px; }
+  .hero-app-stores .store-text span { font-size: 6px; }
+  .hero-app-stores .store-text strong { font-size: 12px; }
+
+  .hero-whatsapp-mobile {
+    bottom: 58px;
+    min-height: 40px;
+    padding: 9px 15px;
+    font-size: 12px;
+  }
+
+  .hero-arrow { width: 32px; height: 32px; font-size: 20px; }
+  .hero-arrow.left { left: 6px; }
+  .hero-arrow.right { right: 6px; }
+
+  .carousel-controls {
+    bottom: 14px;
+    padding: 5px 7px;
+    gap: 6px;
+  }
+
   .carousel-count { display: none; }
-  
+  .carousel-dots { gap: 3px; }
+  .carousel-dots button { width: 4px; height: 4px; }
+  .carousel-dots button.active { width: 12px; }
+  .carousel-controls .carousel-pause { width: 22px; height: 22px; font-size: 10px; }
+}
+
+@media (max-width: 320px) {
+  .hero-app-stores,
+  .model-hero.copy-right .hero-app-stores { width: min(100%, 268px); }
+
+  .hero-app-stores .store-download { padding-inline: 4px; }
+  .hero-app-stores .store-icon.apple { font-size: 25px; }
+  .hero-app-stores .store-icon.play { font-size: 20px; }
+  .hero-app-stores .store-text strong { font-size: 11px; }
 }
 /* =====================================================
    AJUSTES RESPONSIVOS EXTRAS
@@ -1002,12 +1069,12 @@ iframe {
     width: calc(100% - 22px);
   }
 
-  .netbox-app-stores {
+  .netbox-app-stores:not(.hero-app-stores) {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .store-download {
+  .netbox-app-stores:not(.hero-app-stores) .store-download {
     width: 100%;
   }
 
