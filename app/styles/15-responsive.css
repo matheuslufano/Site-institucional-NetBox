@@ -330,7 +330,7 @@
   .model-hero.copy-right .model-hero-copy > p,
   .model-hero.copy-right .model-hero h1 { margin-left: 0; }
   .model-hero h1 { font-size: 41px; }
-  .model-hero-copy > p { font-size: 14px; }
+  .model-hero-copy > p { font-size: 14px; white-space: pre-line;}
   .hero-form { padding: 20px; }
   .coverage-conversion-section { padding: 52px 0; }
   .coverage-conversion-layout { gap: 25px; }
@@ -773,6 +773,7 @@
     color: rgba(255, 255, 255, .9);
     font-size: clamp(14px, 3.9vw, 16px);
     line-height: 1.35;
+    white-space: normal;
   }
 
   .hero-whatsapp-button,
