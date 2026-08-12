@@ -99,6 +99,25 @@
   line-height: 1.38;
 }
 
+.hero-whatsapp-button,
+.hero-app-stores {
+  margin-top: 24px;
+}
+
+.hero-app-stores {
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.model-hero.copy-right .hero-app-stores {
+  justify-content: flex-end;
+}
+
+.hero-whatsapp-button b {
+  font-size: 20px;
+  line-height: 1;
+}
+
 .model-button {
   min-height: 48px;
   padding: 0 24px;

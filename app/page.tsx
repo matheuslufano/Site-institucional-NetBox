@@ -628,6 +628,48 @@ export default function Home() {
               />
               <h1>{heroSlides[activeSlide].title}</h1>
               <p>{heroSlides[activeSlide].text}</p>
+              {activeSlide === 0 ? (
+                <div className="netbox-app-stores hero-app-stores" aria-label="Baixar o Aplicativo Netbox">
+                  <a
+                    className="store-download"
+                    href={APP_STORE}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Baixar o Aplicativo Netbox na App Store"
+                    onClick={() => track("clicou_download_app", { origin: "carrossel", store: "app_store" })}
+                  >
+                    <FaApple className="store-icon apple" aria-hidden="true" />
+                    <div className="store-text">
+                      <span>Download on the</span>
+                      <strong>App Store</strong>
+                    </div>
+                  </a>
+                  <a
+                    className="store-download"
+                    href={PLAY_STORE}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Baixar o Aplicativo Netbox no Google Play"
+                    onClick={() => track("clicou_download_app", { origin: "carrossel", store: "google_play" })}
+                  >
+                    <SiGoogleplay className="store-icon play" aria-hidden="true" />
+                    <div className="store-text">
+                      <span>GET IT ON</span>
+                      <strong>Google Play</strong>
+                    </div>
+                  </a>
+                </div>
+              ) : (
+                <a
+                  className="model-button hero-primary hero-whatsapp-button"
+                  href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("clicou_whatsapp", { origin: "carrossel", slide: heroSlides[activeSlide].title })}
+                >
+                  Falar pelo WhatsApp <b aria-hidden="true">›</b>
+                </a>
+              )}
             </div>
           </div>
           <button

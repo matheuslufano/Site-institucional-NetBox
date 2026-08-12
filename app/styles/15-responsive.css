@@ -775,6 +775,36 @@
     line-height: 1.35;
   }
 
+  .hero-whatsapp-button,
+  .hero-app-stores {
+    margin-top: 18px;
+  }
+
+  .hero-app-stores,
+  .model-hero.copy-right .hero-app-stores {
+    width: min(100%, 330px);
+    margin-inline: auto;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .hero-app-stores .store-download {
+    min-width: 0;
+    height: 48px;
+    margin-top: 0;
+    padding: 5px 9px;
+    flex: 1 1 0;
+    gap: 7px;
+    border-width: 1px;
+    border-radius: 11px;
+  }
+
+  .hero-app-stores .store-icon.apple { font-size: 32px; }
+  .hero-app-stores .store-icon.play { font-size: 25px; }
+  .hero-app-stores .store-text span { font-size: 7px; }
+  .hero-app-stores .store-text strong { font-size: 14px; letter-spacing: -.4px; }
+
   .model-button.hero-primary {
     min-height: 45px;
     padding: 12px 18px;
