@@ -121,24 +121,25 @@
     width: auto;
   }
   .netbox-app-stores {
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
     margin-top: 8px;
     justify-content: center;
   }
   .store-download {
-    margin-top: 10px;
-    height: 48px;
-    padding: 5px 10px;
-    min-width: 100px;
+    margin-top: 8px;
+    height: 46px;
+    padding: 5px 8px;
+    min-width: 0;
+    flex: 1 1 0;
     font-size: 12px;
     border-radius: 12px;
   }
   .store-download .store-icon.apple {
-    font-size: 40px;
+    font-size: 30px;
   }
   .store-download .store-icon.play {
-    font-size: 30px;
+    font-size: 23px;
   }
   .store-download .store-text span {
     font-size: 7px;
@@ -1060,10 +1061,14 @@ iframe {
     border-radius: 0;
   }
 
-  .store-download {
+  .netbox-app-stores:not(.hero-app-stores) {
+    width: min(100%, 300px);
+    margin-inline: auto;
+  }
+
+  .netbox-app-stores:not(.hero-app-stores) .store-download {
     min-width: 0;
-    flex: 1 1 145px;
-    
+    flex: 1 1 0;
   }
 
 
@@ -1089,8 +1094,9 @@ iframe {
   }
 
   .netbox-app-stores:not(.hero-app-stores) {
-    flex-direction: column;
-    align-items: stretch;
+    width: min(100%, 270px);
+    flex-direction: row;
+    align-items: center;
   }
 
   .netbox-app-stores:not(.hero-app-stores) .store-download {
