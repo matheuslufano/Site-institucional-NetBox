@@ -615,7 +615,7 @@ export default function Home() {
           />
           <div className="model-shell hero-inner carousel-only">
             <div
-              className="model-hero-copy"
+              className={`model-hero-copy${activeSlide === 0 ? " is-app-slide" : ""}`}
               key={activeSlide}
               aria-live="polite"
               aria-atomic="true"

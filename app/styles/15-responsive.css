@@ -4,6 +4,9 @@
    ===================================================== */
 
 @media (min-width: 981px) {
+   .hero-app-icon{
+    width: 150px;
+   }
   .netbox-app-carousel {
     min-height: 520px;
     height: 600px;
