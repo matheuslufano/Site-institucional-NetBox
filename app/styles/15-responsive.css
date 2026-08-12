@@ -714,8 +714,10 @@
   }
 
   .hero-slide-background {
-    background-position: center center;
-    transform: scale(1.015);
+    background-image: var(--hero-mobile-image) !important;
+    background-position: center top !important;
+    background-size: cover;
+    transform: none;
   }
 
   .model-hero::after,
@@ -735,8 +737,8 @@
   .hero-inner,
   .hero-inner.carousel-only {
     min-height: clamp(590px, calc(100svh - 72px), 720px);
-    padding: 76px 0;
-    align-items: center;
+    padding: clamp(28px, 7vw, 44px) 0 82px;
+    align-items: start;
   }
 
   .model-hero.copy-right .hero-inner.carousel-only { justify-content: start; }
@@ -750,36 +752,58 @@
     text-align: center;
   }
 
-  .model-hero-copy > span {
-    width: max-content;
-    margin-inline: auto;
-    margin-bottom: 11px;
-    padding: 6px 10px;
-    border-color: rgba(255, 218, 173, .32);
-    background: rgba(165, 49, 8, .26);
-    color: #ffe2bd;
-    font-size: 10px;
-    letter-spacing: .07em;
+  .hero-logo {
+    display: none;
   }
 
   .model-hero h1,
   .model-hero.copy-right .model-hero h1 {
-    max-width: 13ch;
-    margin: 0 auto 12px;
-    font-size: clamp(33px, 9.4vw, 43px);
-    line-height: 1.02;
-    letter-spacing: -.042em;
+    max-width: 10ch;
+    margin: 0 auto 13px;
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: .96;
+    letter-spacing: -.05em;
     text-wrap: balance;
   }
 
   .model-hero-copy > p,
   .model-hero.copy-right .model-hero-copy > p {
-    max-width: 38ch;
-    margin: 0 auto 19px;
-    color: rgba(255, 255, 255, .84);
-    font-size: 15px;
-    line-height: 1.45;
+    max-width: 28ch;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, .9);
+    font-size: clamp(14px, 3.9vw, 16px);
+    line-height: 1.35;
   }
+
+  .hero-whatsapp-button,
+  .hero-app-stores {
+    margin-top: 18px;
+  }
+
+  .hero-app-stores,
+  .model-hero.copy-right .hero-app-stores {
+    width: min(100%, 330px);
+    margin-inline: auto;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .hero-app-stores .store-download {
+    min-width: 0;
+    height: 48px;
+    margin-top: 0;
+    padding: 5px 9px;
+    flex: 1 1 0;
+    gap: 7px;
+    border-width: 1px;
+    border-radius: 11px;
+  }
+
+  .hero-app-stores .store-icon.apple { font-size: 32px; }
+  .hero-app-stores .store-icon.play { font-size: 25px; }
+  .hero-app-stores .store-text span { font-size: 7px; }
+  .hero-app-stores .store-text strong { font-size: 14px; letter-spacing: -.4px; }
 
   .model-button.hero-primary {
     min-height: 45px;
@@ -823,7 +847,7 @@
 
 @media (max-width: 300px) {
   .hero-inner,
-  .hero-inner.carousel-only { padding: 72px 0; }
+  .hero-inner.carousel-only { padding: 28px 0 72px; }
   .model-hero h1,
   .model-hero.copy-right .model-hero h1 { font-size: 31px; }
   .model-hero-copy > p,

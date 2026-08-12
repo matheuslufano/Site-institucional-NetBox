@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     description: "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
     locale: "pt_BR",
     type: "website",
+    images: [{ url: "/og.jpg", width: 1731, height: 909, alt: "Netbox Internet — Internet de verdade" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Netbox Internet — Internet de verdade",
+    description: "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
+    images: ["/og.jpg"],
   },
   icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
 };

@@ -123,6 +123,46 @@
 
 .theme-toggle-label { display: none; }
 
+@media (min-width: 981px) {
+  .model-header {
+    min-height: 76px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    gap: 18px;
+  }
+
+  .model-brand img { width: 142px; }
+
+  .model-nav {
+    gap: 23px;
+    font-size: 12px;
+  }
+
+  .menu-contact-links a {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+    border-radius: 11px;
+  }
+
+  .menu-contact-links svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .theme-toggle {
+    width: 37px;
+    min-width: 37px;
+    height: 37px;
+  }
+
+  .theme-toggle-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+}
+
 .model-menu {
   display: none;
   width: 46px;

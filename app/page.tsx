@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { type CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
 import { ThemeToggle } from "./_components/ThemeToggle";
@@ -208,93 +208,59 @@ const gallery = [
 
 const heroSlides = [
   {
-    kicker: "Conexão que acompanha o Tocantins",
-    title: "Internet para aproximar pessoas, cidades e oportunidades.",
-    text: "Uma rede regional preparada para conectar sua casa ou empresa com estabilidade e atendimento próximo.",
-    action: "Consultar cobertura",
-    href: "#consulta",
-    image: "/carousel/slide-01.jpg",
+    title: "Aplicativo Netbox",
+    text: "Acesse faturas, segunda via, suporte e outros serviços Netbox de onde estiver.",
+    image: "/carousel/netbox-app.jpg",
+    mobileImage: "/carousel/mobile-v2-app.jpg",
+    position: "68% center",
     side: "left",
   },
   {
-    kicker: "Presença regional",
-    title: "Mais cidades conectadas por uma rede que está perto de você.",
-    text: "Conheça a estrutura da Netbox e nossa atuação em diferentes municípios do Tocantins.",
-    action: "Conhecer nossa estrutura",
-    href: "/nossa-estrutura",
-    image: "/carousel/slide-02.jpg",
-    side: "right",
-  },
-  {
-    kicker: "Tudo mais simples para o cliente",
-    title: "Sua assinatura Netbox na palma da mão.",
-    text: "Consulte faturas, emita segunda via, solicite suporte e acesse serviços pelos canais digitais da Netbox.",
-    action: "Acessar Central do Assinante",
-    href: SECOND_COPY,
-    image: "/carousel/slide-03.jpg",
+    title: "Casa conectada",
+    text: "Mais dispositivos conectados com estabilidade, velocidade e segurança.",
+    image: "/carousel/netbox-conexao.jpg",
+    mobileImage: "/carousel/mobile-v2-casa.jpg",
+    position: "68% center",
     side: "left",
   },
   {
-    kicker: "Compartilhe uma boa conexão",
-    title: "Indique a Netbox para quem também quer internet de verdade.",
-    text: "Fale com nossa equipe para conhecer as condições vigentes do programa de indicação.",
-    action: "Quero indicar alguém",
-    href: `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Quero conhecer o programa de indicação da Netbox.")}`,
-    image: "/carousel/slide-04.jpg",
+    title: "Conexão Empresarial",
+    text: "Soluções empresariais para sua equipe produzir, atender e crescer sem interrupções.",
+    image: "/carousel/netbox-empresas.jpg",
+    mobileImage: "/carousel/mobile-v2-empresas.jpg",
+    position: "69% center",
     side: "left",
   },
   {
-    kicker: "Conexão para todos",
-    title: "Uma internet que acompanha toda a família.",
-    text: "Trabalho, estudo, entretenimento e vários dispositivos conectados em uma única experiência.",
-    action: "Encontrar a melhor opção",
-    href: "#consulta",
-    image: "/carousel/slide-05.jpg",
+    title: "Suporte regional",
+    text: "Atendimento feito por quem está perto e entende o que você precisa.",
+    image: "/carousel/netbox-regional.jpg",
+    mobileImage: "/carousel/mobile-v2-regional.jpg",
+    position: "68% center",
     side: "left",
   },
   {
-    kicker: "Rede construída por quem entende",
-    title: "Infraestrutura preparada para levar fibra até você.",
-    text: "Equipe técnica regional e expansão contínua para oferecer uma conexão cada vez mais presente.",
-    action: "Ver nossa estrutura",
-    href: "/nossa-estrutura",
-    image: "/carousel/slide-06.jpg",
+    title: "Internet para toda a família",
+    text: "Uma conexão estável para cada tela, cada tarefa e cada momento da sua casa.",
+    image: "/carousel/netbox-familia.jpg",
+    mobileImage: "/carousel/mobile-v2-casa.jpg",
+    position: "68% center",
     side: "left",
   },
   {
-    kicker: "Instalação e suporte",
-    title: "Atendimento técnico cuidadoso, do início ao pós-venda.",
-    text: "Conte com profissionais preparados para instalar, orientar e ajudar quando você precisar.",
-    action: "Falar com a Netbox",
-    href: "/contatos",
-    image: "/carousel/slide-07.jpg",
-    side: "right",
-  },
-  {
-    kicker: "Tecnologia que faz diferença",
-    title: "Fibra óptica para uma experiência mais estável.",
-    text: "Conheça as soluções Netbox para residências e empresas que precisam estar sempre conectadas.",
-    action: "Conhecer os serviços",
-    href: "/nossos-servicos",
-    image: "/carousel/slide-08.jpg",
+    title: "Instalação Agendada",
+    text: "Agendamento prático e uma equipe preparada para deixar tudo funcionando para você.",
+    image: "/carousel/netbox-instalacao.jpg",
+    mobileImage: "/carousel/mobile-v2-instalacao.jpg",
+    position: "70% center",
     side: "left",
   },
   {
-    kicker: "Netbox Empresas",
-    title: "Soluções para negócios que não podem parar.",
-    text: "Internet empresarial, link dedicado e atendimento personalizado para as necessidades da sua operação.",
-    action: "Ver soluções empresariais",
-    href: "/nossos-servicos#empresas",
-    image: "/carousel/slide-09.jpg",
-    side: "right",
-  },
-  {
-    kicker: "Atendimento humanizado",
-    title: "Canais digitais e pessoas prontas para atender você.",
-    text: "Encontre suporte, informações e soluções com uma equipe que conhece a realidade da região.",
-    action: "Conhecer os canais",
-    href: "/contatos",
-    image: "/carousel/slide-10.jpg",
+    title: "Tecnologia que não para",
+    text: "Uma infraestrutura monitorada para entregar estabilidade, segurança e alto desempenho.",
+    image: "/carousel/netbox-infraestrutura.jpg",
+    mobileImage: "/carousel/mobile-v2-infraestrutura.jpg",
+    position: "70% center",
     side: "left",
   },
 ];
@@ -641,17 +607,13 @@ export default function Home() {
           <div
             className="hero-slide-background"
             key={heroSlides[activeSlide].image}
-            style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }}
+            style={{
+              backgroundImage: `url(${heroSlides[activeSlide].image})`,
+              backgroundPosition: heroSlides[activeSlide].position,
+              "--hero-mobile-image": `url(${heroSlides[activeSlide].mobileImage})`,
+            } as CSSProperties}
             aria-hidden="true"
           />
-          <div className="hero-network" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-          </div>
           <div className="model-shell hero-inner carousel-only">
             <div
               className="model-hero-copy"
@@ -659,25 +621,55 @@ export default function Home() {
               aria-live="polite"
               aria-atomic="true"
             >
-              <span>{heroSlides[activeSlide].kicker}</span>
+              <img
+                className="hero-logo"
+                src="/logo-branca-1024x371.png"
+                alt="Netbox — Internet de verdade"
+              />
               <h1>{heroSlides[activeSlide].title}</h1>
               <p>{heroSlides[activeSlide].text}</p>
-              <a
-                className="model-button hero-primary"
-                href={heroSlides[activeSlide].href}
-                target={
-                  heroSlides[activeSlide].href.startsWith("http")
-                    ? "_blank"
-                    : undefined
-                }
-                rel={
-                  heroSlides[activeSlide].href.startsWith("http")
-                    ? "noreferrer"
-                    : undefined
-                }
-              >
-                {heroSlides[activeSlide].action} <b>»</b>
-              </a>
+              {activeSlide === 0 ? (
+                <div className="netbox-app-stores hero-app-stores" aria-label="Baixar o Aplicativo Netbox">
+                  <a
+                    className="store-download"
+                    href={APP_STORE}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Baixar o Aplicativo Netbox na App Store"
+                    onClick={() => track("clicou_download_app", { origin: "carrossel", store: "app_store" })}
+                  >
+                    <FaApple className="store-icon apple" aria-hidden="true" />
+                    <div className="store-text">
+                      <span>Download on the</span>
+                      <strong>App Store</strong>
+                    </div>
+                  </a>
+                  <a
+                    className="store-download"
+                    href={PLAY_STORE}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Baixar o Aplicativo Netbox no Google Play"
+                    onClick={() => track("clicou_download_app", { origin: "carrossel", store: "google_play" })}
+                  >
+                    <SiGoogleplay className="store-icon play" aria-hidden="true" />
+                    <div className="store-text">
+                      <span>GET IT ON</span>
+                      <strong>Google Play</strong>
+                    </div>
+                  </a>
+                </div>
+              ) : (
+                <a
+                  className="model-button hero-primary hero-whatsapp-button"
+                  href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("clicou_whatsapp", { origin: "carrossel", slide: heroSlides[activeSlide].title })}
+                >
+                  Falar pelo WhatsApp <b aria-hidden="true">›</b>
+                </a>
+              )}
             </div>
           </div>
           <button
@@ -713,7 +705,7 @@ export default function Home() {
                   type="button"
                   className={index === activeSlide ? "active" : ""}
                   onClick={() => setActiveSlide(index)}
-                  aria-label={`Mostrar destaque ${index + 1}: ${slide.kicker}`}
+                  aria-label={`Mostrar destaque ${index + 1}: ${slide.title}`}
                   aria-current={index === activeSlide ? "true" : undefined}
                 />
               ))}
@@ -740,7 +732,7 @@ export default function Home() {
                 <video
                   ref={featureVideoRef}
                   className="feature-video"
-                  src="/videos/Video-netbox.mp4"
+                  src="/videos/Video-netbox-web.mp4"
                   autoPlay
                   muted={featureVideoMuted}
                   loop

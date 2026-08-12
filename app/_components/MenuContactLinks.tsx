@@ -34,7 +34,7 @@ export function MenuContactLinks() {
   return (
     <div className="menu-contact-links" aria-label="Canais de atendimento">
       <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" aria-label="WhatsApp da Netbox" title="WhatsApp"><ContactIcon name="whatsapp" /></a>
-      <a href="https://www.facebook.com/netboxinternet" target="_blank" rel="noreferrer" aria-label="Facebook da Netbox" title="Facebook"><ContactIcon name="facebook" /></a>
+      <a href="https://www.facebook.com/Netboxinternetfibra/" target="_blank" rel="noreferrer" aria-label="Facebook da Netbox" title="Facebook"><ContactIcon name="facebook" /></a>
       <a href="mailto:atendimento@netbox.net.br" aria-label="Enviar e-mail para a Netbox" title="E-mail"><ContactIcon name="mail" /></a>
       <a href="tel:08006022732" aria-label="Ligar para a Netbox no 0800 602 2732" title="Telefone"><ContactIcon name="phone" /></a>
     </div>
