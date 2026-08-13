@@ -763,7 +763,7 @@
 
   .hero-app-icon,
   .model-hero.copy-right .hero-app-icon {
-    width: clamp(54px, 15vw, 68px);
+    width: clamp(150px, 15vw, 68px);
     margin: 30px auto 12px;
     border-radius: 22%;
   }
