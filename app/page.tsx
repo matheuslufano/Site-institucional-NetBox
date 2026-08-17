@@ -15,15 +15,35 @@ import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVi
 import { useFocusTrap } from "./_components/useFocusTrap";
 import { useSwipeGesture } from "./_components/useSwipeGesture";
 import { FaApple } from "react-icons/fa";
-import { IoChevronBack, IoChevronForward, IoClose, IoPause, IoPlay } from "react-icons/io5";
-import { SiGoogleplay } from "react-icons/si";
-import Image from "next/image";
+import { IoBookOutline, IoChevronBack, IoChevronForward, IoClose, IoPause, IoPlay } from "react-icons/io5";
+import { SiDeezer, SiGoogleplay, SiHbomax } from "react-icons/si";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
 const PLAY_STORE =
   "https://play.google.com/store/apps/details?id=br.com.appdoprovedor.netbox";
 const APP_STORE = "https://apps.apple.com/br/app/netbox/id1574550280";
+
+type PlanPlatform = { name: string; tone: string };
+
+function PlatformLogo({ platform }: { platform: PlanPlatform }) {
+  if (platform.tone === "netbox") {
+    return <><img src="/netbox-app-icon.png" alt="" /><span className="sr-only">{platform.name}</span></>;
+  }
+  if (platform.tone === "deezer") {
+    return <><SiDeezer aria-hidden="true" /><span className="sr-only">{platform.name}</span></>;
+  }
+  if (platform.tone === "hbo") {
+    return <><SiHbomax aria-hidden="true" /><span className="sr-only">{platform.name}</span></>;
+  }
+  if (platform.tone === "ubook") {
+    return <span className="platform-wordmark ubook-wordmark"><IoBookOutline aria-hidden="true" /><b>ubook</b><small>GO</small><span className="sr-only">{platform.name}</span></span>;
+  }
+  if (platform.tone === "prime") {
+    return <span className="platform-wordmark prime-wordmark"><b>prime</b><small>video</small><svg viewBox="0 0 36 8" aria-hidden="true"><path d="M2 1.5c8 5.5 20 6 30 .7" /><path d="m28 1 4 1-2 3" /></svg><span className="sr-only">{platform.name}</span></span>;
+  }
+  return <span className="platform-wordmark disney-wordmark"><b>Disney</b><small>+</small><span className="sr-only">{platform.name}</span></span>;
+}
 
 const storeAddresses: Record<string, string> = {
   "Paraíso do Tocantins - TO":
@@ -812,6 +832,13 @@ export default function Home() {
           </div>
         </section>
 
+        <aside className="home-contact-strip" aria-label="Canais rápidos de atendimento">
+          <div className="model-shell">
+            <small className="home-contact-strip-title">Canais de atendimento</small>
+            <MenuContactLinks />
+          </div>
+        </aside>
+
         <section className="services-section" id="servicos">
           <div className="model-shell services-layout">
             <div className="service-feature">
@@ -1007,23 +1034,23 @@ export default function Home() {
                 >
                   <IoChevronForward aria-hidden="true" />
                 </button>
-                <div
-                  className="app-carousel-dots"
-                  aria-label="Navegação de telas"
-                  role="tablist"
-                >
-                  {appScreens.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      className={index === activeAppSlide ? "active" : ""}
-                      onClick={() => setActiveAppSlide(index)}
-                      aria-label={`Mostrar tela ${index + 1}`}
-                      role="tab"
-                      aria-selected={index === activeAppSlide}
-                    />
-                  ))}
-                </div>
+              </div>
+              <div
+                className="app-carousel-dots"
+                aria-label="Navegação de telas"
+                role="tablist"
+              >
+                {appScreens.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={index === activeAppSlide ? "active" : ""}
+                    onClick={() => setActiveAppSlide(index)}
+                    aria-label={`Mostrar tela ${index + 1}`}
+                    role="tab"
+                    aria-selected={index === activeAppSlide}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -1282,7 +1309,7 @@ export default function Home() {
                           <div className="residential-plan-subscriptions">
                             <strong>Serviços inclusos</strong>
                             <div className="plan-platforms">
-                              {plan.platforms.map((platform) => <span key={platform.name} className={`plan-platform brand-${platform.tone}`}>{platform.name}</span>)}
+                              {plan.platforms.map((platform) => <span key={platform.name} className={`plan-platform brand-${platform.tone}`} title={platform.name} aria-label={platform.name}><PlatformLogo platform={platform} /></span>)}
                             </div>
                             {plan.choiceNote && <small>{plan.choiceNote}</small>}
                             {plan.allIncluded && <small>Todos os serviços apresentados estão inclusos.</small>}

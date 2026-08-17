@@ -69,6 +69,21 @@ html.theme-dark .menu-contact-links a {
   color: #ff9a60;
 }
 
+html.theme-dark .home-contact-strip {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html.theme-dark .home-contact-strip-title { color: rgba(245,241,237,.5); }
+
+html.theme-dark .home-contact-strip .menu-contact-links a {
+  border-color: rgba(255,255,255,.12);
+  color: #ff9a60;
+  background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.035));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 9px 24px rgba(0,0,0,.2);
+}
+
 html.theme-dark .model-menu {
   border-color: rgba(255,255,255,.13);
   background: rgba(255,255,255,.07);

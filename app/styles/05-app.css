@@ -194,6 +194,12 @@
 
 }
 
+.netbox-app-visual {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
 .netbox-app-visual img {
   z-index: 1;
   width: 100%;
@@ -274,13 +280,13 @@
 .app-carousel-arrow svg { width: 55%; height: 55%; display: block; }
 
 .app-carousel-dots {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  bottom: 12px;
-  left: 50%;
+  min-height: 38px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
-  transform: translateX(-50%);
+  justify-content: center;
 }
 
 .app-carousel-dots button {

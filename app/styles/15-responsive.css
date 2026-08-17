@@ -150,6 +150,47 @@
 }
 
 @media (max-width: 980px) {
+  .home-contact-strip {
+    display: block;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .home-contact-strip .model-shell {
+    min-height: 104px;
+    padding-block: 13px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .home-contact-strip-title {
+    color: rgba(57,43,35,.58);
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .home-contact-strip .menu-contact-links { flex: 0 0 auto; justify-content: center; gap: 10px; }
+
+  .home-contact-strip .menu-contact-links a {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    border-color: rgba(255,255,255,.8);
+    border-radius: 16px;
+    color: #d7480c;
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,255,255,.3));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.28), 0 9px 24px rgba(104,46,16,.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
   body > main,
   body > footer,
   .client-shortcuts,
@@ -698,13 +739,21 @@
   .client-shortcuts a:hover .shortcut-label,
   .client-shortcuts a:focus-visible .shortcut-label { color: #d7480c; }
   .client-shortcuts .shortcut-label { font-size: 10px; }
-  .plans-modal-backdrop { padding: 8px; }
-  .plans-modal { max-height: calc(100svh - 16px); border-radius: 27px; }
+  .plans-modal-backdrop {
+    padding: calc(8px + env(safe-area-inset-top)) 8px calc(8px + env(safe-area-inset-bottom));
+    place-items: start center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+  .plans-modal-backdrop::-webkit-scrollbar { display: none; }
+  .plans-modal { max-height: none; overflow: hidden; border-radius: 27px; }
   .plans-modal-toolbar { top: 12px; right: 12px; }
   .plans-modal-close { width: 38px; height: 38px; }
   .plans-carousel { padding: 55px 0 5px; }
   .plans-carousel-viewport,
-  .plans-carousel-track { min-height: 535px; height: 535px; }
+  .plans-carousel-track { min-height: 555px; height: 555px; }
   .plans-carousel-arrow { width: 36px; height: 36px; font-size: 26px; }
   .plans-carousel-arrow.previous { left: 11px; }
   .plans-carousel-arrow.next { right: 11px; }
@@ -717,7 +766,13 @@
   .residential-plan-features { padding: 12px; gap: 5px; }
   .residential-plan-features li { font-size: 9px; }
   .residential-plan-subscriptions { margin-top: 10px; padding: 11px; gap: 7px; }
-  .plan-platform { width: 61px; min-height: 41px; padding: 5px; font-size: 7px; }
+  .plan-platform { width: 64px; min-height: 43px; padding: 5px; font-size: 7px; }
+  .plan-platform > img { width: 29px; height: 29px; border-radius: 8px; }
+  .plan-platform > svg { height: 23px; }
+  .platform-wordmark { min-height: 30px; }
+  .ubook-wordmark b, .prime-wordmark b { font-size: 9px; }
+  .ubook-wordmark > svg { width: 12px; height: 12px; }
+  .disney-wordmark b, .disney-wordmark small { font-size: 11px; }
   .residential-plan-notes { padding-block: 9px 7px; }
   .residential-plan-cta { min-height: 42px; font-size: 11px; }
   .plans-carousel-footer { padding-bottom: 13px; }
@@ -1490,6 +1545,17 @@ iframe {
 }
 
 @media (max-width: 420px) {
+  .home-contact-strip .model-shell { min-height: 92px; padding-block: 11px 13px; }
+
+  .home-contact-strip .menu-contact-links { gap: 5px; }
+
+  .home-contact-strip .menu-contact-links a {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    border-radius: 12px;
+  }
+
   .about-hero-tags span:last-child { display: none; }
 
   .about-story-visual { min-height: 350px; }

@@ -85,7 +85,7 @@
 
 .residential-plan-slide {
   position: absolute;
-  top: 0;
+  top: 18px;
   left: 50%;
   width: min(400px, calc(100% - 180px));
   opacity: 0;
@@ -242,15 +242,16 @@
   font-weight: 900;
   letter-spacing: .07em;
   text-transform: uppercase;
+  text-align: center;
 }
 
-.residential-plan-subscriptions > small { color: rgba(255,255,255,.72); font-size: 8px; line-height: 1.4; }
+.residential-plan-subscriptions > small { color: rgba(255,255,255,.72); font-size: 8px; line-height: 1.4; text-align: center; }
 
-.plan-platforms { display: flex; flex-wrap: wrap; gap: 7px; }
+.plan-platforms { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 7px; }
 
 .plan-platform {
-  width: 72px;
-  min-height: 48px;
+  width: 78px;
+  min-height: 52px;
   padding: 7px;
   display: grid;
   place-items: center;
@@ -264,11 +265,56 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 7px 16px rgba(36,22,15,.12);
 }
 
-.brand-ubook { background: linear-gradient(145deg, #ff613b, #ff3218); }
+.plan-platform > img {
+  width: 34px;
+  height: 34px;
+  display: block;
+  border-radius: 9px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+
+.plan-platform > svg { width: 82%; height: 28px; display: block; }
+
+.platform-wordmark {
+  position: relative;
+  width: 100%;
+  min-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.ubook-wordmark { gap: 2px; }
+
+.ubook-wordmark > svg { width: 14px; height: 14px; }
+
+.ubook-wordmark b { font-size: 11px; letter-spacing: -.05em; text-transform: lowercase; }
+
+.ubook-wordmark small { align-self: flex-start; margin-top: 6px; font-size: 5px; font-weight: 900; }
+
+.prime-wordmark { padding-bottom: 8px; gap: 2px; }
+
+.prime-wordmark b { font-size: 11px; font-weight: 800; letter-spacing: -.05em; text-transform: lowercase; }
+
+.prime-wordmark small { font-size: 7px; font-weight: 700; text-transform: lowercase; }
+
+.prime-wordmark > svg { position: absolute; bottom: 3px; left: 50%; width: 36px; height: 8px; overflow: visible; transform: translateX(-50%); }
+
+.prime-wordmark > svg path { fill: none; stroke: #25b9ef; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.disney-wordmark { gap: 1px; font-family: Georgia, serif; font-style: italic; }
+
+.disney-wordmark b { font-size: 13px; letter-spacing: -.07em; }
+
+.disney-wordmark small { color: #76d8ff; font-size: 13px; font-weight: 900; }
+
+.brand-ubook { background: linear-gradient(145deg, #ef5036, #d52d19); }
 
 .brand-netbox { background: linear-gradient(145deg, #ffb11f, #ff7109); }
 
-.brand-deezer { background: linear-gradient(145deg, #211044, #050505); }
+.brand-deezer { background: linear-gradient(145deg, #251249, #070609); }
 
 .brand-prime { background: linear-gradient(145deg, #177aaf, #082d66); }
 
@@ -281,6 +327,7 @@
   font-family: var(--font-display);
   font-size: 14px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .residential-plan-notes { margin-top: auto; padding: 12px 3px 9px; display: grid; gap: 2px; color: rgba(255,255,255,.62); }

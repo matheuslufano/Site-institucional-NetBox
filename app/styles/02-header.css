@@ -53,6 +53,8 @@
 
 .menu-contact-links svg { width: 18px; height: 18px; }
 
+.home-contact-strip { display: none; }
+
 .mobile-nav-heading,
 
 .menu-backdrop { display: none; }
