@@ -165,14 +165,37 @@
 }
 
 .service-thumb {
-  height: 82px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(145deg, #ffbc2a, #eb5918);
-  color: #fff;
-  font-size: 40px;
+  display: block;
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #ff7200;
 }
 
+.service-thumb-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+}
+.footer-service-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.footer-service-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
 .services-list h3 { margin: 0 0 4px; font-size: 15px; }
 
 .services-list p { margin: 0; color: #6f6f6f; font-size: 11px; line-height: 1.45; }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowIcon } from "../_components/ArrowIcon";
 import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
@@ -16,7 +17,7 @@ export default function AboutPage() {
       <section className="inner-section">
         <div className="model-shell story-layout">
           <div className="inner-art about-art"><span>NET</span><strong>BOX</strong><i>Internet de verdade</i></div>
-          <div className="inner-copy"><small>Quem somos</small><h2>Uma empresa de internet com presença regional.</h2><p>A Netbox atua levando conectividade por fibra óptica a cidades do Tocantins, combinando tecnologia, canais digitais e relacionamento próximo com seus clientes.</p><p>As informações históricas detalhadas, números de clientes e extensão da rede serão publicados somente após validação institucional.</p><a className="model-button yellow" href="/contatos">Falar com a Netbox →</a></div>
+          <div className="inner-copy"><small>Quem somos</small><h2>Uma empresa de internet com presença regional.</h2><p>A Netbox atua levando conectividade por fibra óptica a cidades do Tocantins, combinando tecnologia, canais digitais e relacionamento próximo com seus clientes.</p><p>As informações históricas detalhadas, números de clientes e extensão da rede serão publicados somente após validação institucional.</p><a className="model-button yellow" href="/contatos">Falar com a Netbox <ArrowIcon /></a></div>
         </div>
       </section>
       <section className="inner-section soft-section">
@@ -27,7 +28,7 @@ export default function AboutPage() {
           <article><span>04</span><h3>Relacionamento</h3><p>Internet de verdade. Amizade que conecta.</p></article>
         </div></div>
       </section>
-      <section className="inner-cta"><div className="model-shell"><h2>Quer conhecer a Netbox mais de perto?</h2><p>Veja nossas soluções ou converse com a equipe.</p><a className="model-button white" href="/nossos-servicos">Conhecer os serviços →</a></div></section>
+      <section className="inner-cta"><div className="model-shell"><h2>Quer conhecer a Netbox mais de perto?</h2><p>Veja nossas soluções ou converse com a equipe.</p><a className="model-button white" href="/nossos-servicos">Conhecer os serviços <ArrowIcon /></a></div></section>
     </NetboxFrame>
   );
 }

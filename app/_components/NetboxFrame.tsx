@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import { ArrowIcon } from "./ArrowIcon";
 import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContactLinks } from "./MenuContactLinks";
 import { ThemeToggle } from "./ThemeToggle";
@@ -102,26 +103,26 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
             <a className="inner-footer-link" href="/nossos-servicos">
               <span>⌁</span>
               <div>
-                <strong>Internet residencial →</strong>
+                <strong>Internet residencial <ArrowIcon /></strong>
                 <small>Fibra óptica para sua casa e sua rotina.</small>
               </div>
             </a>
             <a className="inner-footer-link" href="/nossos-servicos#empresas">
               <span>▦</span>
               <div>
-                <strong>Soluções empresariais →</strong>
+                <strong>Soluções empresariais <ArrowIcon /></strong>
                 <small>Internet empresarial e link dedicado.</small>
               </div>
             </a>
             <a className="inner-footer-link" href="/contatos">
               <span>◉</span>
               <div>
-                <strong>Atendimento →</strong>
+                <strong>Atendimento <ArrowIcon /></strong>
                 <small>Suporte, segunda via e canais oficiais.</small>
               </div>
             </a>
             <a className="footer-pill" href="/nossos-servicos">
-              Todos os serviços →
+              Todos os serviços <ArrowIcon />
             </a>
           </div>
 
@@ -132,7 +133,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
               conectar o Tocantins.
             </p>
             <a className="model-button yellow" href="/sobre">
-              Mais sobre a Netbox →
+              Mais sobre a Netbox <ArrowIcon />
             </a>
           </div>
 

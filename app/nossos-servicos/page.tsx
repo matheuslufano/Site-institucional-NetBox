@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowIcon } from "../_components/ArrowIcon";
 import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
@@ -24,7 +25,7 @@ export default function ServicesPage() {
             <article key={String(title)} id={title === "Internet empresarial" ? "empresas" : undefined}>
               <span>{icon as string}</span><h2>{title as string}</h2><p>{text as string}</p>
               <ul>{(items as string[]).map((item) => <li key={item}>{item}</li>)}</ul>
-              <a className="model-button yellow" href={title === "Suporte Técnico Regional" ? "/contatos" : `https://wa.me/${"5508006022732"}?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre ${title}.`)}`}>Saiba mais →</a>
+              <a className="model-button yellow" href={title === "Suporte Técnico Regional" ? "/contatos" : `https://wa.me/${"5508006022732"}?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre ${title}.`)}`}>Saiba mais <ArrowIcon /></a>
             </article>
           ))}
         </div></div>

@@ -300,6 +300,16 @@ html.theme-dark .solution-modal {
 
 html.theme-dark .solution-modal-copy p { color: #bbb5af; }
 
+html.theme-dark .structure-modal { border-color: rgba(255,255,255,.12); background: #1b1a19; }
+
+html.theme-dark .structure-modal-copy { border-left-color: rgba(255,255,255,.1); background: #1b1a19; }
+
+@media (max-width: 640px) {
+  html.theme-dark .structure-modal-copy { border-top-color: rgba(255,255,255,.1); }
+}
+
+html.theme-dark .structure-modal-copy p { color: #bbb5af; }
+
 html.theme-dark .contact-hours strong { color: #f5f1ed; }
 
 html.theme-dark .city-chip-grid span { background: #252422; color: #ddd8d3; }

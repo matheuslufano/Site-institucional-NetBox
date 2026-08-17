@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { ArrowIcon } from "./ArrowIcon";
 
 const WHATSAPP = "5508006022732";
 
@@ -33,7 +34,7 @@ export function ContactForm() {
         <label>Assunto<select name="subject"><option>Quero contratar</option><option>Suporte técnico</option><option>Financeiro</option><option>Atendimento empresarial</option><option>Outro assunto</option></select></label>
       </div>
       <label>Como podemos ajudar?<textarea name="message" required rows={5} placeholder="Escreva sua mensagem" /></label>
-      <button className="model-button orange" type="submit">Continuar no WhatsApp →</button>
+      <button className="model-button orange" type="submit">Continuar no WhatsApp <ArrowIcon /></button>
       {sent && <p className="form-status" role="status">Mensagem preparada. O WhatsApp foi aberto em uma nova janela.</p>}
     </form>
   );

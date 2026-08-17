@@ -1,13 +1,22 @@
 "use client";
 
-import { type CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  FormEvent,
+  type TouchEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
+import { ArrowIcon } from "./_components/ArrowIcon";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
 import { ThemeToggle } from "./_components/ThemeToggle";
 import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 import { FaApple } from "react-icons/fa";
-import { IoPause, IoPlay } from "react-icons/io5";
+import { IoChevronBack, IoChevronForward, IoClose, IoPause, IoPlay } from "react-icons/io5";
 import { SiGoogleplay } from "react-icons/si";
+import Image from "next/image";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -62,22 +71,22 @@ const cities = Object.keys(storeAddresses);
 const DEFAULT_CITY = "Paraíso do Tocantins - TO";
 const services = [
   {
-    icon: "⌁",
     title: "Internet Fibra Residencial",
     text: "Internet rápida e estável para estudar, trabalhar, jogar e assistir aos seus conteúdos favoritos.",
     action: "Consultar opções residenciais",
+    image: "/img_services/cabo-optico-laraja.png",
   },
   {
-    icon: "▣",
     title: "Aplicativo Netbox",
     text: "Consulte faturas, veja o histórico financeiro, solicite suporte e receba notificações pelo celular.",
     action: "Baixar aplicativo",
+    image: "/netbox-app-icon.png",
   },
   {
-    icon: "◉",
     title: "Suporte Técnico Regional",
     text: "Atendimento humanizado e suporte técnico realizado por uma equipe que conhece a região.",
     action: "Acessar atendimento",
+    image: "/img_services/atendimento.png",
   },
 ];
 
@@ -153,56 +162,56 @@ const gallery = [
     "01",
     "Fibra residencial",
     "Conexão para a rotina da sua casa.",
-    "/solutions/fibra-residencial.png",
-    "Casal usando a internet Netbox em casa",
+    "/solutions 2/fibra-residencial.png",
+    "oxe?",
   ],
   [
     "02",
     "Casa conectada",
     "Mais dispositivos com estabilidade.",
-    "/solutions/casa-conectada.png",
+    "/solutions 2/casa-conectada.png",
     "Dispositivos conectados à rede de uma residência",
   ],
   [
     "03",
     "Netbox Empresas",
     "Soluções para negócios que não podem parar.",
-    "/solutions/netbox-empresas.png",
+    "/solutions 2/netbox-empresas.png",
     "Equipe trabalhando conectada em uma empresa",
   ],
   [
     "04",
     "Link dedicado",
     "Desempenho personalizado para sua operação.",
-    "/solutions/link-dedicado.png",
+    "/solutions 2/link-dedicado.png",
     "Equipamentos de rede conectados por fibra óptica",
   ],
   [
     "05",
     "Aplicativo Netbox",
     "Serviços e faturas na palma da mão.",
-    "/solutions/aplicativo-netbox.png",
+    "/solutions 2/aplicativo-netbox.png",
     "Aplicativo Netbox sendo usado em um celular",
   ],
   [
     "06",
     "Suporte regional",
     "Atendimento feito por quem está perto.",
-    "/solutions/suporte-regional.png",
+    "/solutions 2/suporte-regional.png",
     "Atendente Netbox auxiliando um cliente",
   ],
   [
     "07",
     "Lojas Netbox",
     "Presença em cidades do Tocantins.",
-    "/solutions/lojas-netbox.png",
+    "/solutions 2/lojas-netbox.png",
     "Cliente chegando a uma loja Netbox",
   ],
   [
     "08",
     "Instalação agendada",
     "Consulta técnica e próximos passos pelo WhatsApp.",
-    "/solutions/instalacao-agendada.png",
+    "/solutions 2/instalacao-agendada.png",
     "Técnico instalando fibra óptica em uma residência",
   ],
 ];
@@ -216,7 +225,7 @@ const heroSlides = [
     position: "68% center",
     side: "left",
   },
-    {
+  {
     title: "Internet Residencial",
     text: "Conexão rápida e estável para estudar, trabalhar,  jogar \ne assistir aos seus conteúdos favoritos.",
     image: "/carousel/netbox-familia.jpg",
@@ -317,11 +326,13 @@ export default function Home() {
   const [plansOpen, setPlansOpen] = useState(false);
   const [activePlan, setActivePlan] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
-  const [carouselInteractionPaused, setCarouselInteractionPaused] = useState(false);
+  const [carouselInteractionPaused, setCarouselInteractionPaused] =
+    useState(false);
   const [featureVideoPaused, setFeatureVideoPaused] = useState(false);
   const [featureVideoMuted, setFeatureVideoMuted] = useState(true);
   const featureVideoRef = useRef<HTMLVideoElement>(null);
   const planTouchStart = useRef<number | null>(null);
+  const heroTouchStart = useRef<{ x: number; y: number } | null>(null);
   const navigationVisible = useScrollDirectionVisibility();
   const selectedStoreAddress =
     storeAddresses[city] ?? storeAddresses[DEFAULT_CITY];
@@ -427,6 +438,28 @@ export default function Home() {
       (current) =>
         (current + direction + heroSlides.length) % heroSlides.length,
     );
+  }
+
+  function handleHeroTouchStart(event: TouchEvent<HTMLElement>) {
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    const touch = event.touches[0];
+    if (!touch) return;
+    heroTouchStart.current = { x: touch.clientX, y: touch.clientY };
+    setCarouselInteractionPaused(true);
+  }
+
+  function handleHeroTouchEnd(event: TouchEvent<HTMLElement>) {
+    const start = heroTouchStart.current;
+    const touch = event.changedTouches[0];
+    heroTouchStart.current = null;
+    setCarouselInteractionPaused(false);
+    if (!start || !touch) return;
+
+    const distanceX = touch.clientX - start.x;
+    const distanceY = touch.clientY - start.y;
+    const isHorizontalSwipe = Math.abs(distanceX) >= 48 && Math.abs(distanceX) > Math.abs(distanceY) * 1.2;
+
+    if (isHorizontalSwipe) moveSlide(distanceX < 0 ? 1 : -1);
   }
 
   function moveAppSlide(direction: number) {
@@ -598,6 +631,12 @@ export default function Home() {
           tabIndex={0}
           onMouseEnter={() => setCarouselInteractionPaused(true)}
           onMouseLeave={() => setCarouselInteractionPaused(false)}
+          onTouchStart={handleHeroTouchStart}
+          onTouchEnd={handleHeroTouchEnd}
+          onTouchCancel={() => {
+            heroTouchStart.current = null;
+            setCarouselInteractionPaused(false);
+          }}
           onKeyDown={(event) => {
             if (event.key === "ArrowLeft") moveSlide(-1);
             if (event.key === "ArrowRight") moveSlide(1);
@@ -606,11 +645,13 @@ export default function Home() {
           <div
             className="hero-slide-background"
             key={heroSlides[activeSlide].image}
-            style={{
-              backgroundImage: `url(${heroSlides[activeSlide].image})`,
-              backgroundPosition: heroSlides[activeSlide].position,
-              "--hero-mobile-image": `url(${heroSlides[activeSlide].mobileImage})`,
-            } as CSSProperties}
+            style={
+              {
+                backgroundImage: `url(${heroSlides[activeSlide].image})`,
+                backgroundPosition: heroSlides[activeSlide].position,
+                "--hero-mobile-image": `url(${heroSlides[activeSlide].mobileImage})`,
+              } as CSSProperties
+            }
             aria-hidden="true"
           />
           <div className="model-shell hero-inner carousel-only">
@@ -635,14 +676,22 @@ export default function Home() {
               <h1>{heroSlides[activeSlide].title}</h1>
               <p>{heroSlides[activeSlide].text}</p>
               {activeSlide === 0 ? (
-                <div className="netbox-app-stores hero-app-stores" aria-label="Baixar o Aplicativo Netbox">
+                <div
+                  className="netbox-app-stores hero-app-stores"
+                  aria-label="Baixar o Aplicativo Netbox"
+                >
                   <a
                     className="store-download"
                     href={APP_STORE}
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Baixar o Aplicativo Netbox na App Store"
-                    onClick={() => track("clicou_download_app", { origin: "carrossel", store: "app_store" })}
+                    onClick={() =>
+                      track("clicou_download_app", {
+                        origin: "carrossel",
+                        store: "app_store",
+                      })
+                    }
                   >
                     <FaApple className="store-icon apple" aria-hidden="true" />
                     <div className="store-text">
@@ -656,9 +705,17 @@ export default function Home() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Baixar o Aplicativo Netbox no Google Play"
-                    onClick={() => track("clicou_download_app", { origin: "carrossel", store: "google_play" })}
+                    onClick={() =>
+                      track("clicou_download_app", {
+                        origin: "carrossel",
+                        store: "google_play",
+                      })
+                    }
                   >
-                    <SiGoogleplay className="store-icon play" aria-hidden="true" />
+                    <SiGoogleplay
+                      className="store-icon play"
+                      aria-hidden="true"
+                    />
                     <div className="store-text">
                       <span>GET IT ON</span>
                       <strong>Google Play</strong>
@@ -671,7 +728,12 @@ export default function Home() {
                   href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
                   target="_blank"
                   rel="noreferrer"
-                  onClick={() => track("clicou_whatsapp", { origin: "carrossel", slide: heroSlides[activeSlide].title })}
+                  onClick={() =>
+                    track("clicou_whatsapp", {
+                      origin: "carrossel",
+                      slide: heroSlides[activeSlide].title,
+                    })
+                  }
                 >
                   Falar pelo WhatsApp <b aria-hidden="true">›</b>
                 </a>
@@ -684,7 +746,12 @@ export default function Home() {
               href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
               target="_blank"
               rel="noreferrer"
-              onClick={() => track("clicou_whatsapp", { origin: "carrossel_mobile", slide: heroSlides[activeSlide].title })}
+              onClick={() =>
+                track("clicou_whatsapp", {
+                  origin: "carrossel_mobile",
+                  slide: heroSlides[activeSlide].title,
+                })
+              }
             >
               Falar pelo WhatsApp <b aria-hidden="true">›</b>
             </a>
@@ -695,7 +762,7 @@ export default function Home() {
             onClick={() => moveSlide(-1)}
             aria-label="Mostrar destaque anterior"
           >
-            ‹
+            <IoChevronBack aria-hidden="true" />
           </button>
           <button
             className="hero-arrow right"
@@ -703,7 +770,7 @@ export default function Home() {
             onClick={() => moveSlide(1)}
             aria-label="Mostrar próximo destaque"
           >
-            ›
+            <IoChevronForward aria-hidden="true" />
           </button>
           <div className="carousel-controls">
             <span
@@ -821,7 +888,11 @@ export default function Home() {
                 {services.map((service) => (
                   <article key={service.title}>
                     <span className="service-thumb" aria-hidden="true">
-                      {service.icon}
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="service-thumb-image"
+                      />
                     </span>
                     <div>
                       <h3>{service.title}</h3>
@@ -1015,7 +1086,7 @@ export default function Home() {
                 aria-label="Fechar detalhes do serviço"
                 autoFocus
               >
-                ×
+                <IoClose aria-hidden="true" />
               </button>
               <div className="solution-modal-image">
                 <img src={activeSolutionData[3]} alt={activeSolutionData[4]} />
@@ -1029,7 +1100,7 @@ export default function Home() {
                   }
                   aria-label="Mostrar solução anterior"
                 >
-                  ‹
+                  <IoChevronBack aria-hidden="true" />
                 </button>
                 <button
                   className="solution-modal-arrow next"
@@ -1039,7 +1110,7 @@ export default function Home() {
                   }
                   aria-label="Mostrar próxima solução"
                 >
-                  ›
+                  <IoChevronForward aria-hidden="true" />
                 </button>
               </div>
               <div className="solution-modal-copy">
@@ -1087,8 +1158,10 @@ export default function Home() {
                   title={`Mapa da Netbox em ${city}`}
                   loading="eager"
                   referrerPolicy="no-referrer-when-downgrade"
+                  allow="fullscreen"
                   allowFullScreen
                 />
+                <span className="coverage-map-touch-hint" aria-hidden="true">Use dois dedos para mover e pinçar para ampliar</span>
               </div>
               <div className="coverage-location">
                 <div>
@@ -1129,7 +1202,7 @@ export default function Home() {
               className="model-button white"
               onClick={() => consultCoverage()}
             >
-              Falar com um consultor <b>→</b>
+              Falar com um consultor <b><ArrowIcon /></b>
             </button>
           </div>
         </section>
@@ -1163,15 +1236,19 @@ export default function Home() {
                 key={service.title}
                 onClick={() => handleService(service.title)}
               >
-                <span>{service.icon}</span>
+                <span className="footer-service-icon">
+                  <img src={service.image} alt="" />
+                </span>
+
                 <div>
-                  <strong>{service.title} →</strong>
+                  <strong>{service.title} <ArrowIcon /></strong>
                   <small>{service.text}</small>
                 </div>
               </button>
             ))}
+
             <a className="footer-pill" href="/nossos-servicos">
-              Todos os serviços →
+              Todos os serviços <ArrowIcon />
             </a>
           </div>
 
@@ -1182,7 +1259,7 @@ export default function Home() {
               conectar casas e empresas no Tocantins.
             </p>
             <a className="model-button yellow" href="/sobre">
-              Mais sobre a Netbox →
+              Mais sobre a Netbox <ArrowIcon />
             </a>
           </div>
 

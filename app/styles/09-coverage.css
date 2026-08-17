@@ -22,6 +22,7 @@
   border: 1px solid rgba(244,119,33,.22);
   border-radius: 50%;
   box-shadow: inset 0 0 0 70px rgba(244,119,33,.025), inset 0 0 0 145px rgba(244,119,33,.02);
+  pointer-events: none;
 }
 
 .coverage-conversion-layout {
@@ -72,12 +73,14 @@
 }
 
 .coverage-map {
+  position: relative;
   min-height: 230px;
   overflow: hidden;
-  border: 1px solid #e4ded9;
+  border: 3px solid #f76f003f;
   border-radius: 16px;
   background: #eee9e5;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+  touch-action: auto;
 }
 
 .coverage-map iframe {
@@ -85,7 +88,11 @@
   height: 400px;
   display: block;
   border: 0;
+  pointer-events: auto;
+  touch-action: auto;
 }
+
+.coverage-map-touch-hint { display: none; }
 
 .coverage-location {
   padding: 13px 14px;

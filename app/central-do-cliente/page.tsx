@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowIcon } from "../_components/ArrowIcon";
 import { BackButton } from "../_components/BackButton";
 import { NetboxFrame } from "../_components/NetboxFrame";
 
@@ -95,7 +96,7 @@ export default function CustomerCenterPage() {
         <div className="model-shell">
           <h2>Ainda precisa de ajuda?</h2>
           <p>Fale com a equipe Netbox pelo canal oficial de atendimento.</p>
-          <a className="model-button yellow" href="https://wa.me/5508006022732" target="_blank" rel="noreferrer">Falar no WhatsApp →</a>
+          <a className="model-button yellow" href="https://wa.me/5508006022732" target="_blank" rel="noreferrer">Falar no WhatsApp <ArrowIcon /></a>
         </div>
       </section>
     </NetboxFrame>
