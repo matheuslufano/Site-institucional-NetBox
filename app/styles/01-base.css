@@ -44,6 +44,18 @@ button { cursor: pointer; }
 
 :focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .model-shell { width: min(1180px, calc(100% - 42px)); margin-inline: auto; }
 
 .skip-link {

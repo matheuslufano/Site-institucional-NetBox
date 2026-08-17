@@ -29,6 +29,7 @@
     radial-gradient(circle at 50% -18%, rgba(255,179,87,.23), transparent 43%),
     linear-gradient(155deg, rgba(57,35,25,.96), rgba(24,17,14,.98));
   box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 35px 100px rgba(7,3,1,.48);
+  touch-action: pan-y;
 }
 
 .plans-modal-toolbar {
@@ -58,6 +59,9 @@
 }
 
 .plans-modal-close:hover { color: #2b180e; background: #fff; transform: rotate(5deg); }
+
+.plans-modal-close svg,
+.plans-carousel-arrow svg { width: 56%; height: 56%; display: block; }
 
 .plans-carousel {
   position: relative;

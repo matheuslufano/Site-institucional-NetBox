@@ -7,16 +7,27 @@ export function useScrollDirectionVisibility() {
 
   useEffect(() => {
     let lastPosition = window.scrollY;
+    let accumulatedDistance = 0;
+    let direction = 0;
     let frame = 0;
 
     const updateVisibility = () => {
       const currentPosition = window.scrollY;
       const distance = currentPosition - lastPosition;
+      const nextDirection = Math.sign(distance);
+
+      if (nextDirection && nextDirection !== direction) {
+        direction = nextDirection;
+        accumulatedDistance = 0;
+      }
+      accumulatedDistance += Math.abs(distance);
 
       if (currentPosition < 80) {
         setVisible(true);
-      } else if (Math.abs(distance) >= 6) {
-        setVisible(distance < 0);
+        accumulatedDistance = 0;
+      } else if (accumulatedDistance >= 28) {
+        setVisible(direction < 0);
+        accumulatedDistance = 0;
       }
 
       lastPosition = currentPosition;

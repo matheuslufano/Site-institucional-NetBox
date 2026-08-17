@@ -210,6 +210,7 @@
   border-radius: 32px;
   display: grid;
   place-items: center;
+  touch-action: pan-y;
 }
 
 .netbox-app-carousel-track {
@@ -217,6 +218,8 @@
   width: 300%;
   transition: transform .44s ease;
 }
+
+.netbox-app-carousel.is-swiping .netbox-app-carousel-track { transition: none; }
 
 .netbox-app-carousel-item {
   flex: 0 0 100%;
@@ -267,3 +270,39 @@
 .app-carousel-arrow.next {
   right: 1px;
 }
+
+.app-carousel-arrow svg { width: 55%; height: 55%; display: block; }
+
+.app-carousel-dots {
+  position: absolute;
+  z-index: 2;
+  bottom: 12px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.app-carousel-dots button {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.app-carousel-dots button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(36,36,36,.35);
+  transform: translate(-50%, -50%);
+  transition: width .2s ease, background-color .2s ease;
+}
+
+.app-carousel-dots button.active::before { width: 18px; background: var(--orange); }

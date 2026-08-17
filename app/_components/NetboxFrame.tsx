@@ -1,11 +1,15 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowIcon } from "./ArrowIcon";
 import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContactLinks } from "./MenuContactLinks";
 import { ThemeToggle } from "./ThemeToggle";
+import { useFocusTrap } from "./useFocusTrap";
 import { useScrollDirectionVisibility } from "./useScrollDirectionVisibility";
+import { useSwipeGesture } from "./useSwipeGesture";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -21,21 +25,25 @@ const navItems = [
 
 export function NetboxFrame({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const currentPath = usePathname();
   const navigationVisible = useScrollDirectionVisibility();
+  const menuSwipe = useSwipeGesture({
+    enabled: menuOpen,
+    onSwipeRight: () => setMenuOpen(false),
+  });
+
+  useFocusTrap(menuOpen, menuRef, menuButtonRef, () => setMenuOpen(false));
 
   useEffect(() => {
     if (!menuOpen) return;
     const previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     document.documentElement.classList.add("mobile-menu-open");
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
-    };
-    window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.documentElement.style.overflow = previousOverflow;
       document.documentElement.classList.remove("mobile-menu-open");
-      window.removeEventListener("keydown", closeOnEscape);
     };
   }, [menuOpen]);
 
@@ -47,16 +55,19 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
       <header
         className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}
       >
-        <a
+        <Link
           className="model-brand"
           href="/"
           aria-label="Netbox Internet — início"
         >
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
-        </a>
+        </Link>
         <nav
+          ref={menuRef}
           id="menu-principal"
           className={menuOpen ? "model-nav open" : "model-nav"}
+          style={{ "--menu-swipe-offset": `${Math.max(0, menuSwipe.offsetX)}px` } as CSSProperties}
+          {...menuSwipe.bind}
           aria-label="Navegação principal"
         >
           <div className="mobile-nav-heading" aria-hidden="true">
@@ -64,15 +75,16 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
             <small>Netbox Internet</small>
           </div>
           {navItems.map(([href, label]) => (
-            <a href={href} key={href} onClick={() => setMenuOpen(false)}>
+            <Link href={href} key={href} aria-current={currentPath === href ? "page" : undefined} onClick={() => setMenuOpen(false)}>
               {label}
-            </a>
+            </Link>
           ))}
           <MenuContactLinks />
         </nav>
         <div className="header-actions">
           <ThemeToggle />
           <button
+            ref={menuButtonRef}
             className={menuOpen ? "model-menu open" : "model-menu"}
             aria-controls="menu-principal"
             aria-expanded={menuOpen}
@@ -166,6 +178,8 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
 
       <a
         className={`model-whatsapp${navigationVisible ? " shortcuts-visible" : " is-collapsed"}`}
+        tabIndex={navigationVisible ? undefined : -1}
+        aria-hidden={!navigationVisible}
         href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo site da Netbox e gostaria de atendimento.")}`}
         target="_blank"
         rel="noreferrer"

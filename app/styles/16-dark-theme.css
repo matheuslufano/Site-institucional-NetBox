@@ -109,6 +109,14 @@ html.theme-dark .coverage-conversion-copy > p {
   color: #b3afab;
 }
 
+html.theme-dark .about-story-highlights span {
+  border-color: rgba(255,255,255,.11);
+  color: #ddd6d0;
+  background: rgba(255,255,255,.04);
+}
+
+html.theme-dark .about-story-detail { border-color: #111110; }
+
 html.theme-dark .reviews-grid small { color: #aaa39d; }
 
 html.theme-dark .netbox-app-section {
