@@ -32,7 +32,7 @@ export function ClientShortcuts({ home = false }: { home?: boolean }) {
     <div className={`client-shortcuts${visible ? "" : " is-hidden"}`} aria-hidden={!visible}>
       <a tabIndex={hiddenTabIndex} className={itemClass("billing")} href={SECOND_COPY} target="_blank" rel="noreferrer" onClick={() => setSelected("billing")}>
         <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5h8l3 3V20.5H7z" /><path d="M15 3.5v4h3M10 11h5M10 14.5h5" /></svg></span>
-        <span className="shortcut-label">2ª via</span>
+        <span className="shortcut-label">Boleto</span>
       </a>
       <a tabIndex={hiddenTabIndex} className={itemClass("services")} href={home ? "#servicos" : "/nossos-servicos"} onClick={() => setSelected("services")}>
         <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 16.5a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0M11 9.5a2 2 0 0 1 2 0" /><circle cx="12" cy="18.5" r="1" /></svg></span>

@@ -3,6 +3,7 @@
 import {
   type CSSProperties,
   FormEvent,
+  type TransitionEvent,
   useEffect,
   useRef,
   useState,
@@ -471,6 +472,21 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const preloadedAppScreens = appScreens.map((src) => {
+      const image = new Image();
+      image.src = src;
+      return image;
+    });
+
+    return () => {
+      preloadedAppScreens.forEach((image) => {
+        image.onload = null;
+        image.onerror = null;
+      });
+    };
+  }, []);
+
+  useEffect(() => {
     if (!menuOpen) return;
     const previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
@@ -552,10 +568,52 @@ export default function Home() {
     if (appCarouselPaused || reduceMotion) return;
     const timer = window.setInterval(() => {
       setAppCarouselResetting(false);
-      setAppCarouselIndex((current) => current + 1);
+      setAppCarouselIndex((current) => {
+        if (current <= 0 || current >= appScreens.length + 1) return current;
+        return current + 1;
+      });
     }, 6500);
     return () => window.clearInterval(timer);
   }, [appCarouselPaused]);
+
+  useEffect(() => {
+    let resetIndex: number | null = null;
+    let resetDelay = 480;
+
+    if (appCarouselIndex === 0) resetIndex = appScreens.length;
+    if (appCarouselIndex === appScreens.length + 1) resetIndex = 1;
+    if (
+      appCarouselIndex < 0 ||
+      appCarouselIndex > appScreens.length + 1
+    ) {
+      resetIndex = 1;
+      resetDelay = 0;
+    }
+    if (resetIndex === null) return;
+
+    const resetTimer = window.setTimeout(() => {
+      setAppCarouselResetting(true);
+      setAppCarouselIndex(resetIndex);
+    }, resetDelay);
+
+    return () => window.clearTimeout(resetTimer);
+  }, [appCarouselIndex]);
+
+  useEffect(() => {
+    if (!appCarouselResetting) return;
+
+    let secondFrame = 0;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        setAppCarouselResetting(false);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      if (secondFrame) window.cancelAnimationFrame(secondFrame);
+    };
+  }, [appCarouselResetting]);
 
   function moveSlide(direction: number) {
     setActiveSlide(
@@ -572,7 +630,12 @@ export default function Home() {
     });
   }
 
-  function finishAppCarouselTransition() {
+  function finishAppCarouselTransition(
+    event: TransitionEvent<HTMLDivElement>,
+  ) {
+    if (event.target !== event.currentTarget || event.propertyName !== "transform")
+      return;
+
     let resetIndex: number | null = null;
     if (appCarouselIndex === 0) resetIndex = appScreens.length;
     if (appCarouselIndex === appScreens.length + 1) resetIndex = 1;
@@ -580,9 +643,6 @@ export default function Home() {
 
     setAppCarouselResetting(true);
     setAppCarouselIndex(resetIndex);
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => setAppCarouselResetting(false));
-    });
   }
 
   function movePlan(direction: number) {
@@ -1149,7 +1209,8 @@ export default function Home() {
                 <div
                   className="netbox-app-carousel-track"
                   style={{
-                    transform: `translateX(calc(-${appCarouselIndex * 100}% + ${appSwipe.offsetX}px))`,
+                    width: `${appCarouselSlides.length * 100}%`,
+                    transform: `translateX(calc(-${appCarouselIndex * (100 / appCarouselSlides.length)}% + ${appSwipe.offsetX}px))`,
                   }}
                   onTransitionEnd={finishAppCarouselTransition}
                 >
@@ -1162,11 +1223,16 @@ export default function Home() {
                         className={`netbox-app-carousel-item ${index === appCarouselIndex ? "active" : ""}`}
                         role="tabpanel"
                         aria-hidden={index !== appCarouselIndex}
+                        style={{
+                          flexBasis: `${100 / appCarouselSlides.length}%`,
+                          width: `${100 / appCarouselSlides.length}%`,
+                        }}
                       >
                         <img
                           src={screen}
                           alt={`Tela do aplicativo Netbox ${logicalIndex + 1}`}
-                          loading="lazy"
+                          loading="eager"
+                          fetchPriority={logicalIndex === 0 ? "high" : "auto"}
                           decoding="async"
                         />
                       </div>
