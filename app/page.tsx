@@ -15,7 +15,17 @@ import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVi
 import { useFocusTrap } from "./_components/useFocusTrap";
 import { useSwipeGesture } from "./_components/useSwipeGesture";
 import { FaApple } from "react-icons/fa";
-import { IoBookOutline, IoChevronBack, IoChevronForward, IoClose, IoPause, IoPlay } from "react-icons/io5";
+import {
+  IoBookOutline,
+  IoCallOutline,
+  IoChevronBack,
+  IoChevronForward,
+  IoClose,
+  IoDocumentTextOutline,
+  IoHeadsetOutline,
+  IoPause,
+  IoPlay,
+} from "react-icons/io5";
 import { SiDeezer, SiGoogleplay, SiHbomax } from "react-icons/si";
 
 const WHATSAPP = "5508006022732";
@@ -28,21 +38,59 @@ type PlanPlatform = { name: string; tone: string };
 
 function PlatformLogo({ platform }: { platform: PlanPlatform }) {
   if (platform.tone === "netbox") {
-    return <><img src="/netbox-app-icon.png" alt="" /><span className="sr-only">{platform.name}</span></>;
+    return (
+      <>
+        <img src="/netbox-app-icon.png" alt="" />
+        <span className="sr-only">{platform.name}</span>
+      </>
+    );
   }
   if (platform.tone === "deezer") {
-    return <><SiDeezer aria-hidden="true" /><span className="sr-only">{platform.name}</span></>;
+    return (
+      <>
+        <SiDeezer aria-hidden="true" />
+        <span className="sr-only">{platform.name}</span>
+      </>
+    );
   }
   if (platform.tone === "hbo") {
-    return <><SiHbomax aria-hidden="true" /><span className="sr-only">{platform.name}</span></>;
+    return (
+      <>
+        <SiHbomax aria-hidden="true" />
+        <span className="sr-only">{platform.name}</span>
+      </>
+    );
   }
   if (platform.tone === "ubook") {
-    return <span className="platform-wordmark ubook-wordmark"><IoBookOutline aria-hidden="true" /><b>ubook</b><small>GO</small><span className="sr-only">{platform.name}</span></span>;
+    return (
+      <span className="platform-wordmark ubook-wordmark">
+        <IoBookOutline aria-hidden="true" />
+        <b>ubook</b>
+        <small>GO</small>
+        <span className="sr-only">{platform.name}</span>
+      </span>
+    );
   }
   if (platform.tone === "prime") {
-    return <span className="platform-wordmark prime-wordmark"><b>prime</b><small>video</small><svg viewBox="0 0 36 8" aria-hidden="true"><path d="M2 1.5c8 5.5 20 6 30 .7" /><path d="m28 1 4 1-2 3" /></svg><span className="sr-only">{platform.name}</span></span>;
+    return (
+      <span className="platform-wordmark prime-wordmark">
+        <b>prime</b>
+        <small>video</small>
+        <svg viewBox="0 0 36 8" aria-hidden="true">
+          <path d="M2 1.5c8 5.5 20 6 30 .7" />
+          <path d="m28 1 4 1-2 3" />
+        </svg>
+        <span className="sr-only">{platform.name}</span>
+      </span>
+    );
   }
-  return <span className="platform-wordmark disney-wordmark"><b>Disney</b><small>+</small><span className="sr-only">{platform.name}</span></span>;
+  return (
+    <span className="platform-wordmark disney-wordmark">
+      <b>Disney</b>
+      <small>+</small>
+      <span className="sr-only">{platform.name}</span>
+    </span>
+  );
 }
 
 const storeAddresses: Record<string, string> = {
@@ -341,7 +389,8 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [activeAppSlide, setActiveAppSlide] = useState(0);
+  const [appCarouselIndex, setAppCarouselIndex] = useState(1);
+  const [appCarouselResetting, setAppCarouselResetting] = useState(false);
   const [appCarouselPaused, setAppCarouselPaused] = useState(false);
   const [activeSolution, setActiveSolution] = useState<number | null>(null);
   const [plansOpen, setPlansOpen] = useState(false);
@@ -366,20 +415,56 @@ export default function Home() {
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedMapLocation)}`;
   const activeSolutionData =
     activeSolution === null ? null : gallery[activeSolution];
+  const appCarouselSlides = [
+    appScreens[appScreens.length - 1],
+    ...appScreens,
+    appScreens[0],
+  ];
+  const activeAppSlide =
+    (appCarouselIndex - 1 + appScreens.length) % appScreens.length;
 
-  const heroSwipe = useSwipeGesture({ onSwipeLeft: () => moveSlide(1), onSwipeRight: () => moveSlide(-1) });
-  const appSwipe = useSwipeGesture({ onSwipeLeft: () => moveAppSlide(1), onSwipeRight: () => moveAppSlide(-1) });
+  const heroSwipe = useSwipeGesture({
+    onSwipeLeft: () => moveSlide(1),
+    onSwipeRight: () => moveSlide(-1),
+  });
+  const appSwipe = useSwipeGesture({
+    onSwipeLeft: () => moveAppSlide(1),
+    onSwipeRight: () => moveAppSlide(-1),
+  });
   const solutionSwipe = useSwipeGesture({
-    onSwipeLeft: () => setActiveSolution((current) => current === null ? null : (current + 1) % gallery.length),
-    onSwipeRight: () => setActiveSolution((current) => current === null ? null : (current - 1 + gallery.length) % gallery.length),
+    onSwipeLeft: () =>
+      setActiveSolution((current) =>
+        current === null ? null : (current + 1) % gallery.length,
+      ),
+    onSwipeRight: () =>
+      setActiveSolution((current) =>
+        current === null
+          ? null
+          : (current - 1 + gallery.length) % gallery.length,
+      ),
     onSwipeDown: () => setActiveSolution(null),
   });
-  const planSwipe = useSwipeGesture({ onSwipeLeft: () => movePlan(1), onSwipeRight: () => movePlan(-1), onSwipeDown: () => setPlansOpen(false) });
-  const menuSwipe = useSwipeGesture({ onSwipeRight: () => setMenuOpen(false), threshold: 56, enabled: menuOpen });
+  const planSwipe = useSwipeGesture({
+    onSwipeLeft: () => movePlan(1),
+    onSwipeRight: () => movePlan(-1),
+    onSwipeDown: () => setPlansOpen(false),
+  });
+  const menuSwipe = useSwipeGesture({
+    onSwipeRight: () => setMenuOpen(false),
+    threshold: 56,
+    enabled: menuOpen,
+  });
 
   useFocusTrap(menuOpen, menuRef, menuButtonRef, () => setMenuOpen(false));
-  useFocusTrap(activeSolution !== null, solutionModalRef, solutionTriggerRef, () => setActiveSolution(null));
-  useFocusTrap(plansOpen, plansModalRef, plansTriggerRef, () => setPlansOpen(false));
+  useFocusTrap(
+    activeSolution !== null,
+    solutionModalRef,
+    solutionTriggerRef,
+    () => setActiveSolution(null),
+  );
+  useFocusTrap(plansOpen, plansModalRef, plansTriggerRef, () =>
+    setPlansOpen(false),
+  );
 
   useEffect(() => {
     setCookieOpen(!localStorage.getItem("netbox_cookie_consent"));
@@ -447,7 +532,13 @@ export default function Home() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (carouselPaused || carouselInteractionPaused || heroSwipe.isDragging || reduceMotion) return;
+    if (
+      carouselPaused ||
+      carouselInteractionPaused ||
+      heroSwipe.isDragging ||
+      reduceMotion
+    )
+      return;
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length);
     }, 6000);
@@ -460,7 +551,8 @@ export default function Home() {
     ).matches;
     if (appCarouselPaused || reduceMotion) return;
     const timer = window.setInterval(() => {
-      setActiveAppSlide((current) => (current + 1) % appScreens.length);
+      setAppCarouselResetting(false);
+      setAppCarouselIndex((current) => current + 1);
     }, 6500);
     return () => window.clearInterval(timer);
   }, [appCarouselPaused]);
@@ -473,10 +565,24 @@ export default function Home() {
   }
 
   function moveAppSlide(direction: number) {
-    setActiveAppSlide(
-      (current) =>
-        (current + direction + appScreens.length) % appScreens.length,
-    );
+    setAppCarouselResetting(false);
+    setAppCarouselIndex((current) => {
+      if (current === 0 || current === appScreens.length + 1) return current;
+      return current + direction;
+    });
+  }
+
+  function finishAppCarouselTransition() {
+    let resetIndex: number | null = null;
+    if (appCarouselIndex === 0) resetIndex = appScreens.length;
+    if (appCarouselIndex === appScreens.length + 1) resetIndex = 1;
+    if (resetIndex === null) return;
+
+    setAppCarouselResetting(true);
+    setAppCarouselIndex(resetIndex);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setAppCarouselResetting(false));
+    });
   }
 
   function movePlan(direction: number) {
@@ -488,7 +594,8 @@ export default function Home() {
   }
 
   function getPlanSlideClass(index: number) {
-    const distance = (index - activePlan + residentialPlans.length) % residentialPlans.length;
+    const distance =
+      (index - activePlan + residentialPlans.length) % residentialPlans.length;
     if (distance === 0) return "is-active";
     if (distance === 1) return "is-next";
     if (distance === residentialPlans.length - 1) return "is-previous";
@@ -496,7 +603,10 @@ export default function Home() {
   }
 
   function openResidentialPlans() {
-    plansTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    plansTriggerRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     setActivePlan(0);
     setPlansOpen(true);
     track("abriu_planos_residenciais", { city, origin: "servicos" });
@@ -591,7 +701,11 @@ export default function Home() {
           id="menu-principal"
           className={menuOpen ? "model-nav open" : "model-nav"}
           aria-label="Navegação principal"
-          style={{ "--menu-swipe-offset": `${Math.max(0, menuSwipe.offsetX)}px` } as CSSProperties}
+          style={
+            {
+              "--menu-swipe-offset": `${Math.max(0, menuSwipe.offsetX)}px`,
+            } as CSSProperties
+          }
           {...menuSwipe.bind}
         >
           <div className="mobile-nav-heading" aria-hidden="true">
@@ -609,9 +723,6 @@ export default function Home() {
           </a>
           <a href="/nossa-estrutura" onClick={() => setMenuOpen(false)}>
             Nossa estrutura
-          </a>
-          <a href="/depoimentos" onClick={() => setMenuOpen(false)}>
-            Depoimentos
           </a>
           <a href="/contatos" onClick={() => setMenuOpen(false)}>
             Contatos
@@ -654,7 +765,11 @@ export default function Home() {
           tabIndex={0}
           onMouseEnter={() => setCarouselInteractionPaused(true)}
           onMouseLeave={() => setCarouselInteractionPaused(false)}
-          style={{ "--hero-swipe-offset": `${heroSwipe.offsetX * .28}px` } as CSSProperties}
+          style={
+            {
+              "--hero-swipe-offset": `${heroSwipe.offsetX * 0.28}px`,
+            } as CSSProperties
+          }
           {...heroSwipe.bind}
           onKeyDown={(event) => {
             if (event.key === "ArrowLeft") moveSlide(-1);
@@ -832,9 +947,14 @@ export default function Home() {
           </div>
         </section>
 
-        <aside className="home-contact-strip" aria-label="Canais rápidos de atendimento">
+        <aside
+          className="home-contact-strip"
+          aria-label="Canais rápidos de atendimento"
+        >
           <div className="model-shell">
-            <small className="home-contact-strip-title">Canais de atendimento</small>
+            <small className="home-contact-strip-title">
+              Canais de atendimento
+            </small>
             <MenuContactLinks />
           </div>
         </aside>
@@ -933,9 +1053,37 @@ export default function Home() {
                   </article>
                 ))}
               </div>
-              <a className="model-button yellow" href="#solucoes">
-                Todas as soluções <b>»</b>
-              </a>
+              <div className="services-actions">
+                <a
+                  className="model-button service-glass-button"
+                  href="https://netboxfibra.sgp.net.br/accounts/central/login"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="service-action-icon" aria-hidden="true">
+                    <IoDocumentTextOutline />
+                  </span>
+                  <span>2ª Via do Boleto</span>
+                </a>
+                <a
+                  className="model-button service-glass-button"
+                  href="https://site-institucional-net-box-chi.vercel.app/contatos"
+                >
+                  <span className="service-action-icon" aria-hidden="true">
+                    <IoHeadsetOutline />
+                  </span>
+                  <span>Suporte</span>
+                </a>
+                <a
+                  className="model-button service-glass-button"
+                  href="/contatos"
+                >
+                  <span className="service-action-icon" aria-hidden="true">
+                    <IoCallOutline />
+                  </span>
+                  <span>Contatos</span>
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -993,30 +1141,37 @@ export default function Home() {
             </div>
             <div className="netbox-app-visual">
               <div
-                className={`netbox-app-carousel${appSwipe.isDragging ? " is-swiping" : ""}`}
+                className={`netbox-app-carousel${appSwipe.isDragging ? " is-swiping" : ""}${appCarouselResetting ? " is-resetting" : ""}`}
                 onMouseEnter={() => setAppCarouselPaused(true)}
                 onMouseLeave={() => setAppCarouselPaused(false)}
                 {...appSwipe.bind}
               >
                 <div
                   className="netbox-app-carousel-track"
-                  style={{ transform: `translateX(calc(-${activeAppSlide * 100}% + ${appSwipe.offsetX}px))` }}
+                  style={{
+                    transform: `translateX(calc(-${appCarouselIndex * 100}% + ${appSwipe.offsetX}px))`,
+                  }}
+                  onTransitionEnd={finishAppCarouselTransition}
                 >
-                  {appScreens.map((screen, index) => (
-                    <div
-                      key={`${screen}-${index}`}
-                      className={`netbox-app-carousel-item ${index === activeAppSlide ? "active" : ""}`}
-                      role="tabpanel"
-                      aria-hidden={index !== activeAppSlide}
-                    >
-                      <img
-                        src={screen}
-                        alt={`Tela do aplicativo Netbox ${index + 1}`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  ))}
+                  {appCarouselSlides.map((screen, index) => {
+                    const logicalIndex =
+                      (index - 1 + appScreens.length) % appScreens.length;
+                    return (
+                      <div
+                        key={`${screen}-${index}`}
+                        className={`netbox-app-carousel-item ${index === appCarouselIndex ? "active" : ""}`}
+                        role="tabpanel"
+                        aria-hidden={index !== appCarouselIndex}
+                      >
+                        <img
+                          src={screen}
+                          alt={`Tela do aplicativo Netbox ${logicalIndex + 1}`}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
                 <button
                   type="button"
@@ -1045,7 +1200,10 @@ export default function Home() {
                     key={index}
                     type="button"
                     className={index === activeAppSlide ? "active" : ""}
-                    onClick={() => setActiveAppSlide(index)}
+                    onClick={() => {
+                      setAppCarouselResetting(false);
+                      setAppCarouselIndex(index + 1);
+                    }}
                     aria-label={`Mostrar tela ${index + 1}`}
                     role="tab"
                     aria-selected={index === activeAppSlide}
@@ -1110,7 +1268,9 @@ export default function Home() {
               role="dialog"
               aria-modal="true"
               aria-labelledby="solution-modal-title"
-              style={{ translate: `${solutionSwipe.offsetX * .2}px ${Math.max(0, solutionSwipe.offsetY) * .2}px` }}
+              style={{
+                translate: `${solutionSwipe.offsetX * 0.2}px ${Math.max(0, solutionSwipe.offsetY) * 0.2}px`,
+              }}
               {...solutionSwipe.bind}
             >
               <button
@@ -1195,7 +1355,9 @@ export default function Home() {
                   allow="fullscreen"
                   allowFullScreen
                 />
-                <span className="coverage-map-touch-hint" aria-hidden="true">Arraste com um dedo para mover e use a pinça para ampliar</span>
+                <span className="coverage-map-touch-hint" aria-hidden="true">
+                  Arraste com um dedo para mover e use a pinça para ampliar
+                </span>
               </div>
               <div className="coverage-location">
                 <div>
@@ -1236,7 +1398,10 @@ export default function Home() {
               className="model-button white"
               onClick={() => consultCoverage()}
             >
-              Falar com um consultor <b><ArrowIcon /></b>
+              Falar com um consultor{" "}
+              <b>
+                <ArrowIcon />
+              </b>
             </button>
           </div>
         </section>
@@ -1276,16 +1441,25 @@ export default function Home() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="plans-modal-title"
-            style={{ translate: `${planSwipe.offsetX * .15}px ${Math.max(0, planSwipe.offsetY) * .15}px` }}
+            style={{
+              translate: `${planSwipe.offsetX * 0.15}px ${Math.max(0, planSwipe.offsetY) * 0.15}px`,
+            }}
             {...planSwipe.bind}
           >
             <div className="plans-modal-toolbar">
-              <button className="plans-modal-close" type="button" onClick={() => setPlansOpen(false)} aria-label="Fechar planos">
+              <button
+                className="plans-modal-close"
+                type="button"
+                onClick={() => setPlansOpen(false)}
+                aria-label="Fechar planos"
+              >
                 <IoClose aria-hidden="true" />
               </button>
             </div>
             <div className="plans-carousel">
-              <h2 id="plans-modal-title" className="sr-only">Planos residenciais Netbox</h2>
+              <h2 id="plans-modal-title" className="sr-only">
+                Planos residenciais Netbox
+              </h2>
               <div className="plans-carousel-viewport">
                 <div className="plans-carousel-track">
                   {residentialPlans.map((plan, index) => {
@@ -1301,35 +1475,104 @@ export default function Home() {
                         }}
                       >
                         <div className="residential-plan-card">
-                          <span className="residential-plan-kicker">Plano residencial</span>
+                          <span className="residential-plan-kicker">
+                            Plano residencial
+                          </span>
                           <h3>{plan.name}</h3>
                           <ul className="residential-plan-features">
-                            {plan.features.map((feature) => <li key={feature}><span>✓</span>{feature}</li>)}
+                            {plan.features.map((feature) => (
+                              <li key={feature}>
+                                <span>✓</span>
+                                {feature}
+                              </li>
+                            ))}
                           </ul>
                           <div className="residential-plan-subscriptions">
                             <strong>Serviços inclusos</strong>
                             <div className="plan-platforms">
-                              {plan.platforms.map((platform) => <span key={platform.name} className={`plan-platform brand-${platform.tone}`} title={platform.name} aria-label={platform.name}><PlatformLogo platform={platform} /></span>)}
+                              {plan.platforms.map((platform) => (
+                                <span
+                                  key={platform.name}
+                                  className={`plan-platform brand-${platform.tone}`}
+                                  title={platform.name}
+                                  aria-label={platform.name}
+                                >
+                                  <PlatformLogo platform={platform} />
+                                </span>
+                              ))}
                             </div>
-                            {plan.choiceNote && <small>{plan.choiceNote}</small>}
-                            {plan.allIncluded && <small>Todos os serviços apresentados estão inclusos.</small>}
-                            {plan.bonus && <b className="residential-plan-bonus">{plan.bonus}</b>}
+                            {plan.choiceNote && (
+                              <small>{plan.choiceNote}</small>
+                            )}
+                            {plan.allIncluded && (
+                              <small>
+                                Todos os serviços apresentados estão inclusos.
+                              </small>
+                            )}
+                            {plan.bonus && (
+                              <b className="residential-plan-bonus">
+                                {plan.bonus}
+                              </b>
+                            )}
                           </div>
-                          <div className="residential-plan-notes"><small>Consulte disponibilidade, velocidade e condições para seu endereço.</small></div>
-                          <button className="residential-plan-cta" type="button" tabIndex={index === activePlan ? 0 : -1} onClick={() => contactPlan(plan.name)}>Consultar este plano</button>
+                          <div className="residential-plan-notes">
+                            <small>
+                              Consulte disponibilidade, velocidade e condições
+                              para seu endereço.
+                            </small>
+                          </div>
+                          <button
+                            className="residential-plan-cta"
+                            type="button"
+                            tabIndex={index === activePlan ? 0 : -1}
+                            onClick={() => contactPlan(plan.name)}
+                          >
+                            Consultar este plano
+                          </button>
                         </div>
                       </article>
                     );
                   })}
                 </div>
               </div>
-              <button className="plans-carousel-arrow previous" type="button" onClick={() => movePlan(-1)} aria-label="Plano anterior"><IoChevronBack aria-hidden="true" /></button>
-              <button className="plans-carousel-arrow next" type="button" onClick={() => movePlan(1)} aria-label="Próximo plano"><IoChevronForward aria-hidden="true" /></button>
+              <button
+                className="plans-carousel-arrow previous"
+                type="button"
+                onClick={() => movePlan(-1)}
+                aria-label="Plano anterior"
+              >
+                <IoChevronBack aria-hidden="true" />
+              </button>
+              <button
+                className="plans-carousel-arrow next"
+                type="button"
+                onClick={() => movePlan(1)}
+                aria-label="Próximo plano"
+              >
+                <IoChevronForward aria-hidden="true" />
+              </button>
             </div>
             <div className="plans-carousel-footer">
-              <span>{String(activePlan + 1).padStart(2, "0")} / {String(residentialPlans.length).padStart(2, "0")}</span>
-              <div className="plans-carousel-dots" role="tablist" aria-label="Escolher plano">
-                {residentialPlans.map((plan, index) => <button key={plan.name} type="button" className={index === activePlan ? "active" : ""} onClick={() => setActivePlan(index)} role="tab" aria-selected={index === activePlan} aria-label={`Mostrar plano ${plan.name}`} />)}
+              <span>
+                {String(activePlan + 1).padStart(2, "0")} /{" "}
+                {String(residentialPlans.length).padStart(2, "0")}
+              </span>
+              <div
+                className="plans-carousel-dots"
+                role="tablist"
+                aria-label="Escolher plano"
+              >
+                {residentialPlans.map((plan, index) => (
+                  <button
+                    key={plan.name}
+                    type="button"
+                    className={index === activePlan ? "active" : ""}
+                    onClick={() => setActivePlan(index)}
+                    role="tab"
+                    aria-selected={index === activePlan}
+                    aria-label={`Mostrar plano ${plan.name}`}
+                  />
+                ))}
               </div>
             </div>
           </section>
@@ -1349,7 +1592,9 @@ export default function Home() {
                 </span>
 
                 <div>
-                  <strong>{service.title} <ArrowIcon /></strong>
+                  <strong>
+                    {service.title} <ArrowIcon />
+                  </strong>
                   <small>{service.text}</small>
                 </div>
               </button>

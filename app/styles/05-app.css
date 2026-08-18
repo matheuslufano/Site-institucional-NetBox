@@ -221,11 +221,12 @@
 
 .netbox-app-carousel-track {
   display: flex;
-  width: 300%;
+  width: 100%;
   transition: transform .44s ease;
 }
 
-.netbox-app-carousel.is-swiping .netbox-app-carousel-track { transition: none; }
+.netbox-app-carousel.is-swiping .netbox-app-carousel-track,
+.netbox-app-carousel.is-resetting .netbox-app-carousel-track { transition: none; }
 
 .netbox-app-carousel-item {
   flex: 0 0 100%;

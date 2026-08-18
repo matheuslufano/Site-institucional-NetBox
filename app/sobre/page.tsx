@@ -16,14 +16,9 @@ export default function AboutPage() {
         <div className="model-shell about-hero-layout">
           <div className="about-hero-copy">
             <div className="inner-hero-nav"><BackButton /><span>Início / Sobre nós</span></div>
-            <small>Internet de verdade</small>
             <h1>Conexão regional feita para estar perto.</h1>
             <p>Conheça os princípios que orientam a Netbox e as pessoas que fazem a conexão acontecer no Tocantins.</p>
-            <div className="about-hero-tags" aria-label="Destaques da Netbox">
-              <span>Fibra óptica</span>
-              <span>Atendimento regional</span>
-              <span>Presença local</span>
-            </div>
+
           </div>
           <figure className="about-hero-media">
             <Image src="/sobre-equipe-netbox.png" alt="Equipe Netbox reunida em frente à unidade" fill priority unoptimized sizes="(max-width: 760px) calc(100vw - 32px), 44vw" />
@@ -37,7 +32,6 @@ export default function AboutPage() {
           <div className="about-story-visual">
             <figure className="about-story-main">
               <Image src="/sobre-loja-netbox.png" alt="Fachada de uma unidade Netbox" fill unoptimized sizes="(max-width: 760px) calc(100vw - 32px), 42vw" />
-              <figcaption>Presença física e atendimento próximo</figcaption>
             </figure>
             <figure className="about-story-detail">
               <Image src="/sobre-central-atendimento.webp" alt="Central de atendimento e infraestrutura interna da Netbox" fill unoptimized sizes="(max-width: 760px) 42vw, 20vw" />

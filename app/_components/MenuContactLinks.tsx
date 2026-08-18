@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 
 const WHATSAPP = "5508006022732";
+const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
 
-type IconName = "whatsapp" | "facebook" | "mail" | "phone";
+type IconName = "whatsapp" | "facebook" | "mail" | "phone" | "document";
 
 function ContactIcon({ name }: { name: IconName }) {
   const paths: Record<IconName, ReactNode> = {
@@ -21,6 +22,12 @@ function ContactIcon({ name }: { name: IconName }) {
       </>
     ),
     phone: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92Z" />,
+    document: (
+      <>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6M8 13h8M8 17h6" />
+      </>
+    ),
   };
 
   return (
@@ -37,6 +44,10 @@ export function MenuContactLinks() {
       <a href="https://www.facebook.com/Netboxinternetfibra/" target="_blank" rel="noreferrer" aria-label="Facebook da Netbox" title="Facebook"><ContactIcon name="facebook" /></a>
       <a href="mailto:atendimento@netbox.net.br" aria-label="Enviar e-mail para a Netbox" title="E-mail"><ContactIcon name="mail" /></a>
       <a href="tel:08006022732" aria-label="Ligar para a Netbox no 0800 602 2732" title="Telefone"><ContactIcon name="phone" /></a>
+      <a className="menu-boleto-link" href={SECOND_COPY} target="_blank" rel="noreferrer" aria-label="Acessar boleto" title="Boleto">
+        <ContactIcon name="document" />
+        <span>Boleto</span>
+      </a>
     </div>
   );
 }
