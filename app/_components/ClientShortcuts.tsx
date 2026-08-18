@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LiaToolsSolid } from "react-icons/lia";
 import { useScrollDirectionVisibility } from "./useScrollDirectionVisibility";
 
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -11,18 +12,23 @@ export function ClientShortcuts({ home = false }: { home?: boolean }) {
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
-    const syncSelection = () => {
+    const syncSelection = (initialLoad = false) => {
       const { pathname, hash } = window.location;
 
       if (pathname === "/central-do-cliente") setSelected("central");
-      else if (pathname === "/nossos-servicos" || (home && hash === "#servicos")) setSelected("services");
+      else if (
+        pathname === "/nossos-servicos" ||
+        (!initialLoad && home && hash === "#servicos")
+      )
+        setSelected("services");
       else if (pathname === "/" && hash === "#consulta") setSelected("coverage");
       else setSelected(null);
     };
 
-    syncSelection();
-    window.addEventListener("hashchange", syncSelection);
-    return () => window.removeEventListener("hashchange", syncSelection);
+    syncSelection(true);
+    const handleHashChange = () => syncSelection(false);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, [home]);
 
   const itemClass = (item: string) => (selected === item ? "is-selected" : undefined);
@@ -35,16 +41,16 @@ export function ClientShortcuts({ home = false }: { home?: boolean }) {
         <span className="shortcut-label">Boleto</span>
       </a>
       <a tabIndex={hiddenTabIndex} className={itemClass("services")} href={home ? "#servicos" : "/nossos-servicos"} onClick={() => setSelected("services")}>
-        <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 16.5a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0M11 9.5a2 2 0 0 1 2 0" /><circle cx="12" cy="18.5" r="1" /></svg></span>
+        <span className="shortcut-icon" aria-hidden="true"><LiaToolsSolid className="shortcut-solid-icon" /></span>
         <span className="shortcut-label">Serviços</span>
       </a>
       <a tabIndex={hiddenTabIndex} className={itemClass("coverage")} href="/#consulta" onClick={() => setSelected("coverage")}>
         <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11z" /><circle cx="12" cy="10" r="2.2" /></svg></span>
-        <span className="shortcut-label">Cobertura</span>
+        <span className="shortcut-label">Lojas</span>
       </a>
       <a tabIndex={hiddenTabIndex} className={itemClass("central")} href="/central-do-cliente" onClick={() => setSelected("central")}>
         <span className="shortcut-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3" /><path d="M6.5 19a5.5 5.5 0 0 1 11 0M4 3.5h16v17H4z" /></svg></span>
-        <span className="shortcut-label">Central</span>
+        <span className="shortcut-label">Ajuda</span>
       </a>
       <a tabIndex={hiddenTabIndex} className={itemClass("whatsapp")} href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" onClick={() => setSelected("whatsapp")}>
         <span className="shortcut-icon whatsapp-icon" aria-hidden="true">
