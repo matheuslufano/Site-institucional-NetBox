@@ -2,23 +2,20 @@
 
 import { useEffect, useState } from "react";
 
-const THEME_KEY = "netbox_theme";
-
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setDark(document.documentElement.classList.contains("theme-dark"));
-    });
-    return () => window.cancelAnimationFrame(frame);
+    document.documentElement.classList.remove("theme-dark");
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute("content", "#f4511e");
   }, []);
 
   function toggleTheme() {
     const nextDark = !dark;
     setDark(nextDark);
     document.documentElement.classList.toggle("theme-dark", nextDark);
-    localStorage.setItem(THEME_KEY, nextDark ? "dark" : "light");
 
     const themeColor = document.querySelector<HTMLMetaElement>(
       'meta[name="theme-color"]',
