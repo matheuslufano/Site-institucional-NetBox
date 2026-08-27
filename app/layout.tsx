@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Sora } from "next/font/google";
+import { AffiliateWhatsAppModal } from "./_components/AffiliateWhatsAppModal";
 import "./globals.css";
 
 const manrope = Manrope({ variable: "--font-body", subsets: ["latin"] });
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${manrope.variable} ${sora.variable}`}>
         {children}
+        <AffiliateWhatsAppModal />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

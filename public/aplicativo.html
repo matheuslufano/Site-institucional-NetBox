@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecionamento</title>
+    <script type="text/javascript">
+        function redirectUser() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android/i.test(userAgent)) {
+                window.location.href = "https://play.google.com/store/apps/details?id=br.com.appdoprovedor.netbox&pcampaignid=web_share";
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "https://apps.apple.com/us/app/netbox/id1574550280";
+            } else {
+                // Se não for iOS ou Android, redirecionar para uma página genérica
+                window.location.href = "/";
+            }
+        }
+    </script>
+</head>
+<body onload="redirectUser()">
+    <p>Redirecionando...</p>
+</body>
+</html>
+
+
