@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { ArrowIcon } from "./ArrowIcon";
+import { openAffiliateAwareWhatsApp } from "./affiliateWhatsApp";
 
 const WHATSAPP = "5508006022732";
 
@@ -20,7 +21,9 @@ export function ContactForm() {
       `Mensagem: ${data.message}`,
     ].join("\n");
     setSent(true);
-    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    openAffiliateAwareWhatsApp(
+      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
+    );
   }
 
   return (

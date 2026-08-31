@@ -26,8 +26,10 @@ import {
   IoHeadsetOutline,
   IoPause,
   IoPlay,
+  IoWarningOutline,
 } from "react-icons/io5";
 import { SiDeezer, SiGoogleplay, SiHbomax } from "react-icons/si";
+import { openAffiliateAwareWhatsApp } from "./_components/affiliateWhatsApp";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -378,10 +380,8 @@ function openWhatsApp(message: string, context: Record<string, unknown>) {
   );
   track("lead_criado", lead);
   track("clicou_whatsapp", context);
-  window.open(
+  openAffiliateAwareWhatsApp(
     `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
-    "_blank",
-    "noopener,noreferrer",
   );
 }
 
@@ -1276,6 +1276,32 @@ export default function Home() {
                   />
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="development-notice"
+          aria-labelledby="development-notice-title"
+        >
+          <div className="model-shell development-notice-layout">
+            <div className="development-notice-copy">
+              <div className="development-notice-heading">
+                <span className="development-notice-icon" aria-hidden="true">
+                  <IoWarningOutline />
+                </span>
+                <small>Estamos preparando uma nova experiência</small>
+              </div>
+              <h2 id="development-notice-title">
+                Este site ainda está em desenvolvimento.
+              </h2>
+              <p>
+                Algumas páginas e funcionalidades ainda podem mudar. Nossos canais
+                de atendimento continuam disponíveis normalmente.
+              </p>
+              <a className="development-notice-link" href="/contatos">
+                Central do Assinante <span aria-hidden="true">›</span>
+              </a>
             </div>
           </div>
         </section>

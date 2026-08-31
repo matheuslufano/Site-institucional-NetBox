@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./AffiliateWhatsAppModal.module.css";
+import { AFFILIATE_WHATSAPP_EVENT } from "./affiliateWhatsApp";
 
 const AFFILIATE_CODE_PATTERN = /^[a-f0-9]{8}$/i;
 const AFFILIATE_STORAGE_KEY = "netbox-affiliate-code";
+const AFFILIATE_WHATSAPP = "556332330892";
 const WHATSAPP_HOSTS = new Set([
   "wa.me",
   "api.whatsapp.com",
@@ -55,6 +57,18 @@ export function AffiliateWhatsAppModal() {
   useEffect(() => {
     if (!affiliateCode) return;
 
+    function interceptProgrammaticWhatsApp(event: Event) {
+      const customEvent = event as CustomEvent<{ url?: string }>;
+      if (!customEvent.detail?.url) return;
+
+      try {
+        const url = new URL(customEvent.detail.url, window.location.href);
+        if (isWhatsAppUrl(url)) setPendingWhatsAppUrl(url);
+      } catch {
+        // Ignora URLs inválidas e mantém o usuário na página.
+      }
+    }
+
     function interceptWhatsAppClick(event: MouseEvent) {
       if (event.defaultPrevented || event.button !== 0) return;
 
@@ -77,9 +91,18 @@ export function AffiliateWhatsAppModal() {
       setPendingWhatsAppUrl(url);
     }
 
+    window.addEventListener(
+      AFFILIATE_WHATSAPP_EVENT,
+      interceptProgrammaticWhatsApp,
+    );
     document.addEventListener("click", interceptWhatsAppClick, true);
-    return () =>
+    return () => {
+      window.removeEventListener(
+        AFFILIATE_WHATSAPP_EVENT,
+        interceptProgrammaticWhatsApp,
+      );
       document.removeEventListener("click", interceptWhatsAppClick, true);
+    };
   }, [affiliateCode]);
 
   useEffect(() => {
@@ -104,6 +127,11 @@ export function AffiliateWhatsAppModal() {
     if (!affiliateCode || !pendingWhatsAppUrl) return;
 
     const destination = new URL(pendingWhatsAppUrl.toString());
+    if (destination.hostname.toLowerCase() === "wa.me") {
+      destination.pathname = `/${AFFILIATE_WHATSAPP}`;
+    } else {
+      destination.searchParams.set("phone", AFFILIATE_WHATSAPP);
+    }
     destination.searchParams.set(
       "text",
       messageWithAffiliateCode(
