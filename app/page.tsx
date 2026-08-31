@@ -30,6 +30,7 @@ import {
 } from "react-icons/io5";
 import { SiDeezer, SiGoogleplay, SiHbomax } from "react-icons/si";
 import { openAffiliateAwareWhatsApp } from "./_components/affiliateWhatsApp";
+import { DevelopmentView } from "./_components/DevelopmentView";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -386,6 +387,10 @@ function openWhatsApp(message: string, context: Record<string, unknown>) {
 }
 
 export default function Home() {
+  return <DevelopmentView />;
+}
+
+export function FullInstitutionalSite() {
   const [city, setCity] = useState(DEFAULT_CITY);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
