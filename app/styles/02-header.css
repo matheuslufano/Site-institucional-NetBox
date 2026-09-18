@@ -51,7 +51,26 @@
 
 .menu-contact-links a:hover { border-color: #f47721; color: #ffffff; background-color: #f47721; transform: translateY(-2px); }
 
-.menu-contact-links svg { width: 18px; height: 18px; }
+.menu-contact-links a:hover .menu-contact-icon,
+.menu-contact-links a:focus-visible .menu-contact-icon {
+  color: #ffffff;
+}
+
+.menu-contact-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  line-height: 0;
+}
+
+.menu-contact-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 .menu-contact-links .menu-boleto-link {
   width: auto;
@@ -200,9 +219,15 @@
     border-radius: 11px;
   }
 
-  .menu-contact-links svg {
-    width: 17px;
-    height: 17px;
+  .menu-contact-icon {
+    width: 19px;
+    height: 19px;
+    flex-basis: 19px;
+  }
+
+  .menu-contact-icon svg {
+    width: 19px;
+    height: 19px;
   }
 
   .theme-toggle {

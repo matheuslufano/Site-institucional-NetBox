@@ -4,6 +4,7 @@ import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowIcon } from "./ArrowIcon";
+import { AppDownloadButton } from "./AppDownloadButton";
 import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContactLinks } from "./MenuContactLinks";
 import { ThemeToggle } from "./ThemeToggle";
@@ -109,25 +110,25 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
 
       <main id="conteudo">{children}</main>
 
-      <footer className="model-footer inner-footer">
+      <footer className="model-footer">
         <div className="model-shell footer-main">
           <div className="footer-services">
-            <a className="inner-footer-link" href="/nossos-servicos">
-              <span>⌁</span>
+            <a className="footer-service-link" href="/nossos-servicos">
+              <span className="footer-service-icon"><img src="/img_services/cabo-optico-laraja.png" alt="" /></span>
               <div>
                 <strong>Internet residencial <ArrowIcon /></strong>
                 <small>Fibra óptica para sua casa e sua rotina.</small>
               </div>
             </a>
-            <a className="inner-footer-link" href="/nossos-servicos#empresas">
-              <span>▦</span>
+            <a className="footer-service-link" href="/nossos-servicos#empresas">
+              <span className="footer-service-icon"><img src="/img_services/atendimento.png" alt="" /></span>
               <div>
                 <strong>Soluções empresariais <ArrowIcon /></strong>
                 <small>Internet empresarial e link dedicado.</small>
               </div>
             </a>
-            <a className="inner-footer-link" href="/contatos">
-              <span>◉</span>
+            <a className="footer-service-link" href="/contatos">
+              <span className="footer-service-icon"><img src="/img_services/atendimento.png" alt="" /></span>
               <div>
                 <strong>Atendimento <ArrowIcon /></strong>
                 <small>Suporte, segunda via e canais oficiais.</small>
@@ -142,7 +143,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
             <img src="/logo-branca-1024x371.png" alt="Netbox Internet" />
             <p>
               Fibra óptica, presença regional e atendimento humanizado para
-              conectar o Tocantins.
+              conectar casas e empresas no Tocantins.
             </p>
             <a className="model-button yellow" href="/sobre">
               Mais sobre a Netbox <ArrowIcon />
@@ -150,16 +151,16 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
           </div>
 
           <div className="footer-contact">
-            <div className="footer-visual" aria-hidden="true">
-              <span>NET</span>
-              <strong>BOX</strong>
-              <i>⌁</i>
-            </div>
+            <img
+              className="footer-app-logo"
+              src="/netbox-app-icon.png"
+              alt="Aplicativo Netbox"
+            />
             <a href="tel:08006022732">☎ 0800 602 2732</a>
             <a href={SECOND_COPY} target="_blank" rel="noreferrer">
               2ª via de boleto
             </a>
-            <a href="/contatos">Todos os contatos</a>
+            <AppDownloadButton />
           </div>
         </div>
         <div className="model-shell footer-bottom">

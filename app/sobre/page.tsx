@@ -43,10 +43,7 @@ export default function AboutPage() {
             <h2>Uma empresa de internet com presença regional.</h2>
             <p>A Netbox atua levando conectividade por fibra óptica a cidades do Tocantins, combinando tecnologia, canais digitais e relacionamento próximo com seus clientes.</p>
             <p>As informações históricas detalhadas, números de clientes e extensão da rede serão publicados somente após validação institucional.</p>
-            <div className="about-story-highlights">
-              <span><b>01</b> Tecnologia que aproxima</span>
-              <span><b>02</b> Equipe presente na região</span>
-            </div>
+
             <a className="model-button yellow" href="/contatos">Falar com a Netbox <ArrowIcon /></a>
           </div>
         </div>

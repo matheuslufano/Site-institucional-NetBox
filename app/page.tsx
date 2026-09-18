@@ -11,6 +11,7 @@ import {
 import { ClientShortcuts } from "./_components/ClientShortcuts";
 import { ArrowIcon } from "./_components/ArrowIcon";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
+import { AppDownloadButton } from "./_components/AppDownloadButton";
 import { ThemeToggle } from "./_components/ThemeToggle";
 import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 import { useFocusTrap } from "./_components/useFocusTrap";
@@ -338,14 +339,7 @@ const heroSlides = [
     position: "70% center",
     side: "left",
   },
-  {
-    title: "Toda casa conectada",
-    text: "Mais dispositivos conectados com estabilidade, \n velocidade e segurança.",
-    image: "/carousel/netbox-conexao.jpg",
-    mobileImage: "/carousel/mobile-v2-casa.jpg",
-    position: "68% center",
-    side: "left",
-  },
+
 ];
 
 const appScreens = [
@@ -1285,31 +1279,6 @@ export function FullInstitutionalSite() {
           </div>
         </section>
 
-        <section
-          className="development-notice"
-          aria-labelledby="development-notice-title"
-        >
-          <div className="model-shell development-notice-layout">
-            <div className="development-notice-copy">
-              <div className="development-notice-heading">
-                <span className="development-notice-icon" aria-hidden="true">
-                  <IoWarningOutline />
-                </span>
-                <small>Estamos preparando uma nova experiência</small>
-              </div>
-              <h2 id="development-notice-title">
-                Este site ainda está em desenvolvimento.
-              </h2>
-              <p>
-                Algumas páginas e funcionalidades ainda podem mudar. Nossos canais
-                de atendimento continuam disponíveis normalmente.
-              </p>
-              <a className="development-notice-link" href="/contatos">
-                Central do Assinante <span aria-hidden="true">›</span>
-              </a>
-            </div>
-          </div>
-        </section>
 
         <section className="gallery-section" id="solucoes">
           <div className="model-shell">
@@ -1512,7 +1481,7 @@ export function FullInstitutionalSite() {
             </article>
             <article>
               <small>COBERTURA LISTADA EM</small>
-              <strong>17</strong>
+              <strong>21</strong>
               <span>CIDADES DO TOCANTINS</span>
             </article>
             <article>
@@ -1714,11 +1683,11 @@ export function FullInstitutionalSite() {
           </div>
 
           <div className="footer-contact">
-            <div className="footer-visual" aria-hidden="true">
-              <span>NET</span>
-              <strong>BOX</strong>
-              <i>⌁</i>
-            </div>
+            <img
+              className="footer-app-logo"
+              src="/netbox-app-icon.png"
+              alt="Aplicativo Netbox"
+            />
             <div className="social-row">
               <span>◎</span>
               <span>◉</span>
@@ -1728,12 +1697,7 @@ export function FullInstitutionalSite() {
             <a href={SECOND_COPY} target="_blank" rel="noreferrer">
               2ª via de boleto
             </a>
-            <a href={PLAY_STORE} target="_blank" rel="noreferrer">
-              Google Play
-            </a>
-            <a href={APP_STORE} target="_blank" rel="noreferrer">
-              App Store
-            </a>
+            <AppDownloadButton />
           </div>
         </div>
         <div className="model-shell footer-bottom">

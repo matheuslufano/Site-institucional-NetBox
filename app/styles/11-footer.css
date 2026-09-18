@@ -4,9 +4,14 @@
 
 .model-footer { padding: 70px 0 22px; background: #242424; color: #fff; }
 
-.footer-main { display: grid; grid-template-columns: 1fr 1fr .78fr; gap: 60px; align-items: start; }
+.footer-main { display: grid; grid-template-columns: 1fr 1fr .78fr; gap: 60px; align-items: stretch; }
 
-.footer-services { display: grid; gap: 13px; }
+.footer-services {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
 
 .footer-services button {
   padding: 0;
@@ -36,23 +41,77 @@
 
 .footer-pill {
   width: max-content;
-  margin-top: 7px;
+  margin: auto auto 0;
   padding: 8px 14px;
   border-radius: 99px;
   background: #fff;
   color: #444;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: 800;
 }
 
-.footer-about { display: flex; align-items: center; flex-direction: column; text-align: center; }
+.footer-about {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
 
 .footer-about img { width: 225px; height: auto; }
 
-.footer-about p { max-width: 390px; color: #bbb; font-size: 11px; line-height: 1.55; }
+.footer-about p {
+  margin-top: 50px;
+  max-width: 390px;
+  margin-inline: auto;
+  color: #bbb;
+  font-size: 11px;
+  line-height: 1.55;
+  text-align: center;
+  
+}
 
-.footer-about .model-button { min-height: 40px; font-size: 10px; }
+.footer-about .model-button { min-height: 40px; margin-top: auto; font-size: 12px; }
 
-.footer-contact { display: flex; align-items: center; flex-direction: column; gap: 8px; font-size: 10px; }
+.footer-contact .footer-app-download {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  min-height: 40px;
+  padding: 0 16px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: #ffb900 !important;
+  color: #322800 !important;
+  font-size: 10px;
+}
+
+.footer-service-link {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 13px;
+  color: #fff;
+  text-align: left;
+}
+
+.footer-service-link div { display: grid; }
+
+.footer-service-link strong { font-size: 12px; }
+
+.footer-service-link small { color: #aaa; font-size: 9px; line-height: 1.35; }
+
+.footer-contact {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 10px;
+}
 
 .footer-visual {
   width: 190px;
@@ -72,18 +131,30 @@
 
 .footer-visual i { position: absolute; right: 14px; bottom: 10px; font-size: 32px; }
 
+.footer-app-logo {
+  width: 150px;
+  height: 150px;
+  display: block;
+  border-radius: 28px;
+  object-fit: cover;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .2);
+}
+
 .social-row { display: flex; gap: 8px; font-size: 16px; }
 
 .footer-bottom {
   margin-top: 60px;
   padding-top: 20px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   gap: 20px;
   border-top: 1px solid #383838;
   color: #aaa;
   font-size: 12px;
   line-height: 1.45;
+  text-align: center;
 }
 
 .footer-bottom span,

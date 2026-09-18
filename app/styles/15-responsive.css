@@ -338,7 +338,16 @@
     background: var(--orange);
     transform: translateY(-2px);
   }
-  .model-nav .menu-contact-links svg { width: 21px; height: 21px; }
+  .model-nav .menu-contact-icon {
+    width: 21px;
+    height: 21px;
+    flex-basis: 21px;
+  }
+
+  .model-nav .menu-contact-icon svg {
+    width: 100%;
+    height: 100%;
+  }
   .model-nav .menu-contact-links .menu-boleto-link {
     width: 100%;
     grid-column: 1 / -1;
@@ -468,7 +477,7 @@
   .stats-strip .model-shell { grid-template-columns: 1fr; gap: 38px; }
   .footer-main { grid-template-columns: 1fr; }
   .footer-contact { grid-column: auto; }
-  .footer-bottom { align-items: flex-start; flex-direction: column; }
+  .footer-bottom { align-items: center; flex-direction: column; }
   .model-whatsapp {
     right: 35px;
     bottom: 70px;
@@ -1542,11 +1551,16 @@ iframe {
 
   .service-detail-body .model-button { width: 100%; min-height: 47px; justify-content: center; }
 
-  .services-support-strip { padding-block: 48px; }
+  .services-support-strip { padding-block: 42px; }
+
+  .services-support-strip .model-shell {
+    padding: 30px 24px;
+    border-radius: 22px;
+  }
 
   .services-support-strip .model-shell { gap: 26px; }
 
-  .services-support-strip h2 { max-width: 12ch; font-size: 30px; line-height: 1.08; }
+  .services-support-strip h2 { max-width: 12ch; font-size: 34px; line-height: 1; }
 
   .services-support-strip p { max-width: 36ch; line-height: 1.5; }
 
@@ -1554,10 +1568,11 @@ iframe {
 
   .services-support-strip .support-actions a {
     width: 100%;
-    min-height: 52px;
+    min-height: 58px;
     padding-inline: 16px;
     justify-content: space-between;
     border-radius: 14px;
+    align-items: center;
   }
 
   .services-support-strip .support-actions .link-arrow { margin-left: auto; }
