@@ -1,11 +1,18 @@
-import { ReactNode } from "react";
+"use client";
+
+import { type ReactNode, useEffect, useState } from "react";
 import { FaInstagram } from "react-icons/fa";
 import { ImWhatsapp } from "react-icons/im";
 import { TfiEmail } from "react-icons/tfi";
 import { FiPhone } from "react-icons/fi";
 
 const WHATSAPP = "5508006022732";
+const WHATSAPP_MESSAGE = "Olá! Vim pelo site da Netbox e gostaria de atendimento.";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
+const EMAIL = "atendimento@netbox.net.br";
+const EMAIL_SUBJECT = "Atendimento Netbox — contato pelo site";
+const WEBMAIL_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=${encodeURIComponent(EMAIL_SUBJECT)}`;
+const MAILTO_URL = `mailto:${EMAIL}?subject=${encodeURIComponent(EMAIL_SUBJECT)}`;
 
 type IconName = "whatsapp" | "instagram" | "mail" | "phone" | "document";
 
@@ -49,10 +56,18 @@ function ContactIcon({ name }: { name: IconName }) {
 }
 
 export function MenuContactLinks() {
+  const [desktopEmail, setDesktopEmail] = useState(false);
+
+  useEffect(() => {
+    const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    const iPad = /Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+    setDesktopEmail(!mobile && !iPad);
+  }, []);
+
   return (
     <div className="menu-contact-links" aria-label="Canais de atendimento">
       <a
-        href={`https://wa.me/${WHATSAPP}`}
+        href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp da Netbox"
@@ -70,9 +85,11 @@ export function MenuContactLinks() {
         <ContactIcon name="instagram" />
       </a>
       <a
-        href="mailto:atendimento@netbox.net.br"
-        aria-label="Enviar e-mail para a Netbox"
-        title="E-mail"
+        href={desktopEmail ? WEBMAIL_URL : MAILTO_URL}
+        target={desktopEmail ? "_blank" : undefined}
+        rel={desktopEmail ? "noopener noreferrer" : undefined}
+        aria-label={desktopEmail ? "Enviar e-mail para a Netbox pelo Gmail (nova aba)" : "Enviar e-mail para a Netbox"}
+        title={desktopEmail ? "E-mail — abrir Gmail em nova aba" : "E-mail"}
       >
         <ContactIcon name="mail" />
       </a>

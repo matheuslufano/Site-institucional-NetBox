@@ -3,7 +3,7 @@
 import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowIcon } from "./ArrowIcon";
+import { FaArrowCircleRight } from "react-icons/fa";
 import { AppDownloadButton } from "./AppDownloadButton";
 import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContactLinks } from "./MenuContactLinks";
@@ -20,7 +20,6 @@ const navItems = [
   ["/sobre", "Sobre nós"],
   ["/nossos-servicos", "Serviços"],
   ["/nossa-estrutura", "Nossa estrutura"],
-  ["/depoimentos", "Depoimentos"],
   ["/contatos", "Contatos"],
 ];
 
@@ -116,26 +115,26 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
             <a className="footer-service-link" href="/nossos-servicos">
               <span className="footer-service-icon"><img src="/img_services/cabo-optico-laraja.png" alt="" /></span>
               <div>
-                <strong>Internet residencial <ArrowIcon /></strong>
+                <strong>Internet residencial <FaArrowCircleRight className="link-arrow" aria-hidden="true" /></strong>
                 <small>Fibra óptica para sua casa e sua rotina.</small>
               </div>
             </a>
             <a className="footer-service-link" href="/nossos-servicos#empresas">
               <span className="footer-service-icon"><img src="/img_services/atendimento.png" alt="" /></span>
               <div>
-                <strong>Soluções empresariais <ArrowIcon /></strong>
+                <strong>Soluções empresariais <FaArrowCircleRight className="link-arrow" aria-hidden="true" /></strong>
                 <small>Internet empresarial e link dedicado.</small>
               </div>
             </a>
             <a className="footer-service-link" href="/contatos">
               <span className="footer-service-icon"><img src="/img_services/atendimento.png" alt="" /></span>
               <div>
-                <strong>Atendimento <ArrowIcon /></strong>
+                <strong>Atendimento <FaArrowCircleRight className="link-arrow" aria-hidden="true" /></strong>
                 <small>Suporte, segunda via e canais oficiais.</small>
               </div>
             </a>
             <a className="footer-pill" href="/nossos-servicos">
-              Todos os serviços <ArrowIcon />
+              Todos os serviços <FaArrowCircleRight className="link-arrow" aria-hidden="true" />
             </a>
           </div>
 
@@ -146,7 +145,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
               conectar casas e empresas no Tocantins.
             </p>
             <a className="model-button yellow" href="/sobre">
-              Mais sobre a Netbox <ArrowIcon />
+              Mais sobre a Netbox <FaArrowCircleRight className="link-arrow" aria-hidden="true" />
             </a>
           </div>
 

@@ -16,7 +16,6 @@ import { ThemeToggle } from "./_components/ThemeToggle";
 import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 import { useFocusTrap } from "./_components/useFocusTrap";
 import { useSwipeGesture } from "./_components/useSwipeGesture";
-import { FaApple } from "react-icons/fa";
 import {
   IoBookOutline,
   IoCallOutline,
@@ -29,15 +28,18 @@ import {
   IoPlay,
   IoWarningOutline,
 } from "react-icons/io5";
-import { SiDeezer, SiGoogleplay, SiHbomax } from "react-icons/si";
+import { SiDeezer, SiHbomax } from "react-icons/si";
 import { openAffiliateAwareWhatsApp } from "./_components/affiliateWhatsApp";
-import { DevelopmentView } from "./_components/DevelopmentView";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
 const PLAY_STORE =
   "https://play.google.com/store/apps/details?id=br.com.appdoprovedor.netbox";
 const APP_STORE = "https://apps.apple.com/br/app/netbox/id1574550280";
+const GOOGLE_PLAY_LOGO =
+  "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Play_2022_icon.svg";
+const APP_STORE_LOGO =
+  "https://commons.wikimedia.org/wiki/Special:FilePath/App_Store_(iOS,_2024).svg";
 
 type PlanPlatform = { name: string; tone: string };
 
@@ -381,7 +383,7 @@ function openWhatsApp(message: string, context: Record<string, unknown>) {
 }
 
 export default function Home() {
-  return <DevelopmentView />;
+  return <FullInstitutionalSite />;
 }
 
 export function FullInstitutionalSite() {
@@ -886,7 +888,7 @@ export function FullInstitutionalSite() {
                       })
                     }
                   >
-                    <FaApple className="store-icon apple" aria-hidden="true" />
+                    <img className="store-icon store-logo apple" src={APP_STORE_LOGO} alt="" />
                     <div className="store-text">
                       <span>Download on the</span>
                       <strong>App Store</strong>
@@ -905,10 +907,7 @@ export function FullInstitutionalSite() {
                       })
                     }
                   >
-                    <SiGoogleplay
-                      className="store-icon play"
-                      aria-hidden="true"
-                    />
+                    <img className="store-icon store-logo play" src={GOOGLE_PLAY_LOGO} alt="" />
                     <div className="store-text">
                       <span>GET IT ON</span>
                       <strong>Google Play</strong>
@@ -1173,7 +1172,7 @@ export function FullInstitutionalSite() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <FaApple className="store-icon apple" />
+                      <img className="store-icon store-logo apple" src={APP_STORE_LOGO} alt="" />
 
                       <div className="store-text">
                         <span>Download on the</span>
@@ -1187,7 +1186,7 @@ export function FullInstitutionalSite() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <SiGoogleplay className="store-icon play" />
+                      <img className="store-icon store-logo play" src={GOOGLE_PLAY_LOGO} alt="" />
 
                       <div className="store-text">
                         <span>GET IT ON</span>
@@ -1687,12 +1686,7 @@ export function FullInstitutionalSite() {
               className="footer-app-logo"
               src="/netbox-app-icon.png"
               alt="Aplicativo Netbox"
-            />
-            <div className="social-row">
-              <span>◎</span>
-              <span>◉</span>
-              <span>▶</span>
-            </div>
+            /> 
             <a href="tel:08006022732">☎ 0800 602 2732</a>
             <a href={SECOND_COPY} target="_blank" rel="noreferrer">
               2ª via de boleto

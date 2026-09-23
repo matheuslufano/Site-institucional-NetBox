@@ -81,9 +81,9 @@ html.theme-dark .theme-toggle:hover {
 }
 
 html.theme-dark .menu-contact-links a {
-  border-color: rgba(255,137,69,.25);
-  background: rgba(244,119,33,.12);
-  color: #ff9a60;
+  border-color: rgba(255,66,14,.42);
+  background: rgba(255,66,14,.14);
+  color: #ff420e;
 }
 
 html.theme-dark .home-contact-strip {
@@ -96,7 +96,7 @@ html.theme-dark .home-contact-strip-title { color: rgba(245,241,237,.5); }
 
 html.theme-dark .home-contact-strip .menu-contact-links a {
   border-color: rgba(255,255,255,.12);
-  color: #ff9a60;
+  color: #ff420e;
   background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.035));
   box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 9px 24px rgba(0,0,0,.2);
 }
@@ -366,6 +366,16 @@ html.theme-dark .inner-section { background: #111110; }
 html.theme-dark .soft-section,
 html.theme-dark .speed-test-section { background: #181817; }
 
+html.theme-dark .store-locator-section { background: #181817; }
+
+html.theme-dark .store-locator-heading p { color: #aaa39d; }
+
+html.theme-dark .store-detail-panel { border-color: rgba(255,255,255,.1); background: #211f1d; }
+
+html.theme-dark .store-detail-line { color: #b6afa9; }
+
+html.theme-dark .store-detail-map { border-color: rgba(255,255,255,.12); background: #2a2927; }
+
 html.theme-dark .solution-modal {
   border-color: rgba(255,255,255,.12);
   background: #1b1a19;
@@ -445,7 +455,7 @@ html.theme-dark .model-whatsapp-copy::after { color: rgba(235,238,234,.62); }
   html.theme-dark .model-nav .menu-contact-links a {
     border-color: rgba(255,255,255,.1);
     background: rgba(255,255,255,.055);
-    color: #ff9c62;
+    color: #ff420e;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
   }
 

@@ -89,6 +89,16 @@
   font-size: 10px;
 }
 
+.footer-app-download-wrap { display: grid; justify-items: center; gap: 10px; }
+
+.footer-app-store-icons { display: inline-flex; align-items: center; gap: 8px; }
+
+.footer-app-store-badge { width: auto; height: 23px; object-fit: contain; }
+
+.footer-app-store-badge-google { width: 28px; height: 28px; }
+
+.footer-app-store-badge-apple { width: 28px; height: 28px; }
+
 .footer-service-link {
   padding: 0;
   display: grid;

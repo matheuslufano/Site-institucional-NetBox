@@ -42,18 +42,25 @@
   display: grid;
   place-items: center;
   flex: 0 0 38px;
-  border: 1px solid #f3d1ba;
+  border: 1px solid rgba(255,66,14,.38);
   border-radius: 12px;
-  color: #d7480c;
-  background-color: #fff0e6;
-  transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease;
+  color: #ff420e;
+  background-color: rgba(255,66,14,.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 4px 12px rgba(255,66,14,.08);
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 
-.menu-contact-links a:hover { border-color: #f47721; color: #ffffff; background-color: #f47721; transform: translateY(-2px); }
+.menu-contact-links a:hover,
+.menu-contact-links a:focus-visible { border-color: #ff420e; color: #ffffff; background-color: #ff420e; box-shadow: 0 8px 18px rgba(255,66,14,.24); transform: translateY(-2px); }
 
 .menu-contact-links a:hover .menu-contact-icon,
 .menu-contact-links a:focus-visible .menu-contact-icon {
   color: #ffffff;
+}
+
+.menu-contact-links a:hover .menu-contact-icon svg,
+.menu-contact-links a:focus-visible .menu-contact-icon svg {
+  color: #ffffff !important;
 }
 
 .menu-contact-icon {
@@ -70,6 +77,7 @@
   width: 100%;
   height: 100%;
   display: block;
+  color: #ff400c !important;
 }
 
 .menu-contact-links .menu-boleto-link {
