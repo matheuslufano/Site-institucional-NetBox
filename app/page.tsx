@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
+import { DevelopmentView } from "./_components/DevelopmentView";
 import { ArrowIcon } from "./_components/ArrowIcon";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
 import { AppDownloadButton } from "./_components/AppDownloadButton";
@@ -265,11 +266,15 @@ const featuredBenefits = [
 ] as const;
 
 const featuredAdditionalTiers = [
-  { name: "STANDARD", services: ["Deezer", "Docway Telemedicina"] },
-  { name: "ADVANCED", services: ["Sky Light", "Prime Video"] },
+  { name: "STANDARD", services: ["Docway Telemedicina", "Deezer"] },
+  {
+    name: "ADVANCED",
+    services: ["Sky Light", "Prime Video"],
+    caption: "SKY+ com Amazon Prime incluso",
+  },
   {
     name: "PREMIUM",
-    services: ["Globoplay", "Disney Plus", "HBO Max"],
+    services: ["Disney Plus", "HBO Max", "Globoplay"],
   },
 ] as const;
 
@@ -290,53 +295,60 @@ function FeaturedPlanCard({
     >
       <div className="nb-featured-card-content">
         <h3>
-          <span aria-hidden="true" className="nb-featured-wifi">
-            <IoWifiOutline />
-          </span>
+          {plan.tone !== "additional" && (
+            <span aria-hidden="true" className="nb-featured-wifi">
+              <IoWifiOutline />
+            </span>
+          )}
           {plan.name === "PRO"
-            ? "Plano PRO"
+            ? "PLANO PRO"
             : plan.name === "ADICIONAIS"
-              ? "Adicionais"
+              ? "Adicional"
               : plan.name}
         </h3>
-        <span className="nb-featured-fiber">
-          {plan.tone === "additional"
-            ? "Adicionais"
-            : plan.tone === "family" || plan.tone === "top-family"
-              ? "Serviços inclusos"
-              : "Fibra Óptica"}
-        </span>
+
         {plan.tone === "additional" ? (
           <div className="nb-featured-services nb-featured-addons">
             <strong>
-              Plataformas que podem ser adicionadas ao seu plano mensal
+              Adicione ao seu plano um aplicativo
             </strong>
-            <div className="nb-featured-services-grid">
+            <div className="nb-featured-addon-table" role="table" aria-label="Aplicativos disponíveis por categoria">
               {featuredAdditionalTiers.map((tier) => (
-                <div className="nb-featured-addon-tier" key={tier.name}>
-                  <span className="nb-featured-addon-tier-name">{tier.name}</span>
-                  <div className="nb-featured-addon-tier-card">
-                    <div
-                      className={`nb-featured-addon-logos nb-featured-addon-logos-${tier.services.length}`}
-                      aria-hidden="true"
-                    >
-                      {tier.services.map((service) => (
-                        <img
-                          className="nb-featured-addon-logo"
-                          key={service}
-                          src={featuredServiceImages[service]}
-                          alt=""
-                        />
-                      ))}
-                    </div>
-                    <ul className="nb-featured-addon-names">
-                      {tier.services.map((service) => (
-                        <li key={service}>
-                          <BsArrowReturnRight aria-hidden="true" />
-                          <span>{service}</span>
-                        </li>
-                      ))}
-                    </ul>
+                <div
+                  className={"nb-featured-addon-row nb-featured-addon-row-" + tier.name.toLowerCase()}
+                  key={tier.name}
+                  role="row"
+                >
+                  <strong className="nb-featured-addon-tier-name" role="rowheader">
+                    {tier.name}
+                  </strong>
+                  <div className="nb-featured-addon-tier-content" role="cell">
+                    {tier.name === "ADVANCED" ? (
+                      <div className="nb-featured-addon-advanced">
+                        <div className="nb-featured-addon-advanced-logos">
+                          <img
+                            src="/featured-plans/sky-amazon-prime.png"
+                            alt="SKY+ e Amazon Prime"
+                          />
+                        </div>
+                        <strong>{tier.caption}</strong>
+                      </div>
+                    ) : (
+                      <div className={"nb-featured-addon-logos nb-featured-addon-logos-" + tier.services.length}>
+                        {tier.services.map((service) => (
+                          <div className="nb-featured-addon-service" key={service}>
+                            <span className="nb-featured-addon-logo-frame">
+                              <img
+                                className="nb-featured-addon-logo"
+                                src={featuredServiceImages[service]}
+                                alt=""
+                              />
+                            </span>
+                            <span>{service}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -730,7 +742,7 @@ function openWhatsApp(message: string, context: Record<string, unknown>) {
 }
 
 export default function Home() {
-  return <FullInstitutionalSite />;
+  return <DevelopmentView />;
 }
 
 export function FullInstitutionalSite() {
@@ -1126,7 +1138,7 @@ export function FullInstitutionalSite() {
       >
         <a
           className="model-brand"
-          href="/"
+          href="/site"
           aria-label="Netbox Internet — início"
         >
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
@@ -1147,7 +1159,7 @@ export function FullInstitutionalSite() {
             <span>Menu</span>
             <small>Netbox Internet</small>
           </div>
-          <a href="/" aria-current="page" onClick={() => setMenuOpen(false)}>
+          <a href="/site" aria-current="page" onClick={() => setMenuOpen(false)}>
             Início
           </a>
           <a href="/sobre" onClick={() => setMenuOpen(false)}>
@@ -1561,7 +1573,7 @@ export function FullInstitutionalSite() {
                     setFeaturedPlanIndex(0);
                   }}
                 >
-                  Família
+                  PREMIUM
                 </button>
               </div>
             </header>

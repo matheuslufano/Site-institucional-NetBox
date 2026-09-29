@@ -16,7 +16,7 @@ const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
 
 const navItems = [
-  ["/", "Início"],
+  ["/site", "Início"],
   ["/sobre", "Sobre nós"],
   ["/nossos-servicos", "Serviços"],
   ["/nossa-estrutura", "Nossa estrutura"],
@@ -57,7 +57,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
       >
         <Link
           className="model-brand"
-          href="/"
+          href="/site"
           aria-label="Netbox Internet — início"
         >
           <img src="/LOGO-NETBOX.png" alt="Netbox Internet" />
