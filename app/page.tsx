@@ -16,12 +16,13 @@ import { ThemeToggle } from "./_components/ThemeToggle";
 import { useScrollDirectionVisibility } from "./_components/useScrollDirectionVisibility";
 import { useFocusTrap } from "./_components/useFocusTrap";
 import { useSwipeGesture } from "./_components/useSwipeGesture";
+import { BsArrowReturnRight } from "react-icons/bs";
 import {
-  IoBookOutline,
   IoCallOutline,
   IoChevronBack,
   IoChevronForward,
   IoClose,
+  IoWifiOutline,
   IoDocumentTextOutline,
   IoHeadsetOutline,
   IoPause,
@@ -30,6 +31,7 @@ import {
 } from "react-icons/io5";
 import { SiDeezer, SiHbomax } from "react-icons/si";
 import { openAffiliateAwareWhatsApp } from "./_components/affiliateWhatsApp";
+import "./netbox-plans.css";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -70,12 +72,10 @@ function PlatformLogo({ platform }: { platform: PlanPlatform }) {
   }
   if (platform.tone === "ubook") {
     return (
-      <span className="platform-wordmark ubook-wordmark">
-        <IoBookOutline aria-hidden="true" />
-        <b>ubook</b>
-        <small>GO</small>
+      <>
+        <img src="/featured-plans/ubook-go.jpg" alt="" />
         <span className="sr-only">{platform.name}</span>
-      </span>
+      </>
     );
   }
   if (platform.tone === "prime") {
@@ -98,6 +98,41 @@ function PlatformLogo({ platform }: { platform: PlanPlatform }) {
       <span className="sr-only">{platform.name}</span>
     </span>
   );
+}
+
+const featuredServiceImages: Record<string, string> = {
+  "Deezer": "/featured-plans/deezer.png",
+  "Ubook Go": "/featured-plans/ubook-go.jpg",
+  "Roteador Wi-Fi": "/featured-plans/roteador.png",
+  "Sky Light": "/featured-plans/sky-light.png",
+  "Prime Video": "/featured-plans/prime-video.png",
+  "Amazon Prime": "/featured-plans/prime-video.png",
+  "Disney Plus": "/featured-plans/disney-plus.png",
+  "Docway Telemedicina": "/featured-plans/docway.png",
+  "HBO Max": "/featured-plans/hbo-max.png",
+  "Globoplay": "/featured-plans/globoplay.png",
+};
+
+function FeaturedServiceIcon({ name }: { name: string }) {
+  if (name === "Aplicativo Netbox") {
+    return <img src="/netbox-app-icon.png" alt="" />;
+  }
+  if (name === "Roteador WiFi") {
+    return <img src={featuredServiceImages["Roteador Wi-Fi"]} alt="" />;
+  }
+  if (name === "Deezer Premium") {
+    return <img src={featuredServiceImages.Deezer} alt="" />;
+  }
+  if (featuredServiceImages[name]) {
+    return <img src={featuredServiceImages[name]} alt="" />;
+  }
+  if (name === "App Netbox") {
+    return <img src="/netbox-app-icon.png" alt="" />;
+  }
+  if (name === "Deezer") {
+    return <PlatformLogo platform={{ name, tone: "Deezer" }} />;
+  }
+  return null;
 }
 
 const storeAddresses: Record<string, string> = {
@@ -145,6 +180,319 @@ const storeAddresses: Record<string, string> = {
 
 const cities = Object.keys(storeAddresses);
 const DEFAULT_CITY = "Paraíso do Tocantins - TO";
+const featuredPlans = [
+  {
+    name: "INTERMEDIÁRIO",
+    tone: "intermediate",
+    services: ["Ubook Go", "App Netbox"],
+  },
+  {
+    name: "ADICIONAIS",
+    tone: "additional",
+    services: [
+      "Globoplay",
+      "HBO Max",
+      "Disney Plus",
+      "Deezer",
+      "Prime Video",
+      "Sky Light",
+      "Docway Telemedicina",
+    ],
+  },
+  {
+    name: "PRO",
+    tone: "pro",
+    services: ["Ubook Go", "App Netbox", "Sky Light"],
+  },
+] as const;
+
+const familyFeaturedPlans = [
+  {
+    name: "FAMÍLIA",
+    tone: "family",
+    benefits: [
+      "Desconto para pagamento com pontualidade",
+      "Roteadores em comodato",
+      "Instalação prioritária",
+    ],
+    services: [
+      "Aplicativo Netbox",
+      "Ubook Go",
+      "Sky Light",
+      "Amazon Prime",
+      "Deezer Premium",
+    ],
+  },
+  {
+    name: "TOP FAMÍLIA",
+    tone: "top-family",
+    benefits: [
+      "Desconto para pagamento com pontualidade",
+      "Roteador em comodato",
+      "Instalação prioritária",
+    ],
+    services: [
+      "Aplicativo Netbox",
+      "Ubook Go",
+    ],
+  },
+  {
+    name: "ADICIONAIS",
+    tone: "additional",
+    services: [
+      "Docway Telemedicina",
+      "Sky Light",
+      "Amazon Prime",
+      "Deezer Premium",
+      "Disney Plus",
+      "HBO Max",
+      "Globoplay",
+    ],
+  },
+] as const;
+
+type FeaturedPlan = {
+  name: string;
+  tone: string;
+  benefits?: readonly string[];
+  services: readonly string[];
+};
+
+const featuredBenefits = [
+  "Entrega da velocidade contratada",
+  "Desconto para pagamento com pontualidade",
+  "Suporte premium 7 dias por semana",
+] as const;
+
+const featuredAdditionalTiers = [
+  { name: "STANDARD", services: ["Deezer", "Docway Telemedicina"] },
+  { name: "ADVANCED", services: ["Sky Light", "Prime Video"] },
+  {
+    name: "PREMIUM",
+    services: ["Globoplay", "Disney Plus", "HBO Max"],
+  },
+] as const;
+
+function FeaturedPlanCard({
+  plan,
+  position,
+  onSelect,
+  onContact,
+}: {
+  plan: FeaturedPlan;
+  position: "previous" | "active" | "next";
+  onSelect: () => void;
+  onContact: (name: string) => void;
+}) {
+  return (
+    <article
+      className={`nb-featured-card nb-featured-card-${position} nb-featured-card-${plan.tone}`}
+    >
+      <div className="nb-featured-card-content">
+        <h3>
+          <span aria-hidden="true" className="nb-featured-wifi">
+            <IoWifiOutline />
+          </span>
+          {plan.name === "PRO"
+            ? "Plano PRO"
+            : plan.name === "ADICIONAIS"
+              ? "Adicionais"
+              : plan.name}
+        </h3>
+        <span className="nb-featured-fiber">
+          {plan.tone === "additional"
+            ? "Adicionais"
+            : plan.tone === "family" || plan.tone === "top-family"
+              ? "Serviços inclusos"
+              : "Fibra Óptica"}
+        </span>
+        {plan.tone === "additional" ? (
+          <div className="nb-featured-services nb-featured-addons">
+            <strong>
+              Plataformas que podem ser adicionadas ao seu plano mensal
+            </strong>
+            <div className="nb-featured-services-grid">
+              {featuredAdditionalTiers.map((tier) => (
+                <div className="nb-featured-addon-tier" key={tier.name}>
+                  <span className="nb-featured-addon-tier-name">{tier.name}</span>
+                  <div className="nb-featured-addon-tier-card">
+                    <div
+                      className={`nb-featured-addon-logos nb-featured-addon-logos-${tier.services.length}`}
+                      aria-hidden="true"
+                    >
+                      {tier.services.map((service) => (
+                        <img
+                          className="nb-featured-addon-logo"
+                          key={service}
+                          src={featuredServiceImages[service]}
+                          alt=""
+                        />
+                      ))}
+                    </div>
+                    <ul className="nb-featured-addon-names">
+                      {tier.services.map((service) => (
+                        <li key={service}>
+                          <BsArrowReturnRight aria-hidden="true" />
+                          <span>{service}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : plan.tone === "family" ? (
+          <>
+            <ul className="nb-featured-benefits">
+              {plan.benefits?.map((benefit) => (
+                <li key={benefit}>{benefit}</li>
+              ))}
+            </ul>
+            <div className="nb-featured-family-panel nb-featured-family-layout">
+              <div className="nb-featured-family-apps">
+                {plan.services.map((service) => (
+                  <div className="nb-featured-service" key={service}>
+                    <span className="nb-featured-service-icon">
+                      <FeaturedServiceIcon name={service} />
+                    </span>
+                    <span>{service}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="nb-featured-family-router">
+                <img src={featuredServiceImages["Roteador Wi-Fi"]} alt="" />
+                <strong>01 Roteador</strong>
+              </div>
+            </div>
+          </>
+        ) : plan.tone === "top-family" ? (
+          <>
+            <ul className="nb-featured-benefits">
+              {plan.benefits?.map((benefit) => (
+                <li key={benefit}>{benefit}</li>
+              ))}
+            </ul>
+            <div className="nb-featured-family-panel nb-featured-top-family-layout">
+              <div className="nb-featured-top-family-defaults">
+                <strong>Nesse plano você tem os aplicativos padrões</strong>
+                <div className="nb-featured-top-family-apps">
+                  {plan.services.map((service) => (
+                    <div className="nb-featured-service" key={service}>
+                      <span className="nb-featured-service-icon">
+                        <FeaturedServiceIcon name={service} />
+                      </span>
+                      <span>{service}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="nb-featured-family-options">
+                <div className="nb-featured-family-options-box">
+                  <strong>Você pode optar entre Disney Plus ou HBO Max</strong>
+                  <div className="nb-featured-family-options-row">
+                    <div className="nb-featured-family-option">
+                      <img src={featuredServiceImages["Disney Plus"]} alt="" />
+                      <span>Disney Plus</span>
+                    </div>
+                    <div className="nb-featured-family-option">
+                      <img src={featuredServiceImages["HBO Max"]} alt="" />
+                      <span>HBO Max</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <ul className="nb-featured-benefits">
+              {featuredBenefits.map((benefit) => (
+                <li key={benefit}>{benefit}</li>
+              ))}
+            </ul>
+            {plan.tone === "intermediate" ? (
+              <div className="nb-featured-intermediate-panel">
+                <div className="nb-featured-intermediate-services">
+                  <strong>Serviços inclusos</strong>
+                  <div className="nb-featured-services-grid">
+                    {plan.services.map((service) => (
+                      <div className="nb-featured-service" key={service}>
+                        <span className="nb-featured-service-icon">
+                          <FeaturedServiceIcon name={service} />
+                        </span>
+                        <span>{service}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="nb-featured-intermediate-router">
+                  <strong>01 Roteador</strong>
+                  <FeaturedServiceIcon name="Roteador Wi-Fi" />
+                </div>
+              </div>
+            ) : (
+              <div className="nb-featured-pro-panel">
+                <div className="nb-featured-pro-services">
+                  <strong>Serviços inclusos</strong>
+                  <div className="nb-featured-services-grid">
+                    {plan.services.map((service) => (
+                      <div className="nb-featured-service" key={service}>
+                        <span className="nb-featured-service-icon">
+                          <FeaturedServiceIcon name={service} />
+                        </span>
+                        <span>{service}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="nb-featured-pro-options">
+                  <strong>Nesse plano você pode optar entre</strong>
+                  <div className="nb-featured-services-grid">
+                    {(["Deezer", "Prime Video"] as const).map((service) => (
+                      <div className="nb-featured-service" key={service}>
+                        <span className="nb-featured-service-icon">
+                          <FeaturedServiceIcon name={service} />
+                        </span>
+                        <span>{service}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+        <button
+          type="button"
+          className="nb-featured-cta"
+          tabIndex={position === "active" ? 0 : -1}
+          onClick={() => onContact(plan.name)}
+        >
+          <span>Conhecer esse plano</span>
+          <span className="icon-[logos--whatsapp-icon] nb-featured-whatsapp" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          className="nb-featured-text-link"
+          tabIndex={position === "active" ? 0 : -1}
+          onClick={() => onContact(plan.name)}
+        >
+          conheça o plano →
+        </button>
+      </div>
+      {position !== "active" && (
+        <button
+          type="button"
+          className="nb-featured-select-card"
+          onClick={onSelect}
+          aria-label={`Ver plano ${plan.name}`}
+        />
+      )}
+    </article>
+  );
+}
+
 const services = [
   {
     title: "Internet Fibra Residencial",
@@ -192,10 +540,10 @@ const residentialPlans = [
     platforms: [
       { name: "Ubook Go", tone: "ubook" },
       { name: "App Netbox", tone: "netbox" },
-      { name: "Deezer Premium", tone: "deezer" },
+      { name: "Deezer", tone: "Deezer" },
       { name: "Prime Video", tone: "prime" },
     ],
-    choiceNote: "Você pode optar por Deezer Premium ou Prime Video.",
+    choiceNote: "Você pode optar por Deezer ou Prime Video.",
   },
   {
     name: "Família",
@@ -209,7 +557,7 @@ const residentialPlans = [
     platforms: [
       { name: "Ubook Go", tone: "ubook" },
       { name: "App Netbox", tone: "netbox" },
-      { name: "Deezer Premium", tone: "deezer" },
+      { name: "Deezer", tone: "Deezer" },
       { name: "Prime Video", tone: "prime" },
     ],
     allIncluded: true,
@@ -227,9 +575,9 @@ const residentialPlans = [
       { name: "Ubook Go", tone: "ubook" },
       { name: "App Netbox", tone: "netbox" },
       { name: "HBO Max", tone: "hbo" },
-      { name: "Disney+", tone: "disney" },
+      { name: "Disney Plus", tone: "disney" },
     ],
-    choiceNote: "Você pode optar por HBO Max ou Disney+.",
+    choiceNote: "Você pode optar por HBO Max ou Disney Plus.",
   },
 ];
 
@@ -341,7 +689,6 @@ const heroSlides = [
     position: "70% center",
     side: "left",
   },
-
 ];
 
 const appScreens = [
@@ -397,6 +744,11 @@ export function FullInstitutionalSite() {
   const [activeSolution, setActiveSolution] = useState<number | null>(null);
   const [plansOpen, setPlansOpen] = useState(false);
   const [activePlan, setActivePlan] = useState(0);
+  const [featuredPlanIndex, setFeaturedPlanIndex] = useState(0);
+  const [selectedFeaturedAudience, setSelectedFeaturedAudience] =
+    useState<"basico" | "familia">("basico");
+  const currentFeaturedPlans =
+    selectedFeaturedAudience === "familia" ? familyFeaturedPlans : featuredPlans;
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [carouselInteractionPaused, setCarouselInteractionPaused] =
     useState(false);
@@ -450,6 +802,10 @@ export function FullInstitutionalSite() {
     onSwipeLeft: () => movePlan(1),
     onSwipeRight: () => movePlan(-1),
     onSwipeDown: () => setPlansOpen(false),
+  });
+  const featuredSwipe = useSwipeGesture({
+    onSwipeLeft: () => moveFeaturedPlan(1),
+    onSwipeRight: () => moveFeaturedPlan(-1),
   });
   const menuSwipe = useSwipeGesture({
     onSwipeRight: () => setMenuOpen(false),
@@ -583,10 +939,7 @@ export function FullInstitutionalSite() {
 
     if (appCarouselIndex === 0) resetIndex = appScreens.length;
     if (appCarouselIndex === appScreens.length + 1) resetIndex = 1;
-    if (
-      appCarouselIndex < 0 ||
-      appCarouselIndex > appScreens.length + 1
-    ) {
+    if (appCarouselIndex < 0 || appCarouselIndex > appScreens.length + 1) {
       resetIndex = 1;
       resetDelay = 0;
     }
@@ -631,10 +984,11 @@ export function FullInstitutionalSite() {
     });
   }
 
-  function finishAppCarouselTransition(
-    event: TransitionEvent<HTMLDivElement>,
-  ) {
-    if (event.target !== event.currentTarget || event.propertyName !== "transform")
+  function finishAppCarouselTransition(event: TransitionEvent<HTMLDivElement>) {
+    if (
+      event.target !== event.currentTarget ||
+      event.propertyName !== "transform"
+    )
       return;
 
     let resetIndex: number | null = null;
@@ -679,6 +1033,26 @@ export function FullInstitutionalSite() {
       { city, type: "residencial", plan: planName, origin: "modal_planos" },
     );
     setPlansOpen(false);
+  }
+
+  function moveFeaturedPlan(direction: number) {
+    setFeaturedPlanIndex(
+      (index) =>
+        (index + direction + currentFeaturedPlans.length) %
+        currentFeaturedPlans.length,
+    );
+  }
+
+  function contactFeaturedPlan(name: string) {
+    openWhatsApp(
+      `Olá! Quero conhecer o plano ${name} da Netbox em Paraíso do Tocantins. Podem me informar velocidade, preço e disponibilidade para meu endereço?`,
+      {
+        city: DEFAULT_CITY,
+        type: "residencial",
+        plan: name,
+        origin: "carrossel_planos",
+      },
+    );
   }
 
   function toggleFeatureVideo() {
@@ -888,7 +1262,11 @@ export function FullInstitutionalSite() {
                       })
                     }
                   >
-                    <img className="store-icon store-logo apple" src={APP_STORE_LOGO} alt="" />
+                    <img
+                      className="store-icon store-logo apple"
+                      src={APP_STORE_LOGO}
+                      alt=""
+                    />
                     <div className="store-text">
                       <span>Download on the</span>
                       <strong>App Store</strong>
@@ -907,7 +1285,11 @@ export function FullInstitutionalSite() {
                       })
                     }
                   >
-                    <img className="store-icon store-logo play" src={GOOGLE_PLAY_LOGO} alt="" />
+                    <img
+                      className="store-icon store-logo play"
+                      src={GOOGLE_PLAY_LOGO}
+                      alt=""
+                    />
                     <div className="store-text">
                       <span>GET IT ON</span>
                       <strong>Google Play</strong>
@@ -1146,6 +1528,110 @@ export function FullInstitutionalSite() {
           </div>
         </section>
 
+        <section
+          className={`nb-featured-plans${selectedFeaturedAudience === "basico" ? " is-basic-audience" : ""}`}
+          id="planos-netbox"
+          aria-labelledby="nb-featured-title"
+        >
+          <div className="nb-featured-shell">
+            <header className="nb-featured-heading">
+              <h2 id="nb-featured-title">Conheça nossos planos</h2>
+              <p>
+                Consulte os planos de internet residencial e escolha a opção
+                ideal para se manter conectado.
+              </p>
+              <div className="nb-featured-audience" aria-label="Escolha seu perfil">
+                <button
+                  type="button"
+                  className={`nb-featured-audience-button${selectedFeaturedAudience === "basico" ? " is-selected" : ""}`}
+                  aria-pressed={selectedFeaturedAudience === "basico"}
+                  onClick={() => {
+                    setSelectedFeaturedAudience("basico");
+                    setFeaturedPlanIndex(0);
+                  }}
+                >
+                  Básico
+                </button>
+                <button
+                  type="button"
+                  className={`nb-featured-audience-button${selectedFeaturedAudience === "familia" ? " is-selected" : ""}`}
+                  aria-pressed={selectedFeaturedAudience === "familia"}
+                  onClick={() => {
+                    setSelectedFeaturedAudience("familia");
+                    setFeaturedPlanIndex(0);
+                  }}
+                >
+                  Família
+                </button>
+              </div>
+            </header>
+
+            <div
+              className="nb-featured-stage"
+              aria-roledescription="carrossel"
+              aria-label={
+                selectedFeaturedAudience === "familia"
+                  ? "Planos Família Netbox"
+                  : "Planos Básicos Netbox"
+              }
+              {...featuredSwipe.bind}
+            >
+              <button
+                type="button"
+                className="nb-featured-arrow nb-featured-arrow-left"
+                onClick={() => moveFeaturedPlan(-1)}
+                aria-label="Plano anterior"
+              >
+                <IoChevronBack aria-hidden="true" />
+              </button>
+
+              {currentFeaturedPlans.map((plan, index) => {
+                const distance =
+                  (index - featuredPlanIndex + currentFeaturedPlans.length) %
+                  currentFeaturedPlans.length;
+                const position =
+                  distance === 0
+                    ? "active"
+                    : distance === 1
+                      ? "next"
+                      : "previous";
+                return (
+                  <FeaturedPlanCard
+                    key={plan.name}
+                    plan={plan}
+                    position={position}
+                    onSelect={() => setFeaturedPlanIndex(index)}
+                    onContact={contactFeaturedPlan}
+                  />
+                );
+              })}
+
+              <button
+                type="button"
+                className="nb-featured-arrow nb-featured-arrow-right"
+                onClick={() => moveFeaturedPlan(1)}
+                aria-label="Próximo plano"
+              >
+                <IoChevronForward aria-hidden="true" />
+              </button>
+            </div>
+            <div className="nb-featured-dots" aria-label="Selecionar plano">
+              {currentFeaturedPlans.map((plan, index) => (
+                <button
+                  key={plan.name}
+                  type="button"
+                  className={index === featuredPlanIndex ? "is-active" : ""}
+                  onClick={() => setFeaturedPlanIndex(index)}
+                  aria-label={`Mostrar plano ${plan.name}`}
+                  aria-current={
+                    index === featuredPlanIndex ? "true" : undefined
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="netbox-app-section" id="aplicativo-netbox">
           <div className="model-shell netbox-app-layout">
             <div className="netbox-app-copy">
@@ -1172,7 +1658,11 @@ export function FullInstitutionalSite() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <img className="store-icon store-logo apple" src={APP_STORE_LOGO} alt="" />
+                      <img
+                        className="store-icon store-logo apple"
+                        src={APP_STORE_LOGO}
+                        alt=""
+                      />
 
                       <div className="store-text">
                         <span>Download on the</span>
@@ -1186,7 +1676,11 @@ export function FullInstitutionalSite() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <img className="store-icon store-logo play" src={GOOGLE_PLAY_LOGO} alt="" />
+                      <img
+                        className="store-icon store-logo play"
+                        src={GOOGLE_PLAY_LOGO}
+                        alt=""
+                      />
 
                       <div className="store-text">
                         <span>GET IT ON</span>
@@ -1277,7 +1771,6 @@ export function FullInstitutionalSite() {
             </div>
           </div>
         </section>
-
 
         <section className="gallery-section" id="solucoes">
           <div className="model-shell">
@@ -1686,7 +2179,7 @@ export function FullInstitutionalSite() {
               className="footer-app-logo"
               src="/netbox-app-icon.png"
               alt="Aplicativo Netbox"
-            /> 
+            />
             <a href="tel:08006022732">☎ 0800 602 2732</a>
             <a href={SECOND_COPY} target="_blank" rel="noreferrer">
               2ª via de boleto

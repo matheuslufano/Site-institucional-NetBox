@@ -17,3 +17,4 @@
 @import "./styles/15-responsive.css";
 @import "./styles/16-dark-theme.css";
 @import "./styles/17-development-notice.css";
+@plugin "@iconify/tailwind4";
