@@ -643,6 +643,8 @@
 }
 
 @media (max-width: 980px) {
+  .structure-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; gap: 14px; }
+
   .netbox-app-carousel {
     min-height: 380px;
     height: 380px;
@@ -664,19 +666,19 @@
   .inner-page-hero h1 { font-size: 39px; }
   .inner-page-hero p { font-size: 14px; }
   .inner-section { padding: 68px 0; }
-  .store-locator-section { padding: 60px 0; }
-  .store-locator-heading { margin-bottom: 25px; }
-  .store-locator-heading h2 { font-size: 35px; }
+  .store-locator-section { padding: 42px 0; }
+  .store-locator-heading { margin-bottom: 18px; }
+  .store-locator-heading h2 { font-size: clamp(29px, 8vw, 35px); }
   .store-locator-heading p { font-size: 14px; line-height: 1.5; }
   .store-locator { grid-template-columns: 1fr; gap: 14px; }
-  .store-map-panel { padding: 14px; border-radius: 20px; }
-  .store-map-canvas { width: 100%; min-height: 0; flex: 0 0 380px; height: 380px; border-radius: 15px; }
+  .store-map-panel { padding: 12px; border-radius: 18px; }
+  .store-map-canvas { width: 100%; min-height: 0; flex: 0 0 clamp(230px, 68vw, 320px); height: clamp(230px, 68vw, 320px); border-radius: 15px; }
   .store-map-pin { width: 20px; height: 20px; }
   .store-map-pin span { font-size: 9px; }
-  .store-detail-panel { border-radius: 20px; }
-  .store-detail-photo { min-height: 210px; }
-  .store-detail-map { height: 220px; }
-  .store-detail-content { padding: 22px 20px 24px; }
+  .store-detail-panel { border-radius: 18px; }
+  .store-detail-photo { min-height: clamp(150px, 48vw, 210px); }
+  .store-detail-map { height: clamp(170px, 56vw, 220px); }
+  .store-detail-content { padding: 18px 16px 20px; }
   .store-detail-content h3 { font-size: 27px; }
   .store-detail-actions { flex-direction: column; }
   .store-detail-actions .model-button { width: 100%; justify-content: center; }
@@ -689,12 +691,20 @@
   .customer-service-grid > a { min-height: 290px; }
   .support-strip .model-shell { align-items: flex-start; flex-direction: column; }
   .support-strip .model-shell > div:last-child { flex-wrap: wrap; }
-  .structure-gallery { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .structure-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 540px; gap: 9px; }
   .structure-art { min-height: 160px; }
   .city-chip-grid { grid-template-columns: 1fr 1fr; }
   .inner-form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 21px; }
   .inner-cta h2 { font-size: 31px; }
+}
+
+@media (max-width: 380px) {
+  .store-locator-section { padding-block: 34px; }
+  .store-map-panel { padding: 10px; }
+  .store-map-canvas { flex-basis: 230px; height: 230px; }
+  .store-detail-map { height: 170px; }
+  .structure-gallery { grid-template-columns: minmax(0, 1fr); max-width: 320px; gap: 14px; }
 }
 
 @media (max-width: 640px) {

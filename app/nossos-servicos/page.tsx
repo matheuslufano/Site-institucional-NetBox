@@ -26,11 +26,12 @@ const serviceDetails = [
     title: "Internet residencial",
     kicker: "Para sua casa",
     image: "/servico-fibra-residencial.png",
-    text: "Conectividade por fibra óptica para estudar, trabalhar, assistir e manter a casa conectada.",
+    text: "Conectividade por fibra óptica para estudar, trabalhar, assistir e manter a casa conectada com estabilidade.",
     items: [
-      "Consulta por cidade e endereço",
-      "Roteador em comodato conforme condições",
-      "Oferta confirmada pelo consultor",
+      "Planos ideais para cada rotina e perfil de consumo",
+      "Wi-Fi de alta performance com instalação prática",
+      "Mais estabilidade para streaming, trabalho e estudos",
+      "Atendimento próximo para acompanhar sua contratação"
     ],
   },
   {
@@ -40,10 +41,10 @@ const serviceDetails = [
     image: "/servico-netbox-empresas.png",
     text: "Soluções para empresas que precisam de estabilidade, flexibilidade e atendimento personalizado.",
     items: [
-      "Internet empresarial",
+      "Internet empresarial com mais estabilidade e desempenho",
       "Link dedicado e conectividade sob medida",
-      "Análise técnica da necessidade do negócio",
-      "Atendimento preferencial",
+      "Análise técnica conforme a necessidade do negócio",
+      "Atendimento e suporte preferencial para sua operação"
     ],
   },
   {
@@ -51,8 +52,26 @@ const serviceDetails = [
     title: "Suporte Técnico Regional",
     kicker: "Atendimento próximo",
     image: "/servico-suporte-regional.png",
-    text: "Acessos rápidos para cuidar da assinatura e falar com a equipe Netbox.",
-    items: ["Atendimento humanizado por uma equipe que conhece a região"],
+    text: "Acesso rápido ao suporte para cuidar da sua assinatura e resolver demandas com agilidade.",
+    items: [
+      "Equipe regional que conhece a sua realidade",
+      "Atendimento humanizado e sem burocracia",
+      "Acompanhamento rápido para suporte e orientações",
+      "Mais segurança para resolver o que você precisa"
+    ],
+  },
+  {
+    icon: IoHeadsetOutline,
+    title: "Aplicativos e benefícios",
+    kicker: "Aplicativos parceiros",
+    image: "/servico-aplicativos-parceiros.png",
+    text: "Complete sua experiência Netbox com serviços de entretenimento, música, saúde e conteúdo. Contrate aplicativos como Docway, Deezer Premium, Sky+ Light com Amazon Prime Video, HBO Max, Disney+ e Globoplay adicionando junto com a sua internet.",
+    items: [
+      "Até 40% de desconto em serviços selecionados no combo com internet",
+      "Contratação sem precisar usar cartão de crédito",
+      "Serviços cobrados junto com a internet em uma única fatura",
+      "Contratação simples, com mais praticidade para gerenciar seus serviços"
+    ],
   },
 ];
 
@@ -77,9 +96,10 @@ export default function ServicesPage() {
         <div className="model-shell services-detail-shell">
           <div className="model-heading services-detail-heading">
             <small>Escolha sua jornada</small>
-            <h2>Nossos serviços</h2>
+            <h2>TUDO O QUE VOCÊ PRECISA PARA SE CONECTAR MELHOR</h2>
             <p>
-              Encontre a solução ideal e fale diretamente com o canal adequado.
+              Internet, suporte e benefícios em um só lugar <br/>
+              Para sua casa, seu negócio e sua rotina. Simples de contratar e fácil de resolver.
             </p>
           </div>
           <div className="detail-service-grid">

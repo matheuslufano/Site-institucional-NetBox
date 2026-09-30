@@ -197,7 +197,7 @@
 
 .about-hero .about-hero-media figcaption span { color: rgba(255,255,255,.72); font-size: 9px; letter-spacing: .08em; }
 
-.inner-section { padding: 90px 0; background: #eaeaea; }
+.inner-section { padding: clamp(52px, 6vw, 90px) 0; background: #eaeaea; }
 
 .soft-section { background: #f3f3f3; }
 
@@ -538,7 +538,7 @@
   height: 17px;
 }
 
-.structure-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.structure-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); max-width: 1120px; margin-inline: auto; }
 
 .structure-gallery article { overflow: hidden; border-radius: 18px; background: #fff; box-shadow: 0 12px 34px rgba(0,0,0,.06); transition: transform .25s ease, box-shadow .25s ease; }
 
@@ -554,7 +554,7 @@
 
 .structure-gallery article:hover .structure-photo img { transform: scale(1.035); }
 
-.store-locator-section { padding: 84px 0; background: #f7f4f0; }
+.store-locator-section { padding: clamp(44px, 6vw, 84px) 0; background: #f7f4f0; }
 
 .store-locator-heading { max-width: 620px; margin-bottom: 31px; }
 
@@ -564,7 +564,7 @@
 
 .store-locator-heading p { margin: 0; color: #6d6864; font-size: 14px; }
 
-.store-locator { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(330px, .92fr); gap: 18px; align-items: stretch; }
+.store-locator { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(12px, 1.5vw, 18px); align-items: stretch; }
 
 .store-map-panel, .store-detail-panel { min-width: 0; overflow: hidden; border: 1px solid #e7dfd8; border-radius: 24px; background: #fff; box-shadow: 0 16px 42px rgba(57, 36, 21, .07); }
 
@@ -580,7 +580,7 @@
 
 .store-map-topline b { padding: 6px 9px; border-radius: 999px; background: var(--yellow); color: #3a2b00; font-size: 9px; letter-spacing: .06em; }
 
-.store-map-canvas { position: relative; width: 100%; min-height: 540px; flex: 1 1 auto; margin: 12px 0 8px; overflow: hidden; border-radius: 18px; background: radial-gradient(circle at 50% 45%, #444, #292929); }
+.store-map-canvas { position: relative; width: 100%; min-height: clamp(320px, 38vw, 540px); flex: 1 1 auto; margin: 12px 0 8px; overflow: hidden; border-radius: 18px; background: radial-gradient(circle at 50% 45%, #444, #292929); }
 
 .store-map-canvas::before, .store-map-canvas::after { position: absolute; content: ""; pointer-events: none; }
 
@@ -618,7 +618,7 @@
 
 .store-detail-panel { display: flex; flex-direction: column; }
 
-.store-detail-photo { position: relative; min-height: 242px; overflow: hidden; background: #382218; }
+.store-detail-photo { position: relative; min-height: clamp(170px, 20vw, 242px); overflow: hidden; background: #382218; }
 
 .store-detail-photo::after { position: absolute; inset: 45% 0 0; content: ""; background: linear-gradient(transparent, rgba(38,20,12,.72)); pointer-events: none; }
 

@@ -404,11 +404,15 @@ function FeaturedPlanCard({
                   <strong>Você pode optar entre Disney Plus ou HBO Max</strong>
                   <div className="nb-featured-family-options-row">
                     <div className="nb-featured-family-option">
-                      <img src={featuredServiceImages["Disney Plus"]} alt="" />
+                      <span className="nb-featured-family-option-logo">
+                        <img src={featuredServiceImages["Disney Plus"]} alt="" />
+                      </span>
                       <span>Disney Plus</span>
                     </div>
                     <div className="nb-featured-family-option">
-                      <img src={featuredServiceImages["HBO Max"]} alt="" />
+                      <span className="nb-featured-family-option-logo">
+                        <img src={featuredServiceImages["HBO Max"]} alt="" />
+                      </span>
                       <span>HBO Max</span>
                     </div>
                   </div>
