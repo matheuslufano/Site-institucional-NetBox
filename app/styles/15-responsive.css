@@ -1270,9 +1270,9 @@ iframe {
 }
 
 @media (max-width: 640px) {
-  .structure-modal { grid-template-columns: 1fr; }
+  .structure-modal { grid-template-columns: 1fr; overflow-y: auto; }
 
-  .structure-modal-image { max-height: 52svh; }
+  .structure-modal-image { max-height: none; }
 
   .structure-modal-copy { padding: 18px 18px 21px; border-top: 1px solid #ece4de; border-left: 0; }
 

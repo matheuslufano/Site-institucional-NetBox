@@ -8,8 +8,8 @@ const structureItems = [
     source: "Imagem ilustrativa",
     position: "center",
     description: "Rede de fibra óptica preparada para manter você conectado.",
-    width: 1678,
-    height: 937,
+    width: 2345,
+    height: 1420,
   },
   {
     title: "ATENDIMENTO SIMPLES",
@@ -18,8 +18,8 @@ const structureItems = [
     source: "Acervo Netbox",
     position: "center",
     description: "Fale com a gente sem complicação e encontre rapidamente o que precisa.",
-    width: 1360,
-    height: 765,
+    width: 2345,
+    height: 1420,
   },
   {
     title: "INSTALAÇÃO ÁGIL",
@@ -28,8 +28,8 @@ const structureItems = [
     source: "Imagem ilustrativa",
     position: "center",
     description: "Contratou? Nossa equipe cuida da instalação para você começar a usar.",
-    width: 1672,
-    height: 941,
+    width: 2345,
+    height: 1420,
   },
   {
     title: "SUPORTE QUE RESOLVE",
@@ -38,8 +38,8 @@ const structureItems = [
     source: "Imagem ilustrativa",
     position: "center",
     description: "Quando precisar, nosso time técnico está pronto para ajudar.",
-    width: 1672,
-    height: 941,
+    width: 2345,
+    height: 1420,
   },
   {
     title: "PARA SUA CASA OU EMPRESA",
@@ -48,8 +48,8 @@ const structureItems = [
     source: "Imagem ilustrativa",
     position: "center",
     description: "Planos e soluções para diferentes formas de usar a internet.",
-    width: 1672,
-    height: 941,
+    width: 2345,
+    height: 1420,
   },
   {
     title: "ESTAMOS PERTO DE VOCÊ",
@@ -58,8 +58,8 @@ const structureItems = [
     source: "Acervo Netbox",
     position: "center",
     description: "Presença regional e atendimento feito por quem conhece sua cidade.",
-    width: 1360,
-    height: 765,
+    width: 2345,
+    height: 1420,
   },
 ];
 

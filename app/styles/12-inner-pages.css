@@ -677,7 +677,7 @@
 
 .structure-modal { position: relative; width: calc(100vw - 48px); max-height: calc(100svh - 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); overflow: hidden; border: 1px solid rgba(255,255,255,.22); border-radius: 25px; background: #fff; box-shadow: 0 32px 100px rgba(0,0,0,.48); animation: solutionModalReveal .28s cubic-bezier(.22,1,.36,1) both; touch-action: pan-y; }
 
-.structure-modal-image { position: relative; width: 100%; background: #17110e; overflow: hidden; }
+.structure-modal-image { position: relative; width: 100%; align-self: start; background: #17110e; overflow: hidden; }
 
 .structure-modal-image img { object-fit: contain; }
 
