@@ -679,7 +679,7 @@
 
 .structure-modal-image { position: relative; width: 100%; align-self: start; background: #17110e; overflow: hidden; }
 
-.structure-modal-image img { object-fit: contain; }
+.structure-modal-image img { display: block; width: 100%; height: auto; object-fit: contain; }
 
 .structure-modal-copy { padding: 30px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid #ece4de; background: #fff; }
 

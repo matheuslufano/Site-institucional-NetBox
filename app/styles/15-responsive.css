@@ -524,7 +524,7 @@
 
   .footer-app-logo { width: 108px; height: 108px; border-radius: 23px; }
 
-  .footer-contact > a:not(.footer-app-download) { width: 100%; max-width: 300px; padding: 11px 14px; border: 1px solid #383838; border-radius: 12px; background: #2b2b2b; text-align: center; }
+  .footer-contact-actions > a { padding: 11px 8px; }
 
   .footer-app-download-wrap { width: 100%; margin-top: 5px; }
 

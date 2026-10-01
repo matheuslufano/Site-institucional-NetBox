@@ -155,10 +155,12 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
               src="/netbox-app-icon.png"
               alt="Aplicativo Netbox"
             />
-            <a href="tel:08006022732">☎ 0800 602 2732</a>
-            <a href={SECOND_COPY} target="_blank" rel="noreferrer">
-              2ª via de boleto
-            </a>
+            <div className="footer-contact-actions">
+              <a href="tel:08006022732">☎ 0800 602 2732</a>
+              <a href={SECOND_COPY} target="_blank" rel="noreferrer">
+                2ª via de boleto
+              </a>
+            </div>
             <AppDownloadButton />
           </div>
         </div>

@@ -18,18 +18,6 @@ export function AppDownloadButton() {
 
   return (
     <div className="footer-app-download-wrap">
-      <span className="footer-app-store-icons" aria-hidden="true">
-        <img
-          className="footer-app-store-badge footer-app-store-badge-google"
-          src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Play_2022_icon.svg"
-          alt=""
-        />
-        <img
-          className="footer-app-store-badge footer-app-store-badge-apple"
-          src="https://commons.wikimedia.org/wiki/Special:FilePath/App_Store_(iOS,_2024).svg"
-          alt=""
-        />
-      </span>
       <a
         className="model-button yellow footer-app-download"
         href={PLAY_STORE}

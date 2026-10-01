@@ -131,14 +131,12 @@ export function StructureGallery({ items }: StructureGalleryProps) {
               <IoClose aria-hidden="true" />
             </button>
 
-            <div
-              className="structure-modal-image"
-              style={{ aspectRatio: `${activeItem.width} / ${activeItem.height}` }}
-            >
+            <div className="structure-modal-image">
               <Image
                 src={activeItem.image}
                 alt={activeItem.alt}
-                fill
+                width={activeItem.width}
+                height={activeItem.height}
                 unoptimized
                 sizes="(max-width: 760px) 100vw, 65vw"
                 style={{ objectPosition: activeItem.position }}

@@ -990,7 +990,7 @@ export function FullInstitutionalSite() {
 
   function handleService(title: string) {
     if (title.toLocaleLowerCase("pt-BR").includes("residencial")) {
-      openResidentialPlans();
+      window.location.hash = "planos-netbox";
       return;
     }
     if (title === "Aplicativo Netbox") {
@@ -1004,9 +1004,7 @@ export function FullInstitutionalSite() {
       title === "Suporte Técnico Regional" ||
       title === "Atendimento ao cliente"
     ) {
-      document
-        .querySelector("#contato")
-        ?.scrollIntoView({ behavior: "smooth" });
+      window.location.href = "/nossa-estrutura";
       track("acessou_atendimento", { origin: "servicos" });
       return;
     }
@@ -1177,7 +1175,7 @@ export function FullInstitutionalSite() {
                       alt=""
                     />
                     <div className="store-text">
-                      <span>Download on the</span>
+                      <span>Baixe o app na</span>
                       <strong>App Store</strong>
                     </div>
                   </a>
@@ -1200,7 +1198,7 @@ export function FullInstitutionalSite() {
                       alt=""
                     />
                     <div className="store-text">
-                      <span>GET IT ON</span>
+                      <span>Baixe o App no</span>
                       <strong>Google Play</strong>
                     </div>
                   </a>
@@ -1376,7 +1374,7 @@ export function FullInstitutionalSite() {
               <small>Netbox Internet</small>
               <h2>Nossos Serviços</h2>
               <p>
-                Soluções para residências, empresas e clientes que precisam
+                DIRECIONAR LINK PARA A PAGINA NOSSA ESTRUTURA que precisam
                 resolver tudo com praticidade e atendimento próximo.
               </p>
               <div className="services-list">
@@ -1574,7 +1572,7 @@ export function FullInstitutionalSite() {
                       />
 
                       <div className="store-text">
-                        <span>Download on the</span>
+                        <span>Baixe o App na</span>
                         <strong>App Store</strong>
                       </div>
                     </a>
@@ -1592,7 +1590,7 @@ export function FullInstitutionalSite() {
                       />
 
                       <div className="store-text">
-                        <span>GET IT ON</span>
+                        <span>Baixe o App no</span>
                         <strong>Google Play</strong>
                       </div>
                     </a>
@@ -1986,10 +1984,12 @@ export function FullInstitutionalSite() {
               src="/netbox-app-icon.png"
               alt="Aplicativo Netbox"
             />
-            <a href="tel:08006022732">☎ 0800 602 2732</a>
-            <a href={SECOND_COPY} target="_blank" rel="noreferrer">
-              2ª via de boleto
-            </a>
+            <div className="footer-contact-actions">
+              <a href="tel:08006022732">☎ 0800 602 2732</a>
+              <a href={SECOND_COPY} target="_blank" rel="noreferrer">
+                2ª via de boleto
+              </a>
+            </div>
             <AppDownloadButton />
           </div>
         </div>
