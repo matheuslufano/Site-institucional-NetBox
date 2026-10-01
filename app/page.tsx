@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
+import { StructureSection } from "./_components/StructureSection";
 import { DevelopmentView } from "./_components/DevelopmentView";
 import { ArrowIcon } from "./_components/ArrowIcon";
 import { MenuContactLinks } from "./_components/MenuContactLinks";
@@ -597,51 +598,6 @@ const residentialPlans = [
   },
 ];
 
-const gallery = [
-  [
-    "01",
-    "REDE DE FIBRA ÓTICA",
-    "Rede de fibra óptica preparada para manter você conectado",
-    "/structure/ICONE - REDE DE FIBRA ÓPTICA.png",
-    "Ícone de rede de fibra óptica",
-  ],
-  [
-    "02",
-    "ATENDIMENTO SIMPLES",
-    "Fale com a gente sem complicação e encontre rapidamente o que precisa",
-    "/structure/ICONE - ATENDIMENTO SIMPLES.png",
-    "Ícone de atendimento simples",
-  ],
-  [
-    "03",
-    "INSTALAÇÃO ÁGIL",
-    "Contratou? Nossa equipe cuida da instalação para você começar a usar",
-    "/structure/ICONE - INSTALAÇÃO ÁGIL.png",
-    "Ícone de instalação ágil",
-  ],
-  [
-    "04",
-    "SUPORTE QUE RESOLVE",
-    "Quando precisar, nosso time técnico está pronto para ajudar",
-    "/structure/ICONE - SUPORTE QUE RESOLVE.png",
-    "Ícone de suporte técnico",
-  ],
-  [
-    "05",
-    "PARA SUA CASA OU EMPRESA",
-    "Planos e soluções para diferentes formas de usar a internet",
-    "/structure/ICONE - PARA SUA CASA OU EMPRESA.png",
-    "Ícone de soluções para casa ou empresa",
-  ],
-  [
-    "06",
-    "ESTAMOS PERTO DE VOCÊ",
-    "Presença regional e atendimento feito por quem conhece sua cidade",
-    "/structure/ICONE - ESTAMOS PERTO DE VOCÊ.png",
-    "Ícone de presença regional",
-  ],
-];
-
 const heroSlides = [
   {
     title: "Aplicativo Netbox",
@@ -743,7 +699,6 @@ export function FullInstitutionalSite() {
   const [appCarouselIndex, setAppCarouselIndex] = useState(1);
   const [appCarouselResetting, setAppCarouselResetting] = useState(false);
   const [appCarouselPaused, setAppCarouselPaused] = useState(false);
-  const [activeSolution, setActiveSolution] = useState<number | null>(null);
   const [plansOpen, setPlansOpen] = useState(false);
   const [activePlan, setActivePlan] = useState(0);
   const [featuredPlanIndex, setFeaturedPlanIndex] = useState(0);
@@ -759,8 +714,6 @@ export function FullInstitutionalSite() {
   const featureVideoRef = useRef<HTMLVideoElement>(null);
   const menuRef = useRef<HTMLElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
-  const solutionModalRef = useRef<HTMLElement | null>(null);
-  const solutionTriggerRef = useRef<HTMLElement | null>(null);
   const plansModalRef = useRef<HTMLElement | null>(null);
   const plansTriggerRef = useRef<HTMLElement | null>(null);
   const navigationVisible = useScrollDirectionVisibility();
@@ -769,8 +722,6 @@ export function FullInstitutionalSite() {
   const selectedMapLocation = selectedStoreAddress;
   const googleMapsEmbedUrl = `https://maps.google.com/maps?hl=pt-BR&q=${encodeURIComponent(selectedMapLocation)}&z=16&output=embed`;
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedMapLocation)}`;
-  const activeSolutionData =
-    activeSolution === null ? null : gallery[activeSolution];
   const appCarouselSlides = [
     appScreens[appScreens.length - 1],
     ...appScreens,
@@ -786,19 +737,6 @@ export function FullInstitutionalSite() {
   const appSwipe = useSwipeGesture({
     onSwipeLeft: () => moveAppSlide(1),
     onSwipeRight: () => moveAppSlide(-1),
-  });
-  const solutionSwipe = useSwipeGesture({
-    onSwipeLeft: () =>
-      setActiveSolution((current) =>
-        current === null ? null : (current + 1) % gallery.length,
-      ),
-    onSwipeRight: () =>
-      setActiveSolution((current) =>
-        current === null
-          ? null
-          : (current - 1 + gallery.length) % gallery.length,
-      ),
-    onSwipeDown: () => setActiveSolution(null),
   });
   const planSwipe = useSwipeGesture({
     onSwipeLeft: () => movePlan(1),
@@ -816,12 +754,6 @@ export function FullInstitutionalSite() {
   });
 
   useFocusTrap(menuOpen, menuRef, menuButtonRef, () => setMenuOpen(false));
-  useFocusTrap(
-    activeSolution !== null,
-    solutionModalRef,
-    solutionTriggerRef,
-    () => setActiveSolution(null),
-  );
   useFocusTrap(plansOpen, plansModalRef, plansTriggerRef, () =>
     setPlansOpen(false),
   );
@@ -855,31 +787,6 @@ export function FullInstitutionalSite() {
       document.documentElement.classList.remove("mobile-menu-open");
     };
   }, [menuOpen]);
-
-  useEffect(() => {
-    if (activeSolution === null) return;
-    const previousOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        setActiveSolution((current) =>
-          current === null
-            ? null
-            : (current - 1 + gallery.length) % gallery.length,
-        );
-      }
-      if (event.key === "ArrowRight") {
-        setActiveSolution((current) =>
-          current === null ? null : (current + 1) % gallery.length,
-        );
-      }
-    };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.documentElement.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [activeSolution]);
 
   useEffect(() => {
     if (!plansOpen) return;
@@ -1774,110 +1681,7 @@ export function FullInstitutionalSite() {
           </div>
         </section>
 
-        <section className="gallery-section" id="solucoes">
-          <div className="model-shell">
-            <div className="model-heading">
-              <h2>Nossas Soluções e Presença</h2>
-              <p>
-                Uma estrutura regional para conectar casas e empresas com fibra
-                óptica, canais digitais e atendimento nas cidades.
-              </p>
-            </div>
-            <div className="solution-gallery">
-              {gallery.map(([number, title, text, image, alt], index) => (
-                <button
-                  className={`solution-card card-${index + 1}`}
-                  key={title}
-                  type="button"
-                  onClick={(event) => {
-                    solutionTriggerRef.current = event.currentTarget;
-                    setActiveSolution(index);
-                  }}
-                  aria-label={`Abrir detalhes de ${title}`}
-                >
-                  <div className="solution-art">
-                    <img
-                      src={image}
-                      alt={alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span>{number}</span>
-                  </div>
-                  <div className="solution-overlay">
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {activeSolutionData && activeSolution !== null && (
-          <div
-            className="solution-modal-backdrop"
-            role="presentation"
-            onMouseDown={(event) => {
-              if (event.target === event.currentTarget) setActiveSolution(null);
-            }}
-          >
-            <section
-              ref={solutionModalRef}
-              className="solution-modal"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="solution-modal-title"
-              style={{
-                translate: `${solutionSwipe.offsetX * 0.2}px ${Math.max(0, solutionSwipe.offsetY) * 0.2}px`,
-              }}
-              {...solutionSwipe.bind}
-            >
-              <button
-                className="solution-modal-close"
-                type="button"
-                onClick={() => setActiveSolution(null)}
-                aria-label="Fechar detalhes do serviço"
-                autoFocus
-              >
-                <IoClose aria-hidden="true" />
-              </button>
-              <div className="solution-modal-image">
-                <img src={activeSolutionData[3]} alt={activeSolutionData[4]} />
-                <button
-                  className="solution-modal-arrow previous"
-                  type="button"
-                  onClick={() =>
-                    setActiveSolution(
-                      (activeSolution - 1 + gallery.length) % gallery.length,
-                    )
-                  }
-                  aria-label="Mostrar solução anterior"
-                >
-                  <IoChevronBack aria-hidden="true" />
-                </button>
-                <button
-                  className="solution-modal-arrow next"
-                  type="button"
-                  onClick={() =>
-                    setActiveSolution((activeSolution + 1) % gallery.length)
-                  }
-                  aria-label="Mostrar próxima solução"
-                >
-                  <IoChevronForward aria-hidden="true" />
-                </button>
-              </div>
-              <div className="solution-modal-copy">
-                <span>
-                  {activeSolutionData[0]} /{" "}
-                  {String(gallery.length).padStart(2, "0")}
-                </span>
-                <h3 id="solution-modal-title">{activeSolutionData[1]}</h3>
-                <p>{activeSolutionData[2]}</p>
-              </div>
-            </section>
-          </div>
-        )}
+        <StructureSection id="solucoes" />
 
         <section className="coverage-conversion-section" id="consulta">
           <div className="model-shell coverage-conversion-layout">
