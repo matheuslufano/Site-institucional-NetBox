@@ -303,7 +303,7 @@ function FeaturedPlanCard({
           {plan.name === "PRO"
             ? "PLANO PRO"
             : plan.name === "ADICIONAIS"
-              ? "Adicional"
+              ? "ADICIONAIS"
               : plan.name}
         </h3>
 
@@ -600,59 +600,45 @@ const residentialPlans = [
 const gallery = [
   [
     "01",
-    "Fibra residencial",
-    "Conexão para a rotina da sua casa.",
-    "/solutions 2/fibra-residencial.png",
-    "oxe?",
+    "REDE DE FIBRA ÓTICA",
+    "Rede de fibra óptica preparada para manter você conectado",
+    "/structure/ICONE - REDE DE FIBRA ÓPTICA.png",
+    "Ícone de rede de fibra óptica",
   ],
   [
     "02",
-    "Casa conectada",
-    "Mais dispositivos com estabilidade.",
-    "/solutions 2/casa-conectada.png",
-    "Dispositivos conectados à rede de uma residência",
+    "ATENDIMENTO SIMPLES",
+    "Fale com a gente sem complicação e encontre rapidamente o que precisa",
+    "/structure/ICONE - ATENDIMENTO SIMPLES.png",
+    "Ícone de atendimento simples",
   ],
   [
     "03",
-    "Netbox Empresas",
-    "Soluções para negócios que não podem parar.",
-    "/solutions 2/netbox-empresas.png",
-    "Equipe trabalhando conectada em uma empresa",
+    "INSTALAÇÃO ÁGIL",
+    "Contratou? Nossa equipe cuida da instalação para você começar a usar",
+    "/structure/ICONE - INSTALAÇÃO ÁGIL.png",
+    "Ícone de instalação ágil",
   ],
   [
     "04",
-    "Link dedicado",
-    "Desempenho personalizado para sua operação.",
-    "/solutions 2/link-dedicado.png",
-    "Equipamentos de rede conectados por fibra óptica",
+    "SUPORTE QUE RESOLVE",
+    "Quando precisar, nosso time técnico está pronto para ajudar",
+    "/structure/ICONE - SUPORTE QUE RESOLVE.png",
+    "Ícone de suporte técnico",
   ],
   [
     "05",
-    "Aplicativo Netbox",
-    "Serviços e faturas na palma da mão.",
-    "/solutions 2/aplicativo-netbox.png",
-    "Aplicativo Netbox sendo usado em um celular",
+    "PARA SUA CASA OU EMPRESA",
+    "Planos e soluções para diferentes formas de usar a internet",
+    "/structure/ICONE - PARA SUA CASA OU EMPRESA.png",
+    "Ícone de soluções para casa ou empresa",
   ],
   [
     "06",
-    "Suporte regional",
-    "Atendimento feito por quem está perto.",
-    "/solutions 2/suporte-regional.png",
-    "Atendente Netbox auxiliando um cliente",
-  ],
-  [
-    "07",
-    "Lojas Netbox",
-    "Presença em cidades do Tocantins.",
-    "/solutions 2/lojas-netbox.png",
-    "Cliente chegando a uma loja Netbox",
-  ],
-  [
-    "08",
-    "Instalação agendada",
-    "Consulta técnica e próximos passos pelo WhatsApp.",
-    "/solutions 2/instalacao-agendada.png",
-    "Técnico instalando fibra óptica em uma residência",
+    "ESTAMOS PERTO DE VOCÊ",
+    "Presença regional e atendimento feito por quem conhece sua cidade",
+    "/structure/ICONE - ESTAMOS PERTO DE VOCÊ.png",
+    "Ícone de presença regional",
   ],
 ];
 

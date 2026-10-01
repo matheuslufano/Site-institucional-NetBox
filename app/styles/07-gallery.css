@@ -15,7 +15,7 @@
 
 .model-heading p { margin: 0; color: var(--muted); line-height: 1.55; }
 
-.solution-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.solution-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
 .solution-card {
   position: relative;
