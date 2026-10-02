@@ -526,7 +526,7 @@
 
   .footer-contact-actions > a { padding: 11px 8px; }
 
-  .footer-app-download-wrap { width: 100%; margin-top: 5px; }
+  .footer-app-download-wrap { width: 100%; margin-top: auto; }
 
   .footer-app-download { width: 100%; max-width: 300px; }
 
