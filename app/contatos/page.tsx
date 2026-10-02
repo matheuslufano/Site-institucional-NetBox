@@ -66,8 +66,8 @@ export default function ContactPage() {
             <small>Envie sua mensagem</small>
             <h2>Conte o que você precisa.</h2>
             <p>
-              Preencha os dados essenciais. A mensagem será preparada e
-              encaminhada para o WhatsApp da Netbox.
+              Preencha os dados essenciais. A mensagem será preparada para
+              envio ao e-mail da Netbox.
             </p>
             <div className="contact-hours">
               <strong>Atendimento divulgado</strong>

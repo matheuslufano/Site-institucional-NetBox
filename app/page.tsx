@@ -650,9 +650,10 @@ const heroSlides = [
 ];
 
 const appScreens = [
-  "/carocel_app/celular-laranja-1.png",
-  "/carocel_app/celular-laranja-2.png",
-  "/carocel_app/celular-laranja-3.png",
+  "/carocel_app/celular-laranja-v1.png",
+  "/carocel_app/celular-laranja-v2.png",
+  "/carocel_app/celular-laranja-v3.png",
+  "/carocel_app/celular-laranja-v4.png",
 ];
 
 declare global {
@@ -954,7 +955,7 @@ export function FullInstitutionalSite() {
 
   function contactFeaturedPlan(name: string) {
     openWhatsApp(
-      `Olá! Quero conhecer o plano ${name} da Netbox em Paraíso do Tocantins. Podem me informar velocidade, preço e disponibilidade para meu endereço?`,
+      `Olá! Vim pelo site e eu quero conhecer os planos disponíveis da Netbox.`,
       {
         city: DEFAULT_CITY,
         type: "residencial",

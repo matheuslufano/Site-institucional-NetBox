@@ -13,7 +13,11 @@ export function AppDownloadButton() {
     const userAgent = navigator.userAgent || "";
     const isAppleDevice = /iPad|iPhone|iPod/.test(userAgent) ||
       (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    window.location.href = isAppleDevice ? APP_STORE : PLAY_STORE;
+    window.open(
+      isAppleDevice ? APP_STORE : PLAY_STORE,
+      "_blank",
+      "noopener,noreferrer",
+    );
   }
 
   return (
@@ -21,6 +25,8 @@ export function AppDownloadButton() {
       <a
         className="model-button yellow footer-app-download"
         href={PLAY_STORE}
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={handleClick}
       >
         Baixe o app Netbox <FaArrowCircleRight className="link-arrow" aria-hidden="true" />

@@ -21,7 +21,7 @@ export default function AboutPage() {
 
           </div>
           <figure className="about-hero-media">
-            <Image src="/sobre-equipe-netbox.png" alt="Equipe Netbox reunida em frente à unidade" fill priority unoptimized sizes="(max-width: 760px) calc(100vw - 32px), 44vw" />
+            <Image src="/premiacao-netbox.jpeg" alt="Equipe Netbox reunida em frente à unidade" fill priority unoptimized sizes="(max-width: 760px) calc(100vw - 32px), 44vw" />
             <figcaption><strong>Gente que conecta</strong><span>Equipe e presença regional</span></figcaption>
           </figure>
         </div>
@@ -36,7 +36,7 @@ export default function AboutPage() {
             <figure className="about-story-detail">
               <Image src="/sobre-central-atendimento.webp" alt="Central de atendimento e infraestrutura interna da Netbox" fill unoptimized sizes="(max-width: 760px) 42vw, 20vw" />
             </figure>
-            <div className="about-story-mark" aria-hidden="true"><span>NET</span><strong>BOX</strong></div>
+            <img className="about-story-mark" src="/selo-netbox-site.png" alt="Selo Netbox" />
           </div>
           <div className="inner-copy about-story-copy">
             <small>Quem somos</small>

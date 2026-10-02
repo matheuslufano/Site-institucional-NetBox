@@ -1566,7 +1566,7 @@ iframe {
 
   .about-story-detail { width: 48%; border-width: 5px; }
 
-  .about-story-mark { top: 16px; right: 7px; width: 74px; }
+  .about-story-mark { top: 16px; right: 7px; width: 74px; height: 74px; }
 
   .about-story-mark span { font-size: 11px; }
 

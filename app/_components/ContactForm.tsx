@@ -2,9 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { ArrowIcon } from "./ArrowIcon";
-import { openAffiliateAwareWhatsApp } from "./affiliateWhatsApp";
 
-const WHATSAPP = "5508006022732";
+const CONTACT_EMAIL = "atendimento@netbox.net.br";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -20,10 +19,10 @@ export function ContactForm() {
       `Assunto: ${data.subject}`,
       `Mensagem: ${data.message}`,
     ].join("\n");
+    const subject = `Contato pelo site — ${data.subject}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    window.open(gmailUrl, "_blank", "noopener,noreferrer");
     setSent(true);
-    openAffiliateAwareWhatsApp(
-      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
-    );
   }
 
   return (
@@ -37,8 +36,8 @@ export function ContactForm() {
         <label>Assunto<select name="subject"><option>Quero contratar</option><option>Suporte técnico</option><option>Financeiro</option><option>Atendimento empresarial</option><option>Outro assunto</option></select></label>
       </div>
       <label>Como podemos ajudar?<textarea name="message" required rows={5} placeholder="Escreva sua mensagem" /></label>
-      <button className="model-button orange" type="submit">Continuar no WhatsApp <ArrowIcon /></button>
-      {sent && <p className="form-status" role="status">Mensagem preparada. O WhatsApp foi aberto em uma nova janela.</p>}
+      <button className="model-button orange" type="submit">Enviar por e-mail <ArrowIcon /></button>
+      {sent && <p className="form-status" role="status">Mensagem preparada no seu aplicativo de e-mail.</p>}
     </form>
   );
 }

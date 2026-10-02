@@ -68,7 +68,7 @@ export function StructureSection({ id }: { id?: string }) {
     <section className="inner-section soft-section" id={id}>
       <div className="model-shell">
         <div className="model-heading">
-          <h2>A estrutura é nossa. <br/>A facilidade é sua.</h2>
+          <h2>A estrutura é nossa, a facilidade é sua.</h2>
           <p>Da contratação ao suporte, trabalhamos para deixar sua experiência mais simples.</p>
         </div>
         <StructureGallery items={structureItems} />
