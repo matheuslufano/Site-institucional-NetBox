@@ -29,8 +29,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJA1L7lKR9I5MRbVAt1szFxzo",
     imageSrc: "/lojas/barrolandia.png",
-    x: "48%",
-    y: "55%",
+    x: "39.7%",
+    y: "57%",
   },
   {
     city: "Bom Jesus do Tocantins - TO",
@@ -38,8 +38,8 @@ const stores: Store[] = [
     address: "Endereço em atualização",
     phone: "0800 602 2732",
     placeId: "ChIJA8OrOHaFJpMRuE4Wzi6tvWI",
-    x: "57%",
-    y: "45%",
+    x: "53%",
+    y: "46%",
   },
   {
     city: "Brasilândia do Tocantins - TO",
@@ -48,8 +48,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJQUUnzmVfJ5MRn08r3WnA3mw",
     imageSrc: "/lojas/brasilandia.png",
-    x: "43%",
-    y: "38%",
+    x: "44.5%",
+    y: "39.7%",
   },
   {
     city: "Colinas do Tocantins - TO",
@@ -58,8 +58,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJQUUnzmVfJ5MRn08r3WnA3mw",
     imageSrc: "/lojas/colinas.png",
-    x: "43%",
-    y: "28%",
+    x: "44.6%",
+    y: "35.8%",
   },
   {
     city: "Colméia - TO",
@@ -68,8 +68,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJm934FYkzIZMRMu_3aLyMWUc",
     imageSrc: "/lojas/colmeia.png",
-    x: "40%",
-    y: "43%",
+    x: "38.9%",
+    y: "43.7%",
   },
   {
     city: "Goianorte - TO",
@@ -78,8 +78,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJlzTfy9U7IZMRdKbXL6FuvMM",
     imageSrc: "/lojas/goianorte.png",
-    x: "40%",
-    y: "36%",
+    x: "35.6%",
+    y: "44.3%",
   },
   {
     city: "Guaraí - TO",
@@ -88,7 +88,7 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJnTtNm4O5JpMRwJ74TEjr2eA",
     imageSrc: "/lojas/guarai.png",
-    x: "53%",
+    x: "43.9%",
     y: "44%",
   },
   {
@@ -98,8 +98,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJ_UsS65OVPpMR7YfAEjwZuH0",
     imageSrc: "/lojas/gurupi.png",
-    x: "39%",
-    y: "79%",
+    x: "33%",
+    y: "79.5%",
   },
   {
     city: "Itacajá - TO",
@@ -108,8 +108,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJScCGGE61J5MR3bq3RrxyRhc",
     imageSrc: "/lojas/itacaja.png",
-    x: "62%",
-    y: "40%",
+    x: "58.5%",
+    y: "39.8%",
   },
   {
     city: "Lajeado - TO",
@@ -118,8 +118,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJ8RyrQdxnJJMRxys-RuKW-RE",
     imageSrc: "/lojas/lajeado.png",
-    x: "53%",
-    y: "53%",
+    x: "57%",
+    y: "56%",
   },
   {
     city: "Luzimangues - TO",
@@ -127,8 +127,8 @@ const stores: Store[] = [
     address: "Endereço em atualização",
     phone: "0800 602 2732",
     placeId: "",
-    x: "52%",
-    y: "64%",
+    x: "53%",
+    y: "62%",
   },
   {
     city: "Miracema do Tocantins - TO",
@@ -138,7 +138,7 @@ const stores: Store[] = [
     placeId: "ChIJ8RyrQdxnJJMRxys-RuKW-RE",
     imageSrc: "/lojas/miracema.png",
     x: "50%",
-    y: "51%",
+    y: "53.8%",
   },
   {
     city: "Miranorte - TO",
@@ -147,8 +147,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJgwn9blNxJJMRCbRPKV8hi3Q",
     imageSrc: "/lojas/miranorte.png",
-    x: "47%",
-    y: "51%",
+    x: "42.3%",
+    y: "53.3%",
   },
   {
     city: "Paraíso do Tocantins - TO",
@@ -157,8 +157,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJWePgppJPI5MR72hOEa65hMU",
     imageSrc: "/lojas/paraiso.png",
-    x: "43%",
-    y: "63%",
+    x: "36.6%",
+    y: "61%",
   },
   {
     city: "Pedro Afonso - TO",
@@ -167,8 +167,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJA8OrOHaFJpMRuE4Wzi6tvWI",
     imageSrc: "/lojas/pedro-afonso.png",
-    x: "60%",
-    y: "45%",
+    x: "50.5%",
+    y: "46.7%",
   },
   {
     city: "Presidente Kennedy - TO",
@@ -177,8 +177,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJGUllUmwnJ5MRBs3W97itxxQ",
     imageSrc: "/lojas/presidente-kennedy.png",
-    x: "45%",
-    y: "41%",
+    x: "44%",
+    y: "41.5%",
   },
   {
     city: "Rio dos Bois - TO",
@@ -187,8 +187,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJgwn9blNxJJMRCbRPKV8hi3Q",
     imageSrc: "/lojas/rio-dos-bois.png",
-    x: "50%",
-    y: "49%",
+    x: "43.5%",
+    y: "51.1%",
   },
   {
     city: "Santa Maria do Tocantins - TO",
@@ -197,8 +197,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJA8OrOHaFJpMRuE4Wzi6tvWI",
     imageSrc: "/lojas/santa-maria.png",
-    x: "46%",
-    y: "44%",
+    x: "58.1%",
+    y: "44.7%",
   },
   {
     city: "Tabocão - TO",
@@ -207,8 +207,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJE26KfYCnJpMR6GRrWn2b1pk",
     imageSrc: "/lojas/tabocao.png",
-    x: "50%",
-    y: "46%",
+    x: "43.8%",
+    y: "46.4%",
   },
   {
     city: "Tocantínia - TO",
@@ -217,8 +217,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJ8RyrQdxnJJMR6GRrWn2b1pk",
     imageSrc: "/lojas/tocantinia.png",
-    x: "52%",
-    y: "49%",
+    x: "46.6%",
+    y: "53.7%",
   },
   {
     city: "Tupirama - TO",
@@ -227,8 +227,8 @@ const stores: Store[] = [
     phone: "0800 602 2732",
     placeId: "ChIJA8OrOHaFJpMRuE4Wzi6tvWI",
     imageSrc: "/lojas/tupirama.png",
-    x: "63%",
-    y: "45%",
+    x: "48.2%",
+    y: "46.8%",
   },
 ];
 
@@ -312,41 +312,43 @@ export function StoreLocator() {
                   −
                 </button>
               </div>
-              <div
-                className="store-map-zoom-layer"
-                style={{
-                  transform: `scale(${mapZoom})`,
-                  transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
-                }}
-              >
-                <img
-                  className="store-map-image"
-                  src="/mapa-tocantins-editavel.svg"
-                  alt="Mapa do Tocantins"
-                />
-                {stores.map((store, index) => (
-                  <button
-                    className={`store-map-pin${selectedIndex === index ? " is-selected" : ""}`}
-                    key={store.city}
-                    type="button"
-                    style={
-                      {
-                        left: store.x,
-                        top: store.y,
-                        "--pin-scale": 1 / mapZoom,
-                      } as CSSProperties
-                    }
-                    onClick={() => setSelectedIndex(index)}
-                    aria-label={`Selecionar loja de ${store.city}`}
-                    aria-pressed={selectedIndex === index}
-                    title={store.city}
-                  >
-                    <span aria-hidden="true" />
-                    <b className="store-map-tooltip" aria-hidden="true">
-                      {store.shortCity}
-                    </b>
-                  </button>
-                ))}
+              <div className="store-map-geography">
+                <div
+                  className="store-map-zoom-layer"
+                  style={{
+                    transform: `scale(${mapZoom})`,
+                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+                  }}
+                >
+                  <img
+                    className="store-map-image"
+                    src="/mapa-tocantins-editavel.svg"
+                    alt="Mapa do Tocantins"
+                  />
+                  {stores.map((store, index) => (
+                    <button
+                      className={`store-map-pin${selectedIndex === index ? " is-selected" : ""}`}
+                      key={store.city}
+                      type="button"
+                      style={
+                        {
+                          left: store.x,
+                          top: store.y,
+                          "--pin-scale": 1 / mapZoom,
+                        } as CSSProperties
+                      }
+                      onClick={() => setSelectedIndex(index)}
+                      aria-label={`Selecionar loja de ${store.city}`}
+                      aria-pressed={selectedIndex === index}
+                      title={store.city}
+                    >
+                      <span aria-hidden="true" />
+                      <b className="store-map-tooltip" aria-hidden="true">
+                        {store.shortCity}
+                      </b>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="store-map-legend">
