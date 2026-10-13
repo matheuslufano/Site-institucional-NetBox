@@ -533,7 +533,7 @@ const services = [
 
 const residentialPlans = [
   {
-    name: "Básico",
+    name: "BÁSICO",
     features: [
       "Entrega da velocidade contratada",
       "Desconto para pagamento com pontualidade",
@@ -547,7 +547,7 @@ const residentialPlans = [
     bonus: "Indique, fechou, ganhou!",
   },
   {
-    name: "Essencial",
+    name: "ESSENCIAL",
     features: [
       "Entrega da velocidade contratada",
       "Desconto para pagamento com pontualidade",
@@ -563,7 +563,7 @@ const residentialPlans = [
     choiceNote: "Você pode optar por Deezer ou Prime Video.",
   },
   {
-    name: "Família",
+    name: "FAMÍLIA",
     features: [
       "Entrega da velocidade contratada",
       "Desconto para pagamento com pontualidade",
@@ -580,7 +580,7 @@ const residentialPlans = [
     allIncluded: true,
   },
   {
-    name: "Top Família",
+    name: "TOP FAMÍLIA",
     features: [
       "Entrega da velocidade contratada",
       "Desconto para pagamento com pontualidade",
@@ -1458,7 +1458,7 @@ export function FullInstitutionalSite() {
                     setFeaturedPlanIndex(0);
                   }}
                 >
-                  Básico
+                  BÁSICO
                 </button>
                 <button
                   type="button"

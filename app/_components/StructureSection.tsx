@@ -2,7 +2,7 @@ import { StructureGallery } from "../nossa-estrutura/StructureGallery";
 
 const structureItems = [
   {
-    title: "Rede de fibra óptica",
+    title: "REDE DE FIBRA ÓPTICA",
     image: "/structure/ICONE - REDE DE FIBRA ÓPTICA.png",
     alt: "Técnico organizando conexões em uma caixa de distribuição de fibra óptica",
     source: "Imagem ilustrativa",
