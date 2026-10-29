@@ -1,4 +1,32 @@
-# vinext-starter
+# Site institucional Netbox
+
+Site institucional em React 19, TypeScript e App Router, executado com Vinext/Vite e com compilação Next.js para Vercel. Fontes Manrope e Sora, cores institucionais e tema claro/escuro compõem a identidade compartilhada.
+
+## Páginas e arquitetura
+
+- `/site`: site institucional completo, planos, serviços e atendimento.
+- `/sobre`, `/nossos-servicos`, `/nossa-estrutura`, `/contatos` e `/central-do-cliente`: páginas institucionais.
+- `/site/blog` e `/site/blog/[slug]`: portal editorial independente e artigos do Blog Netbox, com cabeçalho e rodapé próprios.
+- `app/_components/`: componentes e comportamentos compartilhados, incluindo NetboxFrame e alternância de tema.
+- `app/styles/`: estilos institucionais; o Blog usa CSS Module próprio.
+- `public/`: acervo de imagens, logos e vídeos.
+
+O Blog cobre tecnologia e cultura nerd e pop (filmes, séries, HQs, jogos e entretenimento). Possui layout próprio de portal de notícias, carrossel com as dez notícias mais recentes, feed com linha do tempo e foguete no topo, sem carregar a moldura da home institucional. Utiliza vinte artigos locais demonstrativos, busca por URL, categorias, grupos editoriais, carregamento incremental na home e paginação numerada nas categorias. Conteúdos demonstrativos possuem `noindex` e são excluídos do sitemap; rascunhos não são expostos. Veja [a documentação editorial](app/site/blog/README.md) para adicionar artigos, aprovar publicações, validar o Blog e entender o futuro ponto de integração com CMS.
+
+## Desenvolvimento e verificações
+
+Node.js 22 e npm são necessários. Execute `npm install` e `npm run dev` para desenvolver. No Windows PowerShell, use `npm.cmd` quando a política impedir scripts .ps1.
+
+- `npm run build`: build Vinext; `npm start`: servidor de produção Vinext.
+- `npm run build:vercel`: build Next.js, conforme configuração Vercel existente.
+- `npm run lint`: lint geral; problemas anteriores ao Blog podem impedir sua aprovação.
+- `npx tsc --noEmit`: verificação de tipos.
+- `node --test tests/blog-content.test.mjs`: testes de busca, conteúdo e política editorial.
+
+O Blog não requer dependências ou variáveis de ambiente adicionais. A configuração opcional de infraestrutura original está documentada abaixo. O `npm test` legado ainda verifica o skeleton antigo do template e não corresponde à interface institucional atual.
+
+## Infraestrutura do template original
+
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
@@ -89,7 +117,7 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 
 - `npm run dev`: start local development
 - `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
+- `npm test`: legacy template checks; incompatible with the current institutional interface
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
 ## Learn More

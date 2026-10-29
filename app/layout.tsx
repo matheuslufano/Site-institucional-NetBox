@@ -11,19 +11,33 @@ export const metadata: Metadata = {
   title: "Netbox Internet | Fibra óptica no Tocantins",
   description:
     "Internet 100% fibra óptica para sua casa ou empresa. Consulte a cobertura Netbox na sua cidade pelo WhatsApp.",
-  keywords: ["internet fibra óptica", "provedor de internet", "Tocantins", "Netbox"],
+  keywords: [
+    "internet fibra óptica",
+    "provedor de internet",
+    "Tocantins",
+    "Netbox",
+  ],
   alternates: { canonical: "/" },
   openGraph: {
     title: "Netbox Internet — Internet de verdade",
-    description: "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
+    description:
+      "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
     locale: "pt_BR",
     type: "website",
-    images: [{ url: "/og.jpg", width: 1731, height: 909, alt: "Netbox Internet — Internet de verdade" }],
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1731,
+        height: 909,
+        alt: "Netbox Internet — Internet de verdade",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Netbox Internet — Internet de verdade",
-    description: "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
+    description:
+      "Fibra óptica, estabilidade e atendimento regional no Tocantins.",
     images: ["/og.jpg"],
   },
   icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
@@ -35,7 +49,9 @@ export const viewport: Viewport = {
   themeColor: "#f4511e",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",

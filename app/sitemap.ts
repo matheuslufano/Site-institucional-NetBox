@@ -1,11 +1,16 @@
 import type { MetadataRoute } from "next";
+import { articlePath, indexableArticles, SITE_URL } from "./site/blog/_lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/sobre", "/nossos-servicos", "/nossa-estrutura", "/contatos", "/central-do-cliente"];
-  return routes.map((route, index) => ({
+  const routes = ["", "/sobre", "/nossos-servicos", "/nossa-estrutura", "/contatos", "/central-do-cliente", "/site/blog"];
+  const pages: MetadataRoute.Sitemap = routes.map((route, index) => ({
     url: `https://netbox.net.br${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: index === 0 ? 1 : 0.8,
   }));
+  return [...pages, ...indexableArticles().map(article => ({
+    url: SITE_URL + articlePath(article), lastModified: new Date(article.updatedAt),
+    changeFrequency: 'monthly' as const, priority: 0.6,
+  }))];
 }

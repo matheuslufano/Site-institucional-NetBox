@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
 import { ClientShortcuts } from "./_components/ClientShortcuts";
 import { StructureSection } from "./_components/StructureSection";
 import { DevelopmentView } from "./_components/DevelopmentView";
@@ -103,7 +104,7 @@ function PlatformLogo({ platform }: { platform: PlanPlatform }) {
 }
 
 const featuredServiceImages: Record<string, string> = {
-  "Deezer": "/featured-plans/deezer.png",
+  Deezer: "/featured-plans/deezer.png",
   "Ubook Go": "/featured-plans/ubook-go.jpg",
   "Roteador Wi-Fi": "/featured-plans/roteador.png",
   "Sky Light": "/featured-plans/sky-light.png",
@@ -112,7 +113,7 @@ const featuredServiceImages: Record<string, string> = {
   "Disney Plus": "/featured-plans/disney-plus.png",
   "Docway Telemedicina": "/featured-plans/docway.png",
   "HBO Max": "/featured-plans/hbo-max.png",
-  "Globoplay": "/featured-plans/globoplay.png",
+  Globoplay: "/featured-plans/globoplay.png",
 };
 
 function FeaturedServiceIcon({ name }: { name: string }) {
@@ -233,10 +234,7 @@ const familyFeaturedPlans = [
       "Roteador em comodato",
       "Instalação prioritária",
     ],
-    services: [
-      "Aplicativo Netbox",
-      "Ubook Go",
-    ],
+    services: ["Aplicativo Netbox", "Ubook Go"],
   },
   {
     name: "ADICIONAIS",
@@ -310,17 +308,25 @@ function FeaturedPlanCard({
 
         {plan.tone === "additional" ? (
           <div className="nb-featured-services nb-featured-addons">
-            <strong>
-              Adicione ao seu plano um aplicativo
-            </strong>
-            <div className="nb-featured-addon-table" role="table" aria-label="Aplicativos disponíveis por categoria">
+            <strong>Adicione ao seu plano um aplicativo</strong>
+            <div
+              className="nb-featured-addon-table"
+              role="table"
+              aria-label="Aplicativos disponíveis por categoria"
+            >
               {featuredAdditionalTiers.map((tier) => (
                 <div
-                  className={"nb-featured-addon-row nb-featured-addon-row-" + tier.name.toLowerCase()}
+                  className={
+                    "nb-featured-addon-row nb-featured-addon-row-" +
+                    tier.name.toLowerCase()
+                  }
                   key={tier.name}
                   role="row"
                 >
-                  <strong className="nb-featured-addon-tier-name" role="rowheader">
+                  <strong
+                    className="nb-featured-addon-tier-name"
+                    role="rowheader"
+                  >
                     {tier.name}
                   </strong>
                   <div className="nb-featured-addon-tier-content" role="cell">
@@ -335,9 +341,17 @@ function FeaturedPlanCard({
                         <strong>{tier.caption}</strong>
                       </div>
                     ) : (
-                      <div className={"nb-featured-addon-logos nb-featured-addon-logos-" + tier.services.length}>
+                      <div
+                        className={
+                          "nb-featured-addon-logos nb-featured-addon-logos-" +
+                          tier.services.length
+                        }
+                      >
                         {tier.services.map((service) => (
-                          <div className="nb-featured-addon-service" key={service}>
+                          <div
+                            className="nb-featured-addon-service"
+                            key={service}
+                          >
                             <span className="nb-featured-addon-logo-frame">
                               <img
                                 className="nb-featured-addon-logo"
@@ -406,7 +420,10 @@ function FeaturedPlanCard({
                   <div className="nb-featured-family-options-row">
                     <div className="nb-featured-family-option">
                       <span className="nb-featured-family-option-logo">
-                        <img src={featuredServiceImages["Disney Plus"]} alt="" />
+                        <img
+                          src={featuredServiceImages["Disney Plus"]}
+                          alt=""
+                        />
                       </span>
                       <span>Disney Plus</span>
                     </div>
@@ -487,7 +504,10 @@ function FeaturedPlanCard({
           onClick={() => onContact(plan.name)}
         >
           <span>Conhecer esse plano</span>
-          <span className="icon-[logos--whatsapp-icon] nb-featured-whatsapp" aria-hidden="true" />
+          <span
+            className="icon-[logos--whatsapp-icon] nb-featured-whatsapp"
+            aria-hidden="true"
+          />
         </button>
         <button
           type="button"
@@ -703,10 +723,13 @@ export function FullInstitutionalSite() {
   const [plansOpen, setPlansOpen] = useState(false);
   const [activePlan, setActivePlan] = useState(0);
   const [featuredPlanIndex, setFeaturedPlanIndex] = useState(0);
-  const [selectedFeaturedAudience, setSelectedFeaturedAudience] =
-    useState<"basico" | "familia">("basico");
+  const [selectedFeaturedAudience, setSelectedFeaturedAudience] = useState<
+    "basico" | "familia"
+  >("basico");
   const currentFeaturedPlans =
-    selectedFeaturedAudience === "familia" ? familyFeaturedPlans : featuredPlans;
+    selectedFeaturedAudience === "familia"
+      ? familyFeaturedPlans
+      : featuredPlans;
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [carouselInteractionPaused, setCarouselInteractionPaused] =
     useState(false);
@@ -1055,7 +1078,11 @@ export function FullInstitutionalSite() {
             <span>Menu</span>
             <small>Netbox Internet</small>
           </div>
-          <a href="/site" aria-current="page" onClick={() => setMenuOpen(false)}>
+          <a
+            href="/site"
+            aria-current="page"
+            onClick={() => setMenuOpen(false)}
+          >
             Início
           </a>
           <a href="/sobre" onClick={() => setMenuOpen(false)}>
@@ -1070,6 +1097,9 @@ export function FullInstitutionalSite() {
           <a href="/contatos" onClick={() => setMenuOpen(false)}>
             Contatos
           </a>
+          <Link href="/site/blog" onClick={() => setMenuOpen(false)}>
+            Blog
+          </Link>
           <MenuContactLinks />
         </nav>
         <div className="header-actions">
@@ -1448,7 +1478,10 @@ export function FullInstitutionalSite() {
                 Consulte os planos de internet residencial e escolha a opção
                 ideal para se manter conectado.
               </p>
-              <div className="nb-featured-audience" aria-label="Escolha seu perfil">
+              <div
+                className="nb-featured-audience"
+                aria-label="Escolha seu perfil"
+              >
                 <button
                   type="button"
                   className={`nb-featured-audience-button${selectedFeaturedAudience === "basico" ? " is-selected" : ""}`}

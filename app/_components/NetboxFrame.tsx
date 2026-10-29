@@ -21,6 +21,7 @@ const navItems = [
   ["/nossos-servicos", "Serviços"],
   ["/nossa-estrutura", "Nossa estrutura"],
   ["/contatos", "Contatos"],
+  ["/site/blog", "Blog"],
 ];
 
 export function NetboxFrame({ children }: { children: ReactNode }) {
@@ -75,7 +76,7 @@ export function NetboxFrame({ children }: { children: ReactNode }) {
             <small>Netbox Internet</small>
           </div>
           {navItems.map(([href, label]) => (
-            <Link href={href} key={href} aria-current={currentPath === href ? "page" : undefined} onClick={() => setMenuOpen(false)}>
+            <Link href={href} key={href} aria-current={(currentPath === href || (href === "/site/blog" && currentPath.startsWith(href + "/"))) ? "page" : undefined} onClick={() => setMenuOpen(false)}>
               {label}
             </Link>
           ))}

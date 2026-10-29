@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "homem-aranha-um-novo-dia",
+    "topic": "Super-heróis",
+    "title": "Homem-Aranha: Um Novo Dia conquista o público e lidera as bilheterias de 2026",
+    "text": "Peter Parker está de volta às telonas. Com Tom Holland novamente no papel principal, o filme marca mais uma fase do herói e reúne personagens conhecidos do universo Marvel. A produção alcançou o primeiro lugar entre as maiores bilheterias mundiais do ano.",
+    "image": "Homem-Aranha - Um Novo Dia conquista o público e lidera as bilheterias de 2026.jpg",
+    "coverAlt": "Cena de Homem-Aranha: Um Novo Dia"
+  },
+  {
+    "slug": "a-odisseia-christopher-nolan",
+    "topic": "Aventura",
+    "title": "A Odisseia: Christopher Nolan transforma uma história lendária em espetáculo cinematográfico",
+    "text": "Depois de Oppenheimer, Christopher Nolan apresenta sua adaptação da jornada de Odisseu. A produção leva a mitologia grega às telas com aventuras marítimas, criaturas lendárias e uma narrativa sobre o retorno de um guerreiro ao seu lar.",
+    "image": "A Odisseia - Christopher Nolan transforma uma história lendária em espetáculo cinematográfico.jpg",
+    "coverAlt": "Cena de A Odisseia, de Christopher Nolan"
+  },
+  {
+    "slug": "toy-story-5-woody-e-buzz",
+    "topic": "Animação",
+    "title": "Toy Story 5: Woody e Buzz retornam em uma nova aventura da Pixar",
+    "text": "Os brinquedos mais queridos do cinema estão de volta. Toy Story 5 explora os desafios de crescer em um mundo cada vez mais conectado às telas e aos dispositivos eletrônicos, trazendo novamente amizade, humor e emoção para toda a família.",
+    "image": "Toy Story 5 - Woody e Buzz retornam em uma nova aventura da Pixar.jpg",
+    "coverAlt": "Personagens da animação Toy Story 5"
+  },
+  {
+    "slug": "michael-cinebiografia-rei-do-pop",
+    "topic": "Biografia",
+    "title": "Michael: cinebiografia do Rei do Pop se destaca entre os grandes sucessos do cinema",
+    "text": "A trajetória de Michael Jackson ganha as telas com Jaafar Jackson interpretando o artista. O longa apresenta momentos de sua carreira e o impacto de suas músicas, coreografias e apresentações na cultura pop mundial.",
+    "image": "Michael - cinebiografia do Rei do Pop se destaca entre os grandes sucessos do cinema.jpg",
+    "coverAlt": "Cena da cinebiografia Michael"
+  },
+  {
+    "slug": "super-mario-galaxy-o-filme",
+    "topic": "Games e Cinema",
+    "title": "Super Mario Galaxy: O Filme leva Mario a uma aventura pelo espaço",
+    "text": "O famoso encanador da Nintendo retorna ao cinema em uma aventura inspirada no universo de Super Mario Galaxy. Novos cenários, personagens e desafios ampliam o mundo apresentado na animação anterior, atraindo fãs dos jogos e famílias.",
+    "image": "Super Mario Galaxy - O Filme leva Mario a uma aventura pelo espaço.jpg",
+    "coverAlt": "Mario e Yoshi no universo de Super Mario Galaxy: O Filme"
+  },
+  {
+    "slug": "o-diabo-veste-prada-2",
+    "topic": "Comédia e Drama",
+    "title": "O Diabo Veste Prada 2: o retorno de Miranda Priestly movimenta o cinema",
+    "text": "Quase duas décadas depois do primeiro filme, Miranda Priestly e Andy Sachs voltam às telas. A continuação revisita o competitivo mundo da moda e do jornalismo em meio às transformações da comunicação, da influência digital e das tendências.",
+    "image": "O Diabo Veste Prada 2 - o retorno de Miranda Priestly movimenta o cinema.jpg",
+    "coverAlt": "Personagens de O Diabo Veste Prada 2"
+  },
+  {
+    "slug": "devoradores-de-estrelas",
+    "topic": "Ficção científica",
+    "title": "Devoradores de Estrelas: Ryan Gosling protagoniza uma missão para salvar a Terra",
+    "text": "Baseado no livro de Andy Weir, o filme acompanha um astronauta que desperta sozinho em uma nave, distante da Terra. Enquanto recupera suas memórias, descobre que sua missão pode ser decisiva para o futuro da humanidade.",
+    "image": "Devoradores de Estrelas - Ryan Gosling protagoniza uma missão para salvar a Terra.jpg",
+    "coverAlt": "Ryan Gosling em cena de Devoradores de Estrelas"
+  },
+  {
+    "slug": "minions-e-monstros",
+    "topic": "Animação",
+    "title": "Minions & Monstros: os personagens amarelos retornam com novas confusões",
+    "text": "Os Minions protagonizam mais uma aventura cheia de situações inesperadas. Com o humor que transformou os personagens em fenômeno mundial, o novo filme reforça a força da franquia entre as animações de maior sucesso de 2026.",
+    "image": "Minions & Monstros - os personagens amarelos retornam com novas confusões.jpg",
+    "coverAlt": "Os Minions na animação Minions & Monstros"
+  },
+  {
+    "slug": "obsessao-suspense",
+    "topic": "Suspense e Terror",
+    "title": "Obsessão: suspense surpreende e se destaca nas bilheterias mundiais",
+    "text": "Entre as grandes franquias e produções de alto orçamento, Obsessão encontrou espaço com uma proposta de suspense psicológico. O filme aposta nas consequências de um desejo levado ao extremo e em situações que misturam tensão e horror.",
+    "image": "Obsessão - suspense surpreende e se destaca nas bilheterias mundiais.jpg",
+    "coverAlt": "Cena do suspense Obsessão"
+  },
+  {
+    "slug": "backrooms-um-nao-lugar",
+    "topic": "Terror",
+    "title": "Backrooms: Um Não-Lugar leva o terror da internet para as telonas",
+    "text": "O fenômeno das Backrooms, conhecido pelas imagens de corredores aparentemente infinitos e ambientes perturbadores, ganhou uma adaptação cinematográfica. A produção explora o medo do desconhecido e transforma um fenômeno da cultura digital em experiência de cinema.",
+    "image": "Backrooms - Um Não-Lugar leva o terror da internet para as telonas.jpg",
+    "coverAlt": "Corredores e ambientes do filme Backrooms: Um Não-Lugar"
+  }
+]

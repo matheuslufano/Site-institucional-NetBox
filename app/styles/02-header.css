@@ -270,3 +270,10 @@
   transform-origin: center;
   transition: transform .25s ease, opacity .2s ease;
 }
+
+/* Shared active state also marks the Blog while reading an article. */
+.model-nav > a[aria-current="page"] { color: var(--orange-dark); }
+@media (min-width: 981px) and (max-width: 1200px) {
+  .model-header { gap: 12px; padding-inline: 18px; }
+  .model-nav { gap: 13px; }
+}

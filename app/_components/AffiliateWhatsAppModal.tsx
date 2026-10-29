@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./AffiliateWhatsAppModal.module.css";
 import { AFFILIATE_WHATSAPP_EVENT } from "./affiliateWhatsApp";
 
@@ -29,11 +30,13 @@ function messageWithAffiliateCode(message: string, code: string) {
 }
 
 export function AffiliateWhatsAppModal() {
+  const pathname = usePathname();
+  const isBlog = pathname === "/site/blog" || pathname.startsWith("/site/blog/");
   const [affiliateCode, setAffiliateCode] = useState<string | null>(null);
   const [pendingWhatsAppUrl, setPendingWhatsAppUrl] = useState<URL | null>(null);
   const continueButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const open = Boolean(affiliateCode && pendingWhatsAppUrl);
+  const open = Boolean(!isBlog && affiliateCode && pendingWhatsAppUrl);
 
   useEffect(() => {
     const queryCode = normalizedAffiliateCode(
@@ -55,7 +58,7 @@ export function AffiliateWhatsAppModal() {
   }, []);
 
   useEffect(() => {
-    if (!affiliateCode) return;
+    if (!affiliateCode || isBlog) return;
 
     function interceptProgrammaticWhatsApp(event: Event) {
       const customEvent = event as CustomEvent<{ url?: string }>;
@@ -103,7 +106,7 @@ export function AffiliateWhatsAppModal() {
       );
       document.removeEventListener("click", interceptWhatsAppClick, true);
     };
-  }, [affiliateCode]);
+  }, [affiliateCode, isBlog]);
 
   useEffect(() => {
     if (!open) return;
