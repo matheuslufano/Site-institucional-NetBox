@@ -10,9 +10,13 @@
     "build": "vinext build",
     "build:vercel": "next build",
     "start": "vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "node --test __tests__/architecture.test.mjs __tests__/blog/content.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "test:browser": "node __tests__/blog/browser.mjs",
+    "test:routes": "node --test __tests__/site/routes.test.mjs",
+    "blog:prepare-images": "node scripts/prepare-editorial-images.mjs",
+    "blog:export": "node scripts/export-blog-catalog.mjs"
   },
   "dependencies": {
     "@iconify/tailwind": "^1.2.0",

@@ -1,0 +1,6 @@
+.content { overflow-wrap: anywhere; line-height: 1.75; }
+.content img { width: 100%; height: auto; }
+.content figure { margin: 24px 0; }
+.content figcaption { font-size: 13px; opacity: .75; }
+.content iframe, .content video { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 12px; }
+.content p { min-height: 1em; }

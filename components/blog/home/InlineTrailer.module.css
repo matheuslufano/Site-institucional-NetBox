@@ -1,0 +1,95 @@
+.shell {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 32px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.98);
+  transition:
+    opacity 260ms ease,
+    transform 280ms ease,
+    visibility 0s linear 280ms;
+}
+.shell[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition-delay: 120ms, 120ms, 0s;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 720px) 44px;
+  align-items: start;
+  gap: 14px;
+  width: min(778px, 100%);
+}
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 204px;
+  overflow: hidden;
+  border: 1px solid #ffffff36;
+  border-radius: 9px;
+  background: #000;
+  box-shadow: 0 18px 50px #0007;
+}
+.frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  border: 0;
+}
+.close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 9px;
+  border: 1px solid #ffffff66;
+  border-radius: 50%;
+  background: #242424dd;
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition:
+    background-color 220ms ease,
+    transform 220ms ease;
+}
+.close svg {
+  width: 24px;
+  height: 24px;
+}
+.close:hover {
+  background: #f47721;
+  color: #17120f;
+  transform: rotate(90deg);
+}
+.close:focus-visible {
+  outline: 3px solid #ffa56a;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .shell {
+    padding: 20px 12px;
+  }
+  .layout {
+    gap: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shell,
+  .shell[data-open="true"],
+  .close {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,0 +1,172 @@
+"use client";
+
+import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { useSwipeGesture } from "@/hooks/useSwipeGesture";
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { IoChevronBack, IoChevronForward, IoClose } from "react-icons/io5";
+
+type StructureItem = {
+  title: string;
+  image: string;
+  alt: string;
+  source: string;
+  position: string;
+  description: string;
+  width: number;
+  height: number;
+};
+
+type StructureGalleryProps = {
+  items: StructureItem[];
+};
+
+export function Gallery({ items }: StructureGalleryProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const modalRef = useRef<HTMLElement | null>(null);
+  const modalTriggerRef = useRef<HTMLElement | null>(null);
+  const activeItem = activeIndex === null ? null : items[activeIndex];
+  const imageDisplayWidth = activeItem
+    ? Math.min(activeItem.width, Math.round((activeItem.width / activeItem.height) * 560))
+    : 0;
+  const modalWidth = imageDisplayWidth + 320;
+
+  const closeModal = useCallback(() => {
+    setActiveIndex(null);
+  }, []);
+
+  const modalSwipe = useSwipeGesture({
+    enabled: activeIndex !== null,
+    onSwipeLeft: () => setActiveIndex((current) => current === null ? null : (current + 1) % items.length),
+    onSwipeRight: () => setActiveIndex((current) => current === null ? null : (current - 1 + items.length) % items.length),
+    onSwipeDown: closeModal,
+  });
+
+  useFocusTrap(activeIndex !== null, modalRef, modalTriggerRef, closeModal);
+
+  useEffect(() => {
+    if(activeIndex === null) return;
+
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if(event.key === "ArrowLeft") {
+        setActiveIndex((current) => current === null ? null : (current - 1 + items.length) % items.length);
+      }
+      if(event.key === "ArrowRight") {
+        setActiveIndex((current) => current === null ? null : (current + 1) % items.length);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeIndex, items.length]);
+
+  return (
+    <>
+      <div className="structure-gallery">
+        {items.map((item, index) => (
+          <article key={item.title}>
+            <button
+              ref={(element) => { cardRefs.current[index] = element; }}
+              className="structure-card"
+              type="button"
+              onClick={(event) => {
+                modalTriggerRef.current = event.currentTarget;
+                setActiveIndex(index);
+              }}
+              aria-label={`Ver detalhes sobre ${item.title}`}
+            >
+              <div className="structure-photo">
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 760px) 50vw, (max-width: 1100px) 50vw, 25vw"
+                  style={{ objectPosition: item.position }}
+                />
+                <span>{item.source}</span>
+                <strong>Ver detalhes</strong>
+              </div>
+              <h3>{item.title}</h3>
+            </button>
+          </article>
+        ))}
+      </div>
+
+      {activeItem && activeIndex !== null && (
+        <div
+          className="structure-modal-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if(event.target === event.currentTarget) closeModal();
+          }}
+        >
+          <section
+            ref={modalRef}
+            className="structure-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="structure-modal-title"
+            aria-describedby="structure-modal-description"
+            style={{
+              maxWidth: `${modalWidth}px`,
+              translate: `${modalSwipe.offsetX * .2}px ${Math.max(0, modalSwipe.offsetY) * .2}px`,
+            }}
+            {...modalSwipe.bind}
+          >
+            <button
+              className="structure-modal-close"
+              type="button"
+              onClick={closeModal}
+              aria-label="Fechar imagem ampliada"
+              autoFocus
+            >
+              <IoClose aria-hidden="true" />
+            </button>
+
+            <div className="structure-modal-image">
+              <Image
+                src={activeItem.image}
+                alt={activeItem.alt}
+                width={activeItem.width}
+                height={activeItem.height}
+                unoptimized
+                sizes="(max-width: 760px) 100vw, 65vw"
+                style={{ objectPosition: activeItem.position }}
+              />
+              <button
+                className="structure-modal-arrow previous"
+                type="button"
+                onClick={() => setActiveIndex((activeIndex - 1 + items.length) % items.length)}
+                aria-label="Ver imagem anterior"
+              >
+                <IoChevronBack aria-hidden="true" />
+              </button>
+              <button
+                className="structure-modal-arrow next"
+                type="button"
+                onClick={() => setActiveIndex((activeIndex + 1) % items.length)}
+                aria-label="Ver próxima imagem"
+              >
+                <IoChevronForward aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="structure-modal-copy">
+              <span>{activeItem.source} · {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}</span>
+              <h3 id="structure-modal-title">{activeItem.title}</h3>
+              <p id="structure-modal-description">{activeItem.description}</p>
+            </div>
+          </section>
+        </div>
+      )}
+    </>
+  );
+}

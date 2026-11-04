@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "homem-aranha-um-novo-dia",
+    "title": "Homem-Aranha: Um Novo Dia",
+    "poster": "/blog/posters/homem-aranha-um-novo-dia.webp",
+    "posterSource": "https://spidermanbrandnewday.movie/",
+    "posterImageSource": "https://spidermanbrandnewday.movie/images/spidermanbrandnewday_hoodieposter.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=8TZMtslA3UY"
+  },
+  {
+    "slug": "a-odisseia-christopher-nolan",
+    "title": "A Odisseia",
+    "poster": "/blog/posters/a-odisseia-christopher-nolan.webp",
+    "posterSource": "https://www.odysseymovie.com/",
+    "posterImageSource": "https://dx35vtwkllhj9.cloudfront.net/universalstudios/the-odyssey/images/regions/us/onesheet.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ"
+  },
+  {
+    "slug": "toy-story-5-woody-e-buzz",
+    "title": "Toy Story 5",
+    "poster": "/blog/posters/toy-story-5-woody-e-buzz.webp",
+    "posterSource": "https://movies.disney.com/toy-story-5",
+    "posterImageSource": "https://lumiere-a.akamaihd.net/v1/images/p_movies_toystory5_nowstreamingdisneyplus_poster_v1_93556266.jpeg",
+    "trailerUrl": "https://www.youtube.com/watch?v=c51ND9Hdbw0"
+  },
+  {
+    "slug": "michael-cinebiografia-rei-do-pop",
+    "title": "Michael",
+    "poster": "/blog/posters/michael-cinebiografia-rei-do-pop.webp",
+    "posterSource": "https://www.impawards.com/2026/michael.html",
+    "posterImageSource": "https://www.impawards.com/2026/posters/michael.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=mbtgEE6rkxw"
+  },
+  {
+    "slug": "super-mario-galaxy-o-filme",
+    "title": "Super Mario Galaxy: O Filme",
+    "poster": "/blog/posters/super-mario-galaxy-o-filme.webp",
+    "posterSource": "https://www.thesupermariogalaxymovie.com/",
+    "posterImageSource": "https://dx35vtwkllhj9.cloudfront.net/universal-pictures-cms/the-super-mario-galaxy-movie-cms/images/regions/us/onesheet.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=FdL2GorGdKc"
+  },
+  {
+    "slug": "o-diabo-veste-prada-2",
+    "title": "O Diabo Veste Prada 2",
+    "poster": "/blog/posters/o-diabo-veste-prada-2.webp",
+    "posterSource": "https://www.20thcenturystudios.com/movies/the-devil-wears-prada-2",
+    "posterImageSource": "https://lumiere-a.akamaihd.net/v1/images/p_20cs_dwp2_poster_pay_1_sunrise_28aeda4a.jpeg",
+    "trailerUrl": "https://www.youtube.com/watch?v=e9HXmMnUEdE"
+  },
+  {
+    "slug": "devoradores-de-estrelas",
+    "title": "Devoradores de Estrelas",
+    "poster": "/blog/posters/devoradores-de-estrelas.webp",
+    "posterSource": "https://www.impawards.com/2026/project_hail_mary.html",
+    "posterImageSource": "https://www.impawards.com/2026/posters/project_hail_mary.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=m08TxIsFTRI"
+  },
+  {
+    "slug": "minions-e-monstros",
+    "title": "Minions & Monstros",
+    "poster": "/blog/posters/minions-e-monstros.webp",
+    "posterSource": "https://www.minionsmovie.com/",
+    "posterImageSource": "https://dx35vtwkllhj9.cloudfront.net/universal-pictures-cms/minions-and-monsters-cms/images/regions/us/onesheet.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=ZSdOwt-G49w"
+  },
+  {
+    "slug": "obsessao-suspense",
+    "title": "Obsessão",
+    "poster": "/blog/posters/obsessao-suspense.webp",
+    "posterSource": "https://www.focusfeatures.com/obsession",
+    "posterImageSource": "https://images.contentstack.io/v3/assets/blt223a4a92692ca457/blt266ea84379938936/69b0b06de361980008b94081/GS_FOCUS_OBS_1080x1600_PAYOFF_DIGI_FIN01_Sm.jpg?branch=production",
+    "trailerUrl": "https://www.youtube.com/watch?v=TaaDkbG3I7g"
+  },
+  {
+    "slug": "backrooms-um-nao-lugar",
+    "title": "Backrooms: Um Não-Lugar",
+    "poster": "/blog/posters/backrooms-um-nao-lugar.webp",
+    "posterSource": "https://a24films.com/films/backrooms",
+    "posterImageSource": "https://api-asset-production.s3.amazonaws.com/media/images/976419-backrooms-2026-0-2000-0-3000-crop.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=0HjdiohVOik"
+  }
+]

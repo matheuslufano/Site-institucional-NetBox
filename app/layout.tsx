@@ -1,7 +1,7 @@
+import { ReferralTracker } from "@/components/shared/ReferralTracker";
+import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import { Manrope, Sora } from "next/font/google";
-import { AffiliateWhatsAppModal } from "./_components/AffiliateWhatsAppModal";
-import "./globals.css";
 
 const manrope = Manrope({ variable: "--font-body", subsets: ["latin"] });
 const sora = Sora({ variable: "--font-display", subsets: ["latin"] });
@@ -67,7 +67,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${manrope.variable} ${sora.variable}`}>
         {children}
-        <AffiliateWhatsAppModal />
+        <ReferralTracker />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

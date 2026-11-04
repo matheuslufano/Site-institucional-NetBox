@@ -13,7 +13,7 @@ const covers = {
   'seguranca': 'structure/central-atendimento.webp',
   'games': 'structure/instalacao-residencial.png',
 };
-const cinema = JSON.parse(await readFile(new URL('../app/site/blog/_content/cinema.json', import.meta.url), 'utf8'));
+const cinema = JSON.parse(await readFile(new URL('../content/blog/cinema.json', import.meta.url), 'utf8'));
 for (const story of cinema) covers[story.slug] = 'blog/' + story.image;
 
 await mkdir(new URL('../public/blog/', import.meta.url), { recursive: true });
