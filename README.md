@@ -1,5 +1,13 @@
 # Site institucional Netbox
 
+O otimizador `/_vinext/image` utiliza os bindings Cloudflare `ASSETS` (arquivos públicos) e `IMAGES` (transformação), declarados em `vite.config.ts`. Após alterar bindings, reinicie `npm run dev` para recriar o ambiente do Worker.
+
+O Blog coleta desempenho somente com consentimento, usando o backend existente. Eventos, privacidade e trailers: [docs/blog-analytics.md](docs/blog-analytics.md).
+
+Nos artigos, a lateral repete o autor e oferece compartilhamento por ícones circulares. “Continue a leitura” exibe todos os demais artigos visíveis, do mais recente ao mais antigo, em carrossel compacto com setas. Veja [documentação do Blog](components/blog/README.md).
+
+As páginas de artigo do Blog usam abertura cinematográfica inspirada no Letterboxd: fundo horizontal, pôster opcional à esquerda e nome/foto reais do autor abaixo do subtítulo. O layout também é usado na prévia administrativa. Veja [components/blog/README.md](components/blog/README.md).
+
 Catalogo de filmes e series nas categorias do Blog: veja [configuracao do TMDB, rotas e licenca](docs/blog-media.md). A integracao requer `TMDB_READ_ACCESS_TOKEN` apenas no servidor.
 
 Site institucional em React 19, TypeScript e App Router, executado com Vinext/Vite e com compilação Next.js para Vercel. Fontes Manrope e Sora, cores institucionais e tema claro/escuro compõem a identidade compartilhada.
@@ -208,3 +216,14 @@ O cabeçalho do Blog usa fundo escuro translúcido com desfoque de 32 px no cont
 A área da página inicialmente atrás do cabeçalho tem uma faixa preta própria; o elemento do cabeçalho conserva sua transparência e desfoque durante a rolagem.
 
 A logo fornecida para o Blog fica em `public/blog/netbox-blog-logo.png` e é usada no cabeçalho com proporção original e tamanho responsivo. Detalhes em [components/blog/README.md](components/blog/README.md).
+# Fotos de autores no Blog
+
+Fotos de perfil em JPEG, PNG, WebP ou GIF base64 são aceitas no artigo e na prévia, além de URLs HTTP(S) e caminhos locais. O validador `safeAuthorPhoto` preserva imagens completas até 12 MiB de texto; HTML, SVG inline e URLs executáveis são rejeitados. A prévia não aplica o limite de 20 mil caracteres dos campos de texto à foto.
+# Créditos do rodapé
+
+`components/ui/FooterCredits.tsx` compartilha os créditos entre HomeFooter, SiteLayout e BlogFooter, com copyright próprio do institucional/Blog e ano atual. Mantém “Site desenvolvido por @Matheus Mota 🧑‍💻”, link externo para o portfólio e a imagem original da campanha em `public/images/matheus/portfolio-preview.png`. O cartão aparece acima do nome por hover ou foco, com deslocamento/escala de 180 ms, ponte para manter o hover e redução de movimento. O efeito original é acionado pela presença do mouse; não há rastreamento contínuo do cursor. CNPJ, ouvidoria, privacidade, categorias e demais links existentes são preservados. Referências: CampaignFooter do projeto netbox-10-anos e https://freefrontend.com/css-tabs/. Sem dependências novas.
+# Avatar da Equipe Netbox
+
+Os créditos em `/site/blog/creditos` também identificam Metron (HQs) e IGDB (jogos), usados pelo editor do painel de afiliados. Imagens importadas continuam chegando pela API pública existente, sem credenciais desses provedores no institucional.
+
+O componente `AuthorIdentity` usa `public/blog/equipe-netbox-square.png` para os autores “Equipe Netbox” e “Equipe editorial Netbox”. A versão quadrada foi criada com ImageGen a partir da logo fornecida: fundo branco, foguete e caixa centralizados com margem para o recorte circular. A imagem já contém o espaçamento necessário; CSS usa `object-fit: contain` sem padding adicional. O arquivo original `public/blog/equipe-netbox.png` foi preservado. Autores individuais continuam usando a foto cadastrada. A regra também vale para a prévia do artigo e não altera os dados nem os snapshots publicados.

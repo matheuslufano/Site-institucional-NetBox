@@ -3,6 +3,7 @@ import { AppDownloadButton } from "@/components/site/app/AppDownloadButton";
 import { ArrowIcon } from "@/components/ui/ArrowIcon";
 import { SECOND_COPY } from "@/constants/site";
 import { services } from "./content";
+import { FooterCredits } from '@/components/ui/FooterCredits';
 /** Home footer preserves its context-aware service actions. */
 export function HomeFooter({ onService }: { onService: (title: string) => void }) {
   return (<footer className="model-footer">
@@ -58,10 +59,7 @@ export function HomeFooter({ onService }: { onService: (title: string) => void }
       </div>
     </div>
     <div className="model-shell footer-bottom">
-      <span>
-        © {new Date().getFullYear()} Netbox Internet LTDA • CNPJ
-        25.356.470/0001-13
-      </span>
+      <span>CNPJ 25.356.470/0001-13</span>
       <span>
         <a href="https://netbox.net.br/ouvidoria/">Ouvidoria</a> •{" "}
         <a href="https://netbox.net.br/politica-de-privacidade/">
@@ -69,5 +67,6 @@ export function HomeFooter({ onService }: { onService: (title: string) => void }
         </a>
       </span>
     </div>
+    <FooterCredits />
   </footer>);
 }

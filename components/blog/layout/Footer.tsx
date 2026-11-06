@@ -2,6 +2,7 @@ import { BLOG_PATH, blogHref, categories } from "@/lib/blog/navigation";
 import styles from "@/styles/blog/Blog.module.css";
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
+import { FooterCredits } from '@/components/ui/FooterCredits';
 
 export function BlogFooter() {
   return (
@@ -21,14 +22,11 @@ export function BlogFooter() {
           ))}
         </nav>
         <div className={styles.footerBottom}>
-          <span>
-            © {new Date().getFullYear()} Blog Netbox · Conteúdo em preparação
-            editorial.
-          </span>
           <Link href="/site">Visitar o site institucional ↗</Link>
           <Link href="/site/blog/creditos"><FiInfo aria-hidden="true" /> Créditos</Link>
         </div>
       </div>
+      <FooterCredits product="Netbox Blog" />
     </footer>
   );
 }

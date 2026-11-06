@@ -8,6 +8,6 @@ export const metadata: Metadata = { title: 'Prévia do artigo | Blog Netbox', ro
 /** Inherits the real BlogLayout; unpublished data arrives only via postMessage. */
 export default async function PreviewPage() {
   const allowedOrigins = (process.env.BLOG_EDITOR_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000').split(',').map(value => value.trim()).filter(Boolean);
-  const related = visibleArticles(new Date(), await getBlogArticles().catch(() => [])).slice(0, 4);
+  const related = visibleArticles(new Date(), await getBlogArticles().catch(() => []));
   return <LiveArticlePreview allowedOrigins={allowedOrigins} related={related} />;
 }

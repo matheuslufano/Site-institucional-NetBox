@@ -49,7 +49,7 @@ export function NewsCarousel({
   const rootRef = useRef<HTMLElement>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [player, setPlayer] = useState<{ src: string; title: string } | null>(
+  const [player, setPlayer] = useState<{ src: string; title: string; articleId?:string } | null>(
     null,
   );
   const playingRef = useRef(false);
@@ -253,7 +253,7 @@ export function NewsCarousel({
                           if (!src) return;
                           trailerTriggerRef.current = event.currentTarget;
                           playingRef.current = true;
-                          setPlayer({ src, title: slide.title });
+                          setPlayer({ src, title: slide.title, articleId:slide.id });
                         }}
                       >
                         <IoPlayOutline aria-hidden="true" />

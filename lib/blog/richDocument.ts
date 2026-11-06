@@ -7,6 +7,17 @@ export function safeHref(value: string, relative = false) {
   if (relative && /^\/(?!\/)[^\s\\]*$/.test(value)) return value;
   try { const url = new URL(value); return /^https?:$/.test(url.protocol) ? url.href : ''; } catch { return ''; }
 }
+/** Profile uploads can be inline raster images. Never allow inline HTML or SVG. */
+export function safeAuthorPhoto(value: unknown): string {
+  if (typeof value !== 'string' || value.length > 12 * 1024 * 1024) return '';
+  if (value.startsWith('data:')) {
+    const prefix = /^data:image\/(?:jpeg|png|webp|gif);base64,/.exec(value);
+    if (!prefix) return '';
+    const bytes = value.slice(prefix[0].length);
+    return bytes.length % 4 === 0 && /^[A-Za-z0-9+/]+={0,2}$/.test(bytes) ? value : '';
+  }
+  return safeHref(value, true);
+}
 /** Only known video providers become embeds; arbitrary iframe HTML is never stored. */
 export function videoSource(value: string) {
   try {

@@ -21,7 +21,7 @@ export async function generateArticleMetadata({ params }: ArticlePageProps): Pro
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getBlogArticle((await params).slug);
   if(!article) notFound();
-  const related = visibleArticles(new Date(), await getBlogArticles()).filter(item => item.id !== article.id).sort((a, b) => Number(b.category === article.category) - Number(a.category === article.category)).slice(0, 3);
+  const related = visibleArticles(new Date(), await getBlogArticles()).filter(item => item.id !== article.id);
   const url = SITE_URL + articlePath(article);
   const breadcrumbs = [
     { name: 'Blog Netbox', url: SITE_URL + BLOG_PATH },

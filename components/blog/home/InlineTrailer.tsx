@@ -3,9 +3,10 @@
 import { useEffect, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import styles from "./InlineTrailer.module.css";
+import TrackedTrailerFrame from './TrackedTrailerFrame';
 
 type Props = {
-  player: { src: string; title: string } | null;
+  player: { src: string; title: string; articleId?:string } | null;
   onClose: () => void;
 };
 
@@ -30,13 +31,11 @@ export function InlineTrailer({ player, onClose }: Props) {
     <div className={styles.shell} data-open={open} data-ui="inline-trailer" aria-hidden={!open} inert={!open}>
       <div className={styles.layout} role="region" aria-label={player ? "Trailer de " + player.title : "Trailer"}>
         <div className={styles.frame}>
-          {player && <iframe
+          {player && <TrackedTrailerFrame
             key={player.src}
             src={player.src}
-            title={"Trailer de " + player.title}
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
+            title={player.title}
+            articleId={player.articleId}
           />}
         </div>
         <button ref={closeRef} type="button" className={styles.close} onClick={onClose} aria-label="Fechar trailer" title="Fechar trailer">

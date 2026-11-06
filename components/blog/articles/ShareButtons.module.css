@@ -1,0 +1,20 @@
+.share { margin: 24px 0 0; padding: 16px 0; border-top: 1px solid #34414e; }
+.share > strong { display: block; margin-bottom: 12px; color: #cbd5df; font-size: 11px; font-weight: 600; }
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.share .buttons > .button { display: inline-flex; align-items: center; justify-content: center; width: 36px; min-width: 36px; height: 36px; min-height: 36px; aspect-ratio: 1; flex: 0 0 36px; box-sizing: border-box; padding: 0; border: 1px solid #536171; border-radius: 50%; background: #344352; color: #fff; cursor: pointer; text-decoration: none; transition: transform .16s, filter .16s; }
+.share .button svg { display: block; width: 17px; height: 17px; flex: 0 0 17px; color: inherit; visibility: visible; opacity: 1; }
+.share .button[data-network=whatsapp] img { display: block; width: 20px; height: 20px; max-width: none; flex: 0 0 20px; object-fit: contain; visibility: visible; opacity: 1; }
+.share .buttons > .button[data-network=whatsapp] { background: #128c7e; border-color: #128c7e; }
+.share .buttons > .button[data-network=x] { background: #080808; }
+.share .buttons > .button[data-network=telegram] { background: #1685b9; border-color: #1685b9; }
+.share .buttons > .button[data-network=facebook] { background: #1877f2; border-color: #1877f2; }
+.share .buttons > .button[data-network=linkedin] { background: #0a66c2; border-color: #0a66c2; }
+.share .buttons > .button[data-network=instagram] { background: linear-gradient(35deg,#f9a83a,#dd2a7b 55%,#8134af); border-color: #db357e; }
+.share .buttons > .button[data-network=pinterest] { background: #bd081c; border-color: #bd081c; }
+.share .buttons > .button[data-network=email] { background: #52647b; border-color: #52647b; }
+.share .button:hover { color: #fff; filter: brightness(1.15); transform: translateY(-2px); }
+.share .button:focus-visible { outline: 2px solid #ff985c; outline-offset: 4px; }
+.status { display: block; margin-top: 10px; color: #b4bfca; font-size: 11px; line-height: 1.5; }
+.status:empty { display: none; }
+@media(max-width:700px) { .share .buttons > .button { width: 42px; min-width: 42px; height: 42px; min-height: 42px; flex-basis: 42px; } }
+@media(prefers-reduced-motion:reduce) { .share .button { transition: none; } }

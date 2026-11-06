@@ -14,6 +14,9 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const localBindingConfig = {
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
+  // The image optimizer reads public assets and transforms them through these bindings.
+  assets: { binding: "ASSETS" },
+  images: { binding: "IMAGES" },
   d1_databases: d1
     ? [
         {

@@ -3,6 +3,7 @@ import { BlogHeader, BlogHeaderFallback } from '@/components/blog/layout/Header'
 import { ReadingSuggestions } from '@/components/blog/search/ReadingSuggestions';
 import styles from '@/styles/blog/Blog.module.css';
 import { Suspense } from 'react';
+import BlogConsent from './BlogConsent';
 
 /** The server renders editorial panel content once and passes it through the interactive header. */
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
@@ -16,6 +17,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
       </Suspense>
       <main id="blog-conteudo" className={styles.main}>{children}</main>
       <BlogFooter />
+      <BlogConsent />
     </div>
   );
 }

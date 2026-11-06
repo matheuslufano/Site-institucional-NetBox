@@ -1,6 +1,6 @@
 import type { BlogArticle, ArticleSection } from '@/types/blog';
 import type { RichBlock, TextRun } from './richDocument';
-import { safeHref } from './richDocument';
+import { safeAuthorPhoto, safeHref } from './richDocument';
 
 const record = (value: unknown): Record<string, unknown> => value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
 const text = (value: unknown, max = 20000) => typeof value === 'string' ? value.slice(0, max) : '';
@@ -25,5 +25,7 @@ export function previewArticle(value: unknown): BlogArticle | null {
     return { heading: text(section.heading, 300), level: section.level === 3 ? 3 : 2, paragraphs: Array.isArray(section.paragraphs) ? section.paragraphs.slice(0, 500).map(value => text(value)) : [], ...(Array.isArray(section.document) ? { document: section.document.slice(0, 500).flatMap(block) } : {}), ...(Array.isArray(section.list) ? { list: section.list.slice(0, 100).map(value => text(value)) } : {}), ...(safeHref(text(image.src), true) ? { image: { src: safeHref(text(image.src), true), alt: text(image.alt, 500) } } : {}), ...(safeHref(text(link.href)) ? { link: { href: safeHref(text(link.href)), label: text(link.label, 300) } } : {}) };
   });
   const sources = Array.isArray(input.sources) ? input.sources.slice(0, 100).flatMap(value => { const source = record(value); const url = safeHref(text(source.url)); return url ? [{ title: text(source.title, 300), publisher: text(source.publisher, 300), url, ...(source.role === 'promotional' ? { role: 'promotional' as const } : {}) }] : []; }) : [];
-  return { id: text(input.id, 200), slug: text(input.slug, 200) || 'previa', title: text(input.title, 200) || 'Sem título', summary: text(input.summary, 1000), category: text(input.category, 200), topic: text(input.topic, 200) || undefined, cover: safeHref(text(input.cover), true), coverAlt: text(input.coverAlt, 500), coverCredit: text(input.coverCredit, 500) || undefined, sources, author: text(input.author, 200) || 'Autor do artigo', publishedAt: date(input.publishedAt), updatedAt: date(input.updatedAt), status: input.status === 'demo' ? 'demo' : 'draft', featured: false, content, seo: { title: text(input.title, 200), description: text(input.summary, 1000) } };
+  const artwork = record(input.spotlight);
+  const authorPhotoUrl = safeAuthorPhoto(input.authorPhotoUrl || record(input.authorUser).photoUrl);
+  return { id: text(input.id, 200), slug: text(input.slug, 200) || 'previa', title: text(input.title, 200) || 'Sem título', summary: text(input.summary, 1000), category: text(input.category, 200), topic: text(input.topic, 200) || undefined, cover: safeHref(text(input.cover), true), coverAlt: text(input.coverAlt, 500), coverCredit: text(input.coverCredit, 500) || undefined, ...(safeHref(text(artwork.poster), true) ? { spotlight: { title: text(artwork.title, 200), poster: safeHref(text(artwork.poster), true), posterAlt: text(artwork.posterAlt, 500), trailerUrl: safeHref(text(artwork.trailerUrl)) } } : {}), sources, author: text(input.author, 200) || 'Autor do artigo', authorPhotoUrl, publishedAt: date(input.publishedAt), updatedAt: date(input.updatedAt), status: input.status === 'demo' ? 'demo' : 'draft', featured: false, content, seo: { title: text(input.title, 200), description: text(input.summary, 1000) } };
 }

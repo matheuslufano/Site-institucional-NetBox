@@ -7,13 +7,13 @@ import styles from './ArticleCarousel.module.css';
 const ROTATION_INTERVAL = 6000;
 
 /** Server-rendered cards remain intact; this wrapper only controls horizontal navigation. */
-export function ArticleCarousel({ children, label }: { children: ReactNode; label: string }) {
+export function ArticleCarousel({ children, label, compact = false }: { children: ReactNode; label: string; compact?: boolean }) {
   const slides = Children.toArray(children);
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const interacting = useRef({ hover: false, focus: false, lastManual: 0, visible: false });
-  const [automatic, setAutomatic] = useState(true);
+  const [automatic, setAutomatic] = useState(!compact);
   const [view, setView] = useState({ first: 0, visible: 3, overflow: false });
   const [announcement, setAnnouncement] = useState('');
 
@@ -59,19 +59,19 @@ export function ArticleCarousel({ children, label }: { children: ReactNode; labe
     return () => window.clearInterval(timer);
   }, [automatic, view.overflow, move]);
 
-  return <div ref={root} className={styles.carousel} role="region" aria-roledescription="carrossel" aria-label={label} data-ui="technology-article-carousel"
+  return <div ref={root} className={`${styles.carousel} ${compact ? styles.compact : ''}`} role="region" aria-roledescription="carrossel" aria-label={label} data-ui={compact ? 'blog-recent-articles' : 'technology-article-carousel'}
     onPointerEnter={event => { if (event.pointerType !== 'touch') interacting.current.hover = true; }} onPointerLeave={() => { interacting.current.hover = false; }}
     onFocusCapture={() => { interacting.current.focus = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) interacting.current.focus = false; }}>
     <div className={styles.row}>
-      <button className={styles.arrow} type="button" title="Artigos anteriores" aria-label="Ver artigos anteriores de Tecnologia e inovação" aria-controls={id} disabled={!view.overflow} onClick={() => move(-1, true)}><FiChevronLeft aria-hidden="true" /></button>
+      <button className={styles.arrow} type="button" title="Artigos anteriores" aria-label={`Ver artigos anteriores: ${label}`} aria-controls={id} disabled={!view.overflow} onClick={() => move(-1, true)}><FiChevronLeft aria-hidden="true" /></button>
       <div ref={track} id={id} className={styles.track} onScroll={measure} onPointerDown={() => { interacting.current.lastManual = Date.now(); }}>
         {slides.map((slide, index) => <div className={styles.slide} key={index} role="group" aria-roledescription="slide" aria-label={`Artigo ${index + 1} de ${slides.length}`}>{slide}</div>)}
       </div>
-      <button className={styles.arrow} type="button" title="Próximos artigos" aria-label="Ver próximos artigos de Tecnologia e inovação" aria-controls={id} disabled={!view.overflow} onClick={() => move(1, true)}><FiChevronRight aria-hidden="true" /></button>
+      <button className={styles.arrow} type="button" title="Próximos artigos" aria-label={`Ver próximos artigos: ${label}`} aria-controls={id} disabled={!view.overflow} onClick={() => move(1, true)}><FiChevronRight aria-hidden="true" /></button>
     </div>
     <div className={styles.footer}>
       <span>{slides.length ? `${view.first + 1}–${Math.min(view.first + view.visible, slides.length)} de ${slides.length} artigos` : 'Nenhum artigo disponível'}</span>
-      {view.overflow && <button className={styles.playback} type="button" aria-pressed={!automatic} onClick={() => setAutomatic(value => !value)}>{automatic ? <FiPause aria-hidden="true" /> : <FiPlay aria-hidden="true" />}{automatic ? 'Pausar slides' : 'Reproduzir slides'}</button>}
+      {!compact && view.overflow && <button className={styles.playback} type="button" aria-pressed={!automatic} onClick={() => setAutomatic(value => !value)}>{automatic ? <FiPause aria-hidden="true" /> : <FiPlay aria-hidden="true" />}{automatic ? 'Pausar slides' : 'Reproduzir slides'}</button>}
     </div>
     <span className={styles.srOnly} role="status">{announcement}</span>
   </div>;

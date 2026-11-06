@@ -18,5 +18,5 @@ export default function LiveArticlePreview({ allowedOrigins, related }: { allowe
     window.parent.postMessage({ type: 'netbox:preview-ready' }, '*');
     return () => window.removeEventListener('message', receive);
   }, [allowedOrigins]);
-  return article ? <ArticleView article={article} related={related.filter(item => item.id !== article.id).slice(0, 3)} preview /> : <p role="status" style={{ padding: '48px', textAlign: 'center' }}>Aguardando o artigo do editor…</p>;
+  return article ? <ArticleView article={article} related={related.filter(item => item.id !== article.id)} preview /> : <p role="status" style={{ padding: '48px', textAlign: 'center' }}>Aguardando o artigo do editor…</p>;
 }

@@ -10,7 +10,7 @@
     "build": "vinext build",
     "build:vercel": "next build",
     "start": "vinext start",
-    "test": "node --test __tests__/architecture.test.mjs __tests__/blog/content.test.mjs",
+    "test": "node --test __tests__/architecture.test.mjs __tests__/blog/content.test.mjs __tests__/blog/analytics.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "test:browser": "node __tests__/blog/browser.mjs",

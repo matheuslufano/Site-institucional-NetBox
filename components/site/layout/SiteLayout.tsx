@@ -1,6 +1,7 @@
 "use client";
 
 import { AppDownloadButton } from "@/components/site/app/AppDownloadButton";
+import { FooterCredits } from '@/components/ui/FooterCredits';
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { useScrollDirectionVisibility } from "@/hooks/useScrollDirectionVisibility";
 import { useSwipeGesture } from "@/hooks/useSwipeGesture";
@@ -166,10 +167,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="model-shell footer-bottom">
-          <span>
-            © {new Date().getFullYear()} Netbox Internet LTDA • CNPJ
-            25.356.470/0001-13
-          </span>
+          <span>CNPJ 25.356.470/0001-13</span>
           <span>
             <a href="https://netbox.net.br/ouvidoria/">Ouvidoria</a> •{" "}
             <a href="https://netbox.net.br/politica-de-privacidade/">
@@ -177,6 +175,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </a>
           </span>
         </div>
+        <FooterCredits />
       </footer>
 
       <a

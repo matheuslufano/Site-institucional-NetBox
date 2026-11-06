@@ -42,6 +42,8 @@ export type BlogArticle = {
   spotlight?: { title: string; poster: string; posterAlt?: string; trailerUrl?: string };
   sources?: ArticleSource[];
   author: string;
+  /** Public profile photo of the linked author; older records can omit it. */
+  authorPhotoUrl?: string;
   publishedAt: string;
   updatedAt: string;
   status: 'demo' | 'draft' | 'published';

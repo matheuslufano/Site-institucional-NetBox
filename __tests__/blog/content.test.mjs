@@ -34,6 +34,47 @@ const { articles } = await import(pathToFileURL(join(temp, 'content/blog/article
 const { trailerEmbedUrl } = await import(pathToFileURL(join(temp, 'lib/blog/trailers.mjs')));
 const { default: sitemap } = await import(pathToFileURL(join(temp, 'app/sitemap.mjs')));
 const { previewArticle } = await import(pathToFileURL(join(temp, 'lib/blog/preview.mjs')));
+const { safeAuthorPhoto, safeHref } = await import(pathToFileURL(join(temp, 'lib/blog/richDocument.mjs')));
+
+test('author uploads preserve complete inline raster photos in articles and preview', () => {
+  const photo = 'data:image/jpeg;base64,' + '/9j/' + 'AAAA'.repeat(12000);
+  assert.equal(safeAuthorPhoto(photo), photo);
+  assert.equal(previewArticle({ title: 'Artigo', content: [], authorUser: { photoUrl: photo } }).authorPhotoUrl, photo);
+  assert.equal(previewArticle({ title: 'Artigo', content: [], authorPhotoUrl: photo }).authorPhotoUrl, photo);
+  for (const format of ['png', 'webp', 'gif']) assert.equal(safeAuthorPhoto(`data:image/${format};base64,AAAA`), `data:image/${format};base64,AAAA`);
+  for (const unsafe of ['data:image/svg+xml;base64,AAAA', 'data:text/html;base64,AAAA', 'data:image/jpeg;base64,', 'data:image/jpeg;base64,<script>', 'javascript:alert(1)', '//example.org/photo.jpg']) assert.equal(safeAuthorPhoto(unsafe), '');
+  assert.equal(safeAuthorPhoto('/blog/photo.jpg'), '/blog/photo.jpg');
+  assert.equal(safeAuthorPhoto('https://example.org/photo.jpg'), 'https://example.org/photo.jpg');
+  assert.equal(safeHref(photo, true), '');
+});
+
+test('article author component renders inline profile photo through the Vinext image renderer', async () => {
+  const source = await readFile(new URL('../../components/blog/articles/AuthorIdentity.tsx', import.meta.url), 'utf8');
+  let output = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText;
+  output = output.replace(/from ['"]next\/image['"]/, 'from ' + JSON.stringify(new URL('../../node_modules/vinext/dist/shims/image.js', import.meta.url).href))
+    .replace(/from ['"]react['"]/, 'from ' + JSON.stringify(import.meta.resolve('react')))
+    .replace(/from ['"]react\/jsx-runtime['"]/, 'from ' + JSON.stringify(import.meta.resolve('react/jsx-runtime')))
+    .replace(/from ['"]@\/lib\/blog\/richDocument['"]/, 'from ' + JSON.stringify(pathToFileURL(join(temp, 'lib/blog/richDocument.mjs')).href))
+    .replace(/import styles from ['"].*?\.module\.css['"];?/, 'const styles = {};');
+  const { default: AuthorIdentity } = await import('data:text/javascript;base64,' + Buffer.from(output).toString('base64'));
+  const { createElement } = await import('react');
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const photo = 'data:image/jpeg;base64,/9j/' + 'AAAA'.repeat(12000);
+  const html = renderToStaticMarkup(createElement(AuthorIdentity, { name: 'Autor', photo }));
+  assert.ok(html.includes(`src="${photo}"`));
+  assert.match(html, /alt="Foto de Autor"/);
+});
+
+test('preview preserves artwork and real author photo while rejecting executable URLs', () => {
+  const input = { title: 'Artigo', content: [], author: 'Autor', authorUser: { photoUrl: 'https://example.org/author.jpg' }, spotlight: { title: 'Obra', poster: '/blog/poster.webp', posterAlt: 'Capa original' } };
+  const article = previewArticle(input);
+  assert.equal(article.authorPhotoUrl, input.authorUser.photoUrl);
+  assert.equal(article.spotlight.poster, input.spotlight.poster);
+  assert.equal(article.spotlight.posterAlt, 'Capa original');
+  const unsafe = previewArticle({ ...input, authorUser: { photoUrl: 'javascript:alert(1)' }, spotlight: { poster: 'javascript:alert(1)' } });
+  assert.equal(unsafe.authorPhotoUrl, '');
+  assert.equal(unsafe.spotlight, undefined);
+});
 
 test('unsaved preview handles empty dates, media layout and unsafe message content', () => {
   const input = { title: '', content: [{ document: [{ type: 'image', src: '/blog/image.webp', alt: 'Capa', width: 50, align: 'right' }, { type: 'html', content: [] }, { type: 'paragraph', content: [{ text: '<script>texto</script>', href: 'javascript:alert(1)' }] }] }], publishedAt: '', updatedAt: 'bad', cover: 'javascript:alert(1)' };
