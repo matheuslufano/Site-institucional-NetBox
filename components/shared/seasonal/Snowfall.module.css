@@ -1,0 +1,55 @@
+.snowfall {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.flake {
+  position: absolute;
+  left: var(--snow-x);
+  top: -30px;
+  width: var(--snow-size);
+  height: var(--snow-size);
+  opacity: var(--snow-opacity);
+  animation: christmas-snow-fall var(--snow-duration) var(--snow-delay) linear infinite;
+}
+.sway, .crystal {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sway {
+  animation: christmas-snow-sway var(--snow-sway-duration) var(--snow-delay) ease-in-out infinite alternate;
+}
+.crystal {
+  color: #f3faff;
+  filter: drop-shadow(0 1px 1px #56748880);
+  animation: christmas-snow-turn var(--snow-rotation-duration) var(--snow-delay) linear infinite;
+  animation-direction: var(--snow-rotation-direction);
+}
+@keyframes christmas-snow-fall {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, calc(100dvh + 60px), 0); }
+}
+@keyframes christmas-snow-sway {
+  from { transform: translateX(calc(var(--snow-drift) * -1)); }
+  to { transform: translateX(var(--snow-drift)); }
+}
+@keyframes christmas-snow-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.snowfall[data-paused="true"] .flake,
+.snowfall[data-paused="true"] .sway,
+.snowfall[data-paused="true"] .crystal {
+  animation-play-state: paused;
+}
+@media (max-width: 700px) {
+  .flake:nth-child(n + 73) { display: none; }
+}
+@media (max-width: 400px) {
+  .flake:nth-child(n + 43) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snowfall { display: none; }
+}

@@ -2,6 +2,7 @@
 
 import { AppDownloadButton } from "@/components/site/app/AppDownloadButton";
 import { FooterCredits } from '@/components/ui/FooterCredits';
+import { SeasonalSiteFooter } from '@/components/shared/seasonal/SeasonalFooter';
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { useScrollDirectionVisibility } from "@/hooks/useScrollDirectionVisibility";
 import { useSwipeGesture } from "@/hooks/useSwipeGesture";
@@ -111,7 +112,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
       <main id="conteudo">{children}</main>
 
-      <footer className="model-footer">
+      <SeasonalSiteFooter className="model-footer">
         <div className="model-shell footer-main">
           <div className="footer-services">
             <a className="footer-service-link" href="/nossos-servicos">
@@ -176,7 +177,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </span>
         </div>
         <FooterCredits />
-      </footer>
+      </SeasonalSiteFooter>
 
       <a
         className={`model-whatsapp${navigationVisible ? " shortcuts-visible" : " is-collapsed"}`}

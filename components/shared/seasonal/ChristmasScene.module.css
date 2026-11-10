@@ -1,0 +1,156 @@
+.scene {
+  position: relative;
+  isolation: isolate;
+  z-index: 2;
+  width: 100%;
+  min-height: clamp(290px, 30vw, 600px);
+  overflow: visible;
+  padding: 30px 230px 145px;
+  background: transparent;
+}
+/* The existing Blog footer has a 70px margin: the scene must meet its actual top edge. */
+.scene + footer {
+  margin-top: 0;
+}
+.greeting {
+  position: relative;
+  z-index: 1;
+  max-width: 570px;
+  margin-inline: auto;
+  text-align: center;
+  color: #295442;
+}
+.greeting span {
+  font:
+    700 10px/1.7 var(--font-body),
+    sans-serif;
+  letter-spacing: 0.22em;
+}
+.greeting h2 {
+  position: relative;
+  width: fit-content;
+  margin-inline: auto;
+  padding-bottom: 38px;
+  margin-block: 7px 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  color: #23553f;
+}
+.greeting p {
+  margin: 0;
+  font:
+    400 13px/1.7 var(--font-body),
+    sans-serif;
+  color: #63786e;
+}
+.artwork {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.forest {
+  position: absolute;
+  bottom: -38px;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  mask-image: linear-gradient(to bottom, #000 68%, #000b 78%, transparent 100%);
+}
+.snowman {
+  position: absolute;
+  right: clamp(20px, 7vw, 125px);
+  bottom: -25px;
+  width: 180px;
+  height: 199px;
+}
+.wavingArm {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: christmas-snowman-wave 2.8s ease-in-out infinite;
+}
+@keyframes christmas-snowman-wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(-7deg);
+  }
+  20%,
+  40% {
+    transform: rotate(15deg);
+  }
+  30%,
+  50% {
+    transform: rotate(0);
+  }
+}
+.greetingLights {
+  position: absolute;
+  left: -12%;
+  bottom: 0;
+  width: 124%;
+  height: 48px;
+  overflow: visible;
+  pointer-events: none;
+}
+.lightBulb {
+  fill: currentColor;
+  filter: drop-shadow(0 0 4px currentColor);
+  animation: christmas-light-glow 2.7s ease-in-out infinite alternate;
+}
+@keyframes christmas-light-glow {
+  from { opacity: .4; }
+  to { opacity: 1; }
+}
+.scene[data-paused="true"] .wavingArm,
+.scene[data-paused="true"] .lightBulb {
+  animation-play-state: paused;
+}
+@media (max-width: 900px) {
+  .scene {
+    padding-inline: 170px;
+  }
+  .snowman {
+    width: 155px;
+    height: 171px;
+    right: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .scene {
+    min-height: 295px;
+    padding: 25px 24px 160px;
+  }
+  .greeting {
+    max-width: 320px;
+  }
+  .greeting h2 {
+    font-size: 39px;
+  }
+  .greeting p {
+    font-size: 12px;
+    max-width: 260px;
+    margin-inline: auto;
+  }
+  .snowman {
+    width: 135px;
+    height: 149px;
+    right: 6px;
+    bottom: -30px;
+  }
+
+}
+@media (prefers-reduced-motion: reduce) {
+  .wavingArm,
+  .lightBulb {
+    animation: none;
+  }
+}
+@media print {
+  .scene {
+    display: none;
+  }
+}

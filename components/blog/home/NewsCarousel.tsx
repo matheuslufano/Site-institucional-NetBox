@@ -36,6 +36,34 @@ export type NewsCarouselLayout = "poster" | "background";
 
 const ROTATION_INTERVAL = 6000;
 
+/** Inspect decoded alpha, including PNGs served through extensionless media URLs.
+ * Cross-origin images without canvas access remain unframed, preserving cutouts.
+ */
+function identifyPosterTransparency(image: HTMLImageElement) {
+  const frame = image.closest<HTMLElement>('[data-component="lead-slide-poster"]');
+  if (!frame) return;
+  try {
+    const canvas = document.createElement("canvas");
+    const scale = Math.min(1, 128 / Math.max(image.naturalWidth, image.naturalHeight));
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) return;
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    let transparent = false;
+    for (let offset = 3; offset < pixels.length; offset += 4) {
+      if (pixels[offset] < 255) {
+        transparent = true;
+        break;
+      }
+    }
+    frame.dataset.transparent = String(transparent);
+  } catch {
+    frame.dataset.transparent = "unknown";
+  }
+}
+
 /** Cycles recent stories, pausing for reading, keyboard interaction, reduced motion and off-screen content. */
 export function NewsCarousel({
   slides,
@@ -183,6 +211,8 @@ export function NewsCarousel({
             >
               <Link
                 className={styles.poster}
+                data-component="lead-slide-poster"
+                data-transparent="unknown"
                 href={slide.href}
                 draggable={false}
                 aria-label={"Ler artigo sobre " + slide.title}
@@ -190,6 +220,7 @@ export function NewsCarousel({
                 {slide.poster ? (
                   <Image
                     src={slide.poster}
+                    onLoad={(event) => identifyPosterTransparency(event.currentTarget)}
                     alt={slide.posterAlt || "Pôster de " + slide.title}
                     width={480}
                     height={720}
@@ -199,7 +230,7 @@ export function NewsCarousel({
                   />
                 ) : (
                   <CoverImage
-                    className={styles.articleCover}
+                    onLoad={(event) => identifyPosterTransparency(event.currentTarget)}
                     src={slide.cover}
                     alt={slide.coverAlt}
                     width={480}

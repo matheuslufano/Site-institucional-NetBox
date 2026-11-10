@@ -1,0 +1,241 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.particle {
+  position: absolute;
+  top: -24px;
+  left: var(--particle-x);
+  width: var(--particle-size);
+  height: var(--particle-size);
+  background: var(--particle-color);
+  opacity: 0.62;
+  animation: seasonal-fall var(--particle-duration) var(--particle-delay) linear
+    infinite;
+  will-change: transform;
+}
+.overlay[data-effect="stars"] .particle {
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    100% 38%,
+    70% 61%,
+    81% 100%,
+    50% 77%,
+    19% 100%,
+    30% 61%,
+    0 38%,
+    39% 35%
+  );
+}
+.overlay[data-effect="hearts"] .particle {
+  clip-path: polygon(
+    50% 20%,
+    65% 3%,
+    85% 0,
+    100% 18%,
+    100% 40%,
+    50% 100%,
+    0 40%,
+    0 18%,
+    15% 0,
+    35% 3%
+  );
+}
+.overlay[data-effect="petals"] .particle {
+  border-radius: 80% 0 80% 30%;
+}
+.overlay[data-effect="eggs"] .particle {
+  border-radius: 50% 50% 45% 45%;
+  height: calc(var(--particle-size) * 1.3);
+  background: repeating-linear-gradient(
+    0deg,
+    var(--particle-color) 0 5px,
+    #ffffff99 5px 7px
+  );
+}
+.overlay[data-effect="bats"] .particle {
+  width: calc(var(--particle-size) * 1.8);
+  clip-path: polygon(
+    0 0,
+    28% 25%,
+    36% 0,
+    50% 30%,
+    64% 0,
+    72% 25%,
+    100% 0,
+    90% 80%,
+    66% 65%,
+    50% 100%,
+    34% 65%,
+    10% 80%
+  );
+  opacity: 0.5;
+}
+.overlay[data-effect="flags"] {
+  display: none;
+}
+.overlay[data-paused="true"] .particle {
+  display: none;
+}
+@keyframes seasonal-fall {
+  0% {
+    transform: translate3d(-20px, -20px, 0) rotate(0);
+  }
+  50% {
+    transform: translate3d(24px, 52vh, 0) rotate(120deg);
+  }
+  100% {
+    transform: translate3d(-8px, calc(100dvh + 50px), 0) rotate(220deg);
+  }
+}
+.motionToggle {
+  position: fixed;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid #6d84954d;
+  border-radius: 30px;
+  background: #14202ee8;
+  color: #fff;
+  font:
+    500 11px/1.4 var(--font-body),
+    sans-serif;
+  cursor: pointer;
+  box-shadow: 0 3px 14px #0002;
+}
+.motionToggle:focus-visible {
+  outline: 2px solid #f5a964;
+  outline-offset: 4px;
+}
+.motionToggle:hover {
+  background: #24384b;
+}
+.previewIndicator {
+  position: fixed;
+  top: 8px;
+  right: 10px;
+  z-index: 1000;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: #fff;
+  background: #192b3ee8;
+  font: 500 11px/1.4 sans-serif;
+  pointer-events: none;
+}
+.footerScene {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 125px;
+  padding: 28px 24px 40px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--seasonal-primary) 9%, transparent);
+}
+.frame[data-seasonal-theme="christmas"] {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  overflow: visible;
+  margin-top: 0;
+  padding-top: 44px;
+  border-top: 0;
+  background: #171717;
+}
+.greeting {
+  max-width: 1180px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.greeting > svg {
+  display: block;
+  margin: 0 auto 8px;
+  color: var(--seasonal-primary);
+  width: 22px;
+  height: 22px;
+}
+.greeting small {
+  color: inherit;
+  opacity: 0.7;
+  font:
+    650 10px/1.6 var(--font-body),
+    sans-serif;
+  letter-spacing: 0.2em;
+}
+.greeting p {
+  color: inherit;
+  font-size: clamp(17px, 2.3vw, 25px);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  margin: 8px 0 0;
+  font-weight: 500;
+}
+.festiveBorder {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: space-around;
+  height: 20px;
+  gap: 10px;
+  overflow: hidden;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.festiveBorder span {
+  flex-shrink: 0;
+  width: 14px;
+  height: 7px;
+  background: var(--seasonal-primary);
+  transform: rotate(-22deg);
+}
+.festiveBorder span:nth-child(3n + 2) {
+  background: var(--seasonal-secondary);
+  transform: rotate(23deg);
+}
+.festiveBorder span:nth-child(3n) {
+  background: var(--seasonal-tertiary);
+}
+.footerScene[data-effect="flags"] .festiveBorder {
+  height: 30px;
+  border-top: 1px solid #ffffff55;
+}
+.footerScene[data-effect="flags"] .festiveBorder span {
+  width: 27px;
+  height: 30px;
+  transform: none;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
+}
+@media (max-width: 600px) {
+  .greeting p {
+    font-size: 17px;
+  }
+  .motionToggle {
+    font-size: 10px;
+    padding: 7px 9px;
+    left: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .motionToggle {
+    display: none;
+  }
+}
+@media print {
+  .overlay,
+  .motionToggle,
+  .footerScene,
+  .previewIndicator {
+    display: none;
+  }
+}

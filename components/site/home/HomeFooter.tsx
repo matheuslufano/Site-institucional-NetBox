@@ -4,9 +4,10 @@ import { ArrowIcon } from "@/components/ui/ArrowIcon";
 import { SECOND_COPY } from "@/constants/site";
 import { services } from "./content";
 import { FooterCredits } from '@/components/ui/FooterCredits';
+import { SeasonalSiteFooter } from '@/components/shared/seasonal/SeasonalFooter';
 /** Home footer preserves its context-aware service actions. */
 export function HomeFooter({ onService }: { onService: (title: string) => void }) {
-  return (<footer className="model-footer">
+  return (<SeasonalSiteFooter className="model-footer">
     <div className="model-shell footer-main">
       <div className="footer-services">
         {services.map((service) => (
@@ -68,5 +69,5 @@ export function HomeFooter({ onService }: { onService: (title: string) => void }
       </span>
     </div>
     <FooterCredits />
-  </footer>);
+  </SeasonalSiteFooter>);
 }

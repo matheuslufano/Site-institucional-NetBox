@@ -1,4 +1,5 @@
 import { ReferralTracker } from "@/components/shared/ReferralTracker";
+import { SeasonalThemeProvider } from "@/components/shared/seasonal/SeasonalThemeProvider";
 import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import { Manrope, Sora } from "next/font/google";
@@ -66,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${manrope.variable} ${sora.variable}`}>
-        {children}
+        <SeasonalThemeProvider>{children}</SeasonalThemeProvider>
         <ReferralTracker />
         <script
           type="application/ld+json"

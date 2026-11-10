@@ -29,7 +29,9 @@ export function consentSnapshot() {
     return "essential";
   }
 }
-export const analyticsAllowed = () => consentSnapshot() === "all";
+export const analyticsAllowed = () =>
+  consentSnapshot() === "all" &&
+  !new URLSearchParams(window.location?.search || "").has("previewTheme");
 export function subscribeConsent(callback: () => void) {
   window.addEventListener(CHANGE, callback);
   window.addEventListener("storage", callback);

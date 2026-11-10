@@ -3,10 +3,11 @@ import styles from "@/styles/blog/Blog.module.css";
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
 import { FooterCredits } from '@/components/ui/FooterCredits';
+import { SeasonalSiteFooter } from '@/components/shared/seasonal/SeasonalFooter';
 
 export function BlogFooter() {
   return (
-    <footer className={styles.portalFooter} data-ui="blog-footer">
+    <SeasonalSiteFooter className={styles.portalFooter} data-ui="blog-footer">
       <div className={styles.shell}>
         <div className={styles.footerTop}>
           <Link className={styles.footerBrand} href={BLOG_PATH}>
@@ -27,6 +28,6 @@ export function BlogFooter() {
         </div>
       </div>
       <FooterCredits product="Netbox Blog" />
-    </footer>
+    </SeasonalSiteFooter>
   );
 }

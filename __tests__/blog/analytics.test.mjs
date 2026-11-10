@@ -62,6 +62,11 @@ test("consent gates identifiers and events; navigation follows the same active s
     assert.equal(sent.length, 0);
     assert.equal(localStorage.getItem("netbox_blog_visitor"), null);
     analytics.saveBlogConsent("all");
+    window.location = { search: "?previewTheme=christmas" };
+    analytics.trackArticleView("theme-preview", crypto.randomUUID());
+    assert.equal(sent.length, 0, "Theme previews must not inflate article analytics");
+    assert.equal(localStorage.getItem("netbox_blog_visitor"), null);
+    window.location.search = "";
     analytics.trackArticleView("a", crypto.randomUUID());
     analytics.trackArticleView("b", crypto.randomUUID());
     analytics.trackArticleAction("trailer_play", "b");
