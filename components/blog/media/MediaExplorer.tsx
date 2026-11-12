@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
-import { FiFilm, FiSearch, FiTv, FiX } from "react-icons/fi";
+import { FiSearch, FiX } from "react-icons/fi";
 import { IoTriangle } from "react-icons/io5";
 import type { MediaKind, MediaPage, MediaResult } from "@/lib/blog/media";
 import { MediaCards } from "./MediaCards";
@@ -77,28 +77,6 @@ export function MediaExplorer({ kind, initial, compact = false }: Props) {
       aria-busy={pending}
     >
       <div className={styles.explorerTop}>
-        {!compact && (
-          <header className={styles.heading}>
-            <span>
-              {kind === "tv" ? (
-                <FiTv aria-hidden="true" />
-              ) : (
-                <FiFilm aria-hidden="true" />
-              )}
-            </span>
-            <div>
-              <small>PARA SUA PRÓXIMA SESSÃO</small>
-              <h2>
-                {activeQuery
-                  ? "Resultados para “" + activeQuery + "”"
-                  : kind === "tv"
-                    ? "Séries em alta nesta semana"
-                    : "Filmes em alta nesta semana"}
-              </h2>
-              <p>Descubra histórias e pesquise títulos em português.</p>
-            </div>
-          </header>
-        )}
         <form
           className={styles.mediaSearch}
           role="search"

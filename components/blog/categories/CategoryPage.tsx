@@ -1,6 +1,4 @@
 import { FeaturedNews } from "@/components/blog/home/FeaturedNews";
-import { MediaCatalog } from "@/components/blog/media/MediaCatalog";
-import { Suspense } from "react";
 import { ArticleCard } from "@/components/blog/articles/ArticleCard";
 import {
   BLOG_PATH,
@@ -310,11 +308,6 @@ export function CategoryPage({
           )}
         </section>
       </div>
-      {(category.id === "filmes" || category.id === "series") && (
-          <Suspense fallback={<p role="status">Carregando filmes e séries…</p>}>
-            <MediaCatalog category={category.id} />
-          </Suspense>
-        )}
     </div>
   );
 }

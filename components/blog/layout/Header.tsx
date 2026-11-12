@@ -111,8 +111,8 @@ function HeaderContent({
             className={styles.navSearch}
             data-ui="blog-search-trigger"
             type="button"
-            aria-label="Abrir busca de artigos, filmes e séries"
-            title="Buscar artigos, filmes e séries"
+            aria-label="Buscar artigos"
+            title="Buscar artigos"
             aria-controls="blog-search-panel"
             aria-haspopup="dialog"
             aria-expanded={searchOpen}

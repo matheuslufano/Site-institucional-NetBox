@@ -2,12 +2,9 @@
 
 import { categories } from "@/lib/blog/navigation";
 import styles from "@/styles/blog/Blog.module.css";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { SearchForm } from "./SearchForm";
-import { MediaExplorer } from "../media/MediaExplorer";
-import mediaStyles from "../media/MediaCatalog.module.css";
-import { FiBookOpen, FiFilm } from "react-icons/fi";
 
 type Props = {
   open: boolean;
@@ -28,7 +25,6 @@ export function SearchPanel({
   editorialSidebar,
 }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [mode, setMode] = useState<'works' | 'articles'>('works');
   const categoryLabel = categories.find((item) => item.id === category)?.label;
 
   useEffect(() => {
@@ -90,20 +86,16 @@ export function SearchPanel({
       </div>
       <h2 id="blog-search-title">O que você quer encontrar?</h2>
       <p id="blog-search-description">
-        {mode === 'works' ? 'Busque filmes e séries por títulos em português ou no idioma original.' : categoryLabel
+        {categoryLabel
           ? "Pesquise artigos em " + categoryLabel + "."
-          : "Busque tecnologia, filmes, séries, HQs, jogos e entretenimento."}
+          : "Busque artigos por título, assunto ou categoria."}
       </p>
-      <div className={mediaStyles.searchModes} role="group" aria-label="Tipo de busca">
-        <button type="button" aria-pressed={mode === 'works'} onClick={() => setMode('works')}><FiFilm aria-hidden="true" />Filmes e séries</button>
-        <button type="button" aria-pressed={mode === 'articles'} onClick={() => setMode('articles')}><FiBookOpen aria-hidden="true" />Artigos do blog</button>
-      </div>
-      {mode === 'works' ? <MediaExplorer kind="all" compact /> : <SearchForm
+      <SearchForm
         query={query}
         category={category}
         group={group}
         onSubmitted={onClose}
-      />}
+      />
       <div className={styles.searchPanelEditorial}>{editorialSidebar}</div>
     </dialog>
   );

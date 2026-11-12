@@ -64,9 +64,15 @@ export function MediaUnavailable({
   );
 }
 
-/** Full-width external catalog stays below the editorial archive. */
-export async function MediaCatalog({ category }: { category: string }) {
-  const kind: MediaKind = category === 'series' ? 'tv' : 'movie';
-  const initial = await getMediaPage(kind);
-  return <div className={styles.catalog} data-ui="media-catalog"><div className={styles.catalogInner}><MediaExplorer key={kind} kind={kind} initial={initial} /></div></div>;
-}
+  /** Full-width external catalog stays below the editorial archive. */
+  export async function MediaCatalog({ category }: { category: string }) {
+    const kind: MediaKind = category === "series" ? "tv" : "movie";
+    const initial = await getMediaPage(kind);
+    return (
+      <div className={styles.catalog} data-ui="media-catalog">
+        <div className={styles.catalogInner}>
+          <MediaExplorer key={kind} kind={kind} initial={initial} />
+        </div>
+      </div>
+    );
+  }
