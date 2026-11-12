@@ -1,0 +1,75 @@
+﻿.garland {
+  position: absolute;
+  inset: 100% 0 auto;
+  z-index: 5;
+  display: flex;
+  overflow: hidden;
+  pointer-events: none;
+  transform: scaleY(0.85);
+  transform-origin: center top;
+}
+.artwork {
+  position: relative;
+  flex: 0 0 70%;
+  /* Keep only the central single strand; both double-arc ends stay outside the crop. */
+  aspect-ratio: 1551 / 90;
+  background: url("/seasonal/christmas-hero-garland.png") center top / 140% auto
+    no-repeat;
+}
+.artwork:nth-child(2) {
+  transform: scaleX(-1);
+}
+.lightBank {
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: brightness(1.8) saturate(1.15);
+  mask-image: repeating-linear-gradient(
+    90deg,
+    #000 0 1.4%,
+    transparent 1.4% 4.2%
+  );
+  animation: christmas-hero-twinkle 2.8s ease-in-out infinite;
+}
+.lightBank:nth-child(2) {
+  mask-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 1.4%,
+    #000 1.4% 2.8%,
+    transparent 2.8% 4.2%
+  );
+  animation-delay: -0.93s;
+}
+.lightBank:nth-child(3) {
+  mask-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 2.8%,
+    #000 2.8% 4.2%
+  );
+  animation-delay: -1.86s;
+}
+@keyframes christmas-hero-twinkle {
+  0%,
+  65%,
+  100% {
+    opacity: 0;
+  }
+  25%,
+  40% {
+    opacity: 1;
+  }
+}
+.garland[data-paused="true"] .lightBank {
+  animation-play-state: paused;
+}
+@media (max-width: 600px) {
+  .artwork {
+    flex-basis: 532px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightBank {
+    animation: none;
+    opacity: 0;
+  }
+}

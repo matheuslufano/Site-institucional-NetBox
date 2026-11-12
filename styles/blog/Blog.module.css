@@ -88,7 +88,7 @@
 }
 .brandLogo {
   display: block;
-  width: 165px;
+  width: 140px;
   height: auto;
   object-fit: contain;
 }
@@ -805,7 +805,7 @@
     gap: 8px;
   }
   .brandLogo {
-    width: 118px;
+    width: 108px;
   }
   .blogBrand strong {
     font-size: 12px;
@@ -959,7 +959,7 @@
 }
 @media (max-width: 359px) {
   .brandLogo {
-    width: 102px;
+    width: 90px;
   }
   .feedLink {
     grid-template-columns: minmax(0, 1fr);

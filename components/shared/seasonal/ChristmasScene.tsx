@@ -8,7 +8,7 @@ function WinterForest() {
     <Image
       className={styles.forest}
       data-component="christmas-pine-forest"
-      src="/seasonal/christmas-snowy-pine-panorama-transparent-v1.png"
+      src="/seasonal/"
       width={2172}
       height={724}
       alt=""

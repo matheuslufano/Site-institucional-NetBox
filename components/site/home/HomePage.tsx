@@ -1,4 +1,6 @@
 "use client";
+import ChristmasHeroLights from "@/components/shared/seasonal/ChristmasHeroLights";
+import { useSeasonalTheme } from "@/components/shared/seasonal/SeasonalThemeProvider";
 import { ClientShortcuts } from "@/components/site/layout/ClientShortcuts";
 import { StructureSection } from "@/components/site/structure/StructureSection";
 import Link from "next/link";
@@ -63,6 +65,8 @@ export default function HomePage() {
   const plansModalRef = useRef<HTMLElement | null>(null);
   const plansTriggerRef = useRef<HTMLElement | null>(null);
   const navigationVisible = useScrollDirectionVisibility();
+  const { theme } = useSeasonalTheme();
+  const christmasActive = theme?.id === "christmas";
   const selectedStoreAddress =
     storeAddresses[city] ?? storeAddresses[DEFAULT_CITY];
   const selectedMapLocation = selectedStoreAddress;
@@ -375,7 +379,8 @@ export default function HomePage() {
       </a>
 
       <header
-        className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}
+        className={`model-header${christmasActive || navigationVisible || menuOpen ? "" : " is-hidden"}`}
+        data-seasonal-pinned={christmasActive}
       >
         <a
           className="model-brand"
@@ -439,6 +444,7 @@ export default function HomePage() {
             <span />
           </button>
         </div>
+        <ChristmasHeroLights />
       </header>
       {menuOpen && (
         <button

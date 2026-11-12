@@ -2,6 +2,8 @@
 
 import { SearchPanel } from "@/components/blog/search/SearchPanel";
 import { useHeaderVisibility } from "@/hooks/blog/useHeaderVisibility";
+import ChristmasHeroLights from "@/components/shared/seasonal/ChristmasHeroLights";
+import { useSeasonalTheme } from "@/components/shared/seasonal/SeasonalThemeProvider";
 import {
   BLOG_PATH,
   blogHref,
@@ -36,7 +38,9 @@ function HeaderContent({
   const closeMenu = () => setMenuOpen(false);
   const headerRef = useRef<HTMLElement>(null);
   const scrollVisible = useHeaderVisibility(headerRef, pageKey);
-  const visible = scrollVisible || menuOpen || searchOpen;
+  const { theme } = useSeasonalTheme();
+  const christmasActive = theme?.id === "christmas";
+  const visible = christmasActive || scrollVisible || menuOpen || searchOpen;
 
   return (
     <>
@@ -47,6 +51,7 @@ function HeaderContent({
         inert={!visible}
         aria-hidden={!visible}
         data-ui="blog-header"
+        data-seasonal-pinned={christmasActive}
         onKeyDown={(event) => {
           if (event.key === "Escape") {
             closeMenu();
@@ -65,7 +70,7 @@ function HeaderContent({
           >
             <Image
               className={styles.brandLogo}
-              src="/blog/netbox-blog-logo.png"
+              src="/blog/logo-NETBOX-BLOG.png "
               alt="Netbox — Internet de verdade"
               width={1672}
               height={941}
@@ -132,6 +137,7 @@ function HeaderContent({
             {menuOpen ? "Fechar ✕" : "Menu ☰"}
           </button>
         </div>
+        <ChristmasHeroLights />
       </header>
       <SearchPanel
         open={searchOpen}

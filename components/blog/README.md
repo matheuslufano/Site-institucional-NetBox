@@ -221,3 +221,12 @@ Com uma publicação, a abertura não mostra setas ou miniaturas de paginação.
 ### Imagens do slide principal
 
 O quadro de `NewsCarousel` acompanha a proporcao natural da imagem, sem caixa fixa 2:3 e sem corte da capa. A altura maxima e 340px. Imagens com transparencia ficam sem moldura, fundo ou sombra; no desktop recebem ate 300px de largura. A transparencia e verificada no carregamento pelo canal alpha, inclusive em URLs sem extensao. Quando CORS impede a leitura, a imagem permanece sem moldura. O link do artigo e preservado e identificado por `data-component="lead-slide-poster"`. Estilos em `home/NewsCarousel.module.css`.
+# Pisca-pisca do carrossel natalino
+
+O cabeçalho do Blog usa `components/shared/seasonal/ChristmasHeroLights.tsx` quando o tema ativo é `christmas`. O CSS Module correspondente mantém o cordão decorativo imediatamente abaixo do cabeçalho, sem interceptar cliques. As lâmpadas alternam a opacidade, respeitam o controle global de pausa e ficam estáticas com `prefers-reduced-motion`. No DevTools, localize `data-component="christmas-hero-lights"`.
+
+
+O cordão usa a imagem transparente original em public/seasonal/christmas-hero-garland.png (2172 × 200). O enquadramento CSS amplia a arte para 140% e exibe somente a fileira central, excluindo os arcos duplos das pontas. Três máscaras alternam o brilho sobre o mesmo recorte, preservando fios, soquetes e reflexos. A fileira usa dois segmentos, com o segundo espelhado para unir as extremidades. Cada segmento ocupa 70% da largura (532 px em telas pequenas), reduzindo proporcionalmente as lâmpadas em 30% sem encurtar o cordão.
+
+
+Enquanto o tema christmas estiver ativo, o cabeçalho permanece fixo e visível durante a rolagem (data-seasonal-pinned). O cordão acompanha a borda inferior real do cabeçalho, inclusive com o menu móvel expandido. Ao desativar o tema, a regra normal de recolhimento retorna.

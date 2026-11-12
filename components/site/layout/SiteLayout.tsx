@@ -1,4 +1,6 @@
 "use client";
+import ChristmasHeroLights from "@/components/shared/seasonal/ChristmasHeroLights";
+import { useSeasonalTheme } from "@/components/shared/seasonal/SeasonalThemeProvider";
 
 import { AppDownloadButton } from "@/components/site/app/AppDownloadButton";
 import { FooterCredits } from '@/components/ui/FooterCredits';
@@ -32,6 +34,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const currentPath = usePathname();
   const navigationVisible = useScrollDirectionVisibility();
+  const { theme } = useSeasonalTheme();
+  const christmasActive = theme?.id === "christmas";
   const menuSwipe = useSwipeGesture({
     enabled: menuOpen,
     onSwipeRight: () => setMenuOpen(false),
@@ -56,7 +60,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         Ir para o conteúdo
       </a>
       <header
-        className={`model-header${navigationVisible || menuOpen ? "" : " is-hidden"}`}
+        className={`model-header${christmasActive || navigationVisible || menuOpen ? "" : " is-hidden"}`}
+        data-seasonal-pinned={christmasActive}
       >
         <Link
           className="model-brand"
@@ -99,6 +104,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <span />
           </button>
         </div>
+        <ChristmasHeroLights />
       </header>
       {menuOpen && (
         <button
