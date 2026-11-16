@@ -5,7 +5,7 @@ O site envia eventos consentidos ao proxy same-origin `POST /api/blog/analytics`
 ## Componentes e regras
 
 - `lib/blog/analytics.ts`: consentimento compartilhado `netbox_cookie_consent`, identidades aleatórias, sessão de 30 minutos, expiração de visitante em 365 dias e envio keepalive. Não cria identificadores antes de consentir; respeita DNT/GPC. Alteração para essenciais limpa identidades locais.
-- `BlogConsent` no `BlogLayout`: preferências essenciais/analytics e controle para rever a escolha; oculto em iframe de prévia. Reutiliza a escolha existente do site institucional.
+- O Blog não exibe painel nem botão flutuante de privacidade. O analytics continua respeitando a escolha compartilhada `netbox_cookie_consent` definida no site institucional: sem autorização existente, não cria identificadores nem envia eventos. DNT/GPC continuam respeitados. A remoção da interface não concede consentimento automaticamente.
 - `ArticleAnalytics` no artigo: registra após um segundo visível e consentido. UUID estável evita duplicação em rerenders/StrictMode. Prévia/rascunho não são rastreados. Trocar de artigo registra uma nova visualização e, na sessão ativa, a navegação de origem.
 - `ShareButtons`: registra acionamentos reais de rede, cópia e compartilhamento nativo. Não confirma publicação em plataformas externas.
 - `TrackedTrailerFrame`/`lib/blog/youtube.ts`: instrumentam o trailer YouTube do slide editorial associado ao artigo. Só o primeiro PLAYING observado por montagem é enviado; `onReady` consulta o estado real para capturar reprodução já iniciada. API bloqueada não vira clique. Referência: [YouTube IFrame API](https://developers.google.com/youtube/iframe_api_reference#Events).

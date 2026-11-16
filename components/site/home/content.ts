@@ -1,15 +1,15 @@
 /** Static content for the institutional home. Asset URLs remain public and unchanged. */
 export const featuredServiceImages: Record<string, string> = {
-  Deezer: "/featured-plans/deezer.png",
+  "Deezer": "/featured-plans/deezer.png",
   "Ubook Go": "/featured-plans/ubook-go.jpg",
   "Roteador Wi-Fi": "/featured-plans/roteador.png",
-  "Sky Light": "/featured-plans/sky-light.png",
+  "SKY +": "/featured-plans/sky-light.png",
   "Prime Video": "/featured-plans/prime-video.png",
   "Amazon Prime": "/featured-plans/prime-video.png",
-  "Disney Plus": "/featured-plans/disney-plus.png",
+  "Disney +": "/featured-plans/disney-plus.png",
   "Docway Telemedicina": "/featured-plans/docway.png",
   "HBO Max": "/featured-plans/hbo-max.png",
-  Globoplay: "/featured-plans/globoplay.png",
+  "Globoplay": "/featured-plans/globoplay.png",
 };
 
 export const storeAddresses: Record<string, string> = {
@@ -66,22 +66,22 @@ export const featuredPlans = [
     services: ["Ubook Go", "App Netbox"],
   },
   {
-    name: "ADICIONAIS",
+    name: "APLICATIVOS",
     tone: "additional",
     services: [
       "Globoplay",
       "HBO Max",
-      "Disney Plus",
+      "Disney +",
       "Deezer",
       "Prime Video",
-      "Sky Light",
+      "SKY +",
       "Docway Telemedicina",
     ],
   },
   {
     name: "PRO",
     tone: "pro",
-    services: ["Ubook Go", "App Netbox", "Sky Light"],
+    services: ["Ubook Go", "App Netbox", "SKY +"],
   },
 ] as const;
 
@@ -97,7 +97,7 @@ export const familyFeaturedPlans = [
     services: [
       "Aplicativo Netbox",
       "Ubook Go",
-      "Sky Light",
+      "SKY +",
       "Amazon Prime",
       "Deezer Premium",
     ],
@@ -113,14 +113,14 @@ export const familyFeaturedPlans = [
     services: ["Aplicativo Netbox", "Ubook Go"],
   },
   {
-    name: "ADICIONAIS",
+    name: "APLICATIVOS",
     tone: "additional",
     services: [
       "Docway Telemedicina",
-      "Sky Light",
+      "SKY +",
       "Amazon Prime",
       "Deezer Premium",
-      "Disney Plus",
+      "Disney +",
       "HBO Max",
       "Globoplay",
     ],
@@ -144,12 +144,12 @@ export const featuredAdditionalTiers = [
   { name: "STANDARD", services: ["Docway Telemedicina", "Deezer"] },
   {
     name: "ADVANCED",
-    services: ["Sky Light", "Prime Video"],
+    services: ["SKY +", "Prime Video"],
     caption: "SKY+ com Amazon Prime incluso",
   },
   {
     name: "PREMIUM",
-    services: ["Disney Plus", "HBO Max", "Globoplay"],
+    services: ["Disney +", "HBO Max", "Globoplay"],
   },
 ] as const;
 
@@ -235,9 +235,9 @@ export const residentialPlans = [
       { name: "Ubook Go", tone: "ubook" },
       { name: "App Netbox", tone: "netbox" },
       { name: "HBO Max", tone: "hbo" },
-      { name: "Disney Plus", tone: "disney" },
+      { name: "Disney +", tone: "disney" },
     ],
-    choiceNote: "Você pode optar por HBO Max ou Disney Plus.",
+    choiceNote: "Você pode optar por HBO Max ou Disney +.",
   },
 ];
 

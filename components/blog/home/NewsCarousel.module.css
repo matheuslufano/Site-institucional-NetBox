@@ -1,4 +1,5 @@
 .carousel {
+  --carousel-image-radius: 14px;
   position: relative;
   isolation: isolate;
   min-width: 0;
@@ -35,9 +36,19 @@
 }
 .backdrop img {
   object-fit: cover;
-  filter: blur(22px) saturate(0.85);
+  filter: blur(3px) saturate(0.9);
   opacity: 0.7;
   transform: scale(1.12);
+  animation: carouselBackdropDrift 18s ease-in-out infinite alternate;
+  transition: opacity 260ms ease;
+}
+@keyframes carouselBackdropDrift {
+  from {
+    transform: scale(1.12) translate3d(-1%, 0, 0);
+  }
+  to {
+    transform: scale(1.18) translate3d(1%, -1%, 0);
+  }
 }
 .backdrop::after {
   content: "";
@@ -65,7 +76,7 @@
   max-width: 100%;
   justify-self: center;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 1%;
 }
 .poster img {
   display: block;
@@ -73,14 +84,12 @@
   height: auto;
   max-width: 100%;
   max-height: 340px;
+  border-radius: var(--carousel-image-radius);
   object-fit: contain;
 }
 .poster[data-transparent="false"] {
   box-shadow: 0 18px 45px #0008;
   outline: 1px solid #ffffff2b;
-}
-.poster:not([data-transparent="false"]) {
-  border-radius: 0;
 }
 @media (min-width: 1024px) {
   .carousel[data-layout="poster"] .feature:has(.poster[data-transparent="true"]) {
@@ -319,6 +328,15 @@
     width: calc(100% - 64px);
   }
 }
+:global(#blog-home-featured) .carousel {
+  --carousel-image-radius: 5px;
+}
+/* Only horizontal/square home artwork uses the wider column. */
+@media (min-width: 768px) {
+  :global(#blog-home-featured) .feature:has(.poster[data-orientation="landscape"]) {
+    grid-template-columns: minmax(0, 36.36%) minmax(0, 1fr);
+  }
+}
 @media (max-width: 767px) {
   .feature {
     width: calc(100% - 40px);
@@ -415,6 +433,7 @@
   .carousel *::before,
   .carousel *::after {
     transition: none !important;
+    animation: none !important;
   }
   .actions a:hover,
   .actions button:hover {
@@ -436,9 +455,7 @@
 }
 .carousel[data-trailer-open="true"] .backdrop img {
   opacity: 0.4;
-}
-.backdrop img {
-  transition: opacity 260ms ease;
+  animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
   .feature[data-playing="true"] {
@@ -476,17 +493,15 @@
   }
 }
 
-.carousel[data-layout="background"] .backdrop img {
-  filter: blur(8px) saturate(0.9);
-}
-
 .carousel[data-layout="background"] .poster {
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
   grid-column: 2;
   grid-row: 1;
   z-index: 1;
-  width: fit-content;
-  max-width: 100%;
-  height: fit-content;
+  width: 100%;
+  height: 340px;
   justify-self: center;
   aspect-ratio: auto;
   overflow: visible;
@@ -497,9 +512,8 @@
   outline: none;
 }
 .carousel[data-layout="background"] .poster img {
-  max-height: none;
-  display: block;
-  width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
   object-fit: contain;
 }
@@ -538,6 +552,7 @@
     grid-column: 1;
     grid-row: 2;
     width: min(100%, 340px);
+    height: 260px;
     justify-self: center;
   }
   .technologyArt img:last-child {

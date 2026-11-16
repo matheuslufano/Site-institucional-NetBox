@@ -36,12 +36,13 @@ export type NewsCarouselLayout = "poster" | "background";
 
 const ROTATION_INTERVAL = 6000;
 
-/** Inspect decoded alpha, including PNGs served through extensionless media URLs.
+/** Identify natural orientation and decoded alpha, including extensionless media URLs.
  * Cross-origin images without canvas access remain unframed, preserving cutouts.
  */
-function identifyPosterTransparency(image: HTMLImageElement) {
+function identifyPosterPresentation(image: HTMLImageElement) {
   const frame = image.closest<HTMLElement>('[data-component="lead-slide-poster"]');
   if (!frame) return;
+  frame.dataset.orientation = image.naturalHeight > image.naturalWidth ? "portrait" : "landscape";
   try {
     const canvas = document.createElement("canvas");
     const scale = Math.min(1, 128 / Math.max(image.naturalWidth, image.naturalHeight));
@@ -220,7 +221,7 @@ export function NewsCarousel({
                 {slide.poster ? (
                   <Image
                     src={slide.poster}
-                    onLoad={(event) => identifyPosterTransparency(event.currentTarget)}
+                    onLoad={(event) => identifyPosterPresentation(event.currentTarget)}
                     alt={slide.posterAlt || "Pôster de " + slide.title}
                     width={480}
                     height={720}
@@ -230,7 +231,7 @@ export function NewsCarousel({
                   />
                 ) : (
                   <CoverImage
-                    onLoad={(event) => identifyPosterTransparency(event.currentTarget)}
+                    onLoad={(event) => identifyPosterPresentation(event.currentTarget)}
                     src={slide.cover}
                     alt={slide.coverAlt}
                     width={480}

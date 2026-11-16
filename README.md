@@ -231,3 +231,7 @@ Fotos de perfil em JPEG, PNG, WebP ou GIF base64 são aceitas no artigo e na pr�
 Os créditos em `/site/blog/creditos` também identificam Metron (HQs) e IGDB (jogos), usados pelo editor do painel de afiliados. Imagens importadas continuam chegando pela API pública existente, sem credenciais desses provedores no institucional.
 
 O componente `AuthorIdentity` usa `public/blog/equipe-netbox-square.png` para os autores “Equipe Netbox” e “Equipe editorial Netbox”. A versão quadrada foi criada com ImageGen a partir da logo fornecida: fundo branco, foguete e caixa centralizados com margem para o recorte circular. A imagem já contém o espaçamento necessário; CSS usa `object-fit: contain` sem padding adicional. O arquivo original `public/blog/equipe-netbox.png` foi preservado. Autores individuais continuam usando a foto cadastrada. A regra também vale para a prévia do artigo e não altera os dados nem os snapshots publicados.
+
+Na aba Início do Blog, o destaque reserva 36,36% da grade para imagens horizontais ou quadradas em telas a partir de 768px (até 400px), mantendo a altura máxima de 340px e a proporção natural. O escopo é identificado por blog-home-featured; detalhes em components/blog/README.md.
+
+No destaque inicial, imagens verticais mantêm a grade anterior e as bordas das imagens usam raio de 5px. Consulte os detalhes na documentação do Blog.

@@ -1,10 +1,15 @@
 "use client";
 import { IoWifiOutline } from "react-icons/io5";
 import { SiDeezer, SiHbomax } from "react-icons/si";
-import { featuredAdditionalTiers, featuredBenefits, featuredServiceImages, type FeaturedPlan } from "./content";
+import {
+  featuredAdditionalTiers,
+  featuredBenefits,
+  featuredServiceImages,
+  type FeaturedPlan,
+} from "./content";
 type PlanPlatform = { name: string; tone: string };
 export function PlatformLogo({ platform }: { platform: PlanPlatform }) {
-  if(platform.tone === "netbox") {
+  if (platform.tone === "netbox") {
     return (
       <>
         <img src="/netbox-app-icon.png" alt="" />
@@ -12,7 +17,7 @@ export function PlatformLogo({ platform }: { platform: PlanPlatform }) {
       </>
     );
   }
-  if(platform.tone === "deezer") {
+  if (platform.tone === "deezer") {
     return (
       <>
         <SiDeezer aria-hidden="true" />
@@ -20,7 +25,7 @@ export function PlatformLogo({ platform }: { platform: PlanPlatform }) {
       </>
     );
   }
-  if(platform.tone === "hbo") {
+  if (platform.tone === "hbo") {
     return (
       <>
         <SiHbomax aria-hidden="true" />
@@ -28,7 +33,7 @@ export function PlatformLogo({ platform }: { platform: PlanPlatform }) {
       </>
     );
   }
-  if(platform.tone === "ubook") {
+  if (platform.tone === "ubook") {
     return (
       <>
         <img src="/featured-plans/ubook-go.jpg" alt="" />
@@ -36,7 +41,7 @@ export function PlatformLogo({ platform }: { platform: PlanPlatform }) {
       </>
     );
   }
-  if(platform.tone === "prime") {
+  if (platform.tone === "prime") {
     return (
       <span className="platform-wordmark prime-wordmark">
         <b>prime</b>
@@ -58,22 +63,22 @@ export function PlatformLogo({ platform }: { platform: PlanPlatform }) {
   );
 }
 function FeaturedServiceIcon({ name }: { name: string }) {
-  if(name === "Aplicativo Netbox") {
+  if (name === "Aplicativo Netbox") {
     return <img src="/netbox-app-icon.png" alt="" />;
   }
-  if(name === "Roteador WiFi") {
+  if (name === "Roteador WiFi") {
     return <img src={featuredServiceImages["Roteador Wi-Fi"]} alt="" />;
   }
-  if(name === "Deezer Premium") {
+  if (name === "Deezer Premium") {
     return <img src={featuredServiceImages.Deezer} alt="" />;
   }
-  if(featuredServiceImages[name]) {
+  if (featuredServiceImages[name]) {
     return <img src={featuredServiceImages[name]} alt="" />;
   }
-  if(name === "App Netbox") {
+  if (name === "App Netbox") {
     return <img src="/netbox-app-icon.png" alt="" />;
   }
-  if(name === "Deezer") {
+  if (name === "Deezer") {
     return <PlatformLogo platform={{ name, tone: "Deezer" }} />;
   }
   return null;
@@ -103,14 +108,14 @@ export function PlanCard({
           )}
           {plan.name === "PRO"
             ? "PLANO PRO"
-            : plan.name === "ADICIONAIS"
-              ? "ADICIONAIS"
+            : plan.name === "APLICATIVOS"
+              ? "APLICATIVOS"
               : plan.name}
         </h3>
 
         {plan.tone === "additional" ? (
           <div className="nb-featured-services nb-featured-addons">
-            <strong>Adicione ao seu plano um aplicativo</strong>
+            <strong>Esses aplicativos podem estar no seu plano</strong>
             <div
               className="nb-featured-addon-table"
               role="table"
@@ -137,7 +142,7 @@ export function PlanCard({
                         <div className="nb-featured-addon-advanced-logos">
                           <img
                             src="/featured-plans/sky-amazon-prime.png"
-                            alt="SKY+ e Amazon Prime"
+                            alt="SKY + e Amazon Prime"
                           />
                         </div>
                         <strong>{tier.caption}</strong>
@@ -218,16 +223,13 @@ export function PlanCard({
               </div>
               <div className="nb-featured-family-options">
                 <div className="nb-featured-family-options-box">
-                  <strong>Você pode optar entre Disney Plus ou HBO Max</strong>
+                  <strong>Você pode optar entre Disney + ou HBO Max</strong>
                   <div className="nb-featured-family-options-row">
                     <div className="nb-featured-family-option">
                       <span className="nb-featured-family-option-logo">
-                        <img
-                          src={featuredServiceImages["Disney Plus"]}
-                          alt=""
-                        />
+                        <img src={featuredServiceImages["Disney +"]} alt="" />
                       </span>
-                      <span>Disney Plus</span>
+                      <span>Disney +</span>
                     </div>
                     <div className="nb-featured-family-option">
                       <span className="nb-featured-family-option-logo">

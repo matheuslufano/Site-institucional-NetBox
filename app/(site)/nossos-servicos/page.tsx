@@ -65,7 +65,7 @@ const serviceDetails = [
     title: "Aplicativos e benefícios",
     kicker: "Aplicativos parceiros",
     image: "/servico-aplicativos-parceiros.png",
-    text: "Complete sua experiência Netbox com serviços de entretenimento, música, saúde e conteúdo. Contrate aplicativos como Docway, Deezer Premium, Sky+ Light com Amazon Prime Video, HBO Max, Disney+ e Globoplay adicionando junto com a sua internet.",
+    text: "Complete sua experiência Netbox com serviços de entretenimento, música, saúde e conteúdo. Contrate aplicativos como Docway, Deezer Premium, SKY + Light com Amazon Prime Video, HBO Max, Disney+ e Globoplay adicionando junto com a sua internet.",
     items: [
       "Até 40% de desconto em serviços selecionados no combo com internet",
       "Contratação sem precisar usar cartão de crédito",

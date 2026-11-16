@@ -230,3 +230,8 @@ O cordão usa a imagem transparente original em public/seasonal/christmas-hero-g
 
 
 Enquanto o tema christmas estiver ativo, o cabeçalho permanece fixo e visível durante a rolagem (data-seasonal-pinned). O cordão acompanha a borda inferior real do cabeçalho, inclusive com o menu móvel expandido. Ao desativar o tema, a regra normal de recolhimento retorna.
+
+## Largura da imagem no destaque inicial
+O contêiner #blog-home-featured em home/HomePage.tsx limita o ajuste à aba Início. Em home/NewsCarousel.module.css, a coluna das imagens horizontais ou quadradas ocupa 36,36% da grade a partir de 768px, chegando a 400px na grade de 1100px. Mantém proporção natural, max-height de 340px e o layout mobile existente. Essa regra prevalece sobre o limite de 300px para transparência somente na home; categorias conservam suas dimensões.
+
+No destaque inicial, imagens verticais mantêm a grade anterior (225px no desktop, até 300px quando transparentes; 190px no tablet). A orientação é detectada pelas dimensões naturais, antes da leitura de transparência, e exposta em data-orientation. As bordas das imagens da home usam raio de 5px.
