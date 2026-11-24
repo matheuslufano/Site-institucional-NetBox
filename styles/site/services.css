@@ -16,7 +16,7 @@
 
 .service-feature {
   position: relative;
-  width: min(100%, 432px);
+  width: min(100%, 432px, calc((100vh - 140px) * 9 / 16));
   min-height: 0;
   aspect-ratio: 9 / 16;
   justify-self: center;

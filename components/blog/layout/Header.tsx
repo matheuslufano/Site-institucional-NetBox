@@ -1,5 +1,6 @@
 "use client";
 
+import type { ArticleSuggestion } from "@/components/blog/search/SearchForm";
 import { SearchPanel } from "@/components/blog/search/SearchPanel";
 import { useHeaderVisibility } from "@/hooks/blog/useHeaderVisibility";
 import ChristmasHeroLights from "@/components/shared/seasonal/ChristmasHeroLights";
@@ -25,9 +26,11 @@ function HeaderContent({
   home = false,
   pageKey = "",
   editorialSidebar,
+  articleSuggestions,
 }: {
   pageKey?: string;
   editorialSidebar?: ReactNode;
+  articleSuggestions: ArticleSuggestion[];
   activeCategory?: string;
   query?: string;
   group?: string;
@@ -144,7 +147,7 @@ function HeaderContent({
         query={query}
         category={activeCategory}
         group={group}
-        editorialSidebar={editorialSidebar}
+        editorialSidebar={editorialSidebar} articleSuggestions={articleSuggestions}
         onClose={() => setSearchOpen(false)}
       />
     </>
@@ -153,15 +156,17 @@ function HeaderContent({
 
 export function BlogHeader({
   editorialSidebar,
+  articleSuggestions,
 }: {
   editorialSidebar: ReactNode;
+  articleSuggestions: ArticleSuggestion[];
 }) {
   const params = useSearchParams();
   const pathname = usePathname();
   return (
     <HeaderContent
       pageKey={pathname + "?" + params.toString()}
-      editorialSidebar={editorialSidebar}
+      editorialSidebar={editorialSidebar} articleSuggestions={articleSuggestions}
       activeCategory={resolveCategory(params.get("categoria") ?? "") ?? ""}
       query={params.get("q") ?? ""}
       group={params.get("grupo") ?? ""}
@@ -173,8 +178,10 @@ export function BlogHeader({
 /** The same header remains available in the server-rendered Suspense fallback. */
 export function BlogHeaderFallback({
   editorialSidebar,
+  articleSuggestions,
 }: {
   editorialSidebar: ReactNode;
+  articleSuggestions: ArticleSuggestion[];
 }) {
-  return <HeaderContent editorialSidebar={editorialSidebar} />;
+  return <HeaderContent editorialSidebar={editorialSidebar} articleSuggestions={articleSuggestions} />;
 }

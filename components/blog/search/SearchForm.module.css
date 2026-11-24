@@ -1,0 +1,76 @@
+.articleSearchForm {
+  position: relative;
+}
+
+.articleSearchForm input[type="search"]:focus-visible {
+  outline: 1px solid #767676;
+  outline-offset: -1px;
+}
+
+.articleSearchForm button.searchEnter {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 74px;
+  padding: 2px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #161616;
+  cursor: pointer;
+}
+
+.searchEnterFace {
+  display: block;
+  width: 100%;
+  height: auto;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linejoin: round;
+  font-size: 16px;
+  font-weight: 800;
+  transition: transform 100ms ease;
+}
+
+.searchEnter:enabled:hover .searchEnterFace { transform: translateY(-1px); }
+.searchEnter:is(:enabled:active, [data-pressed="true"]) .searchEnterFace {
+  transform: translateY(4px) scale(.97);
+}
+.searchEnter:focus-visible { outline: 2px solid #d95d13; outline-offset: 2px; }
+.articleSearchForm button.searchEnter:disabled { cursor: wait; }
+
+@media (prefers-reduced-motion: reduce) {
+  .searchEnterFace { transition: none; }
+  .searchEnter[data-pressed="true"] .searchEnterFace { transform: none; }
+}
+
+.articleSuggestions {
+  position: absolute;
+  z-index: 2;
+  inset: calc(100% + 6px) 0 auto;
+  max-height: min(240px, 35dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border: 1px solid rgb(128 128 128 / 35%);
+  border-radius: 10px;
+  background: Canvas;
+  color: CanvasText;
+  box-shadow: 0 12px 24px rgb(0 0 0 / 18%);
+}
+
+.articleSuggestions a,
+.emptySuggestions {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.articleSuggestions a:is(:hover, :focus-visible) {
+  background: rgb(244 119 33 / 16%);
+}

@@ -28,7 +28,10 @@ export function Gallery({ items }: StructureGalleryProps) {
   const modalTriggerRef = useRef<HTMLElement | null>(null);
   const activeItem = activeIndex === null ? null : items[activeIndex];
   const imageDisplayWidth = activeItem
-    ? Math.min(activeItem.width, Math.round((activeItem.width / activeItem.height) * 560))
+    ? Math.min(
+        activeItem.width,
+        Math.round((activeItem.width / activeItem.height) * 560),
+      )
     : 0;
   const modalWidth = imageDisplayWidth + 320;
 
@@ -38,25 +41,35 @@ export function Gallery({ items }: StructureGalleryProps) {
 
   const modalSwipe = useSwipeGesture({
     enabled: activeIndex !== null,
-    onSwipeLeft: () => setActiveIndex((current) => current === null ? null : (current + 1) % items.length),
-    onSwipeRight: () => setActiveIndex((current) => current === null ? null : (current - 1 + items.length) % items.length),
+    onSwipeLeft: () =>
+      setActiveIndex((current) =>
+        current === null ? null : (current + 1) % items.length,
+      ),
+    onSwipeRight: () =>
+      setActiveIndex((current) =>
+        current === null ? null : (current - 1 + items.length) % items.length,
+      ),
     onSwipeDown: closeModal,
   });
 
   useFocusTrap(activeIndex !== null, modalRef, modalTriggerRef, closeModal);
 
   useEffect(() => {
-    if(activeIndex === null) return;
+    if (activeIndex === null) return;
 
     const previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
 
     function handleKeyDown(event: KeyboardEvent) {
-      if(event.key === "ArrowLeft") {
-        setActiveIndex((current) => current === null ? null : (current - 1 + items.length) % items.length);
+      if (event.key === "ArrowLeft") {
+        setActiveIndex((current) =>
+          current === null ? null : (current - 1 + items.length) % items.length,
+        );
       }
-      if(event.key === "ArrowRight") {
-        setActiveIndex((current) => current === null ? null : (current + 1) % items.length);
+      if (event.key === "ArrowRight") {
+        setActiveIndex((current) =>
+          current === null ? null : (current + 1) % items.length,
+        );
       }
     }
 
@@ -73,7 +86,9 @@ export function Gallery({ items }: StructureGalleryProps) {
         {items.map((item, index) => (
           <article key={item.title}>
             <button
-              ref={(element) => { cardRefs.current[index] = element; }}
+              ref={(element) => {
+                cardRefs.current[index] = element;
+              }}
               className="structure-card"
               type="button"
               onClick={(event) => {
@@ -105,7 +120,7 @@ export function Gallery({ items }: StructureGalleryProps) {
           className="structure-modal-backdrop"
           role="presentation"
           onMouseDown={(event) => {
-            if(event.target === event.currentTarget) closeModal();
+            if (event.target === event.currentTarget) closeModal();
           }}
         >
           <section
@@ -117,7 +132,7 @@ export function Gallery({ items }: StructureGalleryProps) {
             aria-describedby="structure-modal-description"
             style={{
               maxWidth: `${modalWidth}px`,
-              translate: `${modalSwipe.offsetX * .2}px ${Math.max(0, modalSwipe.offsetY) * .2}px`,
+              translate: `${modalSwipe.offsetX * 0.2}px ${Math.max(0, modalSwipe.offsetY) * 0.2}px`,
             }}
             {...modalSwipe.bind}
           >
@@ -144,7 +159,11 @@ export function Gallery({ items }: StructureGalleryProps) {
               <button
                 className="structure-modal-arrow previous"
                 type="button"
-                onClick={() => setActiveIndex((activeIndex - 1 + items.length) % items.length)}
+                onClick={() =>
+                  setActiveIndex(
+                    (activeIndex - 1 + items.length) % items.length,
+                  )
+                }
                 aria-label="Ver imagem anterior"
               >
                 <IoChevronBack aria-hidden="true" />
@@ -160,7 +179,10 @@ export function Gallery({ items }: StructureGalleryProps) {
             </div>
 
             <div className="structure-modal-copy">
-              <span>{activeItem.source} · {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}</span>
+              <span>
+                {activeItem.source} · {String(activeIndex + 1).padStart(2, "0")}{" "}
+                / {String(items.length).padStart(2, "0")}
+              </span>
               <h3 id="structure-modal-title">{activeItem.title}</h3>
               <p id="structure-modal-description">{activeItem.description}</p>
             </div>

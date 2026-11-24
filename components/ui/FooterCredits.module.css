@@ -1,4 +1,4 @@
-.credits { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 18px 16px; border-top: 1px solid #ffffff1f; background: #101722; color: #ffffffa6; font-size: 12px; line-height: 1.6; text-align: center; overflow: visible; }
+.credits { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 18px 16px; border-top: 1px solid #ffffff1f; background: inherit; color: #ffffffa6; font-size: 12px; line-height: 1.6; text-align: center; overflow: visible; }
 .credit { color: #ffffffb8; }
 .portfolio { position: relative; display: inline-flex; align-items: center; }
 .credits .link { color: #6da8f9; text-decoration: none; text-underline-offset: 4px; transition: color 180ms ease; }

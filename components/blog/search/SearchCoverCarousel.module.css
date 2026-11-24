@@ -1,0 +1,125 @@
+.coverResults {
+  margin-block-start: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #101010;
+  color: #fff;
+}
+
+.coverResults[data-empty="true"] {
+  background: transparent;
+  color: #000;
+}
+
+.coverResults h3,
+.coverResults p {
+  margin: 0 0 8px;
+}
+
+.coverResults > a {
+  display: inline-block;
+  margin-block-start: 12px;
+  color: #ffc39e;
+  text-decoration: underline;
+}
+
+.coverResultsHeader,
+.coverNavigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coverResultsHeader {
+  justify-content: space-between;
+  margin-block-end: 8px;
+}
+
+.coverResultsHeader h3 {
+  margin: 0;
+}
+
+.coverNavigation button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #666;
+  border-radius: 6px;
+  background: #232323;
+  color: #fff;
+  cursor: pointer;
+}
+
+.coverNavigation button:enabled:hover { background: #363636; }
+.coverNavigation button:disabled { opacity: .4; cursor: default; }
+
+.coverCarousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 8px) / 2);
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  margin: 0;
+  padding: 3px;
+  list-style: none;
+}
+
+.coverCarousel::-webkit-scrollbar {
+  display: none;
+}
+
+.coverCarousel > li {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.coverCard {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #232323;
+  color: inherit;
+}
+
+.coverFrame {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  background: #171717;
+}
+
+.coverFrame img {
+  object-fit: cover;
+}
+
+.coverCard strong {
+  display: block;
+  padding: 8px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.coverCard:is(:hover, :focus-visible) {
+  background: #363636;
+}
+
+.emptySearch {
+  text-align: center;
+}
+
+.emptySearchDog {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  margin-inline: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}

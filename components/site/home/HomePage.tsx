@@ -19,13 +19,15 @@ import { ArrowIcon } from "@/components/ui/ArrowIcon";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { useScrollDirectionVisibility } from "@/hooks/useScrollDirectionVisibility";
 import { useSwipeGesture } from "@/hooks/useSwipeGesture";
+import { FaWhatsapp } from "react-icons/fa";
 import {
   IoCallOutline,
   IoChevronBack,
   IoChevronForward,
   IoClose,
   IoDocumentTextOutline,
-  IoHeadsetOutline
+  IoHeadsetOutline,
+  IoMapOutline,
 } from "react-icons/io5";
 
 import { APP_STORE, APP_STORE_LOGO, GOOGLE_PLAY_LOGO, PLAY_STORE, WHATSAPP } from "@/constants/site";
@@ -35,9 +37,17 @@ import { HomeFooter } from "./HomeFooter";
 import { PlanCard, PlatformLogo } from "./PlanCard";
 import { appScreens, cities, DEFAULT_CITY, familyFeaturedPlans, featuredPlans, heroSlides, residentialPlans, services, storeAddresses } from "./content";
 
+function normalizeCoverageCity(value: string) {
+  return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+}
+
 /** Institutional home composition; routes only mount this component. */
 export default function HomePage() {
   const [city, setCity] = useState(DEFAULT_CITY);
+  const [coverageQuery, setCoverageQuery] = useState("");
+  const coverageCitySuggestions = cities.filter((item) =>
+    normalizeCoverageCity(item).includes(normalizeCoverageCity(coverageQuery)),
+  );
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -69,7 +79,9 @@ export default function HomePage() {
   const christmasActive = theme?.id === "christmas";
   const selectedStoreAddress =
     storeAddresses[city] ?? storeAddresses[DEFAULT_CITY];
-  const selectedMapLocation = selectedStoreAddress;
+  const selectedMapLocation = city === "Luzimangues - TO"
+    ? `Netbox Internet, ${city}`
+    : selectedStoreAddress;
   const googleMapsEmbedUrl = `https://maps.google.com/maps?hl=pt-BR&q=${encodeURIComponent(selectedMapLocation)}&z=16&output=embed`;
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedMapLocation)}`;
   const appCarouselSlides = [
@@ -538,10 +550,6 @@ export default function HomePage() {
             <div className="services-copy">
               <small>Netbox Internet</small>
               <h2>Nossos Serviços</h2>
-              <p>
-                DIRECIONAR LINK PARA A PAGINA NOSSA ESTRUTURA que precisam
-                resolver tudo com praticidade e atendimento próximo.
-              </p>
               <div className="services-list">
                 {services.map((service) => (
                   <article key={service.title}>
@@ -859,22 +867,39 @@ export default function HomePage() {
                 WhatsApp.
               </p>
             </div>
-
             <form className="coverage-form" onSubmit={consultCoverage}>
-              <label>
-                Selecione a cidade
-                <select
-                  value={city}
-                  onChange={(event) => {
-                    setCity(event.target.value);
-                    track("selecionou_cidade", { city: event.target.value });
+              <div className="coverage-city-search">
+                <label htmlFor="coverage-city-search-input">Pesquise a cidade</label>
+                <input
+                  id="coverage-city-search-input"
+                  type="search"
+                  value={coverageQuery}
+                  placeholder="Digite o nome da cidade"
+                  autoComplete="off"
+                  onChange={(event) => setCoverageQuery(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") event.preventDefault();
                   }}
-                >
-                  {cities.map((item) => (
-                    <option key={item}>{item}</option>
+                />
+                <ul className="coverage-city-suggestions" aria-label="Cidades da Netbox">
+                  {coverageCitySuggestions.map((item) => (
+                    <li key={item}>
+                      <button
+                        type="button"
+                        aria-pressed={item === city}
+                        onClick={() => {
+                          setCity(item);
+                          setCoverageQuery("");
+                          track("selecionou_cidade", { city: item });
+                        }}
+                      >
+                        {item}
+                      </button>
+                    </li>
                   ))}
-                </select>
-              </label>
+                  {coverageCitySuggestions.length === 0 && <li>Nenhuma cidade encontrada.</li>}
+                </ul>
+              </div>
               <div className="coverage-map" aria-live="polite">
                 <iframe
                   key={city}
@@ -895,18 +920,22 @@ export default function HomePage() {
                   <strong>{city}</strong>
                   <p>{selectedStoreAddress}</p>
                 </div>
-                <a
-                  href={googleMapsLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Abrir ${city} no Google Maps`}
-                >
-                  Abrir mapa ↗
-                </a>
+                <div className="coverage-location-actions">
+                  <a
+                    id="coverage-open-map"
+                    className="model-button"
+                    href={googleMapsLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Abrir ${city} no Google Maps`}
+                  >
+                    <IoMapOutline aria-hidden="true" /> Mapa
+                  </a>
+                  <button id="coverage-whatsapp-button" className="model-button" type="submit">
+                    <FaWhatsapp aria-hidden="true" />WhatsApp
+                  </button>
+                </div>
               </div>
-              <button className="model-button orange" type="submit">
-                Consultar pelo WhatsApp <b>»</b>
-              </button>
               <em>Cobertura sujeita à viabilidade técnica.</em>
             </form>
           </div>

@@ -53,7 +53,7 @@ O visual mantém os cards existentes, com setas circulares, hover laranja, foco 
 - `/site/blog`: portal independente, com carrossel das dez últimas notícias, seleção numerada lateral, feed de notícias, busca e blocos por assunto.
 - `/site/blog/[slug]`: leitura individual, breadcrumb, compartilhamento e relacionados.
 - `?categoria=tecnologia`: filtra pela categoria; os identificadores estão em `lib/blog/navigation.ts`.
-- `?q=roteador`: busca sem distinção de caixa ou acentos por título, resumo e categoria. Várias palavras devem estar presentes.
+- `?q=roteador`: busca por título, resumo, assunto e categoria sem distinção de maiúsculas ou acentos. Hífens, pontuação e espaços repetidos separam palavras. Apóstrofos são ignorados e todas as palavras buscadas devem estar presentes.
 - `?grupo=entretenimento`: reúne todas as categorias de um bloco editorial.
 - `?pagina=2`: acumula lotes de seis na home e abre páginas numeradas nas categorias, preservando os filtros. Valores inválidos são limitados ao intervalo disponível.
 
@@ -90,6 +90,14 @@ O cabeçalho do Blog é fixo no topo, com fundo escuro translúcido (`rgba(8, 10
 A entrada e a saída usam transform vertical e opacidade com transições de 240–320 ms. A preferência de movimento reduzido desativa a animação. O menu e o painel de busca mantêm o cabeçalho visível enquanto abertos. Quando oculto, o cabeçalho fica inerte e não recebe foco nem cliques. A lógica usa eventos passivos e requestAnimationFrame, recalcula ao redimensionar ou navegar e remove listeners ao desmontar. Sem suporte a backdrop-filter, há fundo preto mais opaco para preservar a leitura.
 
 ## Painel de pesquisa
+
+Quando o carrossel não encontra artigos, exibe uma mensagem em preto sobre fundo transparente e uma imagem decorativa abaixo dela. Cada envio avança para o próximo par de foto e frase, mesmo ao repetir o termo. As quatro imagens ficam em `public/blog/search-empty/`.
+
+Ao enviar pelo botão Enter, os resultados aparecem em um carrossel com duas capas de proporção 2:3 visíveis por vez. A barra de rolagem fica oculta, e as setas e a rolagem horizontal continuam disponíveis. A melhor correspondência vem primeiro, seguida de artigos com termos em comum ou da mesma categoria, dentro dos filtros da busca. Cada card abre a publicação e usa o pôster da obra quando cadastrado ou a capa do artigo. O link abaixo do carrossel abre a página completa de resultados.
+
+O botão Buscar no painel tem o formato da tecla Enter e afunda por um instante antes de abrir os resultados. O efeito vale para o clique e para o envio pelo teclado.
+
+A lista flutuante de títulos só abre ao clicar no campo de busca. Com o campo vazio, aparecem todos os artigos visíveis do catálogo. Ao digitar, a lista filtra os títulos com a mesma normalização da busca e cada sugestão leva ao artigo correspondente.
 
 A lupa do cabeçalho abre “Encontre sua próxima leitura” em um painel fixo à direita, renderizado por `components/blog/search/SearchPanel.tsx`. Não há cópias fixas do formulário na listagem ou nas categorias. A antiga lateral editorial também foi movida integralmente para o painel: assuntos, escolhas da redação e aviso demonstrativo. O feed principal utiliza a largura liberada. A lupa permanece acessível ao lado da marca também em smartphones, sem exigir a abertura do menu de categorias.
 

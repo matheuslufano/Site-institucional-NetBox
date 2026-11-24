@@ -402,7 +402,7 @@
   .coverage-map iframe { min-height: 200px; height: 540px; }
   .coverage-map { min-height: 185px; border-radius: 13px; }
   .coverage-location { padding: 12px; align-items: flex-start; flex-direction: column; gap: 10px; }
-  .coverage-location > a { width: 100%; text-align: center; }
+  .coverage-location-actions { width: 100%; }
   .hero-arrow { display: none; }
   .carousel-controls {
     right: auto;
@@ -420,7 +420,7 @@
   .carousel-dots button.active { width: 14px; }
   .carousel-controls .carousel-pause { width: 24px; height: 24px; font-size: 9px; }
   .services-section, .gallery-section, .reviews-section, .netbox-app-section { padding-block: 70px; }
-  .service-feature { width: min(100%, 390px); min-height: 0; }
+  .service-feature { width: min(100%, 390px, calc((100vh - 140px) * 9 / 16)); min-height: 0; }
   .services-copy > h2, .model-heading h2 { font-size: 33px; }
   .services-list article { grid-template-columns: 68px 1fr 28px; }
   .services-actions { display: none; }
@@ -717,7 +717,6 @@
   .coverage-conversion-copy h2 { font-size: 38px; }
   .coverage-conversion-copy > p { font-size: 16px; line-height: 1.55; }
   .coverage-form label { font-size: 13px; }
-  .coverage-form select { min-height: 48px; font-size: 15px; font-weight: 400; }
   .coverage-location p { line-height: 1.5; }
   .coverage-form em { font-size: 11px; }
   .client-shortcuts {
@@ -1256,7 +1255,7 @@ iframe {
   }
 
   .service-feature {
-    width: min(100%, 430px);
+    width: min(100%, 430px, calc((100vh - 140px) * 9 / 16));
   }
 
   .netbox-app-copy,

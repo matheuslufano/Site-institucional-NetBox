@@ -1,5 +1,9 @@
 # Institucional
 
+O botão de download dos rodapés abre um modal com App Store e Google Play no computador. Em iPhone, iPad e Android, o link `/baixar-app` redireciona para a loja correspondente. O acesso direto à rota em computadores oferece as duas lojas.
+
+Em `/site#consulta`, a busca de cobertura sugere as cidades cadastradas em `home/content.ts`. A seleção atualiza o mapa, o endereço de atendimento e a consulta pelo WhatsApp.
+
 Rotas em app/(site). /site monta home/HomePage.tsx; / e /em-desenvolvimento montam development/DevelopmentPage.tsx. Páginas secundárias utilizam layout/SiteLayout.tsx.
 
 home contém composição, Hero, HomeFooter, PlanCard e dados em content.ts. layout contém moldura, menu, tema e atalhos. structure contém seção compartilhada, Gallery e StoreMap. contact contém o formulário; app, o download; sales, o modal comercial e CSS Module; development, o aviso e CSS Module.

@@ -354,7 +354,7 @@ html.theme-dark .coverage-location {
 html.theme-dark .coverage-location p,
 html.theme-dark .coverage-form em { color: #aaa39d; }
 
-html.theme-dark .coverage-location > a,
+html.theme-dark #coverage-open-map:not(:hover),
 html.theme-dark .support-strip a {
   border-color: rgba(255,143,79,.35);
   background: #171615;

@@ -103,15 +103,12 @@ textarea,
 
 .coverage-form label { gap: 8px; font-size: var(--type-small); }
 
-.coverage-form select { min-height: 50px; font-size: var(--type-body); font-weight: 700; }
-
 .coverage-location small { font-size: var(--type-caption); }
 
 .coverage-location strong { font-size: var(--type-body); }
 
 .coverage-location p { font-size: var(--type-small); }
 
-.coverage-location > a { font-size: var(--type-caption); }
 
 .coverage-form em { font-size: var(--type-caption); line-height: 1.45; }
 

@@ -61,12 +61,6 @@ export function HomeFooter({ onService }: { onService: (title: string) => void }
     </div>
     <div className="model-shell footer-bottom">
       <span>CNPJ 25.356.470/0001-13</span>
-      <span>
-        <a href="https://netbox.net.br/ouvidoria/">Ouvidoria</a> •{" "}
-        <a href="https://netbox.net.br/politica-de-privacidade/">
-          Privacidade
-        </a>
-      </span>
     </div>
     <FooterCredits />
   </SeasonalSiteFooter>);

@@ -4,7 +4,7 @@ import { categories } from "@/lib/blog/navigation";
 import styles from "@/styles/blog/Blog.module.css";
 import { type ReactNode, useEffect, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import { SearchForm } from "./SearchForm";
+import { SearchForm, type ArticleSuggestion } from "./SearchForm";
 
 type Props = {
   open: boolean;
@@ -13,6 +13,7 @@ type Props = {
   group: string;
   onClose: () => void;
   editorialSidebar?: ReactNode;
+  articleSuggestions: ArticleSuggestion[];
 };
 
 /** Native modal behavior contains focus, supports Escape and restores focus to the search trigger. */
@@ -23,6 +24,7 @@ export function SearchPanel({
   group,
   onClose,
   editorialSidebar,
+  articleSuggestions,
 }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const categoryLabel = categories.find((item) => item.id === category)?.label;
@@ -91,6 +93,8 @@ export function SearchPanel({
           : "Busque artigos por título, assunto ou categoria."}
       </p>
       <SearchForm
+        key={JSON.stringify([query, open])}
+        articleSuggestions={articleSuggestions}
         query={query}
         category={category}
         group={group}

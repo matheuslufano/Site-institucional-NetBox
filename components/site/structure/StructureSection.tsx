@@ -3,7 +3,7 @@ import { Gallery } from "./Gallery";
 const structureItems = [
   {
     title: "REDE DE FIBRA ÓPTICA",
-    image: "/structure/ICONE - REDE DE FIBRA ÓPTICA.png",
+    image: "/estrutura/REDE DE FIBRA ÓPTICA.jpg",
     alt: "Técnico organizando conexões em uma caixa de distribuição de fibra óptica",
     source: "Imagem ilustrativa",
     position: "center",
@@ -12,8 +12,8 @@ const structureItems = [
     height: 1420,
   },
   {
-    title: "ATENDIMENTO SIMPLES",
-    image: "/structure/ICONE - ATENDIMENTO SIMPLES.png",
+    title: "ATENDIMENTO HUMANIZADO",
+    image: "/estrutura/ATENDIMENTO HUMANIZADO.jpg",
     alt: "Área interna da central de atendimento Netbox",
     source: "Acervo Netbox",
     position: "center",
@@ -23,7 +23,7 @@ const structureItems = [
   },
   {
     title: "INSTALAÇÃO ÁGIL",
-    image: "/structure/ICONE - INSTALAÇÃO ÁGIL.png",
+    image: "/estrutura/INSTALAÇÃO ÁGIL.jpg",
     alt: "Técnico configurando roteador durante instalação residencial",
     source: "Imagem ilustrativa",
     position: "center",
@@ -33,7 +33,7 @@ const structureItems = [
   },
   {
     title: "SUPORTE QUE RESOLVE",
-    image: "/structure/ICONE - SUPORTE QUE RESOLVE.png",
+    image: "/estrutura/SUPORTE QUE RESOLVE.jpg",
     alt: "Equipe técnica atendendo uma rede em bairro residencial",
     source: "Imagem ilustrativa",
     position: "center",
@@ -43,7 +43,7 @@ const structureItems = [
   },
   {
     title: "PARA SUA CASA OU EMPRESA",
-    image: "/structure/ICONE - PARA SUA CASA OU EMPRESA.png",
+    image: "/estrutura/PARA SUA CASA OU EMPRESA.jpg",
     alt: "Especialista apresentando infraestrutura de rede a clientes empresariais",
     source: "Imagem ilustrativa",
     position: "center",
@@ -53,7 +53,7 @@ const structureItems = [
   },
   {
     title: "ESTAMOS PERTO DE VOCÊ",
-    image: "/structure/ICONE - ESTAMOS PERTO DE VOCÊ.png",
+    image: "/estrutura/ESTAMOS PERTO DE VOCÊ.jpg",
     alt: "Fachada de uma loja Netbox",
     source: "Acervo Netbox",
     position: "center",

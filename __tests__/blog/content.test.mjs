@@ -9,7 +9,7 @@ import ts from 'typescript';
 // Compile the real pure modules to an isolated temporary directory, without a runtime dependency.
 const temp = await mkdtemp(join(tmpdir(), 'netbox-blog-tests-'));
 after(() => rm(temp, { recursive: true, force: true }));
-for (const path of ['types/blog.ts', 'lib/blog/richDocument.ts', 'lib/blog/preview.ts', 'lib/blog/navigation.ts', 'content/blog/cinema.ts', 'content/blog/articles.ts', 'content/blog/editorial/index.ts', 'lib/blog/catalog.ts', 'lib/blog/repository.ts', 'lib/blog/trailers.ts', 'lib/blog/media.ts', 'app/sitemap.ts']) {
+for (const path of ['types/blog.ts', 'lib/blog/richDocument.ts', 'lib/blog/preview.ts', 'lib/blog/navigation.ts', 'content/blog/cinema.ts', 'content/blog/articles.ts', 'content/blog/editorial/index.ts', 'lib/blog/catalog.ts', 'lib/blog/searchNormalization.ts', 'lib/blog/repository.ts', 'lib/blog/trailers.ts', 'lib/blog/media.ts', 'app/sitemap.ts']) {
   const source = await readFile(new URL('../../' + path, import.meta.url), 'utf8');
   let output = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
     .replace(/(from\s+['"])(@\/[^'"]+|\.[^'"]+)(['"])/g, (_, before, specifier, after) => {

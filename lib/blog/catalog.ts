@@ -1,3 +1,5 @@
+import { normalizeSearch } from './searchNormalization';
+export { normalizeSearch } from './searchNormalization';
 import { articles } from '@/content/blog/articles';
 import type { BlogArticle, CategoryId } from '@/types/blog';
 
@@ -16,10 +18,19 @@ export function visibleArticles(now = new Date(), source = articles) {
 }
 export function indexableArticles() { return visibleArticles().filter(article => article.status === 'published'); }
 export function findArticle(slug: string) { return visibleArticles().find(article => article.slug === slug); }
-export function normalizeSearch(value: string) { return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').trim(); }
+export function articleSearchText(article: BlogArticle) {
+  return normalizeSearch([article.title, article.summary, article.topic, categoryLabel(article.category)].join(' '));
+}
+
 export function filterArticles(query: string, category: string, source = articles) {
-  const terms = normalizeSearch(query).split(/\s+/).filter(Boolean);
-  return visibleArticles(new Date(), source).filter(article => (!category || article.category === category) && terms.every(term => normalizeSearch(article.title + ' ' + article.summary + ' ' + (article.topic ?? '') + ' ' + categoryLabel(article.category)).includes(term)));
+  const terms = normalizeSearch(query).split(' ').filter(Boolean);
+  return visibleArticles(new Date(), source).filter(article => {
+    if (category && article.category !== category) return false;
+    if (!terms.length) return true;
+
+    const searchableText = articleSearchText(article);
+    return terms.every(term => searchableText.includes(term));
+  });
 }
 /** Escape opening tags so editorial text cannot terminate a JSON-LD script element. */
 export function serializeJsonLd(value: unknown) { return JSON.stringify(value).replace(/</g, '\\u003c'); }

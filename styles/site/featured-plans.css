@@ -179,18 +179,711 @@
 .nb-featured-card-intermediate {
   --nb-featured-glass: rgba(255, 106, 0, 0.65);
 }
-.nb-featured-card-pro {
-  --nb-featured-glass: rgba(255, 180, 31, 0.6);
-}
 .nb-featured-card-additional {
   --nb-featured-glass: rgba(241, 85, 85, 0.65);
+  color: #000000;
+}
+
+.nb-featured-card-additional h3 {
+  color: #b90b3d;
 }
 .nb-featured-card-family {
-  --nb-featured-glass: rgba(43, 0, 255, 0.52);
+  --nb-featured-glass: rgba(78, 45, 243, 0.52);
 }
 .nb-featured-card-top-family {
   --nb-featured-glass: rgba(179, 88, 235, 0.72);
 }
+
+/* Top Familia: alinhamento, servicos incluidos e escolha de um aplicativo. */
+.nb-featured-card-top-family {
+  padding: 20px 18px 16px;
+  border-color: #7d6bb2;
+  border-radius: 22px;
+  color: #35305f;
+}
+
+.nb-featured-card-top-family::before {
+  background: #b09af0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nb-featured-card-top-family .nb-featured-card-content {
+  align-items: center;
+  text-align: center;
+}
+
+.nb-featured-card-top-family .nb-featured-card-content h3 {
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 7px;
+  color: #4936ca;
+  font-size: 27px;
+  white-space: nowrap;
+}
+
+.nb-featured-card-top-family .nb-featured-wifi {
+  color: #7652e8;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-benefits {
+  gap: 3px;
+  width: 100%;
+  margin: 5px 0 12px;
+  padding: 0;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-benefits li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #443d70;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.nb-featured-top-family-benefits li::before {
+  display: none;
+}
+
+.nb-featured-top-family-benefits li svg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: #7652e8;
+  stroke-width: 3;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-defaults {
+  width: 100%;
+  gap: 7px;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-defaults > strong {
+  color: #171326;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-apps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  justify-items: center;
+  gap: 8px 5px;
+  width: 100%;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-apps .nb-featured-service {
+  gap: 3px;
+  color: #35305f;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-apps .nb-featured-service-icon {
+  width: clamp(52px, 18vw, 72px);
+  height: clamp(52px, 18vw, 72px);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-router .nb-featured-service-icon {
+  border: 1px solid rgba(42, 34, 82, 0.12);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.nb-featured-card-top-family .nb-featured-top-family-router img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: contain;
+}
+
+.nb-featured-card-top-family .nb-featured-family-options {
+  width: min(100%, 210px);
+  margin-top: 8px;
+}
+
+.nb-featured-card-top-family .nb-featured-family-options-box {
+  gap: 6px;
+  padding: 7px 8px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 13px;
+  background: rgba(226, 219, 255, 0.72);
+}
+
+.nb-featured-card-top-family .nb-featured-family-options-box > strong {
+  max-width: none;
+  margin: 0;
+  color: #29233d;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.nb-featured-card-top-family .nb-featured-family-options-box > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+}
+
+.nb-featured-card-top-family .nb-featured-family-option {
+  gap: 3px;
+  color: #35305f;
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.nb-featured-card-top-family .nb-featured-family-option-logo {
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 13px;
+  background: transparent;
+}
+
+.nb-featured-card-top-family .nb-featured-family-option-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.nb-featured-card-top-family .nb-featured-family-option:first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.nb-featured-card-top-family .nb-featured-family-option:last-child {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.nb-featured-card-top-family .nb-featured-family-options-box > div::before {
+  grid-column: 2;
+  grid-row: 1;
+  content: "ou";
+  color: #35305f;
+  font-size: 12px;
+}
+
+.nb-featured-card-top-family .nb-featured-cta {
+  align-self: center;
+  width: fit-content;
+  min-height: 38px;
+  margin: auto 0 0;
+  padding: 6px 10px 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  background: rgba(242, 238, 255, 0.9);
+  box-shadow: 0 4px 10px rgba(67, 48, 126, 0.16);
+  color: #29233d;
+  font-size: 13px;
+}
+
+.nb-featured-card-top-family .nb-featured-text-link {
+  display: none;
+}
+
+/* Cartao Familia: estrutura e estilo inspirados na referencia enviada. */
+.nb-featured-card-family {
+  padding: 20px 18px 16px;
+  border-color: #687bbd;
+  border-radius: 22px;
+  color: #000000;
+}
+
+.nb-featured-card-family::before {
+  background: #9dafff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nb-featured-card-family .nb-featured-card-content {
+  align-items: center;
+  text-align: center;
+}
+
+.nb-featured-card-family .nb-featured-card-content h3 {
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 7px;
+  color: #3e48da;
+  font-size: 27px;
+  white-space: nowrap;
+}
+
+.nb-featured-family-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.nb-featured-card-family .nb-featured-family-benefits {
+  gap: 3px;
+  width: 100%;
+  margin: 5px 0 12px;
+  padding: 0;
+}
+
+.nb-featured-card-family .nb-featured-family-benefits li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #000000;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.nb-featured-family-benefits li::before {
+  display: none;
+}
+
+.nb-featured-family-benefits li svg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: #ed4700;
+  stroke-width: 3;
+}
+
+.nb-featured-family-section {
+  width: 100%;
+}
+
+.nb-featured-family-section > h4 {
+  margin: 0 0 8px;
+  color: #111;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.nb-featured-card-family .nb-featured-family-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 16px 5px;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 15px 8px 10px 8px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 13px;
+  background: rgba(221, 230, 255, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  color: #000a21;
+}
+
+.nb-featured-card-family .nb-featured-family-service {
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.nb-featured-card-family .nb-featured-family-service .nb-featured-service-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+}
+
+.nb-featured-card-family .nb-featured-family-service .nb-featured-service-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: contain;
+}
+
+.nb-featured-card-family .nb-featured-family-router {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  justify-self: center;
+  width: 100%;
+  min-width: 0;
+  gap: 3px;
+  padding: 0;
+  background: transparent;
+  color: #26365f;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.nb-featured-family-router-icon {
+  display: grid;
+  width: 70px;
+  height: 70px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.nb-featured-card-family .nb-featured-family-router img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nb-featured-card-family .nb-featured-cta {
+  align-self: center;
+  width: fit-content;
+  min-height: 38px;
+  margin: auto 0 0;
+  padding: 6px 10px 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  background: rgba(238, 244, 255, 0.9);
+  box-shadow: 0 4px 10px rgba(48, 69, 126, 0.16);
+  color: #202c49;
+  font-size: 13px;
+}
+
+.nb-featured-card-family .nb-featured-text-link {
+  display: none;
+}
+
+/*
+ * Plano Pro: os IDs da interface sao definidos em PlanCard.tsx.
+ * As classes abaixo agrupam os estilos por area do cartao.
+ */
+/* Moldura e superficie: #featured-plan-pro-card */
+.nb-featured-card-pro {
+  --nb-featured-glass: rgba(255, 180, 31, 0.6);
+  padding: 20px 18px 16px;
+  border-color: #b99b60;
+  border-radius: 22px;
+  color: #252525;
+}
+
+/* Fundo do cartao Pro: acompanha a moldura do artigo */
+.nb-featured-card-pro::before {
+  background: #ffda83;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Area interna e titulo: #featured-plan-pro-content e #featured-plan-pro-title */
+.nb-featured-card-pro .nb-featured-card-content {
+  align-items: center;
+  text-align: center;
+}
+
+.nb-featured-card-pro .nb-featured-card-content h3 {
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  margin: 0 0 6px;
+  color: #202020;
+  font-size: 27px;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+/* Icone de conexao do titulo: #featured-plan-pro-wifi-icon */
+.nb-featured-card-pro .nb-featured-wifi {
+  color: #f15a00;
+  font-size: 0.78em;
+}
+
+/* Composicao vertical: #featured-plan-pro-layout */
+.nb-featured-pro-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 0;
+}
+
+/* Lista de beneficios: #featured-plan-pro-benefits e #featured-plan-pro-benefit-N */
+.nb-featured-card-pro .nb-featured-pro-benefits {
+  gap: 3px;
+  width: 100%;
+  margin: 0 0 7px;
+  padding: 0;
+}
+
+/* Texto e confirmacao de cada beneficio */
+.nb-featured-card-pro .nb-featured-pro-benefits li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.nb-featured-card-pro .nb-featured-pro-benefits li::before {
+  display: none;
+}
+
+.nb-featured-pro-benefits li svg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: #f15a00;
+  stroke-width: 3;
+}
+
+/* Titulos de secoes: #featured-plan-pro-included-title e #featured-plan-pro- */
+.nb-featured-pro-included h4,
+.nb-featured-pro-choice h4 {
+  margin: 10px 1px 7px 1px;
+  color: #252525;
+  line-height: 1.15;
+}
+
+.nb-featured-pro-included h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nb-featured-pro-choice h4 {
+  margin-top: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Grade de servicos inclusos: #featured-plan-pro-included-apps */
+.nb-featured-pro-included-apps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(10px, 3vw, 16px);
+  row-gap: 5px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Nome e alinhamento de cada aplicativo do Pro: IDs terminados em -label */
+.nb-featured-pro-app {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #292929;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.nb-featured-pro-included-apps .nb-featured-pro-app-icon {
+  width: clamp(60px, 19vw, 74px);
+}
+
+/* Molduras e imagens: IDs terminados em -logo e -image */
+.nb-featured-pro-app-icon {
+  display: grid;
+  width: clamp(56px, 18vw, 68px);
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20%;
+}
+
+.nb-featured-pro-app-icon img,
+.nb-featured-pro-app-icon svg,
+.nb-featured-pro-app-icon .platform-wordmark {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Painel de escolha: #featured-plan-pro-choice */
+.nb-featured-pro-choice {
+  width: min(100%, 270px);
+  margin: 10px auto;
+  padding: 10px 12px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 13px;
+  background: rgba(255, 249, 231, 0.82);
+}
+
+/* Deezer, Prime Video e separador: #featured-plan-pro-choice-apps */
+.nb-featured-pro-choice-apps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.nb-featured-pro-app-choice:last-of-type {
+  grid-column: 3;
+}
+
+.nb-featured-pro-choice-divider {
+  grid-column: 2;
+  grid-row: 1;
+  color: #252525;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Botao e icone de contato: #featured-plan-pro-contact-button e #featured-plan-pro-whatsapp-icon */
+.nb-featured-card-pro .nb-featured-pro-cta {
+  align-self: center;
+  width: fit-content;
+  min-height: 38px;
+  margin: auto 0 0;
+  padding: 6px 10px 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  background: rgba(255, 249, 231, 0.88);
+  box-shadow: 0 4px 10px rgba(111, 76, 25, 0.15);
+  color: #272727;
+  font-size: 13px;
+}
+
+.nb-featured-card-pro .nb-featured-pro-cta:hover {
+  background: #fffdf5;
+}
+
+.nb-featured-card-pro .nb-featured-whatsapp {
+  filter: none;
+}
+
+.nb-featured-card-pro .nb-featured-text-link {
+  display: none;
+}
+
+/* Cartao Intermediario: mesmo alinhamento e CTA do Pro, com paleta laranja. */
+.nb-featured-card-intermediate {
+  padding: 20px 18px 16px;
+  border-color: #b66f40;
+  border-radius: 22px;
+  color: #252525;
+}
+
+.nb-featured-card-intermediate::before {
+  background: #ff9d54;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nb-featured-card-intermediate .nb-featured-card-content {
+  align-items: center;
+  text-align: center;
+}
+
+.nb-featured-card-intermediate .nb-featured-card-content h3 {
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  margin: 0 0 6px;
+  color: #151515;
+  font-size: clamp(20px, 3vw, 28px);
+  white-space: nowrap;
+}
+
+.nb-featured-card-intermediate .nb-featured-wifi {
+  color: #d95b00;
+  font-size: 0.85em;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-benefits {
+  gap: 3px;
+  width: 100%;
+  margin: clamp(18px, 4vw, 34px) 0 14px;
+  padding: 0;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-benefits li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-benefits li::before {
+  display: none;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-benefits li svg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: #d95b00;
+  stroke-width: 3;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-included {
+  width: 100%;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-included h4 {
+  margin: 0 0 10px;
+  color: #181818;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nb-featured-intermediate-apps {
+  padding: 16px 10px 12px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  background: rgba(255, 216, 187, 0.72);
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-app-icon {
+  width: clamp(66px, 20vw, 86px);
+  background: #fff;
+}
+
+.nb-featured-intermediate-app-netbox .nb-featured-pro-app-icon {
+  background: transparent;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-cta {
+  align-self: center;
+  width: fit-content;
+  min-height: 38px;
+  margin: auto 0 0;
+  padding: 6px 10px 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  background: rgba(255, 249, 231, 0.88);
+  box-shadow: 0 4px 10px rgba(111, 76, 25, 0.15);
+  color: #272727;
+  font-size: 13px;
+}
+
+.nb-featured-card-intermediate .nb-featured-pro-cta:hover {
+  background: #fffdf5;
+}
+
+.nb-featured-card-intermediate .nb-featured-whatsapp {
+  filter: none;
+}
+
+.nb-featured-card-intermediate .nb-featured-text-link {
+  display: none;
+}
+
 .nb-featured-select-card {
   position: absolute;
   inset: 0;
@@ -246,6 +939,12 @@
 .nb-featured-card:hover::after {
   animation: nb-featured-glass-reflection 1s ease-in-out 2;
 }
+
+.nb-featured-card.nb-featured-card-top-family:hover::after {
+  animation: none;
+  opacity: 0;
+}
+
 @keyframes nb-featured-glass-reflection {
   0% {
     opacity: 0;
@@ -710,6 +1409,10 @@ html.theme-dark .nb-featured-family-panel {
   -webkit-backdrop-filter: blur(8px) saturate(135%);
 }
 .nb-featured-addons {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -721,14 +1424,15 @@ html.theme-dark .nb-featured-family-panel {
 .nb-featured-addons > strong {
   display: block;
   margin: 0 auto 8px;
-  color: #fff;
+  color: #000;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.2;
   text-align: center;
 }
 .nb-featured-addons .nb-featured-addon-table {
-  width: 100%;
+  width: min(100%, 320px);
+  margin: auto;
   overflow: hidden;
   border-radius: 10px;
   background: #fff;
@@ -881,6 +1585,91 @@ html.theme-dark .nb-featured-family-panel {
 .nb-featured-service-icon .ubook-wordmark small {
   font-size: 8px;
 }
+
+/* Reflexos e relevo de vidro liquido compartilhados por todos os icones dos planos. */
+.nb-featured-service-icon,
+.nb-featured-pro-app-icon,
+.nb-featured-addon-logo-frame,
+.nb-featured-family-option-logo,
+.nb-featured-family-router-icon {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+.nb-featured-service-icon::before,
+.nb-featured-pro-app-icon::before,
+.nb-featured-addon-logo-frame::before,
+.nb-featured-family-option-logo::before,
+.nb-featured-family-router-icon::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      ellipse at 22% 5%,
+      rgba(255, 255, 255, 0.5),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.48),
+      rgba(255, 255, 255, 0.16) 28%,
+      transparent 66%
+    ),
+    linear-gradient(325deg, rgba(255, 255, 255, 0.22), transparent 56%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.68),
+    inset 0 -1px 0 rgba(28, 22, 48, 0.1);
+  content: "";
+  pointer-events: none;
+}
+
+.nb-featured-service-icon::after,
+.nb-featured-pro-app-icon::after,
+.nb-featured-addon-logo-frame::after,
+.nb-featured-family-option-logo::after,
+.nb-featured-family-router-icon::after {
+  position: absolute;
+  inset: -45% auto -45% 0;
+  z-index: 2;
+  width: 38%;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.38),
+    transparent
+  );
+  content: "";
+  pointer-events: none;
+  transform: translateX(-150%) rotate(18deg);
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.nb-featured-service-icon:hover::after,
+.nb-featured-pro-app-icon:hover::after,
+.nb-featured-addon-logo-frame:hover::after,
+.nb-featured-family-option-logo:hover::after,
+.nb-featured-family-router-icon:hover::after {
+  transform: translateX(350%) rotate(18deg);
+}
+
+.nb-featured-service-icon img,
+.nb-featured-service-icon svg,
+.nb-featured-pro-app-icon img,
+.nb-featured-pro-app-icon svg,
+.nb-featured-addon-logo-frame img,
+.nb-featured-family-option-logo img,
+.nb-featured-family-router-icon img {
+  position: relative;
+  z-index: 0;
+}
+
 .nb-featured-sky-logo {
   display: flex;
   align-items: baseline;
@@ -1039,6 +1828,30 @@ html.theme-dark .nb-featured-family-panel {
   }
   .nb-featured-card h3 {
     font-size: 19px;
+  }
+  /* Mantem o titulo do Pro compacto em telas pequenas. */
+  .nb-featured-card-pro .nb-featured-card-content h3 {
+    font-size: 27px;
+  }
+  .nb-featured-card-family .nb-featured-card-content h3 {
+    font-size: 22px;
+  }
+  .nb-featured-card-top-family .nb-featured-card-content h3 {
+    font-size: 22px;
+  }
+  .nb-featured-card-top-family .nb-featured-top-family-apps .nb-featured-service-icon {
+    width: clamp(52px, 18vw, 68px);
+    height: clamp(52px, 18vw, 68px);
+  }
+  .nb-featured-card-family .nb-featured-family-service .nb-featured-service-icon,
+  .nb-featured-family-router-icon {
+    width: clamp(52px, 19vw, 70px);
+  }
+  .nb-featured-card-family .nb-featured-family-service .nb-featured-service-icon {
+    height: clamp(52px, 19vw, 70px);
+  }
+  .nb-featured-family-router-icon {
+    height: clamp(52px, 19vw, 70px);
   }
   .nb-featured-card-additional h3 {
     font-size: 22px;

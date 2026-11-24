@@ -35,7 +35,8 @@ export const storeAddresses: Record<string, string> = {
     "NETBOX INTERNET - ITACAJÁ - Av. Pres. Dutra, 435 - Cartucho - Centro, Itacajá - TO, 77720-000",
   "Lajeado - TO":
     "Netbox Internet - Miracema - TO-342, 1664 - Vila Maria, Miracema do Tocantins - TO, 77650-000",
-  "Miracema - TO":
+  "Luzimangues - TO": "Endereço em atualização",
+  "Miracema do Tocantins - TO":
     "Netbox Internet - Miracema - TO-342, 1664 - Vila Maria, Miracema do Tocantins - TO, 77650-000",
   "Miranorte - TO":
     "Netbox Internet - Miranorte - Av. Tocantins, 812 - Centro, Miranorte - TO, 77660-000",
@@ -110,7 +111,7 @@ export const familyFeaturedPlans = [
       "Roteador em comodato",
       "Instalação prioritária",
     ],
-    services: ["Aplicativo Netbox", "Ubook Go"],
+    services: ["Ubook Go", "Aplicativo Netbox"],
   },
   {
     name: "APLICATIVOS",
