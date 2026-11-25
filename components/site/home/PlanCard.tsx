@@ -125,6 +125,7 @@ export function PlanCard({
       className={`nb-featured-card nb-featured-card-${position} nb-featured-card-${plan.tone}`}
       data-component="featured-plan-card"
     >
+      <span className="nb-featured-card-blur" aria-hidden="true" />
       <div
         id={getPlanElementId("content")}
         className="nb-featured-card-content"
