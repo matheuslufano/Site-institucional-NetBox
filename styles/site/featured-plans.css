@@ -129,9 +129,11 @@
   width: 100%;
   height: 510px;
   isolation: isolate;
-  perspective: 1500px;
-  perspective-origin: 50% 45%;
-  transform-style: preserve-3d;
+  /* background:
+    radial-gradient(ellipse at 20% 26%, rgba(255, 106, 0, 0.3), transparent 34%),
+    radial-gradient(ellipse at 78% 22%, rgba(241, 85, 85, 0.25), transparent 32%),
+    radial-gradient(ellipse at 74% 78%, rgba(110, 91, 235, 0.25), transparent 36%),
+    radial-gradient(ellipse at 24% 76%, rgba(255, 190, 72, 0.26), transparent 34%); */
 }
 
 .nb-featured-card {
@@ -167,14 +169,12 @@
 .nb-featured-card-previous {
   z-index: 1;
   filter: brightness(0.9);
-  transform: translateX(-125%) translateY(35px) translateZ(-90px) rotateY(19deg)
-    rotateZ(-13deg) scale(0.82);
+  transform: translateX(-125%) translateY(35px) rotateZ(-13deg) scale(0.82);
 }
 .nb-featured-card-next {
   z-index: 1;
   filter: brightness(0.9);
-  transform: translateX(25%) translateY(35px) translateZ(-90px) rotateY(-19deg)
-    rotateZ(13deg) scale(0.82);
+  transform: translateX(25%) translateY(35px) rotateZ(13deg) scale(0.82);
 }
 .nb-featured-card-intermediate {
   --nb-featured-glass: rgba(255, 106, 0, 0.65);
@@ -216,7 +216,7 @@
   width: 100%;
   margin: 0 0 7px;
   color: #ae00fe;
-  font-size: 27px;
+  font-size: 22px;
   white-space: nowrap;
 }
 
@@ -237,7 +237,7 @@
   justify-content: center;
   gap: 3px;
   color: #443d70;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.2;
 }
 
@@ -420,7 +420,7 @@
   width: 100%;
   margin: 0 0 7px;
   color: #3f42ff;
-  font-size: 27px;
+  font-size: 22px;
   white-space: nowrap;
 }
 
@@ -588,7 +588,7 @@
   width: 100%;
   margin: 0 0 6px;
   color: #c74a01;
-  font-size: 27px;
+  font-size: 22px;
   letter-spacing: -0.025em;
   white-space: nowrap;
 }
@@ -785,7 +785,7 @@
   width: 100%;
   margin: 0 0 6px;
   color: #e21903;
-  font-size: clamp(20px, 3vw, 28px);
+  font-size: 22px;;
   white-space: nowrap;
 }
 
@@ -806,7 +806,7 @@
   align-items: center;
   justify-content: center;
   gap: 3px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.2;
 }
 
@@ -909,8 +909,8 @@
       rgba(255, 255, 255, 0.08) 78%
     ),
     var(--nb-featured-glass);
-  backdrop-filter: blur(8px) saturate(140%);
-  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
 }
 
 .nb-featured-card::after {
@@ -1417,7 +1417,7 @@ html.theme-dark .nb-featured-family-panel {
   display: block;
   margin: 0 auto 8px;
   color: #000;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.2;
   text-align: center;
@@ -1811,19 +1811,17 @@ html.theme-dark .nb-featured-family-panel {
     padding: 22px 14px 18px;
   }
   .nb-featured-card-previous {
-    transform: translateX(-116%) translateY(35px) translateZ(-80px)
-      rotateY(18deg) rotateZ(-12deg) scale(0.78);
+    transform: translateX(-116%) translateY(35px) rotateZ(-12deg) scale(0.78);
   }
   .nb-featured-card-next {
-    transform: translateX(16%) translateY(35px) translateZ(-80px)
-      rotateY(-18deg) rotateZ(12deg) scale(0.78);
+    transform: translateX(16%) translateY(35px) rotateZ(12deg) scale(0.78);
   }
   .nb-featured-card h3 {
     font-size: 19px;
   }
   /* Mantem o titulo do Pro compacto em telas pequenas. */
   .nb-featured-card-pro .nb-featured-card-content h3 {
-    font-size: 27px;
+    font-size: 22px;
   }
   .nb-featured-card-family .nb-featured-card-content h3 {
     font-size: 22px;
