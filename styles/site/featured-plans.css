@@ -203,9 +203,7 @@
 }
 
 .nb-featured-card-top-family::before {
-  background: #b09af0;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(176, 154, 240, 0.72);
 }
 
 .nb-featured-card-top-family .nb-featured-card-content {
@@ -217,13 +215,13 @@
   justify-content: center;
   width: 100%;
   margin: 0 0 7px;
-  color: #4936ca;
+  color: #ae00fe;
   font-size: 27px;
   white-space: nowrap;
 }
 
 .nb-featured-card-top-family .nb-featured-wifi {
-  color: #7652e8;
+  color: #ae00fe;
 }
 
 .nb-featured-card-top-family .nb-featured-top-family-benefits {
@@ -251,7 +249,7 @@
   flex: none;
   width: 1em;
   height: 1em;
-  color: #7652e8;
+  color: #ae00fe;
   stroke-width: 3;
 }
 
@@ -409,9 +407,7 @@
 }
 
 .nb-featured-card-family::before {
-  background: #9dafff;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(157, 175, 255, 0.68);
 }
 
 .nb-featured-card-family .nb-featured-card-content {
@@ -423,7 +419,7 @@
   justify-content: center;
   width: 100%;
   margin: 0 0 7px;
-  color: #3e48da;
+  color: #3f42ff;
   font-size: 27px;
   white-space: nowrap;
 }
@@ -462,7 +458,7 @@
   flex: none;
   width: 1em;
   height: 1em;
-  color: #ed4700;
+  color: #0020ed;
   stroke-width: 3;
 }
 
@@ -577,9 +573,7 @@
 
 /* Fundo do cartao Pro: acompanha a moldura do artigo */
 .nb-featured-card-pro::before {
-  background: #ffda83;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(255, 218, 131, 0.68);
 }
 
 /* Area interna e titulo: #featured-plan-pro-content e #featured-plan-pro-title */
@@ -593,7 +587,7 @@
   gap: 5px;
   width: 100%;
   margin: 0 0 6px;
-  color: #202020;
+  color: #c74a01;
   font-size: 27px;
   letter-spacing: -0.025em;
   white-space: nowrap;
@@ -602,7 +596,7 @@
 /* Icone de conexao do titulo: #featured-plan-pro-wifi-icon */
 .nb-featured-card-pro .nb-featured-wifi {
   color: #f15a00;
-  font-size: 0.78em;
+  font-size: 0.90em;
 }
 
 /* Composicao vertical: #featured-plan-pro-layout */
@@ -777,9 +771,7 @@
 }
 
 .nb-featured-card-intermediate::before {
-  background: #ff9d54;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(255, 157, 84, 0.68);
 }
 
 .nb-featured-card-intermediate .nb-featured-card-content {
@@ -792,14 +784,14 @@
   gap: 5px;
   width: 100%;
   margin: 0 0 6px;
-  color: #151515;
+  color: #e21903;
   font-size: clamp(20px, 3vw, 28px);
   white-space: nowrap;
 }
 
 .nb-featured-card-intermediate .nb-featured-wifi {
   color: #d95b00;
-  font-size: 0.85em;
+  font-size: 0.99em;
 }
 
 .nb-featured-card-intermediate .nb-featured-pro-benefits {

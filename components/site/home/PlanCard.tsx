@@ -140,7 +140,7 @@ export function PlanCard({
             </span>
           )}
           {plan.name === "PRO"
-            ? "Plano PRO"
+            ? "PLANO PRO"
             : plan.name === "APLICATIVOS"
               ? "APLICATIVOS"
               : plan.name}
