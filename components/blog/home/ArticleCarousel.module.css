@@ -153,6 +153,20 @@
     padding-inline: 43px;
   }
 }
+@media (max-width: 767px) {
+  .carousel:not(.compact) .row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .carousel:not(.compact) .arrow { display: none; }
+  .carousel:not(.compact) .track { grid-auto-columns: 80%; column-gap: 10px; }
+  .carousel:not(.compact) .footer { padding-inline: 0; }
+  .carousel:not(.compact) .slide h3,
+  .carousel:not(.compact) .slide p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .carousel:not(.compact) .slide h3 { -webkit-line-clamp: 3; font-size: var(--blog-mobile-card-title); }
+  .carousel:not(.compact) .slide p { -webkit-line-clamp: 2; }
+}
 @media (prefers-reduced-motion: reduce) {
   .arrow,
   .playback {

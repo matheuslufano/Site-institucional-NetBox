@@ -29,7 +29,7 @@ export function NextReading({ articles }: { articles: BlogArticle[] }) {
                 <h3>{article.title}</h3>
                 <span className={styles.time}><FiClock aria-hidden="true" />{readingTime(article)} min de leitura</span>
               </div>
-              <span className={styles.image}><CoverImage src={article.cover} alt={article.coverAlt} fill sizes={index === 0 ? '(max-width: 1023px) 90vw, 282px' : '68px'} /></span>
+              <span className={styles.image}><CoverImage src={article.cover} alt={article.coverAlt} fill sizes={index === 0 ? '(max-width: 767px) 56px, (max-width: 1023px) 50vw, 282px' : '68px'} /></span>
             </Link>
           </li>
         ))}

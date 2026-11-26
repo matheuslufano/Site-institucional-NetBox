@@ -16,7 +16,8 @@
 .lead { min-width: 0; overflow: hidden; border-radius: 17px; background: #17201c; }
 .leadLink { position: relative; display: flex; align-items: flex-end; min-height: 490px; height: 100%; isolation: isolate; color: white; }
 .leadLink::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(5 12 9 / 8%) 0%,rgb(5 12 9 / 35%) 25%,rgb(5 12 9 / 91%) 65%,#09100c 100%); }
-.lead .leadImage { z-index: -2; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.leadMedia { position: absolute; inset: 0; z-index: -2; }
+.lead .leadImage { object-fit: cover; object-position: var(--recommendation-image-position, center); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .leadLabel { position: absolute; inset: 22px auto auto 22px; display: inline-flex; gap: 8px; align-items: center; padding: 8px 12px; border: 1px solid rgb(255 255 255 / 35%); border-radius: 100px; background: rgb(10 17 13 / 70%); color: white; font-size: 11px; font-weight: 700; }
 .leadLabel svg { width: 14px; height: 14px; }
 .leadBody { width: 100%; min-width: 0; padding: clamp(24px,3vw,38px); }
@@ -53,5 +54,37 @@
 @media(hover:hover) { .explore:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); } .categories a:hover { border-color: var(--accent); transform: translateY(-2px); } .leadLink:hover .leadImage, .cardLink:hover .thumbnail img { transform: scale(1.045); } .leadLink:hover .leadArrow { background: #c85016; transform: rotate(7deg); } .card:hover { border-color: #c3cec1; box-shadow: 0 8px 24px rgb(35 50 33 / 7%); transform: translateY(-3px); } }
 @media(max-width:1100px) { .layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 18px; } .cardLink { grid-template-columns: 120px minmax(0,1fr); } .cardBody { padding: 17px; } }
 @media(max-width:800px) { .section { margin-block: 40px; } .header { align-items: flex-start; gap: 16px; } .layout { grid-template-columns: minmax(0,1fr); } .leadLink { min-height: 470px; } .cardLink { grid-template-columns: 180px minmax(0,1fr); min-height: 190px; } .list { gap: 12px; } .listHeading { margin-block: 8px 2px; } .cardBody h3 { font-size: 19px; } }
-@media(max-width:500px) { .header { flex-direction: column; } .explore { padding: 9px 13px; font-size: 12px; } .categories { margin-top: 19px; gap: 6px; } .categories a { padding: 7px 10px; font-size: 11px; } .leadLink { min-height: 450px; } .leadBody { padding: 24px 20px; } .leadBody h3 { font-size: 25px; } .leadArrow { right: 18px; bottom: 22px; width: 34px; height: 34px; } .cardLink { grid-template-columns: 108px minmax(0,1fr); } .cardBody { padding: 14px; } .cardBody h3 { font-size: 16px; } .cardBody > p { display: none; } .cardBody .meta { gap: 7px; margin-top: 10px; } .thumbnail { min-height: 190px; } .section { padding: 18px; border-radius: 19px; } }
+@media (max-width: 767px) {
+  .section { margin-block: 30px; padding: 12px; border-radius: 14px; }
+  .header { align-items: center; gap: 8px; }
+  .heading { min-width: 0; }
+  .heading h2 { margin: 0; font-size: var(--blog-mobile-section-title); }
+  .heading p, .eyebrow, .leadLabel, .leadArrow, .listHeading, .cardBody > p, .cardAction { display: none; }
+  .explore { min-height: 44px; padding: 5px 8px; gap: 3px; font-size: 11px; }
+  .explore svg { width: 14px; height: 14px; }
+  .categories { flex-wrap: nowrap; overflow-x: auto; margin: 8px 0 12px; padding: 2px; }
+  .categories a { min-height: 44px; flex: none; padding: 5px 8px; }
+  .layout, .list { gap: 8px; }
+  .leadLink { display: block; min-height: 0; }
+  .leadLink::after { display: none; }
+  .leadMedia { position: relative; aspect-ratio: 16 / 9; z-index: 0; overflow: hidden; }
+  .leadBody { padding: 12px; }
+  .leadBody h3, .cardBody h3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    margin: 4px 0;
+  }
+  .leadBody h3 { font-size: clamp(16px, 4.4vw, 20px); }
+  .leadBody > p { margin-bottom: 8px; }
+  .leadBody .meta { padding-right: 0; }
+  .read { margin-top: 8px; }
+  .cardLink { grid-template-columns: clamp(80px, 24vw, 110px) minmax(0, 1fr); min-height: 92px; }
+  .thumbnail { min-height: 0; }
+  .number { top: 6px; left: 6px; width: 22px; height: 22px; font-size: 10px; }
+  .cardBody { padding: 8px; }
+  .cardBody h3 { font-size: var(--blog-mobile-card-title); }
+  .cardBody .meta { gap: 5px; }
+}
 @media(prefers-reduced-motion:reduce) { .section *, .section *::after { transition: none !important; } }

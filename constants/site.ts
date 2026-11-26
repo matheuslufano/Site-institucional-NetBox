@@ -1,5 +1,8 @@
 /** Public institutional contact and app destinations. No credentials belong here. */
 export const WHATSAPP = "5508006022732";
+export const INSTAGRAM_URL = "https://www.instagram.com/netboxinternet/";
+export const SUPPORT_EMAIL = "atendimento@netbox.net.br";
+export const SUPPORT_PHONE_URL = "tel:08006022732";
 
 export const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
 

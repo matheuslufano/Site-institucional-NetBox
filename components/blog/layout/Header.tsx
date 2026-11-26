@@ -16,7 +16,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { type ReactNode, useRef, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
+import { IoMenuOutline, IoSearchOutline } from "react-icons/io5";
+import { BlogMobileDrawer } from "./BlogMobileDrawer";
 
 /** Brand, categories and actions share one row; smaller screens expand the menu in flow. */
 function HeaderContent({
@@ -73,7 +74,7 @@ function HeaderContent({
           >
             <Image
               className={styles.brandLogo}
-              src="/blog/logo-NETBOX-BLOG.png "
+              src="/blog/logo-NETBOX-BLOG.png"
               alt="Netbox — Internet de verdade"
               width={1672}
               height={941}
@@ -133,15 +134,23 @@ function HeaderContent({
             className={styles.menuButton}
             data-ui="blog-menu-button"
             type="button"
-            aria-controls="blog-navigation"
+            aria-controls="blog-mobile-drawer"
+            aria-haspopup="dialog"
+            aria-label="Abrir menu do Blog"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((value) => !value)}
           >
-            {menuOpen ? "Fechar ✕" : "Menu ☰"}
+            <IoMenuOutline aria-hidden="true" />
           </button>
         </div>
         <ChristmasHeroLights />
       </header>
+      <BlogMobileDrawer
+        open={menuOpen}
+        category={activeCategory}
+        onClose={closeMenu}
+        onSearch={() => { closeMenu(); setSearchOpen(true); }}
+      />
       <SearchPanel
         open={searchOpen}
         query={query}
@@ -175,13 +184,13 @@ export function BlogHeader({
   );
 }
 
-/** The same header remains available in the server-rendered Suspense fallback. */
-export function BlogHeaderFallback({
-  editorialSidebar,
-  articleSuggestions,
-}: {
-  editorialSidebar: ReactNode;
-  articleSuggestions: ArticleSuggestion[];
-}) {
-  return <HeaderContent editorialSidebar={editorialSidebar} articleSuggestions={articleSuggestions} />;
+/** Keeps the masthead visible while routing state resolves, without duplicating interactive IDs. */
+export function BlogHeaderFallback() {
+  return (
+    <header className={styles.portalHeader} aria-hidden="true">
+      <div className={styles.masthead}>
+        <Image src="/blog/logo-NETBOX-BLOG.png" alt="" width={1672} height={941} unoptimized className={styles.brandLogo} />
+      </div>
+    </header>
+  );
 }

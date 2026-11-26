@@ -4,6 +4,7 @@ import type { MouseEvent } from "react";
 import { FaArrowRight, FaWhatsapp } from "react-icons/fa";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import styles from "./Development.module.css";
+import { ManagedPageSections } from "@/components/site/content/ManagedPageSections";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -13,7 +14,7 @@ const APP_STORE = "https://apps.apple.com/br/app/netbox/id1574550280";
 const MESSAGE =
   "Olá! Vim pelo site da Netbox e gostaria de falar com a equipe.";
 
-export function DevelopmentPage() {
+export function DevelopmentPage({ showManagedSections = true }: { showManagedSections?: boolean } = {}) {
   function openAppStore(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const userAgent = navigator.userAgent || "";
@@ -85,6 +86,7 @@ export function DevelopmentPage() {
           <img src="/maintenance-rocket.png" alt="" />
         </div>
       </section>
+      {showManagedSections && <ManagedPageSections />}
     </main>
   );
 }

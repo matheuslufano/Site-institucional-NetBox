@@ -21,6 +21,20 @@
   transform: scale(1.015);
 }
 
+.hero-slide-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide-video { display: none; }
+}
+
 .model-hero::after {
   content: "";
   position: absolute;

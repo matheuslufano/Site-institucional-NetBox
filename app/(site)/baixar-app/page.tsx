@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { APP_STORE, PLAY_STORE } from "@/constants/site";
 import { getAppStoreUrl } from "@/components/site/app/getAppStoreUrl";
+import { ManagedPageSections } from "@/components/site/content/ManagedPageSections";
 
 export default function AppDownloadPage() {
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function AppDownloadPage() {
           <FaGooglePlay aria-hidden="true" /> Google Play
         </a>
       </nav>
+      <ManagedPageSections />
     </main>
   );
 }

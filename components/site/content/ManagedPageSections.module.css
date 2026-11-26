@@ -1,0 +1,23 @@
+.managedSections { width: 100%; padding: 8px clamp(14px, 3vw, 42px) 36px; }
+.section { width: min(100%, 1180px); margin: 18px auto; padding: clamp(18px, 3vw, 34px); overflow: hidden; border: 1px solid rgba(255,255,255,.8); border-radius: 24px; background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,249,244,.82)); box-shadow: 0 16px 38px rgba(56,32,20,.09), inset 0 1px 0 #fff; }
+.sectionInner { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; align-items: start; }
+.sectionNumber { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid rgba(217,70,22,.18); border-radius: 11px; background: rgba(217,70,22,.08); color: #d94616; font-size: 11px; font-weight: 900; }
+.sectionContent { min-width: 0; }
+.sectionContent h2 { margin: 2px 0 10px; color: #27201c; font-size: clamp(20px, 3vw, 32px); font-weight: 900; letter-spacing: -.04em; line-height: 1.15; }
+.sectionContent p { max-width: 76ch; margin: 0 0 16px; color: #5e534d; font-size: 15px; line-height: 1.75; white-space: pre-line; }
+.image { display: block; width: min(100%, 900px); max-height: 620px; margin-top: 16px; border-radius: 16px; object-fit: cover; box-shadow: 0 14px 34px rgba(39,25,17,.13); }
+.video { position: relative; width: min(100%, 900px); margin-top: 16px; overflow: hidden; border-radius: 16px; background: #171717; aspect-ratio: 16 / 9; box-shadow: 0 14px 34px rgba(39,25,17,.15); }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.videoFile { display: block; width: min(100%, 900px); max-height: 620px; margin-top: 16px; border-radius: 16px; background: #171717; }
+
+@media (max-width: 600px) {
+  .managedSections { padding: 4px 12px 26px; }
+  .section { margin: 12px auto; padding: 17px 15px; border-radius: 18px; }
+  .sectionInner { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
+  .sectionNumber { width: 28px; height: 28px; border-radius: 9px; font-size: 10px; }
+  .sectionContent p { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section { scroll-behavior: auto; }
+}

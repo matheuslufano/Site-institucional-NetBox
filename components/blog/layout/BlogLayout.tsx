@@ -1,5 +1,7 @@
 import { BlogFooter } from '@/components/blog/layout/Footer';
 import { BlogHeader, BlogHeaderFallback } from '@/components/blog/layout/Header';
+import { BlogMobileShortcuts } from '@/components/blog/layout/BlogMobileShortcuts';
+import { BlogPrivacy } from '@/components/blog/layout/BlogPrivacy';
 import { ReadingSuggestions } from '@/components/blog/search/ReadingSuggestions';
 import styles from '@/styles/blog/Blog.module.css';
 import { articlePath, articleSearchText, visibleArticles } from '@/lib/blog/catalog';
@@ -21,11 +23,15 @@ export default async function BlogLayout({ children }: { children: React.ReactNo
   return (
     <div className={styles.blog} data-ui="netbox-blog">
       <a className="skip-link" href="#blog-conteudo">Ir para as notícias</a>
-      <Suspense fallback={<BlogHeaderFallback editorialSidebar={editorialSidebar} articleSuggestions={articleSuggestions} />}>
+      <Suspense fallback={<BlogHeaderFallback />}>
         <BlogHeader editorialSidebar={editorialSidebar} articleSuggestions={articleSuggestions} />
       </Suspense>
       <main id="blog-conteudo" className={styles.main}>{children}</main>
       <BlogFooter />
+      <BlogPrivacy />
+      <Suspense fallback={null}>
+        <BlogMobileShortcuts />
+      </Suspense>
     </div>
   );
 }

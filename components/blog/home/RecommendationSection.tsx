@@ -41,7 +41,9 @@ export function RecommendationSection({ group, articles }: Props) {
     {lead ? <div className={styles.layout}>
       <article className={styles.lead}>
         <Link className={styles.leadLink} href={articlePath(lead)}>
-          <CoverImage src={lead.cover} alt={lead.coverAlt} fill sizes="(max-width: 800px) 100vw, 55vw" className={styles.leadImage} />
+          <div className={styles.leadMedia}>
+            <CoverImage src={lead.cover} alt={lead.coverAlt} fill sizes="(max-width: 800px) 100vw, 55vw" className={styles.leadImage} />
+          </div>
           <span className={styles.leadLabel}><Icon aria-hidden="true" />Para começar</span>
           <div className={styles.leadBody}>
             <span className={styles.category}>{lead.topic ?? categoryLabel(lead.category)}</span>

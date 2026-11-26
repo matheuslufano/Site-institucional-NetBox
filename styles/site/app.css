@@ -3,7 +3,7 @@
    ===================================================== */
 
 .netbox-app-section {
-  scroll-margin-top: 96px;
+  scroll-margin-block: 96px;
   padding: 88px 0 92px;
   background:
     radial-gradient(circle at 88% 18%, rgba(255, 189, 44, .18), transparent 28%),

@@ -22,7 +22,7 @@ export function NewsCard({ article }: { article: BlogArticle }) {
       </div>
       <Link className={styles.feedLink} href={articlePath(article)}>
         <div className={styles.feedImage}>
-          <CoverImage src={article.cover} alt={article.coverAlt} fill sizes="(max-width: 599px) 100vw, 300px" />
+          <CoverImage src={article.cover} alt={article.coverAlt} fill sizes="(max-width: 767px) 112px, 300px" />
           {article.status === 'demo' && <span className={styles.demoBadge}>Demonstrativo</span>}
         </div>
         <div className={styles.feedCopy}>
@@ -30,7 +30,11 @@ export function NewsCard({ article }: { article: BlogArticle }) {
           <h3>{article.title}</h3>
           <p>{article.summary}</p>
           <span className={styles.feedRead}>
-            {readingTime(article)} min de leitura <span aria-hidden="true">↗</span>
+            <span className={styles.feedReadDetails}>
+              <time className={styles.feedMobileDate} dateTime={article.publishedAt}>{publishedDate.replace(/ de \d{4}$/, '')} · </time>
+              {readingTime(article)} min de leitura
+            </span>
+            <span className={styles.feedReadArrow} aria-hidden="true">↗</span>
           </span>
         </div>
       </Link>

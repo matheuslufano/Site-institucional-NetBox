@@ -409,6 +409,19 @@
 .searchGrid .card {
   grid-column: auto;
 }
+@media (max-width: 767px) {
+  .compact .mediaSearch input { font-size: 16px; }
+  .compact .mediaSearch button { min-width: 44px; min-height: 44px; }
+  .compact .searchGrid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .compact .searchGrid .card {
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr);
+    align-items: center;
+  }
+  .compact .searchGrid .copy { min-width: 0; padding: 8px; }
+  .compact .searchGrid .copy h3 { font-size: 15px; }
+  .compact .searchGrid .more { display: none; }
+}
 .searchHint {
   color: #bbc4b5;
   font-size: 12px;

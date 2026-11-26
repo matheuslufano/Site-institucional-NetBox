@@ -14,6 +14,7 @@ import {
 } from "react-icons/io5";
 import { heroSlides } from "./content";
 type Props = {
+  slides: Array<(typeof heroSlides)[number] & { id?: string; videoUrl?: string }>;
   activeSlide: number;
   heroSwipe: ReturnType<typeof useSwipeGesture>;
   setCarouselInteractionPaused: Dispatch<SetStateAction<boolean>>;
@@ -24,9 +25,11 @@ type Props = {
 };
 
 /** Institutional opening carousel. Interaction state remains owned by the home composition. */
-export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, moveSlide, setActiveSlide, setCarouselPaused, carouselPaused }: Props) {
+export function Hero({ slides, activeSlide, heroSwipe, setCarouselInteractionPaused, moveSlide, setActiveSlide, setCarouselPaused, carouselPaused }: Props) {
+  const currentSlide = slides[activeSlide] ?? slides[0];
+  const heroVideo = currentSlide.videoUrl ? resolveHeroVideo(currentSlide.videoUrl) : null;
   return (<section
-    className={`model-hero copy-${heroSlides[activeSlide].side}${heroSwipe.isDragging ? " is-swiping" : ""}`}
+    className={`model-hero copy-${currentSlide.side}${heroSwipe.isDragging ? " is-swiping" : ""}`}
     id="inicio"
     role="region"
     aria-roledescription="carrossel"
@@ -47,16 +50,19 @@ export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, mov
   >
     <div
       className="hero-slide-background"
-      key={heroSlides[activeSlide].image}
+      key={currentSlide.id || currentSlide.image}
       style={
         {
-          backgroundImage: `url(${heroSlides[activeSlide].image})`,
-          backgroundPosition: heroSlides[activeSlide].position,
-          "--hero-mobile-image": `url(${heroSlides[activeSlide].mobileImage})`,
+          backgroundImage: `url(${currentSlide.image})`,
+          backgroundPosition: currentSlide.position,
+          "--hero-mobile-image": `url(${currentSlide.mobileImage})`,
         } as CSSProperties
       }
       aria-hidden="true"
-    />
+    >
+      {heroVideo?.type === "file" && <video className="hero-slide-video" autoPlay muted loop playsInline poster={currentSlide.image}><source src={heroVideo.src} /></video>}
+      {heroVideo?.type === "embed" && <iframe className="hero-slide-video" src={heroVideo.src} title={`Vídeo: ${currentSlide.title}`} tabIndex={-1} allow="autoplay; encrypted-media; picture-in-picture" />}
+    </div>
     <div className="model-shell hero-inner carousel-only">
       <div
         className={`model-hero-copy${activeSlide === 0 ? " is-app-slide" : ""}`}
@@ -76,8 +82,8 @@ export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, mov
             alt="Ícone do Aplicativo Netbox"
           />
         )}
-        <h1>{heroSlides[activeSlide].title}</h1>
-        <p>{heroSlides[activeSlide].text}</p>
+        <h1>{currentSlide.title}</h1>
+        <p>{currentSlide.text}</p>
         {activeSlide === 0 ? (
           <div
             className="netbox-app-stores hero-app-stores"
@@ -133,13 +139,13 @@ export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, mov
         ) : (
           <a
             className="model-button hero-primary hero-whatsapp-button hero-whatsapp-desktop"
-            href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
+            href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${currentSlide.title}” no site da Netbox e gostaria de saber mais.`)}`}
             target="_blank"
             rel="noreferrer"
             onClick={() =>
               track("clicou_whatsapp", {
                 origin: "carrossel",
-                slide: heroSlides[activeSlide].title,
+                slide: currentSlide.title,
               })
             }
           >
@@ -151,13 +157,13 @@ export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, mov
     {activeSlide !== 0 && (
       <a
         className="model-button hero-primary hero-whatsapp-button hero-whatsapp-mobile"
-        href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${heroSlides[activeSlide].title}” no site da Netbox e gostaria de saber mais.`)}`}
+        href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vim pelo destaque “${currentSlide.title}” no site da Netbox e gostaria de saber mais.`)}`}
         target="_blank"
         rel="noreferrer"
         onClick={() =>
           track("clicou_whatsapp", {
             origin: "carrossel_mobile",
-            slide: heroSlides[activeSlide].title,
+            slide: currentSlide.title,
           })
         }
       >
@@ -188,10 +194,10 @@ export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, mov
       >
         <strong>{String(activeSlide + 1).padStart(2, "0")}</strong>
         <i>/</i>
-        {String(heroSlides.length).padStart(2, "0")}
+        {String(slides.length).padStart(2, "0")}
       </span>
       <div className="carousel-dots" aria-label="Escolher destaque">
-        {heroSlides.map((slide, index) => (
+        {slides.map((slide, index) => (
           <button
             key={slide.title}
             type="button"
@@ -220,4 +226,23 @@ export function Hero({ activeSlide, heroSwipe, setCarouselInteractionPaused, mov
       </button>
     </div>
   </section>);
+}
+
+function resolveHeroVideo(source: string): { type: "file" | "embed"; src: string } | null {
+  if (source.startsWith("/") && /\.(mp4|webm)(?:\?|$)/i.test(source)) return { type: "file", src: source };
+  try {
+    const url = new URL(source);
+    if (url.protocol !== "https:") return null;
+    const host = url.hostname.toLowerCase();
+    if (/\.(mp4|webm)$/i.test(url.pathname)) return { type: "file", src: url.href };
+    if (host === "youtu.be" || ["youtube.com", "www.youtube.com", "m.youtube.com", "www.youtube-nocookie.com"].includes(host)) {
+      const id = host === "youtu.be" ? url.pathname.slice(1) : url.searchParams.get("v") || url.pathname.split("/").filter(Boolean).at(-1);
+      if (id && /^[\w-]{11}$/.test(id)) return { type: "embed", src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1` };
+    }
+    if (["vimeo.com", "www.vimeo.com", "player.vimeo.com"].includes(host)) {
+      const id = url.pathname.split("/").filter(Boolean).at(-1);
+      if (id && /^\d+$/.test(id)) return { type: "embed", src: `https://player.vimeo.com/video/${id}?autoplay=1&muted=1&loop=1&background=1` };
+    }
+  } catch { return null; }
+  return null;
 }

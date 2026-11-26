@@ -4,6 +4,8 @@ A cena natalina inclui floresta realista em PNG transparente, base de neve disso
 
 Temas comemorativos do Blog e do institucional são configurados na aba **Temas comemorativos** de `/integracoes/blog` do painel. Ambos iniciam desativados e usam `BLOG_API_URL` para consultar `/site/themes`, por meio do proxy local `/api/site-themes`. A prévia `?previewTheme=christmas` afeta somente a página aberta e não contabiliza analytics do Blog. Arquitetura, permissões, migração e relatório em [site-seasonal-themes.md](../afiliados-backend/docs/site-seasonal-themes.md).
 
+O carrossel inicial e seções adicionais de texto, imagem ou vídeo podem ser administrados pelo painel Afiliados Netbox em `/integracoes/site-institucional`. O site consulta apenas o snapshot publicado pelo proxy `/api/site-content`; o carrossel local continua como fallback. Veja [contrato e limites](docs/institutional-site-content.md).
+
 O otimizador `/_vinext/image` utiliza os bindings Cloudflare `ASSETS` (arquivos públicos) e `IMAGES` (transformação), declarados em `vite.config.ts`. Após alterar bindings, reinicie `npm run dev` para recriar o ambiente do Worker.
 
 O Blog coleta desempenho somente com consentimento, usando o backend existente. Eventos, privacidade e trailers: [docs/blog-analytics.md](docs/blog-analytics.md).

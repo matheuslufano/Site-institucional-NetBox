@@ -1,20 +1,16 @@
-"use client";
+﻿"use client";
 
 import { CoverImage } from "@/components/blog/articles/CoverImage";
 import { normalizeSearch } from "@/lib/blog/searchNormalization";
+import { categoryLabel } from "@/lib/blog/catalog";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import type { ArticleSuggestion } from "./SearchForm";
 import styles from "./SearchCoverCarousel.module.css";
+import { emptySearchDogs } from "./empty-search-dogs";
 
-const emptySearchDogs = [
-  { name: "filhote-preto", width: 520, height: 520, message: "Nenhum artigo encontrado." },
-  { name: "filhote-terrier", width: 520, height: 347, message: "Espiei por aqui e não encontrei nenhum artigo." },
-  { name: "filhote-caramelo", width: 413, height: 520, message: "Não achei artigos com esse termo. Que tal tentar outro?" },
-  { name: "bulldogue-tigrado", width: 424, height: 520, message: "Fiquei de olho, mas essa busca não trouxe artigos." },
-];
 
 function rankSearchCovers(articles: ArticleSuggestion[], query: string) {
   const normalizedQuery = normalizeSearch(query);
@@ -105,6 +101,7 @@ export function SearchCoverCarousel({
       aria-labelledby="blog-search-results-title"
     >
       <div className={styles.coverResultsHeader}>
+        <h3 id="blog-search-results-title">Resultados da busca</h3>
         {covers.length > 2 && (
           <div className={styles.coverNavigation}>
             <button
@@ -119,7 +116,7 @@ export function SearchCoverCarousel({
             <button
               id="blog-search-covers-next"
               type="button"
-              aria-label="Próximas capas"
+              aria-label="PrÃ³ximas capas"
               disabled={edges.end}
               onClick={() => scrollCovers(1)}
             >
@@ -155,10 +152,13 @@ export function SearchCoverCarousel({
                     src={article.cover}
                     alt=""
                     fill
-                    sizes="(max-width: 440px) 44vw, 180px"
+                    sizes="(max-width: 767px) 64px, 180px"
                   />
                 </span>
-                <strong>{article.title}</strong>
+                <span className={styles.coverCopy}>
+                  <small>{categoryLabel(article.category)}</small>
+                  <strong>{article.title}</strong>
+                </span>
               </Link>
             </li>
           ))}
@@ -166,6 +166,7 @@ export function SearchCoverCarousel({
       ) : (
         <EmptySearchState submissionIndex={submissionIndex} />
       )}
+      {!!covers.length && <Link href={resultsHref} onNavigate={onNavigate}>Ver todos os resultados</Link>}
     </section>
   );
 }

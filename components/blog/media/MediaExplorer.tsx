@@ -22,8 +22,13 @@ export function MediaExplorer({ kind, initial, compact = false }: Props) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const controller = useRef<AbortController | null>(null);
-  useEffect(() => () => controller.current?.abort(), []);
+  const searchTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => {
+    controller.current?.abort();
+    window.clearTimeout(searchTimer.current);
+  }, []);
   const load = async (term: string, page = 1, append = false) => {
+    window.clearTimeout(searchTimer.current);
     controller.current?.abort();
     const request = new AbortController();
     controller.current = request;
@@ -102,7 +107,18 @@ export function MediaExplorer({ kind, initial, compact = false }: Props) {
             id={id}
             type="search"
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => {
+              const nextQuery = event.target.value;
+              setQuery(nextQuery);
+              if (!compact) return;
+              window.clearTimeout(searchTimer.current);
+              controller.current?.abort();
+              setResult(undefined);
+              setError("");
+              setActiveQuery("");
+              setPending(Boolean(nextQuery.trim()));
+              if (nextQuery.trim()) searchTimer.current = window.setTimeout(() => void load(nextQuery.trim()), 300);
+            }}
             placeholder={
               kind === "movie"
                 ? "Buscar filmes em português…"
@@ -117,6 +133,7 @@ export function MediaExplorer({ kind, initial, compact = false }: Props) {
               type="button"
               aria-label="Limpar busca"
               onClick={() => {
+                window.clearTimeout(searchTimer.current);
                 setQuery("");
                 if (!compact) void load("");
                 else {

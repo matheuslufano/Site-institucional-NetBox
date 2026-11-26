@@ -2,6 +2,7 @@ import { NextReading } from "./NextReading";
 import { CategoryStrip } from "./CategoryStrip";
 import { RecommendationSection } from "./RecommendationSection";
 import { ArticleCarousel } from "./ArticleCarousel";
+import { LoadMoreNews } from "./LoadMoreNews";
 import { ArticleCard } from "@/components/blog/articles/ArticleCard";
 import { NewsCard } from "@/components/blog/articles/NewsCard";
 import { CategoryPage } from "@/components/blog/categories/CategoryPage";
@@ -194,24 +195,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     <NewsCard key={article.id} article={article} />
                   ))}
                 </div>
-                {page < maxPage && (
-                  <div className={styles.loadMore}>
-                    <Link
-                      className={styles.secondaryButton}
-                      href={
-                        blogHref(category, query, page + 1, group?.id) +
-                        "#publicacoes"
-                      }
-                      scroll={false}
-                    >
-                      Carregar mais notícias ↓
-                    </Link>
-                    <p>
-                      Exibindo {Math.min(page * PAGE_SIZE, results.length)} de{" "}
-                      {results.length} artigos
-                    </p>
-                  </div>
-                )}
+                <LoadMoreNews
+                  href={page < maxPage ? blogHref(category, query, page + 1, group?.id) + "#publicacoes" : ""}
+                  shown={Math.min(page * PAGE_SIZE, results.length)}
+                  total={results.length}
+                />
               </>
             ) : (
               <div className={styles.empty}>

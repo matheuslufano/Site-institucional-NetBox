@@ -19,6 +19,7 @@ import {
 } from "react-icons/fi";
 import { CategorySort } from "./CategorySort";
 import { FeaturedCard } from "./FeaturedCard";
+import { EmptySearchDogs } from "@/components/blog/search/EmptySearchDogs";
 import styles from "./CategoryPage.module.css";
 
 type Props = {
@@ -61,12 +62,12 @@ export function CategoryPage({
       data-category={category.id}
       className={styles.page}
     >
-
-
+      <h1 className="sr-only">{category.label}</h1>
       {hasHero && (
         <FeaturedNews
           latestArticles={heroArticles}
           layout={category.id === "tecnologia" ? "background" : "poster"}
+          expandableSummary={category.id === "filmes"}
           label={"Destaques de " + category.label}
         />
       )}
@@ -212,6 +213,7 @@ export function CategoryPage({
                 Tente outra palavra ou limpe os filtros para explorar esta
                 categoria.
               </p>
+              <EmptySearchDogs />
               <Link href={blogHref(category.id)}>
                 <FiArrowLeft aria-hidden="true" />
                 Ver artigos da categoria

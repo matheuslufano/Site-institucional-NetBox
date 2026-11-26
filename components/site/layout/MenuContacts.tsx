@@ -1,18 +1,16 @@
 "use client";
 
+import { INSTAGRAM_URL, SECOND_COPY, SUPPORT_EMAIL, SUPPORT_PHONE_URL, WHATSAPP } from "@/constants/site";
 import { type ReactNode, useEffect, useState } from "react";
 import { FaInstagram } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
 import { ImWhatsapp } from "react-icons/im";
 import { TfiEmail } from "react-icons/tfi";
 
-const WHATSAPP = "5508006022732";
 const WHATSAPP_MESSAGE = "Olá! Vim pelo site da Netbox e gostaria de atendimento.";
-const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
-const EMAIL = "atendimento@netbox.net.br";
 const EMAIL_SUBJECT = "Atendimento Netbox — contato pelo site";
-const WEBMAIL_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=${encodeURIComponent(EMAIL_SUBJECT)}`;
-const MAILTO_URL = `mailto:${EMAIL}?subject=${encodeURIComponent(EMAIL_SUBJECT)}`;
+const WEBMAIL_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SUPPORT_EMAIL)}&su=${encodeURIComponent(EMAIL_SUBJECT)}`;
+const MAILTO_URL = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(EMAIL_SUBJECT)}`;
 
 type IconName = "whatsapp" | "instagram" | "mail" | "phone" | "document";
 
@@ -76,7 +74,7 @@ export function MenuContacts() {
         <ContactIcon name="whatsapp" />
       </a>
       <a
-        href="https://www.instagram.com/netboxinternet/"
+        href={INSTAGRAM_URL}
         target="_blank"
         rel="noreferrer"
         aria-label="Instagram da Netbox"
@@ -94,7 +92,7 @@ export function MenuContacts() {
         <ContactIcon name="mail" />
       </a>
       <a
-        href="tel:08006022732"
+        href={SUPPORT_PHONE_URL}
         aria-label="Ligar para a Netbox no 0800 602 2732"
         title="Telefone"
       >

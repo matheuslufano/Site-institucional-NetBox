@@ -1,3 +1,3 @@
-import { DevelopmentPage } from "@/components/site/development/DevelopmentPage";
+import HomePage from "@/components/site/home/HomePage";
 
-export default function IndexPage() { return <DevelopmentPage />; }
+export default function IndexPage() { return <HomePage />; }

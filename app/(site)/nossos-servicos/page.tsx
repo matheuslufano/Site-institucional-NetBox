@@ -1,8 +1,10 @@
 import { SiteLayout } from "@/components/site/layout/SiteLayout";
 import { ArrowIcon } from "@/components/ui/ArrowIcon";
 import { BackButton } from "@/components/ui/BackButton";
+import { WHATSAPP } from "@/constants/site";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { FaWhatsapp } from "react-icons/fa";
 import {
   IoBusinessOutline,
   IoDocumentTextOutline,
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
     "Conheça as soluções residenciais, empresariais e os canais de atendimento da Netbox.",
 };
 
-const WHATSAPP = "5508006022732";
+const SUPPORT_PHONE = "0800 602 2732";
 
 const serviceDetails = [
   {
@@ -106,9 +108,10 @@ export default function ServicesPage() {
             {serviceDetails.map((service, index) => {
               const Icon = service.icon;
               const isSupport = service.title === "Suporte Técnico Regional";
-              const href = isSupport
-                ? "/nossa-estrutura"
-                : `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre ${service.title}.`)}`;
+              const message = isSupport
+                ? "Olá! Gostaria de falar com o suporte técnico da Netbox."
+                : `Olá! Gostaria de saber mais sobre ${service.title}.`;
+              const href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
               return (
                 <article
                   className="service-detail-card"
@@ -144,12 +147,23 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                     <a
-                      className="model-button yellow"
+                      id={isSupport ? "regional-support-whatsapp-link" : undefined}
+                      className={isSupport ? "model-button yellow regional-support-whatsapp" : "model-button yellow"}
                       href={href}
-                      target={isSupport ? undefined : "_blank"}
-                      rel={isSupport ? undefined : "noreferrer"}
+                      aria-label={isSupport ? `Falar com o suporte Netbox pelo WhatsApp: ${SUPPORT_PHONE}` : undefined}
+                      target="_blank"
+                      rel="noreferrer"
                     >
-                      Saiba mais <ArrowIcon />
+                      {isSupport ? (
+                        <>
+                          <span className="regional-support-whatsapp-icon" aria-hidden="true">
+                            <FaWhatsapp />
+                          </span>
+                          <span>{SUPPORT_PHONE}</span>
+                        </>
+                      ) : (
+                        <>Saiba mais <ArrowIcon /></>
+                      )}
                     </a>
                   </div>
                 </article>

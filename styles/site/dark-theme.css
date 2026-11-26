@@ -482,13 +482,13 @@ html.theme-dark .model-whatsapp-copy::after { color: rgba(235,238,234,.62); }
     background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.12), transparent 38%), radial-gradient(circle at 92% 120%, rgba(255,112,39,.12), transparent 42%);
   }
 
-  html.theme-dark .client-shortcuts a { color: rgba(236,230,224,.72); }
+  html.theme-dark .client-shortcuts > :is(a, button) { color: rgba(236,230,224,.72); }
 
-  html.theme-dark .client-shortcuts a:hover,
-  html.theme-dark .client-shortcuts a:focus-visible { color: #ffa16a; }
+  html.theme-dark .client-shortcuts > :is(a, button):hover,
+  html.theme-dark .client-shortcuts > :is(a, button):focus-visible { color: #ffa16a; }
 
   html.theme-dark .client-shortcuts a.is-selected,
-  html.theme-dark .client-shortcuts a:active {
+  html.theme-dark .client-shortcuts > :is(a, button):active {
     border-color: rgba(255,255,255,.14);
     color: #ff9b62;
     background: linear-gradient(145deg, rgba(255,255,255,.11), rgba(255,119,36,.065));
@@ -497,6 +497,5 @@ html.theme-dark .model-whatsapp-copy::after { color: rgba(235,238,234,.62); }
 
   html.theme-dark .client-shortcuts a.is-selected::after { background: rgba(255,255,255,.11); }
 
-  html.theme-dark .client-shortcuts .shortcut-icon svg,
-  html.theme-dark .client-shortcuts .whatsapp-icon img { filter: drop-shadow(0 1px 0 rgba(0,0,0,.45)); }
+  html.theme-dark .client-shortcuts .shortcut-icon svg { filter: drop-shadow(0 1px 0 rgba(0,0,0,.45)); }
 }

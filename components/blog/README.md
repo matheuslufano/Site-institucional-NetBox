@@ -243,3 +243,12 @@ Enquanto o tema christmas estiver ativo, o cabeçalho permanece fixo e visível 
 O contêiner #blog-home-featured em home/HomePage.tsx limita o ajuste à aba Início. Em home/NewsCarousel.module.css, a coluna das imagens horizontais ou quadradas ocupa 36,36% da grade a partir de 768px, chegando a 400px na grade de 1100px. Mantém proporção natural, max-height de 340px e o layout mobile existente. Essa regra prevalece sobre o limite de 300px para transparência somente na home; categorias conservam suas dimensões.
 
 No destaque inicial, imagens verticais mantêm a grade anterior (225px no desktop, até 300px quando transparentes; 190px no tablet). A orientação é detectada pelas dimensões naturais, antes da leitura de transparência, e exposta em data-orientation. As bordas das imagens da home usam raio de 5px.
+Em telas de até 640 px, a barra fixa do Blog mostra **Início**, **Tecnologia**, **Filmes**, **Séries**, **HQs** e **Jogos**, cada um com seu ícone. Os atalhos reutilizam as URLs do menu e destacam a categoria da listagem aberta. O rodapé reserva espaço para a barra.
+
+## Layout mobile
+
+Até 767 px, a faixa principal do cabeçalho mede 60 px, seguida por uma faixa horizontal de categorias. O drawer e os painéis de pesquisa e trailer usam `dialog` para conter o foco e bloquear a rolagem de fundo. A busca de artigos mantém o catálogo local de sugestões. O modo de filmes e séries carrega sob demanda e chama a API existente após 300 ms, cancelando pedidos anteriores. A preferência de analytics usa a chave compartilhada `netbox_cookie_consent` e respeita DNT/GPC.
+
+O radar mostra uma capa ativa com contraste reforçado e sincroniza a faixa de miniaturas. A lista recente é horizontal, o destaque usa um ranking e as categorias e a tecnologia usam trilhas com encaixe horizontal. As recomendações de cinema e cultura nerd usam uma capa principal 16:9 e listas menores. O conteúdo dos artigos continua sem truncamento.
+
+O roteiro `node __tests__/blog/responsive.mjs` usa Playwright e Chrome para validar as 14 larguras pedidas e dois tamanhos horizontais. Use `BLOG_TEST_URL` para mudar o alvo local, `BLOG_PLAYWRIGHT_PATH` para apontar a uma instalação externa do Playwright e `BLOG_SCREENSHOT_DIR` para escolher onde salvar as capturas.

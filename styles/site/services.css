@@ -391,9 +391,11 @@
 }
 
 .services-list button {
+  display: grid;
+  place-items: center;
   width: 26px;
   height: 26px;
+  padding: 0;
   border: 0;
   background: var(--yellow);
-  font-weight: 900;
 }

@@ -731,8 +731,8 @@
     height: 70px;
     padding: 7px;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 5px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(2px, 0.8vw, 5px);
     overflow: hidden;
     border: 1px solid rgba(255,255,255,.7);
     border-radius: 25px;
@@ -749,10 +749,12 @@
     pointer-events: none;
     transform: translateY(calc(100% + 24px + env(safe-area-inset-bottom)));
   }
+  .client-shortcuts[data-contacts-open="true"] { overflow: visible; }
   .client-shortcuts::before {
     content: "";
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     pointer-events: none;
     background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.86), transparent 38%), radial-gradient(circle at 92% 120%, rgba(255,132,47,.2), transparent 42%);
   }
@@ -762,7 +764,7 @@
       background-image: linear-gradient(145deg, rgba(255,255,255,.84), rgba(226,219,214,.5));
     }
   }
-  .client-shortcuts a {
+  .client-shortcuts > :is(a, button) {
     position: relative;
     z-index: 1;
     min-width: 0;
@@ -778,12 +780,12 @@
     box-shadow: none;
     transition: color .2s ease, background-color .24s ease, transform .2s ease, border-color .24s ease, box-shadow .24s ease;
   }
-  .client-shortcuts a:hover,
-  .client-shortcuts a:focus-visible {
+  .client-shortcuts > :is(a, button):hover,
+  .client-shortcuts > :is(a, button):focus-visible {
     color: #b94616;
   }
   .client-shortcuts a.is-selected,
-  .client-shortcuts a:active {
+  .client-shortcuts > :is(a, button):active {
     border-color: rgba(255,255,255,.78);
     color: #a83e12;
     background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.27));
@@ -791,7 +793,7 @@
     backdrop-filter: blur(22px) saturate(170%);
     -webkit-backdrop-filter: blur(22px) saturate(170%);
   }
-  .client-shortcuts a:active { transform: scale(.96); }
+  .client-shortcuts > :is(a, button):active { transform: scale(.96); }
   .client-shortcuts a.is-selected::after {
     content: "";
     position: absolute;
@@ -837,22 +839,11 @@
     fill: currentColor;
     stroke: none;
   }
-  .client-shortcuts .whatsapp-icon {
-    width: 38px;
-    height: 38px;
-  }
-  .client-shortcuts .whatsapp-icon img {
-    width: 36px;
-    height: 36px;
-    display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
-  }
-  .client-shortcuts a:hover .shortcut-icon,
-  .client-shortcuts a:focus-visible .shortcut-icon { color: #d7480c; }
+  .client-shortcuts > :is(a, button):hover .shortcut-icon,
+  .client-shortcuts > :is(a, button):focus-visible .shortcut-icon { color: #d7480c; }
   .client-shortcuts .shortcut-label { position: relative; z-index: 1; overflow: hidden; max-width: 100%; color: inherit; font-size: 9.5px; font-weight: 750; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; transition: color .2s ease; }
-  .client-shortcuts a:hover .shortcut-label,
-  .client-shortcuts a:focus-visible .shortcut-label { color: #d7480c; }
+  .client-shortcuts > :is(a, button):hover .shortcut-label,
+  .client-shortcuts > :is(a, button):focus-visible .shortcut-label { color: #d7480c; }
   .client-shortcuts .shortcut-label { font-size: 10px; }
   .plans-modal-backdrop {
     padding: calc(8px + env(safe-area-inset-top)) 8px calc(8px + env(safe-area-inset-bottom));
@@ -1475,8 +1466,7 @@ iframe {
   .about-hero-copy > small { margin-top: 28px; }
 
   .about-hero-media {
-    min-height: 400px;
-    transform: none;
+    transform: rotate(1deg);
   }
 
   .about-story-layout { gap: 45px; }
@@ -1511,7 +1501,7 @@ iframe {
 
 @media (max-width: 640px) {
   .about-hero {
-    padding-block: 70px 26px;
+    padding-block: 24px 28px;
     border-bottom: 3px solid var(--yellow);
   }
 
@@ -1524,15 +1514,15 @@ iframe {
 
   .about-hero::after { display: none; }
 
-  .about-hero .about-hero-layout { gap: 28px; }
+  .about-hero .about-hero-layout { gap: 20px; }
 
   .about-hero-copy > small { margin-top: 24px; font-size: 9px; }
 
   .about-hero-copy h1 {
-    max-width: 12ch;
-    margin-block: 11px;
-    font-size: clamp(37px, 11vw, 49px);
-    line-height: 1.02;
+    max-width: 22ch;
+    margin-block: 14px 10px;
+    font-size: clamp(30px, 7.5vw, 42px);
+    line-height: 1.1;
   }
 
   .about-hero-copy > p { font-size: 15px; line-height: 1.5; }
@@ -1540,18 +1530,6 @@ iframe {
   .about-hero-tags { margin-top: 20px; gap: 6px; }
 
   .about-hero .about-hero-tags span { padding: 8px 10px; font-size: 8px; }
-
-  .about-hero-media {
-    min-height: 285px;
-    border-radius: 22px 6px 22px 6px;
-    box-shadow: 0 22px 50px rgba(41,10,1,.32);
-  }
-
-  .about-hero-media img { object-position: 57% center; }
-
-  .about-hero-media figcaption { right: 15px; bottom: 14px; left: 15px; }
-
-  .about-hero-media figcaption strong { font-size: 17px; }
 
   .about-story-section { padding-block: 58px; }
 

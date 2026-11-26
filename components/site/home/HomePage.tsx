@@ -1,5 +1,6 @@
 "use client";
 import ChristmasHeroLights from "@/components/shared/seasonal/ChristmasHeroLights";
+import { ManagedPageSections } from "@/components/site/content/ManagedPageSections";
 import { useSeasonalTheme } from "@/components/shared/seasonal/SeasonalThemeProvider";
 import { ClientShortcuts } from "@/components/site/layout/ClientShortcuts";
 import { StructureSection } from "@/components/site/structure/StructureSection";
@@ -29,6 +30,7 @@ import {
   IoHeadsetOutline,
   IoMapOutline,
 } from "react-icons/io5";
+import { RiArrowLeftWideFill, RiArrowRightWideFill } from "react-icons/ri";
 
 import { APP_STORE, APP_STORE_LOGO, GOOGLE_PLAY_LOGO, PLAY_STORE, WHATSAPP } from "@/constants/site";
 import { openWhatsApp, track } from "@/services/site/leads";
@@ -41,6 +43,14 @@ function normalizeCoverageCity(value: string) {
   return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
 }
 
+function centerHomeSection(section: HTMLElement) {
+  section.focus({ preventScroll: true });
+  section.scrollIntoView({
+    block: "center",
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+  });
+}
+
 /** Institutional home composition; routes only mount this component. */
 export default function HomePage() {
   const [city, setCity] = useState(DEFAULT_CITY);
@@ -51,12 +61,15 @@ export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieOpen, setCookieOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [publishedHeroSlides, setPublishedHeroSlides] = useState(heroSlides);
   const [appCarouselIndex, setAppCarouselIndex] = useState(1);
   const [appCarouselResetting, setAppCarouselResetting] = useState(false);
   const [appCarouselPaused, setAppCarouselPaused] = useState(false);
   const [plansOpen, setPlansOpen] = useState(false);
   const [activePlan, setActivePlan] = useState(0);
   const [featuredPlanIndex, setFeaturedPlanIndex] = useState(0);
+  const featuredPlansStageRef = useRef<HTMLDivElement>(null);
+  const [showFeaturedArrowsIntro, setShowFeaturedArrowsIntro] = useState(false);
   const [selectedFeaturedAudience, setSelectedFeaturedAudience] = useState<
     "basico" | "familia"
   >("basico");
@@ -64,6 +77,41 @@ export default function HomePage() {
     selectedFeaturedAudience === "familia"
       ? familyFeaturedPlans
       : featuredPlans;
+
+  useEffect(() => {
+    const stage = featuredPlansStageRef.current;
+    if (!stage) return;
+
+    let hideArrowsTimer: number | undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio < 0.3) return;
+
+      observer.disconnect();
+      setShowFeaturedArrowsIntro(true);
+      hideArrowsTimer = window.setTimeout(() => setShowFeaturedArrowsIntro(false), 2000);
+    }, { threshold: 0.3 });
+
+    observer.observe(stage);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(hideArrowsTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/site-content", { cache: "no-store", signal: controller.signal })
+      .then((response) => response.ok ? response.json() : null)
+      .then((result: { content?: { heroSlides?: typeof heroSlides } } | null) => {
+        const slides = result?.content?.heroSlides;
+        if (slides?.length) {
+          setPublishedHeroSlides(slides as typeof heroSlides);
+          setActiveSlide((current) => current % slides.length);
+        }
+      })
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, []);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [carouselInteractionPaused, setCarouselInteractionPaused] =
     useState(false);
@@ -184,10 +232,10 @@ export default function HomePage() {
     )
       return;
     const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length);
+      setActiveSlide((current) => (current + 1) % publishedHeroSlides.length);
     }, 6000);
     return () => window.clearInterval(timer);
-  }, [carouselPaused, carouselInteractionPaused, heroSwipe.isDragging]);
+  }, [carouselPaused, carouselInteractionPaused, heroSwipe.isDragging, publishedHeroSlides.length]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia(
@@ -243,7 +291,7 @@ export default function HomePage() {
   function moveSlide(direction: number) {
     setActiveSlide(
       (current) =>
-        (current + direction + heroSlides.length) % heroSlides.length,
+        (current + direction + publishedHeroSlides.length) % publishedHeroSlides.length,
     );
   }
 
@@ -352,20 +400,31 @@ export default function HomePage() {
 
   function handleService(title: string) {
     if(title.toLocaleLowerCase("pt-BR").includes("residencial")) {
-      window.location.hash = "planos-netbox";
+      const plans = document.getElementById("planos-netbox");
+      if (!plans) return;
+
+      if (window.location.hash !== "#planos-netbox") {
+        window.history.pushState(null, "", "#planos-netbox");
+      }
+      centerHomeSection(plans);
       return;
     }
     if(title === "Aplicativo Netbox") {
-      document
-        .querySelector("#aplicativo-netbox")
-        ?.scrollIntoView({ behavior: "smooth" });
+      const appSection = document.getElementById("aplicativo-netbox");
+      if (appSection) centerHomeSection(appSection);
       track("acessou_aplicativo", { origin: "servicos" });
       return;
     }
-    if(
-      title === "Suporte Técnico Regional" ||
-      title === "Atendimento ao cliente"
-    ) {
+    if (title === "Suporte Técnico Regional") {
+      track("acessou_atendimento", { origin: "servicos" });
+      openWhatsApp("Olá! Gostaria de falar com o suporte técnico da Netbox.", {
+        city,
+        type: "suporte_tecnico",
+        origin: "servicos",
+      });
+      return;
+    }
+    if (title === "Atendimento ao cliente") {
       window.location.href = "/nossa-estrutura";
       track("acessou_atendimento", { origin: "servicos" });
       return;
@@ -469,7 +528,7 @@ export default function HomePage() {
       )}
 
       <main id="conteudo">
-        <Hero activeSlide={activeSlide} heroSwipe={heroSwipe} setCarouselInteractionPaused={setCarouselInteractionPaused} moveSlide={moveSlide} setActiveSlide={setActiveSlide} setCarouselPaused={setCarouselPaused} carouselPaused={carouselPaused} />
+        <Hero slides={publishedHeroSlides} activeSlide={activeSlide} heroSwipe={heroSwipe} setCarouselInteractionPaused={setCarouselInteractionPaused} moveSlide={moveSlide} setActiveSlide={setActiveSlide} setCarouselPaused={setCarouselPaused} carouselPaused={carouselPaused} />
 
         <aside
           className="home-contact-strip"
@@ -565,10 +624,12 @@ export default function HomePage() {
                       <p>{service.text}</p>
                     </div>
                     <button
+                      id={`home-service-${service.id}`}
+                      type="button"
                       onClick={() => handleService(service.title)}
                       aria-label={service.action}
                     >
-                      ＋
+                      <ArrowIcon />
                     </button>
                   </article>
                 ))}
@@ -612,6 +673,7 @@ export default function HomePage() {
           className={`nb-featured-plans${selectedFeaturedAudience === "basico" ? " is-basic-audience" : ""}`}
           id="planos-netbox"
           aria-labelledby="nb-featured-title"
+          tabIndex={-1}
         >
           <div className="nb-featured-shell">
             <header className="nb-featured-heading">
@@ -651,6 +713,8 @@ export default function HomePage() {
 
             <div
               className="nb-featured-stage"
+              ref={featuredPlansStageRef}
+              data-arrows-intro={showFeaturedArrowsIntro}
               aria-roledescription="carrossel"
               aria-label={
                 selectedFeaturedAudience === "familia"
@@ -659,13 +723,27 @@ export default function HomePage() {
               }
               {...featuredSwipe.bind}
             >
+              <svg width="0" height="0" aria-hidden="true" className="nb-featured-arrow-paint">
+                <defs>
+                  <linearGradient id="featured-plan-arrow-prism" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ddc3ff" stopOpacity=".65" />
+                    <stop offset="20%" stopColor="#a9d8ff" stopOpacity=".72" />
+                    <stop offset="40%" stopColor="#b9f3ea" stopOpacity=".6" />
+                    <stop offset="49%" stopColor="#fffdf5" stopOpacity=".88" />
+                    <stop offset="63%" stopColor="#ffe3a9" stopOpacity=".68" />
+                    <stop offset="82%" stopColor="#ffc1df" stopOpacity=".65" />
+                    <stop offset="100%" stopColor="#d7c2ff" stopOpacity=".72" />
+                  </linearGradient>
+                </defs>
+              </svg>
               <button
+                id="featured-plan-previous"
                 type="button"
                 className="nb-featured-arrow nb-featured-arrow-left"
                 onClick={() => moveFeaturedPlan(-1)}
                 aria-label="Plano anterior"
               >
-                <IoChevronBack aria-hidden="true" />
+                <RiArrowLeftWideFill aria-hidden="true" />
               </button>
 
               {currentFeaturedPlans.map((plan, index) => {
@@ -690,12 +768,13 @@ export default function HomePage() {
               })}
 
               <button
+                id="featured-plan-next"
                 type="button"
                 className="nb-featured-arrow nb-featured-arrow-right"
                 onClick={() => moveFeaturedPlan(1)}
                 aria-label="Próximo plano"
               >
-                <IoChevronForward aria-hidden="true" />
+                <RiArrowRightWideFill aria-hidden="true" />
               </button>
             </div>
             <div className="nb-featured-dots" aria-label="Selecionar plano">
@@ -715,7 +794,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="netbox-app-section" id="aplicativo-netbox">
+        <section
+          className="netbox-app-section"
+          id="aplicativo-netbox"
+          aria-labelledby="netbox-app-section-title"
+          tabIndex={-1}
+        >
           <div className="model-shell netbox-app-layout">
             <div className="netbox-app-copy">
               <div className="netbox-app-copy-row">
@@ -728,7 +812,7 @@ export default function HomePage() {
                 </span>
                 <div className="netbox-app-copy-text">
                   <small>Controle na palma da mão</small>
-                  <h2>Aplicativo Netbox</h2>
+                  <h2 id="netbox-app-section-title">Aplicativo Netbox</h2>
                   <p>
                     Consulte faturas, veja o histórico financeiro, solicite
                     suporte e receba notificações pelo celular.
@@ -1138,6 +1222,7 @@ export default function HomePage() {
         </div>
       )}
 
+      <ManagedPageSections />
       <HomeFooter onService={handleService} />
 
       <a
@@ -1159,7 +1244,7 @@ export default function HomePage() {
         </strong>
       </a>
 
-      <ClientShortcuts home />
+      <ClientShortcuts />
 
       {cookieOpen && (
         <aside className="cookie-banner" aria-label="Preferências de cookies">

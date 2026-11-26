@@ -2,8 +2,25 @@
 
 import { useEffect, useState } from "react";
 
-export function useScrollDirectionVisibility() {
-  const [visible, setVisible] = useState(true);
+type ScrollDirectionVisibilityOptions = {
+  initialVisible?: boolean;
+  revealAtTop?: boolean;
+  resetKey?: string;
+};
+
+export function useScrollDirectionVisibility({
+  initialVisible = true,
+  revealAtTop = true,
+  resetKey,
+}: ScrollDirectionVisibilityOptions = {}) {
+  const [visibilityState, setVisibilityState] = useState({
+    key: resetKey,
+    visible: initialVisible,
+  });
+  const visible =
+    visibilityState.key === resetKey
+      ? visibilityState.visible
+      : initialVisible;
 
   useEffect(() => {
     let lastPosition = window.scrollY;
@@ -22,11 +39,11 @@ export function useScrollDirectionVisibility() {
       }
       accumulatedDistance += Math.abs(distance);
 
-      if(currentPosition < 80) {
-        setVisible(true);
+      if(revealAtTop && currentPosition < 80) {
+        setVisibilityState({ key: resetKey, visible: true });
         accumulatedDistance = 0;
       } else if(accumulatedDistance >= 28) {
-        setVisible(direction < 0);
+        setVisibilityState({ key: resetKey, visible: direction < 0 });
         accumulatedDistance = 0;
       }
 
@@ -43,7 +60,7 @@ export function useScrollDirectionVisibility() {
       window.removeEventListener("scroll", handleScroll);
       if(frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [initialVisible, resetKey, revealAtTop]);
 
   return visible;
 }

@@ -91,7 +91,7 @@ export const familyFeaturedPlans = [
     name: "FAMÍLIA",
     tone: "family",
     benefits: [
-      "Desconto para pagamento com pontualidade",
+      "Desconto na pontualidade",
       "Roteadores em comodato",
       "Instalação prioritária",
     ],
@@ -107,7 +107,7 @@ export const familyFeaturedPlans = [
     name: "TOP FAMÍLIA",
     tone: "top-family",
     benefits: [
-      "Desconto para pagamento com pontualidade",
+      "Desconto na pontualidade",
       "Roteador em comodato",
       "Instalação prioritária",
     ],
@@ -136,8 +136,8 @@ export type FeaturedPlan = {
 };
 
 export const featuredBenefits = [
+  "Desconto na pontualidade",
   "Entrega da velocidade contratada",
-  "Desconto para pagamento com pontualidade",
   "Suporte premium 7 dias por semana",
 ] as const;
 
@@ -156,21 +156,24 @@ export const featuredAdditionalTiers = [
 
 export const services = [
   {
+    id: "residential-plans",
     title: "Internet Fibra Residencial",
     text: "Internet rápida e estável para estudar, trabalhar, jogar e assistir aos seus conteúdos favoritos.",
     action: "Consultar opções residenciais",
     image: "/img_services/cabo-optico-laraja.png",
   },
   {
+    id: "netbox-app",
     title: "Aplicativo Netbox",
     text: "Consulte faturas, veja o histórico financeiro, solicite suporte e receba notificações pelo celular.",
     action: "Baixar aplicativo",
     image: "/netbox-app-icon.png",
   },
   {
+    id: "regional-support",
     title: "Suporte Técnico Regional",
     text: "Atendimento humanizado e suporte técnico realizado por uma equipe que conhece a região.",
-    action: "Acessar atendimento",
+    action: "Falar com o suporte técnico pelo WhatsApp",
     image: "/img_services/atendimento.png",
   },
 ];
@@ -180,7 +183,7 @@ export const residentialPlans = [
     name: "BÁSICO",
     features: [
       "Entrega da velocidade contratada",
-      "Desconto para pagamento com pontualidade",
+      "Desconto na pontualidade",
       "Roteador em comodato",
       "Suporte premium 7 dias por semana",
     ],
@@ -194,7 +197,7 @@ export const residentialPlans = [
     name: "ESSENCIAL",
     features: [
       "Entrega da velocidade contratada",
-      "Desconto para pagamento com pontualidade",
+      "Desconto na pontualidade",
       "Roteador em comodato",
       "Suporte premium 7 dias por semana",
     ],
@@ -210,7 +213,7 @@ export const residentialPlans = [
     name: "FAMÍLIA",
     features: [
       "Entrega da velocidade contratada",
-      "Desconto para pagamento com pontualidade",
+      "Desconto na pontualidade",
       "Roteadores em comodato",
       "Suporte premium 7 dias por semana",
       "Instalação prioritária",
@@ -227,7 +230,7 @@ export const residentialPlans = [
     name: "TOP FAMÍLIA",
     features: [
       "Entrega da velocidade contratada",
-      "Desconto para pagamento com pontualidade",
+      "Desconto na pontualidade",
       "Roteador em comodato",
       "Suporte premium 7 dias por semana",
       "Instalação prioritária",

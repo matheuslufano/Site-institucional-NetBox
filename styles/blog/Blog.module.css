@@ -6,6 +6,10 @@
   --orange-dark: #bd430b;
   --paper: #fff;
   --soft: #f7f7f7;
+  --blog-mobile-gutter: clamp(14px, 4vw, 20px);
+  --blog-mobile-section-title: clamp(18px, 4.6vw, 22px);
+  --blog-mobile-card-title: clamp(14px, 3.7vw, 17px);
+  --blog-mobile-radius: 10px;
   min-height: 100vh;
   background: #fff;
   color: #202020;
@@ -120,6 +124,7 @@
   font-size: 12px;
   font-weight: 700;
 }
+.menuButton svg { width: 22px; height: 22px; }
 .portalNav {
   flex: 1;
   min-width: 0;
@@ -354,7 +359,9 @@
   color: #777;
   font-size: 10px;
 }
-.feedRead > span {
+.feedMobileDate { display: none; }
+
+.feedReadArrow {
   color: #b33e08;
   font-size: 17px;
 }
@@ -576,6 +583,10 @@
   font-size: 11px;
   margin: 12px 0 0;
 }
+.loadMore :is(a, svg) { vertical-align: middle; }
+.loadMore svg { width: 16px; height: 16px; }
+.loadMoreSpinner { animation: rotateBlogLoading 800ms linear infinite; }
+@keyframes rotateBlogLoading { to { transform: rotate(360deg); } }
 .secondaryButton {
   display: inline-flex;
   justify-content: center;
@@ -622,6 +633,7 @@
   letter-spacing: 0.06em;
   margin-left: 8px;
 }
+.footerBrand img { display: none; }
 .footerTop p {
   font-size: 12px;
   color: #b8b8b8;
@@ -649,6 +661,7 @@
 .footerBottom a {
   color: #e8e8e8;
 }
+.footerBottom button { color: #e8e8e8; min-height: 44px; }
 .breadcrumb {
   padding: 28px 0;
   font-size: 11px;
@@ -826,9 +839,6 @@
     order: 4;
     flex-basis: 100%;
   }
-  .portalNav[data-open="true"] {
-    display: block;
-  }
   .navInner {
     flex-direction: column;
     align-items: stretch;
@@ -847,6 +857,8 @@
   }
 }
 @media (max-width: 767px) {
+  .blog { --blog-header-height: 76px; }
+  .masthead { min-height: 76px; gap: 0 4px; flex-wrap: nowrap; }
   .siteLink {
     display: none;
   }
@@ -864,7 +876,7 @@
 }
 @media (max-width: 767px) {
   .shell {
-    width: calc(100% - 32px);
+    width: calc(100% - 2 * var(--blog-mobile-gutter));
   }
   .editorialHero {
     grid-template-columns: minmax(0, 1fr);
@@ -879,38 +891,42 @@
     display: none;
   }
   .feed {
-    --timeline-rail: 70px;
+    padding-top: 0;
   }
+  .feed::before, .feedMarker, .timelineRocket { display: none; }
   .feedCard {
-    gap: 12px;
-  }
-  .feedDate {
-    font-size: 8px;
-    padding: 5px 2px;
-  }
-  .timelineRocket {
-    width: 38px;
-    height: 38px;
-  }
-  .timelineRocket svg {
-    width: 23px;
-    height: 23px;
+    display: block;
+    padding: 10px 0;
   }
   .feedLink {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
+    grid-template-columns: clamp(88px, 26vw, 112px) minmax(0, 1fr);
+    align-items: center;
+    min-height: 90px;
+    gap: 10px;
   }
   .feedCopy h3 {
-    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    margin: 3px 0;
+    font-size: var(--blog-mobile-card-title);
+    line-height: 1.3;
   }
   .feedCopy p {
-    display: block;
+    display: none;
   }
   .feedRead {
-    margin-top: 10px;
+    align-items: center;
+    gap: 5px;
+    margin-top: 3px;
+    font-size: 11px;
   }
+  .feedMobileDate { display: inline; }
   .feedImage {
-    aspect-ratio: 16 / 9;
+    align-self: center;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--blog-mobile-radius);
   }
   .feedImage .demoBadge {
     font-size: 7px;
@@ -924,7 +940,10 @@
   }
   .sectionHeading {
     gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 12px;
   }
+  .sectionHeading h2 { font-size: var(--blog-mobile-section-title); }
   .sectionHeading > span {
     display: none;
   }
@@ -960,18 +979,6 @@
 @media (max-width: 359px) {
   .brandLogo {
     width: 90px;
-  }
-  .feedLink {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .feedImage {
-    aspect-ratio: 16 / 9;
-  }
-  .feedCopy h3 {
-    font-size: 20px;
-  }
-  .feedCopy p {
-    display: block;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1064,22 +1071,42 @@
 }
 @media (max-width: 767px) {
   .searchPanel {
-    padding: 24px;
+    width: 100%;
+    height: var(--blog-search-viewport, 100dvh);
+    max-height: var(--blog-search-viewport, 100dvh);
+    padding: max(12px, env(safe-area-inset-top)) var(--blog-mobile-gutter) max(16px, env(safe-area-inset-bottom));
+    overscroll-behavior: contain;
   }
+  .searchPanelHeading { margin-bottom: 8px; }
+  .searchCloseButton { width: 44px; height: 44px; }
+  .searchPanel > h2 { margin-bottom: 6px; font-size: 23px; }
+  .searchPanel > p { margin-bottom: 12px; line-height: 1.45; }
+  .blog .search input { font-size: 16px; }
+  .searchPanelEditorial { margin-top: 20px; padding-top: 14px; }
 }
 @media (max-width: 767px) {
   .masthead {
     column-gap: 10px;
   }
   .navSearch {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     padding: 6px;
   }
   .menuButton {
     margin-left: 0;
-    padding: 9px 8px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 7px;
   }
+  .portalFooter { padding-block: 18px 10px; margin-top: 32px; }
+  .portalFooter [data-ui="footer-credits"] { padding-block: 10px; font-size: 11px; }
+  .footerBrand { font-size: 22px; }
+  .footerBrand .footerBrandText { display: none; }
+  .footerBrand img { display: block; width: 110px; height: auto; }
+  .portalFooter nav { padding-block: 10px; gap: 4px 14px; }
+  .footerBottom { padding-top: 8px; gap: 4px 12px; }
+  .portalFooter :is(nav, .footerBottom) a { display: inline-flex; align-items: center; min-height: 44px; }
 }
 @media (max-width: 359px) {
   .blogBrand {

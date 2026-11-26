@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <SiteLayout>
-      <section className="inner-page-hero about-hero">
+      <section id="about-netbox-intro" className="inner-page-hero about-hero" aria-labelledby="about-netbox-intro-title">
         <div className="model-shell about-hero-layout">
           <div className="about-hero-copy">
             <div className="inner-hero-nav">
               <BackButton />
               <span>Início / Sobre nós</span>
             </div>
-            <h1>Conexão regional feita para estar perto.</h1>
+            <h1 id="about-netbox-intro-title">Conexão regional feita para estar perto.</h1>
             <p>
               Conheça os princípios que orientam a Netbox e as pessoas que fazem
               a conexão acontecer no Tocantins.
@@ -30,14 +30,14 @@ export default function AboutPage() {
             <Image
               src="/premiacao-netbox.jpeg"
               alt="Equipe Netbox reunida em frente à unidade"
-              fill
+              width={3596}
+              height={2023}
               priority
               unoptimized
-              sizes="(max-width: 760px) calc(100vw - 32px), 44vw"
+              sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1200px) 44vw, 520px"
             />
             <figcaption>
-              <strong>Gente que conecta</strong>
-              <span>Equipe e presença regional</span>
+              <span>Equipe e representantes da Netbox</span>
             </figcaption>
           </figure>
         </div>

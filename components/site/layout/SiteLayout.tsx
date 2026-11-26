@@ -15,6 +15,7 @@ import { FaArrowCircleRight } from "react-icons/fa";
 import { ClientShortcuts } from "./ClientShortcuts";
 import { MenuContacts } from "./MenuContacts";
 import { ThemeToggle } from "./ThemeToggle";
+import { ManagedPageSections } from "@/components/site/content/ManagedPageSections";
 
 const WHATSAPP = "5508006022732";
 const SECOND_COPY = "https://netboxfibra.sgp.net.br/accounts/central/login";
@@ -116,7 +117,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         />
       )}
 
-      <main id="conteudo">{children}</main>
+      <main id="conteudo">{children}<ManagedPageSections /></main>
 
       <SeasonalSiteFooter className="model-footer">
         <div className="model-shell footer-main">

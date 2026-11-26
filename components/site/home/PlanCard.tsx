@@ -113,9 +113,9 @@ export function PlanCard({
         ? "featured-plan-intermediate"
         : plan.tone === "family"
           ? "featured-plan-family"
-        : plan.tone === "top-family"
-          ? "featured-plan-top-family"
-        : undefined;
+          : plan.tone === "top-family"
+            ? "featured-plan-top-family"
+            : undefined;
   const getPlanElementId = (element: string) =>
     planId ? `${planId}-${element}` : undefined;
 
@@ -125,7 +125,6 @@ export function PlanCard({
       className={`nb-featured-card nb-featured-card-${position} nb-featured-card-${plan.tone}`}
       data-component="featured-plan-card"
     >
-      <span className="nb-featured-card-blur" aria-hidden="true" />
       <div
         id={getPlanElementId("content")}
         className="nb-featured-card-content"
@@ -172,14 +171,14 @@ export function PlanCard({
                   </strong>
                   <div className="nb-featured-addon-tier-content" role="cell">
                     {tier.name === "ADVANCED" ? (
-                      <div className="nb-featured-addon-advanced">
+                      <div className="nb-featured-addon-advanced" data-featured-brand="sky-prime">
                         <div className="nb-featured-addon-advanced-logos">
                           <img
                             src="/featured-plans/sky-amazon-prime.png"
-                            alt="SKY + e Amazon Prime"
+                            alt=""
                           />
                         </div>
-                        <strong>{tier.caption}</strong>
+                        <strong className="nb-featured-addon-advanced-title">{tier.caption}</strong>
                       </div>
                     ) : (
                       <div
@@ -191,6 +190,7 @@ export function PlanCard({
                         {tier.services.map((service) => (
                           <div
                             className="nb-featured-addon-service"
+                            data-featured-brand={toFeaturedPlanIdFragment(service)}
                             key={service}
                           >
                             <span className="nb-featured-addon-logo-frame">
@@ -213,34 +213,46 @@ export function PlanCard({
         ) : plan.tone === "family" ? (
           <div className="nb-featured-family-content">
             <ul className="nb-featured-benefits nb-featured-family-benefits">
-              {plan.benefits?.slice().reverse().map((benefit, index) => (
-                <li key={benefit}>
-                  <IoCheckmark aria-hidden="true" />
-                  <span>
-                    {benefit === "Desconto para pagamento com pontualidade"
-                      ? "Desconto no pagamento com pontualidade"
-                      : benefit}
-                  </span>
-                </li>
-              ))}
+              {plan.benefits
+                ?.slice()
+                .reverse()
+                .map((benefit, index) => (
+                  <li key={benefit}>
+                    <IoCheckmark aria-hidden="true" />
+                    <span>
+                      {benefit === "Desconto na pontualidade"
+                        ? "Desconto no pagamento com pontualidade"
+                        : benefit}
+                    </span>
+                  </li>
+                ))}
             </ul>
             <section className="nb-featured-family-section">
               <h4>{"Servi\u00e7os inclusos"}</h4>
               <div className="nb-featured-family-panel nb-featured-family-layout">
                 {plan.services.map((service) => (
-                  <div className="nb-featured-service nb-featured-family-service" key={service}>
+                  <div
+                    className="nb-featured-service nb-featured-family-service"
+                    data-featured-brand={toFeaturedPlanIdFragment(service)}
+                    key={service}
+                  >
                     <span className="nb-featured-service-icon">
                       <FeaturedServiceIcon name={service} />
                     </span>
-                    <span>{
-                      service === "Aplicativo Netbox" ? "App NetBox" :
-                      service === "SKY +" ? "SKY+ LIGHT" :
-                      service === "Deezer Premium" ? "DEEZER" :
-                      service === "Amazon Prime" ? "PRIME VÍDEO" : service
-                    }</span>
+                    <span>
+                      {service === "Aplicativo Netbox"
+                        ? "App NetBox"
+                        : service === "SKY +"
+                          ? "SKY+ LIGHT"
+                          : service === "Deezer Premium"
+                            ? "DEEZER"
+                            : service === "Amazon Prime"
+                              ? "PRIME VÍDEO"
+                              : service}
+                    </span>
                   </div>
                 ))}
-                <div className="nb-featured-family-router">
+                <div className="nb-featured-family-router" data-featured-brand="roteador-wi-fi">
                   <span className="nb-featured-family-router-icon">
                     <img src={featuredServiceImages["Roteador Wi-Fi"]} alt="" />
                   </span>
@@ -252,28 +264,42 @@ export function PlanCard({
         ) : plan.tone === "top-family" ? (
           <>
             <ul className="nb-featured-benefits nb-featured-top-family-benefits">
-              {plan.benefits?.slice().reverse().map((benefit) => (
-                <li key={benefit}>
-                  <IoCheckmark aria-hidden="true" />
-                  <span>{benefit === "Roteador em comodato" ? "Roteadores em comodato" : benefit}</span>
-                </li>
-              ))}
+              {plan.benefits
+                ?.slice()
+                .reverse()
+                .map((benefit) => (
+                  <li key={benefit}>
+                    <IoCheckmark aria-hidden="true" />
+                    <span>
+                      {benefit === "Roteador em comodato"
+                        ? "Roteadores em comodato"
+                        : benefit}
+                    </span>
+                  </li>
+                ))}
             </ul>
             <div className="nb-featured-family-panel nb-featured-top-family-layout">
               <div className="nb-featured-top-family-defaults">
                 <strong>{"Servi\u00e7os inclusos"}</strong>
                 <div className="nb-featured-top-family-apps">
                   {plan.services.map((service) => (
-                    <div className="nb-featured-service" key={service}>
+                    <div className="nb-featured-service" key={service} data-featured-brand={toFeaturedPlanIdFragment(service)}>
                       <span className="nb-featured-service-icon">
                         <FeaturedServiceIcon name={service} />
                       </span>
-                      <span>{service === "Aplicativo Netbox" ? "App NetBox" : service}</span>
+                      <span>
+                        {service === "Aplicativo Netbox"
+                          ? "App NetBox"
+                          : service}
+                      </span>
                     </div>
                   ))}
-                  <div className="nb-featured-service nb-featured-top-family-router">
+                  <div className="nb-featured-service nb-featured-top-family-router" data-featured-brand="roteador-wi-fi">
                     <span className="nb-featured-service-icon">
-                      <img src={featuredServiceImages["Roteador Wi-Fi"]} alt="" />
+                      <img
+                        src={featuredServiceImages["Roteador Wi-Fi"]}
+                        alt=""
+                      />
                     </span>
                     <span>1 ROTEADOR</span>
                   </div>
@@ -283,13 +309,13 @@ export function PlanCard({
                 <div className="nb-featured-family-options-box">
                   <strong>{"Nesse plano voc\u00ea pode optar entre"}</strong>
                   <div className="nb-featured-family-options-row">
-                    <div className="nb-featured-family-option">
+                    <div className="nb-featured-family-option" data-featured-brand="hbo-max">
                       <span className="nb-featured-family-option-logo">
                         <img src={featuredServiceImages["HBO Max"]} alt="" />
                       </span>
                       <span>HBO MAX</span>
                     </div>
-                    <div className="nb-featured-family-option">
+                    <div className="nb-featured-family-option" data-featured-brand="disney">
                       <span className="nb-featured-family-option-logo">
                         <img src={featuredServiceImages["Disney +"]} alt="" />
                       </span>
@@ -316,6 +342,7 @@ export function PlanCard({
                 {plan.services.map((service) => (
                   <div
                     className={`nb-featured-pro-app${service === "App Netbox" ? " nb-featured-intermediate-app-netbox" : ""}`}
+                    data-featured-brand={toFeaturedPlanIdFragment(service)}
                     key={service}
                   >
                     <span className="nb-featured-pro-app-icon">
@@ -324,7 +351,7 @@ export function PlanCard({
                     <span>{service}</span>
                   </div>
                 ))}
-                <div className="nb-featured-pro-app">
+                <div className="nb-featured-pro-app" data-featured-brand="roteador-wi-fi">
                   <span className="nb-featured-pro-app-icon nb-featured-intermediate-router-icon">
                     <FeaturedServiceIcon name="Roteador WiFi" />
                   </span>
@@ -370,6 +397,7 @@ export function PlanCard({
                       `included-app-${toFeaturedPlanIdFragment(service)}`,
                     )}
                     className="nb-featured-pro-app"
+                    data-featured-brand={toFeaturedPlanIdFragment(service)}
                     key={service}
                   >
                     <span
@@ -418,6 +446,7 @@ export function PlanCard({
                       `choice-app-${toFeaturedPlanIdFragment(service)}`,
                     )}
                     className="nb-featured-pro-app nb-featured-pro-app-choice"
+                    data-featured-brand={toFeaturedPlanIdFragment(service)}
                     key={service}
                   >
                     <span
@@ -465,7 +494,7 @@ export function PlanCard({
                   <strong>Serviços inclusos</strong>
                   <div className="nb-featured-services-grid">
                     {plan.services.map((service) => (
-                      <div className="nb-featured-service" key={service}>
+                      <div className="nb-featured-service" key={service} data-featured-brand={toFeaturedPlanIdFragment(service)}>
                         <span className="nb-featured-service-icon">
                           <FeaturedServiceIcon name={service} />
                         </span>
@@ -474,7 +503,7 @@ export function PlanCard({
                     ))}
                   </div>
                 </div>
-                <div className="nb-featured-intermediate-router">
+                <div className="nb-featured-intermediate-router" data-featured-brand="roteador-wi-fi">
                   <strong>01 Roteador</strong>
                   <FeaturedServiceIcon name="Roteador Wi-Fi" />
                 </div>
@@ -485,7 +514,7 @@ export function PlanCard({
                   <strong>Serviços inclusos</strong>
                   <div className="nb-featured-services-grid">
                     {plan.services.map((service) => (
-                      <div className="nb-featured-service" key={service}>
+                      <div className="nb-featured-service" key={service} data-featured-brand={toFeaturedPlanIdFragment(service)}>
                         <span className="nb-featured-service-icon">
                           <FeaturedServiceIcon name={service} />
                         </span>
@@ -498,7 +527,7 @@ export function PlanCard({
                   <strong>Nesse plano você pode optar entre</strong>
                   <div className="nb-featured-services-grid">
                     {(["Deezer", "Prime Video"] as const).map((service) => (
-                      <div className="nb-featured-service" key={service}>
+                      <div className="nb-featured-service" key={service} data-featured-brand={toFeaturedPlanIdFragment(service)}>
                         <span className="nb-featured-service-icon">
                           <FeaturedServiceIcon name={service} />
                         </span>

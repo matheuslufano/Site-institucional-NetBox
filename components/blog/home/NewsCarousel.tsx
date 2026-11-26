@@ -29,7 +29,6 @@ export type NewsSlide = {
   trailerUrl?: string;
   publishedAt: string;
   dateLabel: string;
-  demo: boolean;
 };
 
 export type NewsCarouselLayout = "poster" | "background";
@@ -69,16 +68,19 @@ function identifyPosterPresentation(image: HTMLImageElement) {
 export function NewsCarousel({
   slides,
   layout = "poster",
+  expandableSummary = false,
   label = "Últimas notícias do Blog",
 }: {
   slides: NewsSlide[];
   layout?: NewsCarouselLayout;
+  expandableSummary?: boolean;
   label?: string;
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [player, setPlayer] = useState<{ src: string; title: string; articleId?:string } | null>(
+  const [expandedSummaryId, setExpandedSummaryId] = useState<string | null>(null);
+  const [player, setPlayer] = useState<{ src: string; title: string; articleId?:string; modal?: boolean } | null>(
     null,
   );
   const playingRef = useRef(false);
@@ -92,6 +94,7 @@ export function NewsCarousel({
   }, []);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [interacted, setInteracted] = useState(false);
   const move = useCallback(
     (offset: number) => {
       if (playingRef.current) return;
@@ -102,15 +105,17 @@ export function NewsCarousel({
   const swipe = useSwipeGesture({
     enabled: slides.length > 1 && !player,
     onSwipeLeft: () => {
+      setInteracted(true);
       move(1);
     },
     onSwipeRight: () => {
+      setInteracted(true);
       move(-1);
     },
   });
 
   useEffect(() => {
-    if (player || focused || hovered || slides.length < 2) return;
+    if (player || focused || hovered || interacted || slides.length < 2) return;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let timer: ReturnType<typeof setInterval> | undefined;
     let inView = false;
@@ -132,7 +137,7 @@ export function NewsCarousel({
       motion.removeEventListener("change", synchronize);
       document.removeEventListener("visibilitychange", synchronize);
     };
-  }, [active, focused, hovered, slides.length, move, player]);
+  }, [active, focused, hovered, interacted, slides.length, move, player]);
 
   useEffect(() => {
     const rail = thumbnailsRef.current;
@@ -175,6 +180,7 @@ export function NewsCarousel({
         if (player) return;
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         event.preventDefault();
+        setInteracted(true);
         move(event.key === "ArrowLeft" ? -1 : 1);
       }}
       {...swipe.bind}
@@ -207,6 +213,7 @@ export function NewsCarousel({
             <div
               className={styles.feature}
               data-playing={Boolean(player)}
+              data-summary-expanded={expandedSummaryId === slide.id}
               aria-hidden={player ? true : undefined}
               inert={Boolean(player)}
             >
@@ -218,7 +225,7 @@ export function NewsCarousel({
                 draggable={false}
                 aria-label={"Ler artigo sobre " + slide.title}
               >
-                {slide.poster ? (
+                {index !== active ? null : slide.poster ? (
                   <Image
                     src={slide.poster}
                     onLoad={(event) => identifyPosterPresentation(event.currentTarget)}
@@ -264,7 +271,28 @@ export function NewsCarousel({
                     </div>
                   )}
                 </div>
-                <p className={styles.summary}>{slide.summary}</p>
+                {expandableSummary ? (
+                  <button
+                    className={styles.summaryToggle}
+                    data-expanded={expandedSummaryId === slide.id}
+                    type="button"
+                    aria-expanded={expandedSummaryId === slide.id}
+                    aria-label={
+                      (expandedSummaryId === slide.id ? "Recolher" : "Expandir") +
+                      " resumo de " +
+                      slide.title
+                    }
+                    onClick={() =>
+                      setExpandedSummaryId((current) =>
+                        current === slide.id ? null : slide.id,
+                      )
+                    }
+                  >
+                    <span className={styles.summary}>{slide.summary}</span>
+                  </button>
+                ) : (
+                  <p className={styles.summary}>{slide.summary}</p>
+                )}
                 {layout === "poster" && (
                   <div className={styles.actions}>
                     <Link className={styles.readButton} href={slide.href}>
@@ -285,7 +313,8 @@ export function NewsCarousel({
                           if (!src) return;
                           trailerTriggerRef.current = event.currentTarget;
                           playingRef.current = true;
-                          setPlayer({ src, title: slide.title, articleId:slide.id });
+                          setInteracted(true);
+                          setPlayer({ src, title: slide.title, articleId: slide.id, modal: window.matchMedia("(max-width: 767px)").matches });
                         }}
                       >
                         <IoPlayOutline aria-hidden="true" />
@@ -293,11 +322,6 @@ export function NewsCarousel({
                       </button>
                     )}
                   </div>
-                )}
-                {slide.demo && (
-                  <small className={styles.notice}>
-                    Conteúdo demonstrativo · aguardando aprovação editorial
-                  </small>
                 )}
               </div>
             </div>
@@ -324,7 +348,7 @@ export function NewsCarousel({
               className={styles.arrow}
               type="button"
               disabled={Boolean(player)}
-              onClick={() => move(-1)}
+              onClick={() => { setInteracted(true); move(-1); }}
               aria-label="Notícia anterior"
             >
               <IoChevronBack aria-hidden="true" />
@@ -341,7 +365,7 @@ export function NewsCarousel({
                   type="button"
                   disabled={Boolean(player)}
                   key={slide.id}
-                  onClick={() => setActive(index)}
+                  onClick={() => { setInteracted(true); setActive(index); }}
                   aria-label={
                     "Mostrar notícia " + (index + 1) + ": " + slide.title
                   }
@@ -351,7 +375,7 @@ export function NewsCarousel({
                     src={slide.cover}
                     alt=""
                     fill
-                    sizes="140px"
+                    sizes="(max-width: 767px) 80px, 140px"
                     draggable={false}
                   />
                   <span>{slide.title}</span>
@@ -362,7 +386,7 @@ export function NewsCarousel({
               className={styles.arrow}
               type="button"
               disabled={Boolean(player)}
-              onClick={() => move(1)}
+              onClick={() => { setInteracted(true); move(1); }}
               aria-label="Próxima notícia"
             >
               <IoChevronForward aria-hidden="true" />

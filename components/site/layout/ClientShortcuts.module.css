@@ -1,0 +1,93 @@
+.contactsPanel:not([hidden]) {
+  position: absolute;
+  z-index: 2;
+  /* A última célula da barra coincide com o botão Mais. */
+  grid-area: 1 / -2 / 2 / -1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.contactLink {
+  position: absolute;
+  inset: 0;
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border-radius: 13px;
+  background: var(--contact-tile);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 38%),
+    0 0 20px var(--contact-glow),
+    0 5px 10px rgb(35 19 11 / 28%);
+  pointer-events: auto;
+  transform: translate(var(--contact-x), var(--contact-y));
+}
+
+.contactLink[data-channel="whatsapp"] {
+  --contact-x: 0px;
+  --contact-y: -108px;
+  --contact-delay: 0ms;
+  --contact-tile: linear-gradient(155deg, #4dd84a, #1e9c39);
+  --contact-glow: rgb(59 224 64 / 70%);
+}
+
+.contactLink[data-channel="instagram"] {
+  --contact-x: calc(-1 * clamp(48px, 17vw, 72px));
+  --contact-y: -134px;
+  --contact-delay: 35ms;
+  --contact-tile: radial-gradient(circle at 22% 100%, #ffd968, #f65f30 29%, #da238f 59%, #751dce 92%);
+  --contact-glow: rgb(255 43 152 / 72%);
+}
+
+.contactLink[data-channel="email"] {
+  --contact-x: calc(-1 * clamp(96px, 34vw, 146px));
+  --contact-y: -109px;
+  --contact-delay: 70ms;
+  --contact-tile: linear-gradient(155deg, #fff, #f9ecea);
+  --contact-glow: rgb(255 76 64 / 70%);
+}
+
+.contactLink[data-channel="phone"] {
+  --contact-x: calc(-1 * clamp(145px, 49vw, 210px));
+  --contact-y: -74px;
+  --contact-delay: 105ms;
+  --contact-tile: linear-gradient(155deg, #338cf0, #164cbc);
+  --contact-glow: rgb(55 147 255 / 70%);
+}
+
+.contactLink > :is(span, svg, img) {
+  width: 31px;
+  height: 31px;
+}
+
+.contactLink[data-channel="phone"] > img {
+  filter: brightness(0) invert(1);
+}
+
+.contactLink:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contactsPanel:not([hidden]) .contactLink {
+    --contact-launch-duration: 380ms;
+    animation:
+      launchContact var(--contact-launch-duration) cubic-bezier(.2, .7, .25, 1.15) var(--contact-delay) both,
+      floatContact 2.8s ease-in-out calc(var(--contact-launch-duration) + var(--contact-delay)) infinite;
+  }
+}
+
+@keyframes launchContact {
+  from { opacity: 0; transform: translate(0, 0) scale(.15); }
+  55% { opacity: 1; }
+  to { opacity: 1; transform: translate(var(--contact-x), var(--contact-y)) scale(1); }
+}
+
+@keyframes floatContact {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}

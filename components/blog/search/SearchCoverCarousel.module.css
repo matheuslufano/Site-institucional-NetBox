@@ -104,6 +104,7 @@
   font-size: 13px;
   overflow-wrap: anywhere;
 }
+.coverCopy small { display: none; }
 
 .coverCard:is(:hover, :focus-visible) {
   background: #363636;
@@ -122,4 +123,27 @@
   margin-inline: auto;
   border-radius: 8px;
   object-fit: contain;
+}
+@media (max-width: 767px) {
+  .coverResultsHeader h3 { font-size: 15px; }
+  .coverNavigation { display: none; }
+  .coverCarousel {
+    grid-auto-flow: row;
+    grid-auto-columns: minmax(0, 1fr);
+    max-height: min(560px, 60dvh);
+    overflow: auto;
+    scroll-snap-type: none;
+  }
+  .coverCard {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    align-items: center;
+    min-height: 52px;
+  }
+  .coverFrame { aspect-ratio: 4 / 3; }
+  .coverCopy { min-width: 0; padding: 7px; }
+  .coverCopy small { display: block; font-size: 10px; color: #ffbb91; }
+  .coverCopy strong { padding: 0; }
+  .coverResults > a { display: inline-flex; align-items: center; min-height: 44px; }
+  .emptySearchDog { max-height: 110px; }
 }

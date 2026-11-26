@@ -2,9 +2,12 @@
 
 import { categories } from "@/lib/blog/navigation";
 import styles from "@/styles/blog/Blog.module.css";
-import { type ReactNode, useEffect, useRef } from "react";
+import { type ReactNode, Suspense, lazy, useEffect, useRef, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { SearchForm, type ArticleSuggestion } from "./SearchForm";
+import panelStyles from "./SearchPanel.module.css";
+
+const MediaExplorer = lazy(() => import("../media/MediaExplorer").then((module) => ({ default: module.MediaExplorer })));
 
 type Props = {
   open: boolean;
@@ -27,6 +30,7 @@ export function SearchPanel({
   articleSuggestions,
 }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [mode, setMode] = useState<"articles" | "media">("articles");
   const categoryLabel = categories.find((item) => item.id === category)?.label;
 
   useEffect(() => {
@@ -34,11 +38,19 @@ export function SearchPanel({
     if(!dialog || !open) return;
 
     const previousOverflow = document.documentElement.style.overflow;
+    const viewport = window.visualViewport;
+    const updateViewport = () => {
+      if (viewport) dialog.style.setProperty("--blog-search-viewport", `${viewport.height}px`);
+    };
+    viewport?.addEventListener("resize", updateViewport);
+    updateViewport();
     dialog.showModal();
     document.documentElement.style.overflow = "hidden";
     dialog.querySelector<HTMLInputElement>('input[type="search"]')?.focus();
 
     return () => {
+      viewport?.removeEventListener("resize", updateViewport);
+      dialog.style.removeProperty("--blog-search-viewport");
       dialog.close();
       document.documentElement.style.overflow = previousOverflow;
     };
@@ -92,14 +104,22 @@ export function SearchPanel({
           ? "Pesquise artigos em " + categoryLabel + "."
           : "Busque artigos por título, assunto ou categoria."}
       </p>
-      <SearchForm
+      <div className={panelStyles.modes} role="group" aria-label="Tipo de pesquisa">
+        <button id="blog-search-mode-articles" type="button" aria-pressed={mode === "articles"} onClick={() => setMode("articles")}>Artigos do Blog</button>
+        <button id="blog-search-mode-media" type="button" aria-pressed={mode === "media"} onClick={() => setMode("media")}>Filmes e séries</button>
+      </div>
+      {mode === "articles" ? <SearchForm
         key={JSON.stringify([query, open])}
         articleSuggestions={articleSuggestions}
         query={query}
         category={category}
         group={group}
         onSubmitted={onClose}
-      />
+      /> : open && (
+        <Suspense fallback={<p role="status">Carregando pesquisa de obras…</p>}>
+          <MediaExplorer kind="all" compact />
+        </Suspense>
+      )}
       <div className={styles.searchPanelEditorial}>{editorialSidebar}</div>
     </dialog>
   );
