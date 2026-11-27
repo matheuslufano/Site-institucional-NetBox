@@ -3,13 +3,14 @@
   margin-top: 24px;
 }
 .compact { margin-top: 14px; }
-.compact .row { grid-template-columns: 34px minmax(0,1fr) 34px; gap: 10px; }
-.compact .track { grid-auto-columns: clamp(170px, 21vw, 220px); column-gap: 14px; }
-.compact .arrow { width: 34px; height: 34px; margin-top: -40px; background: #263441; border-color: #405060; color: #ff985c; }
+.compact .row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.compact .track { grid-auto-columns: calc((100% - 28px) / 3); column-gap: 14px; }
+.compact .arrow { width: 34px; height: 34px; margin-top: 0; background: #263441; border-color: #405060; color: #ff985c; }
 .compact .slide h3 { font-size: 15px; margin: 8px 0; }
 .compact .slide p { display: none; }
 .compact .slide > article > a > div:last-child { padding-top: 10px; }
-.compact .footer { padding-inline: 44px; color: #a9b4bf; }
+.compact .footer { padding: 10px 0 0; color: #a9b4bf; }
+.compactControls { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .row {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr) 44px;
@@ -140,6 +141,10 @@
   .track {
     grid-auto-columns: 100%;
     column-gap: 18px;
+  }
+  .compact .track {
+    grid-auto-columns: calc((100% - 12px) / 2);
+    column-gap: 12px;
   }
   .arrow {
     width: 34px;

@@ -7,7 +7,8 @@ import { useSwipeGesture } from "@/hooks/useSwipeGesture";
 import styles from "./NewsCarousel.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   IoChevronBack,
   IoChevronForward,
@@ -42,6 +43,14 @@ function identifyPosterPresentation(image: HTMLImageElement) {
   const frame = image.closest<HTMLElement>('[data-component="lead-slide-poster"]');
   if (!frame) return;
   frame.dataset.orientation = image.naturalHeight > image.naturalWidth ? "portrait" : "landscape";
+  const imageUrl = new URL(image.currentSrc || image.src, window.location.href);
+  const originalImagePath = imageUrl.searchParams.get("url") || imageUrl.pathname;
+  frame.dataset.format = decodeURIComponent(originalImagePath)
+    .split("?")[0]
+    .toLowerCase()
+    .endsWith(".png")
+    ? "png"
+    : "other";
   try {
     const canvas = document.createElement("canvas");
     const scale = Math.min(1, 128 / Math.max(image.naturalWidth, image.naturalHeight));
@@ -78,6 +87,8 @@ export function NewsCarousel({
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
+  const posterNavigationPendingRef = useRef(false);
+  const router = useRouter();
   const [active, setActive] = useState(0);
   const [expandedSummaryId, setExpandedSummaryId] = useState<string | null>(null);
   const [player, setPlayer] = useState<{ src: string; title: string; articleId?:string; modal?: boolean } | null>(
@@ -101,6 +112,82 @@ export function NewsCarousel({
       setActive((index) => (index + offset + slides.length) % slides.length);
     },
     [slides.length],
+  );
+  const navigateFromPoster = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) return;
+      if (posterNavigationPendingRef.current) {
+        event.preventDefault();
+        return;
+      }
+
+      const link = event.currentTarget;
+      const sourceImage = link.querySelector("img");
+      const bounds = link.getBoundingClientRect();
+      if (!sourceImage || bounds.width === 0 || bounds.height === 0) return;
+
+      posterNavigationPendingRef.current = true;
+      event.preventDefault();
+      const transitionLayer = document.createElement("div");
+      transitionLayer.className = styles.posterTransition;
+      transitionLayer.dataset.component = "article-cover-transition";
+      transitionLayer.setAttribute("aria-hidden", "true");
+
+      const transitionImage = document.createElement("img");
+      transitionImage.src = sourceImage.currentSrc || sourceImage.src;
+      transitionImage.alt = "";
+      transitionImage.style.left = `${bounds.left}px`;
+      transitionImage.style.top = `${bounds.top}px`;
+      transitionImage.style.width = `${bounds.width}px`;
+      transitionImage.style.height = `${bounds.height}px`;
+      transitionImage.style.borderRadius = getComputedStyle(sourceImage).borderRadius;
+      transitionLayer.append(transitionImage);
+      document.body.append(transitionLayer);
+
+      const expandAnimation = transitionImage.animate(
+        [
+          {
+            left: `${bounds.left}px`,
+            top: `${bounds.top}px`,
+            width: `${bounds.width}px`,
+            height: `${bounds.height}px`,
+          },
+          {
+            left: "0px",
+            top: "0px",
+            width: `${window.innerWidth}px`,
+            height: `${window.innerHeight}px`,
+            borderRadius: "0px",
+          },
+        ],
+        { duration: 300, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "forwards" },
+      );
+      transitionLayer.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 240,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards",
+      });
+
+      void expandAnimation.finished
+        .then(() => {
+          router.push(href);
+          window.setTimeout(() => transitionLayer.remove(), 1800);
+        })
+        .catch(() => {
+          posterNavigationPendingRef.current = false;
+          transitionLayer.remove();
+          router.push(href);
+        });
+    },
+    [router],
   );
   const swipe = useSwipeGesture({
     enabled: slides.length > 1 && !player,
@@ -221,7 +308,9 @@ export function NewsCarousel({
                 className={styles.poster}
                 data-component="lead-slide-poster"
                 data-transparent="unknown"
+                data-format="unknown"
                 href={slide.href}
+                onClick={(event) => navigateFromPoster(event, slide.href)}
                 draggable={false}
                 aria-label={"Ler artigo sobre " + slide.title}
               >
@@ -251,15 +340,8 @@ export function NewsCarousel({
               </Link>
               <div className={styles.copy}>
                 <div className={styles.heading}>
-                  {layout === "poster" && (
-                    <span className={styles.eyebrow}>NO RADAR NETBOX</span>
-                  )}
                   <h2>
-                    {layout === "background" ? (
                       <Link href={slide.href}>{slide.title}</Link>
-                    ) : (
-                      slide.title
-                    )}
                   </h2>
                   {layout === "poster" && (
                     <div className={styles.meta}>

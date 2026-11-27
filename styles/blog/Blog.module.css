@@ -617,6 +617,9 @@
   color: #fff;
   border-top: 4px solid #f47721;
 }
+.main:has([data-ui="blog-article-view"]) ~ .portalFooter {
+  margin-top: 0;
+}
 .footerTop {
   display: flex;
   gap: 30px;

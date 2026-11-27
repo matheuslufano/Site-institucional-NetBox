@@ -149,7 +149,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <h1 className="sr-only">Blog Netbox — tecnologia e cultura nerd e pop</h1>
       {!filtered && (
         <div id="blog-home-featured">
-          <FeaturedNews latestArticles={all.slice(0, 10)} />
+          <FeaturedNews
+            latestArticles={all.slice(0, 10)}
+            expandableSummary
+          />
         </div>
       )}
       <div className={styles.shell}>

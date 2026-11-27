@@ -17,6 +17,14 @@ import {
 } from "react-icons/io5";
 import styles from "./BlogMobileShortcuts.module.css";
 
+const mobileShortcutCategoryOrder = [
+  "filmes",
+  "series",
+  "games",
+  "hqs",
+  "tecnologia",
+] as const;
+
 export const blogCategoryIcons: Record<string, IconType> = {
   tecnologia: IoHardwareChipOutline,
   filmes: IoFilmOutline,
@@ -57,7 +65,10 @@ export function BlogMobileShortcuts() {
           <IoHomeOutline aria-hidden="true" />
           <span>Início</span>
         </Link>
-        {categories.map(({ id, label }) => {
+        {mobileShortcutCategoryOrder.map((categoryId) => {
+          const categoryItem = categories.find(({ id }) => id === categoryId);
+          if (!categoryItem) return null;
+          const { id, label } = categoryItem;
           const Icon = blogCategoryIcons[id] ?? IoAppsOutline;
           return (
             <Link

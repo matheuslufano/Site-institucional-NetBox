@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { CoverImage } from "@/components/blog/articles/CoverImage";
 import { normalizeSearch } from "@/lib/blog/searchNormalization";
@@ -116,7 +116,7 @@ export function SearchCoverCarousel({
             <button
               id="blog-search-covers-next"
               type="button"
-              aria-label="PrÃ³ximas capas"
+              aria-label="Próximas capas"
               disabled={edges.end}
               onClick={() => scrollCovers(1)}
             >
